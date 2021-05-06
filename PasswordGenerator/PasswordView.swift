@@ -13,7 +13,7 @@ struct PasswordView: View {
     @ObservedObject var viewModel = PasswordViewModel()
     @State private var uppercased = true
     @State private var specialCharacters = true
-    @State private var numberOfCharacter = 8.0
+    @State private var numberOfCharacter = 14.0
     @State private var withNumbers = true
     @State private var result = ""
     let range = 1...20.0
@@ -36,12 +36,12 @@ struct PasswordView: View {
                         }).buttonStyle(PlainButtonStyle())
                     }
                   
-                    Slider(value: $numberOfCharacter, in: range, step: 1).accentColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 8 ?  .orange : .green)
+                    Slider(value: $numberOfCharacter, in: range, step: 1).accentColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 10 ?  .orange : .green)
                     
                      HStack {
                         Spacer()
                         if numberOfCharacter > 1 {
-                        Text("\(Int(numberOfCharacter)) caractères").foregroundColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 8 ?  .orange : .green)
+                        Text("\(Int(numberOfCharacter)) caractères").foregroundColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 10 ?  .orange : .green)
                         }
                         else {
                          Text("\(Int(numberOfCharacter)) caractère")
