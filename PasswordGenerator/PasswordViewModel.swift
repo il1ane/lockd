@@ -44,6 +44,11 @@ class PasswordViewModel: ObservableObject {
             for _ in 0...lenght {
                 password.append(alphabet.randomElement()!)
             }
+        if password.joined().count != lenght {
+            while password.joined().count > lenght {
+                password.remove(at: 0)
+            }
+        }
                 return password.joined()
     }
     
