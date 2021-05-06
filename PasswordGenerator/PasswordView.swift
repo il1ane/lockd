@@ -9,12 +9,13 @@ import SwiftUI
 
 struct PasswordView: View {
     
+    @ObservedObject var viewModel = PasswordViewModel()
     @State private var withUpercase = true
     @State private var withSpecialCharacter = true
     @State private var numberOfCharacter = 8.0
     @State private var withNumbers = true
-    @State private var result = "PSWRD"
-    let range = 1...20.0
+    @State private var result = ""
+    let range = 0...20.0
     
     var body: some View {
         
@@ -40,10 +41,10 @@ struct PasswordView: View {
                      HStack {
                         Spacer()
                         if numberOfCharacter > 1 {
-                        Text("\(Int(numberOfCharacter)) caractères").foregroundColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 8 ?  .orange : .green)
+                        Text("\(Int(numberOfCharacter + 1)) caractères").foregroundColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 8 ?  .orange : .green)
                         }
                         else {
-                         Text("\(Int(numberOfCharacter)) caractère")
+                         Text("\(Int(numberOfCharacter + 1)) caractère")
                             .foregroundColor(.red)
                         }
                         Spacer()
@@ -62,6 +63,7 @@ struct PasswordView: View {
                     })
                 }
                 
+                
             }.navigationBarTitle("Générateur")
              .navigationBarItems(trailing: Button(action: {
                 //func that generate another password
@@ -69,7 +71,21 @@ struct PasswordView: View {
                 Image(systemName: "arrow.triangle.2.circlepath")
                     .foregroundColor(.green)
             }))
-        }
+        }.onChange(of: numberOfCharacter, perform: { value in
+            result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+        })
+        .onChange(of: withUpercase, perform: { value in
+         result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+        })
+        .onChange(of: withSpecialCharacter, perform: { value in
+         result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+        })
+        .onChange(of: withNumbers, perform: { value in
+         result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+        })
+        .onAppear(perform: {
+            result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+        })
     }
 }
 
