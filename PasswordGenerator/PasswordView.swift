@@ -36,16 +36,15 @@ struct PasswordView: View {
                         }).buttonStyle(PlainButtonStyle())
                     }
                   
-                    
                     Slider(value: $numberOfCharacter, in: range, step: 1).accentColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 8 ?  .orange : .green)
                     
                      HStack {
                         Spacer()
                         if numberOfCharacter > 1 {
-                        Text("\(Int(numberOfCharacter + 1)) caractères").foregroundColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 8 ?  .orange : .green)
+                        Text("\(Int(numberOfCharacter)) caractères").foregroundColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 8 ?  .orange : .green)
                         }
                         else {
-                         Text("\(Int(numberOfCharacter + 1)) caractère")
+                         Text("\(Int(numberOfCharacter)) caractère")
                             .foregroundColor(.red)
                         }
                         Spacer()
