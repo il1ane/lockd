@@ -65,6 +65,13 @@ class PasswordViewModel: ObservableObject {
                 password.append(special.randomElement()!)
             }
             password.shuffle()
+            
+            if password.joined().count != lenght {
+                while password.joined().count > lenght {
+                    password.remove(at: 0)
+                }
+            }
+            
             return password.joined()
         }
         
@@ -77,6 +84,12 @@ class PasswordViewModel: ObservableObject {
                 password.append(uppercasedAlphabet.randomElement()!)
             }
             password.shuffle()
+            
+            if password.joined().count != lenght {
+                while password.joined().count > lenght {
+                    password.remove(at: 0)
+                }
+            }
             return password.joined()
         }
         
@@ -89,6 +102,12 @@ class PasswordViewModel: ObservableObject {
                 password.append(numbersArray.randomElement()!)
             }
             password.shuffle()
+            
+            if password.joined().count != lenght {
+                while password.joined().count > lenght {
+                    password.remove(at: 0)
+                }
+            }
             return password.joined()
         }
         
@@ -121,6 +140,13 @@ class PasswordViewModel: ObservableObject {
             }
             
             password.shuffle()
+            
+            if password.joined().count != lenght {
+                while password.joined().count > lenght {
+                    password.remove(at: 0)
+                }
+            }
+            
             return password.joined()
         }
         
@@ -139,6 +165,13 @@ class PasswordViewModel: ObservableObject {
             }
             
             password.shuffle()
+            
+            if password.joined().count != lenght {
+                while password.joined().count > lenght {
+                    password.remove(at: 0)
+                }
+            }
+            
             return password.joined()
         }
         
@@ -157,6 +190,13 @@ class PasswordViewModel: ObservableObject {
             }
             
             password.shuffle()
+            
+            if password.joined().count != lenght {
+                while password.joined().count > lenght {
+                    password.remove(at: 0)
+                }
+            }
+            
             return password.joined()
         }
         
@@ -192,6 +232,13 @@ class PasswordViewModel: ObservableObject {
         }
         
         password.shuffle()
+        
+        if password.joined().count != lenght {
+            while password.joined().count > lenght {
+                password.remove(at: 0)
+            }
+        }
+        
         return password.joined()
     }
     
