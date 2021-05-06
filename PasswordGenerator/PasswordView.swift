@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MobileCoreServices
 
 struct PasswordView: View {
     
@@ -29,7 +30,7 @@ struct PasswordView: View {
                         Text(result).foregroundColor(.gray)
                         Spacer()
                         Button(action: {
-                        //Todo : find a way to copy to clipboard
+                        UIPasteboard.general.string = result
                         }, label: {
                             Image(systemName: "doc.on.doc")
                         }).buttonStyle(PlainButtonStyle())
