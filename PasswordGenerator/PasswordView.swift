@@ -10,11 +10,11 @@ import SwiftUI
 struct PasswordView: View {
     
     @ObservedObject var viewModel = PasswordViewModel()
-    @State private var withUpercase = true
-    @State private var withSpecialCharacter = true
+    @State private var uppercased = true
+    @State private var specialCharacters = true
     @State private var numberOfCharacter = 8.0
     @State private var withNumbers = true
-    @State private var result = ""
+    @State private var password = ""
     let range = 0...20.0
     
     var body: some View {
@@ -26,7 +26,7 @@ struct PasswordView: View {
                     
                     HStack {
                         Spacer()
-                        Text(result).foregroundColor(.gray)
+                        Text(password).foregroundColor(.gray)
                         Spacer()
                         Button(action: {
                         //Todo : find a way to copy to clipboard
@@ -52,10 +52,10 @@ struct PasswordView: View {
                 }
                 
                 Section(header: Text("paramètres"), footer: Text("Note : chaque paramètre actif renforce la sécurité du mot de passe.").padding()) {
-                    Toggle(isOn: $withUpercase, label: {
+                    Toggle(isOn: $uppercased, label: {
                         Text("Majuscules")
                     })
-                    Toggle(isOn: $withSpecialCharacter, label: {
+                    Toggle(isOn: $specialCharacters, label: {
                         Text("Caractères spéciaux")
                     })
                     Toggle(isOn: $withNumbers, label: {
@@ -66,25 +66,25 @@ struct PasswordView: View {
                 
             }.navigationBarTitle("Générateur")
              .navigationBarItems(trailing: Button(action: {
-                //func that generate another password
+                password = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased)
             }, label: {
                 Image(systemName: "arrow.triangle.2.circlepath")
                     .foregroundColor(.green)
             }))
         }.onChange(of: numberOfCharacter, perform: { value in
-            result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+            password = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased)
         })
-        .onChange(of: withUpercase, perform: { value in
-         result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+        .onChange(of: uppercased, perform: { value in
+         password = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased)
         })
-        .onChange(of: withSpecialCharacter, perform: { value in
-         result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+        .onChange(of: specialCharacters, perform: { value in
+         password = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased)
         })
         .onChange(of: withNumbers, perform: { value in
-         result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+         password = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased)
         })
         .onAppear(perform: {
-            result = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: withSpecialCharacter, uppercase: withUpercase)
+            password = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased)
         })
     }
 }
