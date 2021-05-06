@@ -13,10 +13,10 @@ struct PasswordView: View {
     @ObservedObject var viewModel = PasswordViewModel()
     @State private var uppercased = true
     @State private var specialCharacters = true
-    @State private var numberOfCharacter = 14.0
+    @State private var numberOfCharacter = 20.0
     @State private var withNumbers = true
     @State private var result = ""
-    let range = 1...20.0
+    let range = 1...30.0
     
     var body: some View {
         
@@ -27,12 +27,12 @@ struct PasswordView: View {
                     
                     HStack {
                         Spacer()
-                        Text(result).foregroundColor(.gray)
+                        Text(result).foregroundColor(.gray).font(numberOfCharacter > 25 ? .system(size: 15) : .body).animation(.easeOut)
                         Spacer()
                         Button(action: {
                         UIPasteboard.general.string = result
                         }, label: {
-                            Image(systemName: "doc.on.doc")
+                            Image(systemName: "doc.on.doc").foregroundColor(.green)
                         }).buttonStyle(PlainButtonStyle())
                     }
                   
