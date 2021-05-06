@@ -13,7 +13,7 @@ struct PasswordGeneratorApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PasswordView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
