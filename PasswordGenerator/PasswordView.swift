@@ -16,7 +16,7 @@ struct PasswordView: View {
     @State private var numberOfCharacter = 8.0
     @State private var withNumbers = true
     @State private var result = ""
-    let range = 0...20.0
+    let range = 1...20.0
     
     var body: some View {
         
