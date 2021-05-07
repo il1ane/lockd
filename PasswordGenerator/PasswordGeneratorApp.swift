@@ -13,8 +13,9 @@ struct PasswordGeneratorApp: App {
 
     var body: some Scene {
         WindowGroup {
-            PasswordView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            MainView()
+            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .accentColor(.green).preferredColorScheme(.dark)
         }
     }
 }
