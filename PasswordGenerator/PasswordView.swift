@@ -23,7 +23,7 @@ struct PasswordView: View {
         NavigationView {
             Form {
                 
-                Section(header: Text("Ajuster la longeur du mot de passe")) {
+                Section(header: Text("Mot de passe généré aléatoirement")) {
                     
                     HStack {
                         Spacer()
@@ -35,23 +35,21 @@ struct PasswordView: View {
                             Image(systemName: "doc.on.doc").foregroundColor(.green)
                         }).buttonStyle(PlainButtonStyle())
                     }
-                  
-                    Slider(value: $numberOfCharacter, in: range, step: 1).accentColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 10 ?  .orange : .green)
-                    
-                     HStack {
-                        Spacer()
-                        if numberOfCharacter > 1 {
-                        Text("\(Int(numberOfCharacter)) caractères").foregroundColor(numberOfCharacter < 6 ? .red : numberOfCharacter < 10 ?  .orange : .green)
-                        }
-                        else {
-                         Text("\(Int(numberOfCharacter)) caractère")
-                            .foregroundColor(.red)
-                        }
-                        Spacer()
-                    }
                 }
                 
-                Section(header: Text("paramètres"), footer: Text("Note : chaque paramètre actif renforce la sécurité du mot de passe.").padding()) {
+                Section(header: Text("Nombre de caractères")) {
+                HStack {
+                Slider(value: $numberOfCharacter, in: range, step: 1).accentColor(numberOfCharacter < 9 ? .red : numberOfCharacter < 14 ?  .orange : .green)
+              
+                    Divider().frame(minWidth: 20)
+                
+                    Text("\(Int(numberOfCharacter)) ")
+                        .frame(minWidth: 25)
+                    
+                }
+                }
+
+                Section(header: Text("Inclure"), footer: Text("Note : chaque paramètre actif renforce la sécurité du mot de passe.").padding()) {
                     
                     Toggle(isOn: $specialCharacters, label: {
                         Text("Caractères spéciaux")
