@@ -7,19 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9103AC0D2645A00600CA6EB6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103AC0C2645A00600CA6EB6 /* MainView.swift */; };
+		9103AC0F2645A7BD00CA6EB6 /* SavePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */; };
 		912B03CA2643D6EF001C5FCA /* PasswordGeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */; };
 		912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03CB2643D6EF001C5FCA /* ContentView.swift */; };
 		912B03CE2643D6F1001C5FCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 912B03CD2643D6F1001C5FCA /* Assets.xcassets */; };
 		912B03D12643D6F1001C5FCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 912B03D02643D6F1001C5FCA /* Preview Assets.xcassets */; };
 		912B03D32643D6F1001C5FCA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03D22643D6F1001C5FCA /* Persistence.swift */; };
 		912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 912B03D42643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld */; };
-		912B03DE2643DDE2001C5FCA /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DD2643DDE2001C5FCA /* PasswordView.swift */; };
-		912B03E02643E566001C5FCA /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DF2643E566001C5FCA /* PasswordViewModel.swift */; };
+		912B03DE2643DDE2001C5FCA /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */; };
+		912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */; };
 		912B03E22644660D001C5FCA /* PasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E12644660D001C5FCA /* PasswordListView.swift */; };
 		912B03E426446A38001C5FCA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E326446A38001C5FCA /* KeychainHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9103AC0C2645A00600CA6EB6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordView.swift; sourceTree = "<group>"; };
+		9103AC102645B30A00CA6EB6 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		912B03C62643D6EF001C5FCA /* PasswordGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasswordGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorApp.swift; sourceTree = "<group>"; };
 		912B03CB2643D6EF001C5FCA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -28,8 +33,8 @@
 		912B03D22643D6F1001C5FCA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		912B03D52643D6F1001C5FCA /* PasswordGenerator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PasswordGenerator.xcdatamodel; sourceTree = "<group>"; };
 		912B03D72643D6F1001C5FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		912B03DD2643DDE2001C5FCA /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
-		912B03DF2643E566001C5FCA /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
+		912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorViewModel.swift; sourceTree = "<group>"; };
 		912B03E12644660D001C5FCA /* PasswordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListView.swift; sourceTree = "<group>"; };
 		912B03E326446A38001C5FCA /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,6 +50,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9103AC0A26459F5C00CA6EB6 /* Store passwords */ = {
+			isa = PBXGroup;
+			children = (
+				912B03E12644660D001C5FCA /* PasswordListView.swift */,
+			);
+			path = "Store passwords";
+			sourceTree = "<group>";
+		};
+		9103AC0B26459F8A00CA6EB6 /* Generate password */ = {
+			isa = PBXGroup;
+			children = (
+				912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */,
+				912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */,
+				9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */,
+			);
+			path = "Generate password";
+			sourceTree = "<group>";
+		};
 		912B03BD2643D6EF001C5FCA = {
 			isa = PBXGroup;
 			children = (
@@ -66,9 +89,10 @@
 			children = (
 				912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */,
 				912B03CB2643D6EF001C5FCA /* ContentView.swift */,
-				912B03DD2643DDE2001C5FCA /* PasswordView.swift */,
-				912B03E12644660D001C5FCA /* PasswordListView.swift */,
-				912B03DF2643E566001C5FCA /* PasswordViewModel.swift */,
+				9103AC102645B30A00CA6EB6 /* TODO.md */,
+				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
+				9103AC0B26459F8A00CA6EB6 /* Generate password */,
+				9103AC0A26459F5C00CA6EB6 /* Store passwords */,
 				912B03E326446A38001C5FCA /* KeychainHelper.swift */,
 				912B03CD2643D6F1001C5FCA /* Assets.xcassets */,
 				912B03D22643D6F1001C5FCA /* Persistence.swift */,
@@ -156,9 +180,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9103AC0F2645A7BD00CA6EB6 /* SavePasswordView.swift in Sources */,
 				912B03E22644660D001C5FCA /* PasswordListView.swift in Sources */,
-				912B03DE2643DDE2001C5FCA /* PasswordView.swift in Sources */,
-				912B03E02643E566001C5FCA /* PasswordViewModel.swift in Sources */,
+				9103AC0D2645A00600CA6EB6 /* MainView.swift in Sources */,
+				912B03DE2643DDE2001C5FCA /* PasswordGeneratorView.swift in Sources */,
+				912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */,
 				912B03E426446A38001C5FCA /* KeychainHelper.swift in Sources */,
 				912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */,
 				912B03D32643D6F1001C5FCA /* Persistence.swift in Sources */,
