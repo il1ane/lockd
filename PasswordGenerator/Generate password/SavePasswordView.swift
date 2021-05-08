@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct SavePasswordView: View {
     
@@ -14,6 +15,8 @@ struct SavePasswordView: View {
     @State private var passwordTitle = ""
     @State private var username = ""
     @State private var isEditingPassword = false
+    @State private var showKeyboard = false
+    let keyboard = Keyboard()
     
     var body: some View {
         NavigationView {
@@ -30,7 +33,8 @@ struct SavePasswordView: View {
                                    
                             } else {
                                 
-                                TextField(password, text: $password)
+                                CocoaTextField(password, text: $password)
+                                .isFirstResponder(true)
                                 .disableAutocorrection(true)
                                 
                             }
@@ -53,6 +57,8 @@ struct SavePasswordView: View {
                                 Button(action: {
                                     withAnimation(.default) {
                                     isEditingPassword.toggle()
+                                    //showKeyboard doesn't change anything but Xcode stop complaining
+                                    showKeyboard = keyboard.isShowing
                                     }
                                     
                                 }, label: {
