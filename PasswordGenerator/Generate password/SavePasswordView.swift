@@ -13,6 +13,8 @@ struct SavePasswordView: View {
     @Binding var isPresented: Bool
     @State private var passwordTitle = ""
     @State private var username = ""
+    @State private var isEditingPassword = false
+    
     
     var body: some View {
         NavigationView {
@@ -23,15 +25,42 @@ struct SavePasswordView: View {
                     Section(header: Text("Modifier votre mot de passe")) {
                         HStack {
                             Spacer()
-                            Text(password)
+                            if !isEditingPassword {
+                                Text(password)
                                 .foregroundColor(.gray)
+                                   
+                            } else {
+                                
+                                TextField(password, text: $password)
+                                
+                            }
                             Spacer()
-                            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                                Text("Edit")
-                            })
                             
-                            .buttonStyle(PlainButtonStyle())
-                            .foregroundColor(.green)
+                            if !isEditingPassword {
+                                
+                                Button(action: {
+                                    withAnimation {
+                                    isEditingPassword.toggle()
+                                    }
+                                    
+                                }, label: {
+                                    Text("Edit")
+                                })
+                                .buttonStyle(PlainButtonStyle())
+                                .foregroundColor(.green)
+                            }
+                            else {
+                                Button(action: {
+                                    withAnimation(.default) {
+                                    isEditingPassword.toggle()
+                                    }
+                                    
+                                }, label: {
+                                    Image(systemName: "checkmark")
+                                })
+                                .buttonStyle(PlainButtonStyle())
+                                .foregroundColor(.green)
+                            }
                         }
                     }
                     
@@ -64,6 +93,6 @@ struct SavePasswordView: View {
 
 struct SavePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), isPresented: .constant(true))
+        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), isPresented: .constant(true)).accentColor(.green)
     }
 }
