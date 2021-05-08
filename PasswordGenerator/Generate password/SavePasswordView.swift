@@ -15,7 +15,6 @@ struct SavePasswordView: View {
     @State private var username = ""
     @State private var isEditingPassword = false
     
-    
     var body: some View {
         NavigationView {
             
@@ -32,6 +31,7 @@ struct SavePasswordView: View {
                             } else {
                                 
                                 TextField(password, text: $password)
+                                .disableAutocorrection(true)
                                 
                             }
                             Spacer()
