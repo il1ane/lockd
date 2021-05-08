@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */; };
 		912B03E22644660D001C5FCA /* PasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E12644660D001C5FCA /* PasswordListView.swift */; };
 		912B03E426446A38001C5FCA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E326446A38001C5FCA /* KeychainHelper.swift */; };
+		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +129,9 @@
 			dependencies = (
 			);
 			name = PasswordGenerator;
+			packageProductDependencies = (
+				91C2716126472A1A0036DC49 /* SwiftUIX */,
+			);
 			productName = PasswordGenerator;
 			productReference = 912B03C62643D6EF001C5FCA /* PasswordGenerator.app */;
 			productType = "com.apple.product-type.application";
@@ -154,6 +159,9 @@
 				Base,
 			);
 			mainGroup = 912B03BD2643D6EF001C5FCA;
+			packageReferences = (
+				91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = 912B03C72643D6EF001C5FCA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -378,6 +386,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		91C2716126472A1A0036DC49 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		912B03D42643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld */ = {
