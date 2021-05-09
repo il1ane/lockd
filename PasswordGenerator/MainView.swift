@@ -9,7 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        TabView(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/,
+        
+        TabView(
                 content:  {
                     PasswordGeneratorView().tabItem { Label(
                         title: { Text("Générateur") },
