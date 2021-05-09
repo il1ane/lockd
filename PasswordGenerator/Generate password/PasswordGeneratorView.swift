@@ -111,7 +111,7 @@ struct PasswordGeneratorView: View {
     }
 }
 
-struct PasswordView_Previews: PreviewProvider {
+struct PasswordGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
         PasswordGeneratorView()
     }
