@@ -1,8 +1,5 @@
 #  Todo :
 
-Priority:
-- add keychain to save users passwords
-
 Maybe:
 - add faceID & touchID & password to unlock safe
 - add animation when password is successfully saved or if there was an error
