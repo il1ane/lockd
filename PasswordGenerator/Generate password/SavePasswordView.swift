@@ -124,8 +124,9 @@ struct SavePasswordView: View {
                     }
                     
                 }, label: {
-                    Image(systemName: "tray.and.arrow.down").foregroundColor(isEditingPassword ? .gray : .accentColor)
-                }))
+                    Image(systemName: "tray.and.arrow.down")
+                }).disabled(isEditingPassword ? true : false)
+                )
                 
             }.onChange(of: editedPassword.text.count, perform: { _ in
                 passwordLenght = editedPassword.text
