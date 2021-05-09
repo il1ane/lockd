@@ -87,7 +87,7 @@ struct PasswordGeneratorView: View {
             }))
             
         }.sheet(isPresented: $savePasswordSheetIsPresented, content: {
-            SavePasswordView(password: $generatedPassword, isPresented: $savePasswordSheetIsPresented)
+            SavePasswordView(password: $generatedPassword, sheetIsPresented: $savePasswordSheetIsPresented)
             .environment(\.colorScheme, colorScheme)
             .accentColor(.green)
         })
