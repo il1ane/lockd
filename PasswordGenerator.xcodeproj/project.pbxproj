@@ -19,6 +19,7 @@
 		912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */; };
 		912B03E22644660D001C5FCA /* PasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E12644660D001C5FCA /* PasswordListView.swift */; };
 		912B03E426446A38001C5FCA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E326446A38001C5FCA /* KeychainHelper.swift */; };
+		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		912B03E12644660D001C5FCA /* PasswordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListView.swift; sourceTree = "<group>"; };
 		912B03E326446A38001C5FCA /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		9158C046264736D8005C8B0C /* ToFix.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToFix.md; sourceTree = "<group>"; };
+		9158C0472647F71D005C8B0C /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 			children = (
 				912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */,
 				912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */,
+				9158C0472647F71D005C8B0C /* TextBindingManager.swift */,
 				9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */,
 			);
 			path = "Generate password";
@@ -198,6 +201,7 @@
 				912B03E426446A38001C5FCA /* KeychainHelper.swift in Sources */,
 				912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */,
 				912B03D32643D6F1001C5FCA /* Persistence.swift in Sources */,
+				9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */,
 				912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */,
 				912B03CA2643D6EF001C5FCA /* PasswordGeneratorApp.swift in Sources */,
 			);
