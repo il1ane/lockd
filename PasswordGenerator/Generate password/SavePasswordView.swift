@@ -17,6 +17,7 @@ struct SavePasswordView: View {
     @State private var username = ""
     @State private var isEditingPassword = false
     @State private var showKeyboard = false
+    @State private var passwordLenght = ""
     let keyboard = Keyboard()
     
     var body: some View {
@@ -25,12 +26,12 @@ struct SavePasswordView: View {
             VStack {
                 
                 Form {
-                    Section(header: Text("Modifier votre mot de passe")) {
+                    Section(header: Text("Modifier votre mot de passe"), footer: passwordLenght.isEmpty ? Text("Le mot de passe ne peut pas être vide").foregroundColor(.red) : nil) {
                         HStack {
                             Spacer()
                             if !isEditingPassword {
                                 Text(editedPassword.text)
-                                .foregroundColor(.gray)
+                                    .foregroundColor(.gray).font(editedPassword.characterLimit > 25 ? .system(size: 15) : .body)
                                    
                             } else {
                                 
@@ -47,7 +48,7 @@ struct SavePasswordView: View {
                                     withAnimation {
                                     isEditingPassword.toggle()
                                     showKeyboard = keyboard.isShowing
-                                        editedPassword.text = password
+                                    
                                     }
                                     
                                 }, label: {
@@ -63,6 +64,7 @@ struct SavePasswordView: View {
                                     //showKeyboard doesn't change anything but Xcode stop complaining
                                     //not always working
                                     showKeyboard = keyboard.isShowing
+                                        passwordLenght = editedPassword.text
                                     }
                                     
                                 }, label: {
@@ -99,6 +101,7 @@ struct SavePasswordView: View {
             }
         }.onAppear(perform: {
             editedPassword.text = password
+            passwordLenght = password
         })
     }
 }
