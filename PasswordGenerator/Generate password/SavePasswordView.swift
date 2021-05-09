@@ -21,7 +21,7 @@ struct SavePasswordView: View {
     @State private var showMissingTitleAlert = false
     @State private var showMissingPasswordAlert = false
     @State private var showMissingPasswordAndTitleAlert = false
-    
+    @State private var showTitleMissingFooter = false
     let keyboard = Keyboard()
     
     var body: some View {
@@ -82,7 +82,7 @@ struct SavePasswordView: View {
                         })
                     }
                     
-                    Section(header: Text("Intitulé")) {
+                    Section(header: Text("Intitulé"), footer: showTitleMissingFooter ? Text("Champ obligatoire").foregroundColor(.red) : nil) {
                         TextField("ex: Facebook", text: $passwordTitle)
                     }.alert(isPresented: $showMissingTitleAlert, content: {
                         Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un titre a votre mot de passe."), dismissButton: .cancel(Text("OK!")))
@@ -108,8 +108,10 @@ struct SavePasswordView: View {
                     if !isEditingPassword {
                         if passwordTitle.isEmpty && editedPassword.text.isEmpty {
                             showMissingPasswordAndTitleAlert.toggle()
+                            print("Password and title missing")
                         } else if passwordTitle.isEmpty && editedPassword.text.isEmpty == false {
                             print("Title missing")
+                            showTitleMissingFooter = true
                             showMissingTitleAlert.toggle()
                         }
                         else if editedPassword.text.isEmpty && passwordTitle.isEmpty == false {
