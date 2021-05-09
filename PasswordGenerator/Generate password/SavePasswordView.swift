@@ -12,6 +12,7 @@ struct SavePasswordView: View {
     
     @Binding var password: String
     @Binding var isPresented: Bool
+    @ObservedObject var editedPassword = TextBindingManager(limit: 30)
     @State private var passwordTitle = ""
     @State private var username = ""
     @State private var isEditingPassword = false
@@ -28,16 +29,15 @@ struct SavePasswordView: View {
                         HStack {
                             Spacer()
                             if !isEditingPassword {
-                                Text(password)
+                                Text(editedPassword.text)
                                 .foregroundColor(.gray)
                                    
                             } else {
                                 
-                                CocoaTextField(password, text: $password)
+                                CocoaTextField(password, text: $editedPassword.text)
                                 .keyboardType(.asciiCapable)
                                 .isFirstResponder(true)
                                 .disableAutocorrection(true)
-                                
                             }
                             Spacer()
                             
@@ -46,6 +46,8 @@ struct SavePasswordView: View {
                                 Button(action: {
                                     withAnimation {
                                     isEditingPassword.toggle()
+                                    showKeyboard = keyboard.isShowing
+                                        editedPassword.text = password
                                     }
                                     
                                 }, label: {
@@ -59,6 +61,7 @@ struct SavePasswordView: View {
                                     withAnimation(.default) {
                                     isEditingPassword.toggle()
                                     //showKeyboard doesn't change anything but Xcode stop complaining
+                                    //not always working
                                     showKeyboard = keyboard.isShowing
                                     }
                                     
@@ -94,7 +97,9 @@ struct SavePasswordView: View {
                     Image(systemName: "tray.and.arrow.down")
                 }))
             }
-        }
+        }.onAppear(perform: {
+            editedPassword.text = password
+        })
     }
 }
 
