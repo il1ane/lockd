@@ -11,13 +11,17 @@ import SwiftUIX
 struct SavePasswordView: View {
     
     @Binding var password: String
-    @Binding var isPresented: Bool
+    @Binding var sheetIsPresented: Bool
     @ObservedObject var editedPassword = TextBindingManager(limit: 30)
     @State private var passwordTitle = ""
     @State private var username = ""
     @State private var isEditingPassword = false
     @State private var showKeyboard = false
     @State private var passwordLenght = ""
+    @State private var showMissingTitleAlert = false
+    @State private var showMissingPasswordAlert = false
+    @State private var showMissingPasswordAndTitleAlert = false
+    
     let keyboard = Keyboard()
     
     var body: some View {
@@ -32,14 +36,14 @@ struct SavePasswordView: View {
                             if !isEditingPassword {
                                 Text(editedPassword.text)
                                     .foregroundColor(.gray).font(editedPassword.characterLimit > 25 ? .system(size: 15) : .body)
-                                   
+                                
                             } else {
                                 
                                 CocoaTextField(password, text: $editedPassword.text)
-                                .keyboardType(.asciiCapable)
-                                .isFirstResponder(true)
-                                .disableAutocorrection(true)
-                                   
+                                    .keyboardType(.asciiCapable)
+                                    .isFirstResponder(true)
+                                    .disableAutocorrection(true)
+                                
                             }
                             Spacer()
                             
@@ -47,8 +51,8 @@ struct SavePasswordView: View {
                                 
                                 Button(action: {
                                     withAnimation {
-                                    isEditingPassword.toggle()
-                                    showKeyboard = keyboard.isShowing
+                                        isEditingPassword.toggle()
+                                        showKeyboard = keyboard.isShowing
                                     }
                                     
                                 }, label: {
@@ -60,10 +64,10 @@ struct SavePasswordView: View {
                             else {
                                 Button(action: {
                                     withAnimation(.default) {
-                                    isEditingPassword.toggle()
-                                    //showKeyboard doesn't change anything but Xcode stop complaining
-                                    //not always working
-                                    showKeyboard = keyboard.isShowing
+                                        isEditingPassword.toggle()
+                                        //showKeyboard doesn't change anything but Xcode stop complaining
+                                        //not always working
+                                        showKeyboard = keyboard.isShowing
                                     }
                                     
                                 }, label: {
@@ -72,32 +76,56 @@ struct SavePasswordView: View {
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(.green)
                             }
-                        }
+                        }.alert(isPresented: $showMissingPasswordAlert, content: {
+                            Alert(title: Text("Mot de passe invalide"), message: Text("Le champ mot de passe ne peut pas être vide."), dismissButton: .cancel(Text("OK!")))
+                            
+                        })
                     }
                     
                     Section(header: Text("Intitulé")) {
                         TextField("ex: Facebook", text: $passwordTitle)
-                    }
+                    }.alert(isPresented: $showMissingTitleAlert, content: {
+                        Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un titre a votre mot de passe."), dismissButton: .cancel(Text("OK!")))
+                        
+                    })
                     
                     Section(header: Text("Nom de compte (optionel)")) {
                         TextField("ex: momail@icloud.com", text: $username)
                     }
                     
-                }.navigationBarTitle("Enregistrement")
+                }.alert(isPresented: $showMissingPasswordAndTitleAlert, content: {
+                    Alert(title: Text("Champs vides"), message: Text("Le champ mot de passe et intitulé ne peuvent pas être vides."), dismissButton: .cancel(Text("OK!")))
+                })
+                .navigationBarTitle("Enregistrement")
                 .navigationBarItems(leading: Button(action: {
                     
-                    isPresented.toggle()
+                    sheetIsPresented.toggle()
                     
                 }, label: {
                     Image(systemName: "xmark")
                 }), trailing: Button(action: {
                     
-                    isPresented.toggle()
-                    //add code to save to keychain
+                    if !isEditingPassword {
+                        if passwordTitle.isEmpty && editedPassword.text.isEmpty {
+                            showMissingPasswordAndTitleAlert.toggle()
+                        } else if passwordTitle.isEmpty && editedPassword.text.isEmpty == false {
+                            print("Title missing")
+                            showMissingTitleAlert.toggle()
+                        }
+                        else if editedPassword.text.isEmpty && passwordTitle.isEmpty == false {
+                            showMissingPasswordAlert.toggle()
+                            print("Password missing")
+                        }
+                        else {
+                            sheetIsPresented.toggle()
+                        }
+                    }
+                    
                 }, label: {
                     Image(systemName: "tray.and.arrow.down").foregroundColor(isEditingPassword ? .gray : .accentColor)
                 }))
-            }.onChange(of: editedPassword.text.count, perform: { value in
+                
+            }.onChange(of: editedPassword.text.count, perform: { _ in
                 passwordLenght = editedPassword.text
             })
         }.onAppear(perform: {
@@ -109,6 +137,6 @@ struct SavePasswordView: View {
 
 struct SavePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), isPresented: .constant(true)).accentColor(.green)
+        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), sheetIsPresented: .constant(true)).accentColor(.green)
     }
 }
