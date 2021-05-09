@@ -39,6 +39,7 @@ struct SavePasswordView: View {
                                 .keyboardType(.asciiCapable)
                                 .isFirstResponder(true)
                                 .disableAutocorrection(true)
+                                   
                             }
                             Spacer()
                             
@@ -48,7 +49,6 @@ struct SavePasswordView: View {
                                     withAnimation {
                                     isEditingPassword.toggle()
                                     showKeyboard = keyboard.isShowing
-                                    
                                     }
                                     
                                 }, label: {
@@ -64,7 +64,6 @@ struct SavePasswordView: View {
                                     //showKeyboard doesn't change anything but Xcode stop complaining
                                     //not always working
                                     showKeyboard = keyboard.isShowing
-                                        passwordLenght = editedPassword.text
                                     }
                                     
                                 }, label: {
@@ -96,9 +95,11 @@ struct SavePasswordView: View {
                     isPresented.toggle()
                     //add code to save to keychain
                 }, label: {
-                    Image(systemName: "tray.and.arrow.down")
+                    Image(systemName: "tray.and.arrow.down").foregroundColor(isEditingPassword ? .gray : .accentColor)
                 }))
-            }
+            }.onChange(of: editedPassword.text.count, perform: { value in
+                passwordLenght = editedPassword.text
+            })
         }.onAppear(perform: {
             editedPassword.text = password
             passwordLenght = password
