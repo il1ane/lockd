@@ -23,6 +23,8 @@ struct SavePasswordView: View {
     @State private var showMissingPasswordAlert = false
     @State private var showMissingPasswordAndTitleAlert = false
     @State private var showTitleMissingFooter = false
+    @State var generatedPasswordIsPresented: Bool
+    @ObservedObject var viewModel = PasswordListViewModel()
     let keyboard = Keyboard()
     let keychain = KeychainSwift()
     
@@ -35,6 +37,7 @@ struct SavePasswordView: View {
                     Section(header: Text("Modifier votre mot de passe"), footer: passwordLenght.isEmpty ? Text("Le mot de passe ne peut pas être vide").foregroundColor(.red) : nil) {
                         HStack {
                             Spacer()
+                            
                             if !isEditingPassword {
                                 Text(editedPassword.text)
                                     .foregroundColor(.gray).font(editedPassword.characterLimit > 25 ? .system(size: 15) : .body)
@@ -62,6 +65,7 @@ struct SavePasswordView: View {
                                 })
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(.green)
+                                
                             }
                             else {
                                 Button(action: {
@@ -123,6 +127,7 @@ struct SavePasswordView: View {
                         else {
                             sheetIsPresented.toggle()
                             keychain.set(editedPassword.text, forKey: passwordTitle)
+                            viewModel.refreshKeys()
                         }
                     }
                     
@@ -135,6 +140,9 @@ struct SavePasswordView: View {
                 passwordLenght = editedPassword.text
             })
         }.onAppear(perform: {
+            if !generatedPasswordIsPresented {
+                isEditingPassword = true
+            }
             editedPassword.text = password
             passwordLenght = password
         })
@@ -143,6 +151,6 @@ struct SavePasswordView: View {
 
 struct SavePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), sheetIsPresented: .constant(true)).accentColor(.green)
+        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), sheetIsPresented: .constant(true), generatedPasswordIsPresented: true, viewModel: PasswordListViewModel()).accentColor(.green)
     }
 }

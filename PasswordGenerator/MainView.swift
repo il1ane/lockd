@@ -16,7 +16,7 @@ struct MainView: View {
                         title: { Text("Générateur") },
                         icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
                     ).padding() }.tag(1)
-                    PasswordListView().tabItem { Label(
+                    PasswordListView(viewModel: PasswordListViewModel()).tabItem { Label(
                         title: { Text("Coffre fort") },
                         icon: { Image(systemName: "tray.2") }
                     ).padding() }.tag(2)
