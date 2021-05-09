@@ -18,7 +18,9 @@
 		912B03DE2643DDE2001C5FCA /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */; };
 		912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */; };
 		912B03E22644660D001C5FCA /* PasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E12644660D001C5FCA /* PasswordListView.swift */; };
-		912B03E426446A38001C5FCA /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E326446A38001C5FCA /* KeychainHelper.swift */; };
+		9143820B26484D7A00819C15 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9143820A26484D7A00819C15 /* KeychainSwift */; };
+		9143820D2648526B00819C15 /* PasswordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9143820C2648526B00819C15 /* PasswordListViewModel.swift */; };
+		91438211264857A200819C15 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91438210264857A200819C15 /* PasswordView.swift */; };
 		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
 /* End PBXBuildFile section */
@@ -38,7 +40,8 @@
 		912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
 		912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorViewModel.swift; sourceTree = "<group>"; };
 		912B03E12644660D001C5FCA /* PasswordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListView.swift; sourceTree = "<group>"; };
-		912B03E326446A38001C5FCA /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		9143820C2648526B00819C15 /* PasswordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListViewModel.swift; sourceTree = "<group>"; };
+		91438210264857A200819C15 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		9158C046264736D8005C8B0C /* ToFix.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToFix.md; sourceTree = "<group>"; };
 		9158C0472647F71D005C8B0C /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -48,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9143820B26484D7A00819C15 /* KeychainSwift in Frameworks */,
 				91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,6 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				912B03E12644660D001C5FCA /* PasswordListView.swift */,
+				91438210264857A200819C15 /* PasswordView.swift */,
+				9143820C2648526B00819C15 /* PasswordListViewModel.swift */,
 			);
 			path = "Store passwords";
 			sourceTree = "<group>";
@@ -100,7 +106,6 @@
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
 				9103AC0B26459F8A00CA6EB6 /* Generate password */,
 				9103AC0A26459F5C00CA6EB6 /* Store passwords */,
-				912B03E326446A38001C5FCA /* KeychainHelper.swift */,
 				912B03CD2643D6F1001C5FCA /* Assets.xcassets */,
 				912B03D22643D6F1001C5FCA /* Persistence.swift */,
 				912B03D72643D6F1001C5FCA /* Info.plist */,
@@ -136,6 +141,7 @@
 			name = PasswordGenerator;
 			packageProductDependencies = (
 				91C2716126472A1A0036DC49 /* SwiftUIX */,
+				9143820A26484D7A00819C15 /* KeychainSwift */,
 			);
 			productName = PasswordGenerator;
 			productReference = 912B03C62643D6EF001C5FCA /* PasswordGenerator.app */;
@@ -166,6 +172,7 @@
 			mainGroup = 912B03BD2643D6EF001C5FCA;
 			packageReferences = (
 				91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				9143820926484D7A00819C15 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 912B03C72643D6EF001C5FCA /* Products */;
 			projectDirPath = "";
@@ -198,8 +205,9 @@
 				9103AC0D2645A00600CA6EB6 /* MainView.swift in Sources */,
 				912B03DE2643DDE2001C5FCA /* PasswordGeneratorView.swift in Sources */,
 				912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */,
-				912B03E426446A38001C5FCA /* KeychainHelper.swift in Sources */,
 				912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */,
+				9143820D2648526B00819C15 /* PasswordListViewModel.swift in Sources */,
+				91438211264857A200819C15 /* PasswordView.swift in Sources */,
 				912B03D32643D6F1001C5FCA /* Persistence.swift in Sources */,
 				9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */,
 				912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */,
@@ -394,6 +402,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9143820926484D7A00819C15 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.0;
+			};
+		};
 		91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
@@ -405,6 +421,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9143820A26484D7A00819C15 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9143820926484D7A00819C15 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
 		91C2716126472A1A0036DC49 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
