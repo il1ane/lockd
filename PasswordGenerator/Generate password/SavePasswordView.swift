@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftUIX
+import KeychainSwift
 
 struct SavePasswordView: View {
     
@@ -23,6 +24,7 @@ struct SavePasswordView: View {
     @State private var showMissingPasswordAndTitleAlert = false
     @State private var showTitleMissingFooter = false
     let keyboard = Keyboard()
+    let keychain = KeychainSwift()
     
     var body: some View {
         NavigationView {
@@ -120,6 +122,7 @@ struct SavePasswordView: View {
                         }
                         else {
                             sheetIsPresented.toggle()
+                            keychain.set(editedPassword.text, forKey: passwordTitle)
                         }
                     }
                     
