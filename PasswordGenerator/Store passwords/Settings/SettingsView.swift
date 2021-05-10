@@ -12,7 +12,6 @@ struct SettingsView: View {
     @ObservedObject var settings = SettingsViewModel()
     @State private var selectedColor = Colors.green
     @State var biometricType: SettingsViewModel.BiometricType
-    @State private var biometricAuthentication = false
     
     var body: some View {
         NavigationView {
@@ -20,53 +19,37 @@ struct SettingsView: View {
                 Form {
                     Section(header: Text("Sécurité")) {
                         
-                        Text("Rate app")
                         if settings.biometricType() != .none {
-                            Toggle(isOn: $biometricAuthentication, label: {
+                            Toggle(isOn: $settings.useFaceId, label: {
                                 Label(
                                     title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("") },
                                     icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "") }
                                 )
-                            }).onChange(of: biometricAuthentication, perform: { value in
+                            }).onChange(of: settings.useFaceId, perform: { value in
                                 
-                                if biometricAuthentication {
-                                    settings.authenticate()
+                                //When toggled on, try to add faceID or touch ID
+                                if settings.useFaceId {
+                                    settings.addBiometricAuthentication()
                                     print("Waiting for auth")
                                 }
                                 
-                                if !biometricAuthentication {
-                                    settings.defaults.setValue(false, forKey: "biometricAuthentication")
-                                    print("Face ID turned off", settings.defaults.value(forKey: "biometricAuthentication")!)
+                                //When toggled off, ask user to authenticate before turning off biometric authentication
+                                else if !settings.useFaceId {
+                                    settings.turnOffBiometricAuthentication()
+                                    print("Waiting for auth")
                                 }
                             })
                         }
-                        
-                        Text("Delete all passwords")
                     }
-                    
-                }.onChange(of: settings.isUnlocked, perform: { value in
-                    
-                    if settings.isUnlocked {
-                            settings.defaults.setValue(true, forKey: "biometricAuthentication")
-                        print("Face ID turned ON", settings.defaults.value(forKey: "biometricAuthentication")!)
-                    }
-                    
-                    if !settings.isUnlocked {
-                        settings.defaults.setValue(false, forKey: "biometricAuthentication")
-                        print("Failed to authenticate")
-                    }
-                    
-                })
-                .onChange(of: settings.faceIdFail, perform: { value in
-                    if settings.faceIdFail == true {
-                    biometricAuthentication = false
-                    }
-                })
+                }
                 
-            }.onAppear(perform: {
+            }
+            
+            .onAppear(perform: {
                 biometricType = settings.biometricType()
-                biometricAuthentication = settings.defaults.bool(forKey: "biometricAuthentication")
             })
+            
+            
             
             .navigationBarTitle("Préférences")
         }.accentColor(settings.accentColor)
