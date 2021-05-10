@@ -11,16 +11,21 @@ struct MainView: View {
     var body: some View {
         
         TabView(
-                content:  {
-                    PasswordGeneratorView().tabItem { Label(
-                        title: { Text("Générateur") },
-                        icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
-                    ).padding() }.tag(1)
-                    PasswordListView(viewModel: PasswordListViewModel()).tabItem { Label(
-                        title: { Text("Coffre fort") },
-                        icon: { Image(systemName: "tray.2") }
-                    ).padding() }.tag(2)
-                })
+            content:  {
+                PasswordGeneratorView().tabItem { Label(
+                    title: { Text("Générateur") },
+                    icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
+                ).padding() }.tag(0)
+                PasswordListView(viewModel: PasswordListViewModel()).tabItem { Label(
+                    title: { Text("Coffre fort") },
+                    icon: { Image(systemName: "tray.2") }
+                ).padding() }.tag(1)
+                SettingsView().tabItem { Label(
+                    title: { Text("Préfèrences") },
+                    icon: { Image(systemName: "gear") }
+                    
+                ).padding() }.tag(2)
+        })
     }
 }
 
