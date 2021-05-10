@@ -16,9 +16,8 @@ struct MainView: View {
     var body: some View {
         
         
-        
         VStack {
-            if viewModel.isUnlocked {
+            if isUnlocked {
             TabView(
                 content:  {
                     PasswordGeneratorView().tabItem { Label(
@@ -35,13 +34,25 @@ struct MainView: View {
                         
                     ).padding() }.tag(2)
                 })
-        } else {
-            Text("🧐").font(.system(size: 100))
-            Spacer()
         }
+            
         }.onAppear(perform: {
-            viewModel.authenticate()
-    })
+            if viewModel.defaults.bool(forKey: "biometricAuthentication") == false   {
+                isUnlocked = true
+                print("No biometric authentication")
+            }
+            
+            if viewModel.defaults.bool(forKey: "biometricAuthentication") == true {
+                
+                viewModel.authenticate()
+                print("Biometric authentication")
+                
+                print(isUnlocked.description)
+                isUnlocked = viewModel.isUnlocked
+            }
+        }).onChange(of: viewModel.isUnlocked, perform: { value in
+            isUnlocked = viewModel.isUnlocked
+        })
     }
 }
 
