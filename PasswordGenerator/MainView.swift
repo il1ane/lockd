@@ -37,22 +37,19 @@ struct MainView: View {
         }
             
         }.onAppear(perform: {
-            if viewModel.defaults.bool(forKey: "biometricAuthentication") == false   {
+            if viewModel.useFaceId == false   {
                 isUnlocked = true
                 print("No biometric authentication")
             }
             
-            if viewModel.defaults.bool(forKey: "biometricAuthentication") == true {
+            if viewModel.useFaceId == true {
                 
                 viewModel.authenticate()
                 print("Biometric authentication")
-                
-                print(isUnlocked.description)
-                isUnlocked = viewModel.isUnlocked
+
             }
         }).onChange(of: viewModel.isUnlocked, perform: { value in
             isUnlocked = viewModel.isUnlocked
-            
         })
     }
 }
