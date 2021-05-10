@@ -7,11 +7,13 @@
 
 import SwiftUI
 import MobileCoreServices
+import LocalAuthentication
 
 struct PasswordGeneratorView: View {
     
     @ObservedObject var viewModel = PasswordGeneratorViewModel()
     @Environment(\.colorScheme) var colorScheme
+    @State private var isUnlocked = false
     @State private var uppercased = true
     @State private var specialCharacters = true
     @State private var numberOfCharacter = 20.0
@@ -110,6 +112,8 @@ struct PasswordGeneratorView: View {
         })
     }
 }
+
+
 
 struct PasswordGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
