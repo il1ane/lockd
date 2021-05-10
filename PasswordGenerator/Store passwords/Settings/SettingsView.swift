@@ -58,11 +58,14 @@ struct SettingsView: View {
                     
                 })
                 .onChange(of: settings.faceIdFail, perform: { value in
+                    if settings.faceIdFail == true {
                     biometricAuthentication = false
+                    }
                 })
                 
             }.onAppear(perform: {
                 biometricType = settings.biometricType()
+                biometricAuthentication = settings.defaults.bool(forKey: "biometricAuthentication")
             })
             
             .navigationBarTitle("Préférences")

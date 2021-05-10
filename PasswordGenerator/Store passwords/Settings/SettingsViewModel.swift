@@ -58,10 +58,12 @@ accentColor = color
                     DispatchQueue.main.async {
                         if success {
                             self.isUnlocked = true
+                            self.faceIdFail = false
                             print("Success")
                             
                         } else {
-                            self.faceIdFail.toggle()
+                            
+                            self.faceIdFail = true
                             self.isUnlocked = false
                             print("Failed to authenticate")
                         }

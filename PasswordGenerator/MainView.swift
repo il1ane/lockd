@@ -52,6 +52,7 @@ struct MainView: View {
             }
         }).onChange(of: viewModel.isUnlocked, perform: { value in
             isUnlocked = viewModel.isUnlocked
+            
         })
     }
 }
