@@ -41,7 +41,7 @@ struct PasswordView: View {
                 }
                 
             }        .actionSheet(isPresented: $showAlert, content: {
-                ActionSheet(title: Text("Supprimer le mot de passe"), message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cet action est irreversible"), buttons: [.cancel(), .destructive(Text("Supprimer definitivement"), action: { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.refreshKeys() })])
+                ActionSheet(title: Text("Supprimer le mot de passe"), message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."), buttons: [.cancel(), .destructive(Text("Supprimer definitivement"), action: { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.refreshKeys() })])
             })
             .navigationBarItems(leading: Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")), trailing: Button(action: {  }, label: {
                 Image(systemName: "pencil")

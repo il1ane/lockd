@@ -19,13 +19,13 @@ struct PasswordGeneratorApp: App {
             MainView(viewModel: settingsViewModel)
                 
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                .accentColor(.green)
+                .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
                 .preferredColorScheme(.dark)
         
             }
             
             if !settingsViewModel.isUnlocked {
-                LoggingView(viewModel: settingsViewModel)
+                LoggingView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType())
                     .accentColor(.green)
                     .preferredColorScheme(.dark)
                     .onAppear(perform: {

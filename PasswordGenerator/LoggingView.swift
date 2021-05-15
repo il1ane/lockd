@@ -11,6 +11,7 @@ struct LoggingView: View {
     
     @State private var scale: CGFloat = 1
     @ObservedObject var viewModel: SettingsViewModel
+    @State var biometricType: SettingsViewModel.BiometricType
     var body: some View {
        
             VStack {
@@ -25,13 +26,17 @@ struct LoggingView: View {
                 Spacer()
                 Button(action: { viewModel.authenticate() }, label: {
                     Label(
-                        title: { Text("Déverouiller avec Face ID") },
-                        icon: { Image(systemName: "faceid") }
-)
-                }).foregroundColor(.white).padding().background(Color.green).cornerRadius(15)
+                        title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("") },
+                        icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "") }
+                    )
+                }).foregroundColor(.white).padding().background(viewModel.colors[viewModel.accentColorIndex]).cornerRadius(15)
+                
                 Spacer().frame(maxHeight : 30)
             
-        }
+        } .onAppear(perform: {
+            //set biometric type for device
+            biometricType = viewModel.biometricType()
+            })
     }
 }
 
@@ -49,6 +54,6 @@ extension View {
 
 struct LoggingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoggingView(viewModel: SettingsViewModel())
+        LoggingView(viewModel: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.touch)
     }
 }

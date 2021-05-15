@@ -20,6 +20,7 @@ struct PasswordGeneratorView: View {
     @State private var withNumbers = true
     @State private var generatedPassword = ""
     @State private var savePasswordSheetIsPresented = false
+    @ObservedObject var settings: SettingsViewModel
     
     var body: some View {
         
@@ -36,7 +37,7 @@ struct PasswordGeneratorView: View {
                             UIPasteboard.general.string = generatedPassword
                         }, label: {
                             Image(systemName: "doc.on.doc")
-                            .foregroundColor(.green)
+                            
                             
                         }).buttonStyle(PlainButtonStyle())
                     }
@@ -45,8 +46,8 @@ struct PasswordGeneratorView: View {
                         Button(action: { savePasswordSheetIsPresented.toggle()
                             
                         }, label: {
-                            Text("Ajouter au coffre fort")
-                            .foregroundColor(.green)
+                            Text("Ajouter au coffre fort").foregroundColor(settings.colors[settings.accentColorIndex])
+                          
                             
                         }).buttonStyle(PlainButtonStyle())
                         Spacer()
@@ -55,7 +56,7 @@ struct PasswordGeneratorView: View {
                 
                 Section(header: Text("Nombre de caractères")) {
                     HStack {
-                        Slider(value: $numberOfCharacter, in: viewModel.range, step: 1).accentColor(numberOfCharacter < 9 ? .red : numberOfCharacter < 14 ?  .orange : .green)
+                        Slider(value: $numberOfCharacter, in: viewModel.range, step: 1).accentColor(numberOfCharacter < 9 ? .red : numberOfCharacter < 14 ?  .orange : settings.colors[settings.accentColorIndex])
                         
                         Divider().frame(minWidth: 20)
                         
@@ -70,12 +71,15 @@ struct PasswordGeneratorView: View {
                     Toggle(isOn: $specialCharacters, label: {
                         Text("Caractères spéciaux")
                     })
+                    .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                     Toggle(isOn: $uppercased, label: {
                         Text("Majuscules")
                     })
+                    .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                     Toggle(isOn: $withNumbers, label: {
                         Text("Chiffres")
                     })
+                    .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                 }
                 
                 
@@ -85,13 +89,13 @@ struct PasswordGeneratorView: View {
                 generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             }, label: {
                 Image(systemName: "die.face.5.fill")
-                    .foregroundColor(.green)
+                    
             }))
             
         }.sheet(isPresented: $savePasswordSheetIsPresented, content: {
             SavePasswordView(password: $generatedPassword, sheetIsPresented: $savePasswordSheetIsPresented, generatedPasswordIsPresented: true, viewModel: PasswordListViewModel())
-            .environment(\.colorScheme, colorScheme)
-            .accentColor(.green)
+                .environment(\.colorScheme, colorScheme).foregroundColor(settings.colors[settings.accentColorIndex])
+            
         })
    
         //Triggers that generate a new password
@@ -117,6 +121,7 @@ struct PasswordGeneratorView: View {
 
 struct PasswordGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordGeneratorView()
+        PasswordGeneratorView(settings: SettingsViewModel())
     }
 }
+

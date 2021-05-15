@@ -16,7 +16,7 @@ struct PasswordListView: View {
     @State private var showPasswordView = false
     @State private var chosenKey = ""
     @State private var addSheetIsShowing = false
-    @State private var password = " "
+    @State private var password = ""
     
     var body: some View {
         
@@ -24,11 +24,15 @@ struct PasswordListView: View {
             VStack {
                 
                 if viewModel.keys.isEmpty {
+                    
+                    VStack {
                     Spacer()
-                    Text("🧐")
-                        .font(.system(size: 100))
-                    Text("Aucun mot de passe a l'horizon...")
+                    Text("🤷")
+                    .font(.system(size: 100))
+                    Text("Aucun mot de passe a l'horizon...").bold()
                     Spacer()
+                    }
+                    
                 }
                 
                 if viewModel.keys.isEmpty == false {
@@ -61,7 +65,9 @@ struct PasswordListView: View {
            
                 
             .sheet(isPresented: $showPasswordView, content: {
-                PasswordView(key: $chosenKey, viewModel: viewModel, isPresented: $showPasswordView).environment(\.colorScheme, colorScheme)
+                PasswordView(key: $chosenKey, viewModel: viewModel, isPresented: $showPasswordView)
+                    .navigationBarTitle("ddd")
+                    .environment(\.colorScheme, colorScheme)
                     .accentColor(.green)
         })
         }

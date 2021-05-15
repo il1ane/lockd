@@ -8,18 +8,20 @@
 import Foundation
 import SwiftUI
 import LocalAuthentication
-import Combine
 
 class SettingsViewModel: ObservableObject {
     
-    
-
     @Published var isUnlocked = false
-    @Published var accentColor = Color.green
+    
+    @Published var accentColorIndex: Int {
+        didSet {
+            UserDefaults.standard.set(accentColorIndex, forKey: "accentColorIndex")
+        }
+    }
     
     @Published var faceIdToggle: Bool {
         didSet {
-            UserDefaults.standard.set(faceIdDefault, forKey: "biometricAuthentication")
+            UserDefaults.standard.set(faceIdDefault, forKey: "faceIdToggle")
         }
     }
     
@@ -30,14 +32,12 @@ class SettingsViewModel: ObservableObject {
     }
         init() {
         self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? true
-        self.faceIdToggle = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? true
+        self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? true
+        self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 0
         }
     
     let colors = [Color.green, Color.blue, Color.red, Color.pink, Color.purple, Color.yellow]
-    
-    func updateColor(color: Color) {
-accentColor = color
-    }
+   
     
     //check if device have touchID, faceID or no biometric activated
      func biometricType() -> BiometricType {
@@ -70,7 +70,7 @@ accentColor = color
             let context = LAContext()
             var error: NSError?
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-                let reason = "We need to unlock your data."
+                let reason = "Déverouiller vos mots de passe"
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                     DispatchQueue.main.async {
                         if success {
@@ -92,7 +92,7 @@ accentColor = color
         let context = LAContext()
         var error: NSError?
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "We need to unlock your data."
+            let reason = "Sécurisez vos mots de passes avec l'authentication biometrique."
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if success {
@@ -118,14 +118,3 @@ accentColor = color
    }
 }
 
-
-enum Colors: String, Identifiable, CaseIterable{
-    case green
-    case blue
-    case red
-    case pink
-    case purple
-    case yellow
-    
-    var id: String { self.rawValue }
-}
