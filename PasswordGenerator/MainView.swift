@@ -10,14 +10,12 @@ import LocalAuthentication
 
 struct MainView: View {
     
-    @State private var isUnlocked = false
-    @ObservedObject var viewModel = SettingsViewModel()
+    @ObservedObject var viewModel: SettingsViewModel
     
     var body: some View {
         
         
         VStack {
-            if isUnlocked {
             TabView(
                 content:  {
                     PasswordGeneratorView().tabItem { Label(
@@ -28,29 +26,13 @@ struct MainView: View {
                         title: { Text("Coffre fort") },
                         icon: { Image(systemName: "tray.2") }
                     ).padding() }.tag(1)
-                    SettingsView( biometricType: viewModel.biometricType() ).tabItem { Label(
+                    SettingsView( settings: viewModel, biometricType: viewModel.biometricType() ).tabItem { Label(
                         title: { Text("Préfèrences") },
                         icon: { Image(systemName: "gear") }
                         
                     ).padding() }.tag(2)
                 })
         }
-            
-        }.onAppear(perform: {
-            if viewModel.useFaceId == false   {
-                isUnlocked = true
-                print("No biometric authentication")
-            }
-            
-            if viewModel.useFaceId == true {
-                
-                viewModel.authenticate()
-                print("Biometric authentication")
-
-            }
-        }).onChange(of: viewModel.isUnlocked, perform: { value in
-            isUnlocked = viewModel.isUnlocked
-        })
     }
 }
 
@@ -58,6 +40,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(viewModel: SettingsViewModel())
     }
 }

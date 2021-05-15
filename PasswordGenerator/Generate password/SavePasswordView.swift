@@ -34,7 +34,7 @@ struct SavePasswordView: View {
             VStack {
                 
                 Form {
-                    Section(header: Text("Modifier votre mot de passe"), footer: passwordLenght.isEmpty ? Text("Le mot de passe ne peut pas être vide").foregroundColor(.red) : nil) {
+                    Section(header: Text("Mot de passe"), footer: passwordLenght.isEmpty ? Text("Le mot de passe ne peut pas être vide").foregroundColor(.red) : nil) {
                         HStack {
                             Spacer()
                             
