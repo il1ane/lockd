@@ -23,6 +23,7 @@
 		91438211264857A200819C15 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91438210264857A200819C15 /* PasswordView.swift */; };
 		914382142648AD4700819C15 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914382132648AD4700819C15 /* SettingsView.swift */; };
 		914382162648AF6B00819C15 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914382152648AF6B00819C15 /* SettingsViewModel.swift */; };
+		9145A5772649E23600594C11 /* LoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145A5762649E23600594C11 /* LoggingView.swift */; };
 		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		91438210264857A200819C15 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		914382132648AD4700819C15 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		914382152648AF6B00819C15 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		9145A5762649E23600594C11 /* LoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingView.swift; sourceTree = "<group>"; };
 		9158C046264736D8005C8B0C /* ToFix.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToFix.md; sourceTree = "<group>"; };
 		9158C0472647F71D005C8B0C /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +111,7 @@
 				9103AC102645B30A00CA6EB6 /* TODO.md */,
 				9158C046264736D8005C8B0C /* ToFix.md */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
+				9145A5762649E23600594C11 /* LoggingView.swift */,
 				9103AC0B26459F8A00CA6EB6 /* Generate password */,
 				9103AC0A26459F5C00CA6EB6 /* Store passwords */,
 				912B03CD2643D6F1001C5FCA /* Assets.xcassets */,
@@ -226,6 +229,7 @@
 				9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */,
 				912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */,
 				912B03CA2643D6EF001C5FCA /* PasswordGeneratorApp.swift in Sources */,
+				9145A5772649E23600594C11 /* LoggingView.swift in Sources */,
 				914382142648AD4700819C15 /* SettingsView.swift in Sources */,
 				914382162648AF6B00819C15 /* SettingsViewModel.swift in Sources */,
 			);
