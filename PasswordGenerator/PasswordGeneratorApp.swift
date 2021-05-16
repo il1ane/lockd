@@ -20,14 +20,15 @@ struct PasswordGeneratorApp: App {
                 
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
+                
         
             }
             
             if !settingsViewModel.isUnlocked {
                 LoggingView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType())
-                    .accentColor(.green)
-                    .preferredColorScheme(.dark)
+                    .preferredColorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
+                    
                     .onAppear(perform: {
                         
                         if settingsViewModel.faceIdDefault == false {

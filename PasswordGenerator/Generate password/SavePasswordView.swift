@@ -25,6 +25,7 @@ struct SavePasswordView: View {
     @State private var showTitleMissingFooter = false
     @State var generatedPasswordIsPresented: Bool
     @ObservedObject var viewModel = PasswordListViewModel()
+    @ObservedObject var settings:SettingsViewModel
     let keyboard = Keyboard()
     let keychain = KeychainSwift()
     
@@ -34,7 +35,7 @@ struct SavePasswordView: View {
             VStack {
                 
                 Form {
-                    Section(header: Text("Mot de passe"), footer: passwordLenght.isEmpty ? Text("Le mot de passe ne peut pas être vide").foregroundColor(.red) : nil) {
+                    Section(header: Text("Mot de passe").foregroundColor(.gray), footer: passwordLenght.isEmpty ? Text("Le mot de passe ne peut pas être vide").foregroundColor(.red) : nil) {
                         HStack {
                             Spacer()
                             
@@ -64,7 +65,7 @@ struct SavePasswordView: View {
                                     Text("Edit")
                                 })
                                 .buttonStyle(PlainButtonStyle())
-                                .foregroundColor(.green)
+                                .foregroundColor(settings.colors[settings.accentColorIndex])
                                 
                             }
                             else {
@@ -80,7 +81,7 @@ struct SavePasswordView: View {
                                     Image(systemName: "checkmark")
                                 })
                                 .buttonStyle(PlainButtonStyle())
-                                .foregroundColor(.green)
+                                .foregroundColor(settings.colors[settings.accentColorIndex])
                             }
                         }.alert(isPresented: $showMissingPasswordAlert, content: {
                             Alert(title: Text("Mot de passe invalide"), message: Text("Le champ mot de passe ne peut pas être vide."), dismissButton: .cancel(Text("OK!")))
@@ -88,14 +89,14 @@ struct SavePasswordView: View {
                         })
                     }
                     
-                    Section(header: Text("Intitulé"), footer: showTitleMissingFooter ? Text("Champ obligatoire").foregroundColor(.red) : nil) {
+                    Section(header: Text("Intitulé").foregroundColor(.gray), footer: showTitleMissingFooter ? Text("Champ obligatoire").foregroundColor(.red) : nil) {
                         TextField("ex: Facebook", text: $passwordTitle)
                     }.alert(isPresented: $showMissingTitleAlert, content: {
                         Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un titre a votre mot de passe."), dismissButton: .cancel(Text("OK!")))
                         
                     })
                     
-                    Section(header: Text("Nom de compte (optionel)")) {
+                    Section(header: Text("Nom de compte (optionel)").foregroundColor(.gray)) {
                         TextField("ex: momail@icloud.com", text: $username)
                     }
                     
@@ -151,6 +152,6 @@ struct SavePasswordView: View {
 
 struct SavePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), sheetIsPresented: .constant(true), generatedPasswordIsPresented: true, viewModel: PasswordListViewModel()).accentColor(.green)
+        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), sheetIsPresented: .constant(true), generatedPasswordIsPresented: true, viewModel: PasswordListViewModel(), settings: SettingsViewModel()).accentColor(.green)
     }
 }

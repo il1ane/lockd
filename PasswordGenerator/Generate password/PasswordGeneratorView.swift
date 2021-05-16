@@ -56,7 +56,7 @@ struct PasswordGeneratorView: View {
                 
                 Section(header: Text("Nombre de caractères")) {
                     HStack {
-                        Slider(value: $numberOfCharacter, in: viewModel.range, step: 1).accentColor(numberOfCharacter < 9 ? .red : numberOfCharacter < 14 ?  .orange : settings.colors[settings.accentColorIndex])
+                        Slider(value: $numberOfCharacter, in: viewModel.range, step: 1).accentColor(numberOfCharacter < 9 ? settings.colors[settings.accentColorIndex].opacity(0.5) : numberOfCharacter < 14 ?  settings.colors[settings.accentColorIndex].opacity(0.7) : settings.colors[settings.accentColorIndex].opacity(1))
                         
                         Divider().frame(minWidth: 20)
                         
@@ -93,7 +93,7 @@ struct PasswordGeneratorView: View {
             }))
             
         }.sheet(isPresented: $savePasswordSheetIsPresented, content: {
-            SavePasswordView(password: $generatedPassword, sheetIsPresented: $savePasswordSheetIsPresented, generatedPasswordIsPresented: true, viewModel: PasswordListViewModel())
+            SavePasswordView(password: $generatedPassword, sheetIsPresented: $savePasswordSheetIsPresented, generatedPasswordIsPresented: true, viewModel: PasswordListViewModel(), settings: settings)
                 .environment(\.colorScheme, colorScheme).foregroundColor(settings.colors[settings.accentColorIndex])
             
         })

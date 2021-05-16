@@ -13,6 +13,10 @@ class SettingsViewModel: ObservableObject {
     
     @Published var isUnlocked = false
     
+    @AppStorage("isDarkMode") var appAppearance: String = "Auto"
+    
+    @Published var appAppearanceToggle: Bool = false
+    
     @Published var accentColorIndex: Int {
         didSet {
             UserDefaults.standard.set(accentColorIndex, forKey: "accentColorIndex")
@@ -21,7 +25,7 @@ class SettingsViewModel: ObservableObject {
     
     @Published var faceIdToggle: Bool {
         didSet {
-            UserDefaults.standard.set(faceIdDefault, forKey: "faceIdToggle")
+            UserDefaults.standard.set(faceIdToggle, forKey: "faceIdToggle")
         }
     }
     

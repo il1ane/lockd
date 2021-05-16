@@ -15,6 +15,7 @@ struct PasswordView: View {
     @State private var showAlert = false
     @State private var revealPassword = false
     @Binding var isPresented: Bool
+    @ObservedObject var settings:SettingsViewModel
     
     var body: some View {
         
@@ -31,7 +32,7 @@ struct PasswordView: View {
                     Button(action: { password = viewModel.keychain.get(key)!; revealPassword.toggle()
                     }, label: {
                         Image(systemName: "eye")
-                    }).buttonStyle(PlainButtonStyle()).foregroundColor(.green)
+                    }).buttonStyle(PlainButtonStyle()).foregroundColor(settings.colors[settings.accentColorIndex])
                 }
                
                 HStack {
@@ -53,6 +54,6 @@ struct PasswordView: View {
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView(key: .constant("clérandom"), viewModel: PasswordListViewModel(), isPresented: .constant(true))
+        PasswordView(key: .constant("clérandom"), viewModel: PasswordListViewModel(), isPresented: .constant(true), settings: SettingsViewModel())
     }
 }

@@ -44,70 +44,107 @@ struct SettingsView: View {
                             })
                         }
                     }
-                    Section(header: Text("Section 2")) {
-                        Label(
-                            title: { Text("Noter l'application") },
-                            icon: { Image(systemName: "star.fill") })
+                    Section(header: Text("Personalisation")) {
                         Picker(selection: $settings.accentColorIndex, label: Label(
                             title: { Text("Couleur principale") },
-                            icon: { Image(systemName: "star") }
+                            icon: { Image(systemName: "eyedropper.halffull") }
                         )             , content: {
                             
                             List {
-                            Label(
-                                title: { Text("Vert") },
-                                icon: { Image(systemName: "circle.fill")
-                                    .foregroundColor(settings.colors[0])
-                                    
-                                }).tag(0)
-                            
-                            Label(
-                                title: { Text("Bleu") },
-                                icon: { Image(systemName: "circle.fill")
-                                    .foregroundColor(settings.colors[1])
-                                    
-                                }).tag(1)
-                            
-                            Label(
-                                title: { Text("Rouge") },
-                                icon: { Image(systemName: "circle.fill")
-                                    .foregroundColor(settings.colors[2])
-                                    
-                                }).tag(2)
-                            
-                            Label(
-                                title: { Text("Rose") },
-                                icon: { Image(systemName: "circle.fill")
-                                    .foregroundColor(settings.colors[3])
-                                    
-                                }).tag(3)
-                            
-                            Label(
-                                title: { Text("Violet") },
-                                icon: { Image(systemName: "circle.fill")
-                                    .foregroundColor(settings.colors[4])
-                                    
-                                }).tag(4)
-                            
-                            Label(
-                                title: { Text("Jaune") },
-                                icon: { Image(systemName: "circle.fill")
-                                    .foregroundColor(settings.colors[5])
-                                    
-                                }).tag(5)
+                                Label(
+                                    title: { Text("Vert") },
+                                    icon: { Image(systemName: "circle.fill")
+                                        .foregroundColor(settings.colors[0])
+                                        
+                                    }).tag(0)
+                                
+                                Label(
+                                    title: { Text("Bleu") },
+                                    icon: { Image(systemName: "circle.fill")
+                                        .foregroundColor(settings.colors[1])
+                                        
+                                    }).tag(1)
+                                
+                                Label(
+                                    title: { Text("Rouge") },
+                                    icon: { Image(systemName: "circle.fill")
+                                        .foregroundColor(settings.colors[2])
+                                        
+                                    }).tag(2)
+                                
+                                Label(
+                                    title: { Text("Rose") },
+                                    icon: { Image(systemName: "circle.fill")
+                                        .foregroundColor(settings.colors[3])
+                                        
+                                    }).tag(3)
+                                
+                                Label(
+                                    title: { Text("Violet") },
+                                    icon: { Image(systemName: "circle.fill")
+                                        .foregroundColor(settings.colors[4])
+                                        
+                                    }).tag(4)
+                                
+                                Label(
+                                    title: { Text("Jaune") },
+                                    icon: { Image(systemName: "circle.fill")
+                                        .foregroundColor(settings.colors[5])
+                                        
+                                    }).tag(5)
                             }
                             
                         })
                         
+                        Picker(selection: settings.$appAppearance, label: Label(
+                            title: { HStack {
+                                Text("Mode nuit")
+                                
+                            } },
+                                icon: {
+                                    
+                                    if settings.appAppearance == "Auto" {
+                                        Image(systemName: "moon.circle")
+                                    }
+                                    if settings.appAppearance == "Nuit" {
+                                        Image(systemName: "moon.fill")
+                                    }
+                                    if settings.appAppearance == "Jour" {
+                                    Image(systemName: "sun.min")
+                                    }
+                                    
+                                }
+                        ), content: {
+                            Text("Automatique").tag("Auto")
+                            Text("Nuit").tag("Nuit")
+                            Text("Jour").tag("Jour")
+                        }).pickerStyle(MenuPickerStyle()).onChange(of: settings.appAppearance, perform: { value in
+                            if settings.appAppearance == "Nuit" {
+                                settings.appAppearanceToggle = true
+                            } else if settings.appAppearance == "Jour" {
+                                settings.appAppearanceToggle = false
+                            }
+                        })
+                        
                     }
+                    Label(
+                        title: { Text("Noter l'application") },
+                        icon: { Image(systemName: "star.fill") })
                     
                     Section(header: Text("Section 3")) {
                         Button(action: { removePasswordAlert.toggle() }, label: {
                             Text("Effacer tous les mots de passes").foregroundColor(.red)
                         }).buttonStyle(PlainButtonStyle())
                     }
+                    HStack {
+                        Text("Version")
+                        Spacer()
+                        Text("1.0 beta 1").foregroundColor(.gray)
+                    }
                 }
+                
             }
+            
             .alert(isPresented: $removePasswordAlert, content: {
                 Alert(title: Text("Effacer TOUS les mots de passes"), message: Text("Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible."), primaryButton: .cancel(), secondaryButton: .destructive(Text("TOUT supprimer"), action: {
                     keychain.clear()

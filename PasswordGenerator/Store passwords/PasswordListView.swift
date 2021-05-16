@@ -17,6 +17,7 @@ struct PasswordListView: View {
     @State private var chosenKey = ""
     @State private var addSheetIsShowing = false
     @State private var password = ""
+    @ObservedObject var settings:SettingsViewModel
     
     var body: some View {
         
@@ -51,8 +52,8 @@ struct PasswordListView: View {
                 }
                 Spacer()
                 .sheet(isPresented: $addSheetIsShowing, content: {
-                    SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: viewModel).environment(\.colorScheme, colorScheme)
-                        .accentColor(.green)
+                    SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: viewModel, settings: settings).environment(\.colorScheme, colorScheme)
+                        .accentColor(settings.colors[settings.accentColorIndex])
                 })
                 .onAppear(perform: {
                     viewModel.refreshKeys()
@@ -65,10 +66,10 @@ struct PasswordListView: View {
            
                 
             .sheet(isPresented: $showPasswordView, content: {
-                PasswordView(key: $chosenKey, viewModel: viewModel, isPresented: $showPasswordView)
+                PasswordView(key: $chosenKey, viewModel: viewModel, isPresented: $showPasswordView, settings: settings)
                     .navigationBarTitle("ddd")
                     .environment(\.colorScheme, colorScheme)
-                    .accentColor(.green)
+                    .accentColor(settings.colors[settings.accentColorIndex])
         })
         }
     }
@@ -77,6 +78,6 @@ struct PasswordListView: View {
 
 struct PasswordListView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordListView(viewModel: PasswordListViewModel())
+        PasswordListView(viewModel: PasswordListViewModel(), settings: SettingsViewModel())
     }
 }
