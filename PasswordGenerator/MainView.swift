@@ -11,6 +11,7 @@ import LocalAuthentication
 struct MainView: View {
     
     @ObservedObject var viewModel: SettingsViewModel
+    @ObservedObject var passwordViewModel: PasswordListViewModel
     
     var body: some View {
         
@@ -22,7 +23,7 @@ struct MainView: View {
                         title: { Text("Générateur") },
                         icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
                     ).padding() }.tag(0)
-                    PasswordListView(viewModel: PasswordListViewModel(), settings: viewModel).tabItem { Label(
+                    PasswordListView(passwordViewModel: passwordViewModel, settings: viewModel).tabItem { Label(
                         title: { Text("Coffre fort") },
                         icon: { Image(systemName: "tray.2") }
                     ).padding() }.tag(1)
@@ -44,6 +45,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: SettingsViewModel())
+        MainView(viewModel: SettingsViewModel(), passwordViewModel: PasswordListViewModel())
     }
 }

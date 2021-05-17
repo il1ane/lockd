@@ -11,20 +11,21 @@ import KeychainSwift
 
 struct PasswordListView: View {
     
-    @ObservedObject var viewModel: PasswordListViewModel
+    @ObservedObject var passwordViewModel: PasswordListViewModel
     @Environment(\.colorScheme) var colorScheme
     @State private var showPasswordView = false
     @State private var chosenKey = ""
     @State private var addSheetIsShowing = false
     @State private var password = ""
     @ObservedObject var settings:SettingsViewModel
+    @State private var currentUsername = ""
     
     var body: some View {
         
         NavigationView {
             VStack {
                 
-                if viewModel.keys.isEmpty {
+                if passwordViewModel.keys.isEmpty {
                     
                     VStack {
                     Spacer()
@@ -36,27 +37,33 @@ struct PasswordListView: View {
                     
                 }
                 
-                if viewModel.keys.isEmpty == false {
-                VStack {
-                List {
-                    ForEach(viewModel.keys, id: \.self) { key in
-                        HStack {
-                            Button(action: {
-                                    chosenKey = key
-                                    showPasswordView.toggle() },
-                                   label: Text(key))
+                if passwordViewModel.keys.isEmpty == false {
+                Form {
+                    Section(header: Text("Total : \(passwordViewModel.keys.count)")) {
+                        List {
+                        ForEach(passwordViewModel.keys, id: \.self) { key in
+                            let username = key.components(separatedBy: passwordViewModel.separator)
+                            HStack {
+                                Button(action: {
+                                        chosenKey = key
+                                        showPasswordView.toggle()
+                                        currentUsername = username[1]
+                                },
+                                       label: Text("\(username[1])"))
+                            }
                         }
                     }
                 }
             }
-                }
-                Spacer()
+        }
+                VStack{}
                 .sheet(isPresented: $addSheetIsShowing, content: {
-                    SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: viewModel, settings: settings).environment(\.colorScheme, colorScheme)
+                    SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings).environment(\.colorScheme, colorScheme)
                         .accentColor(settings.colors[settings.accentColorIndex])
                 })
                 .onAppear(perform: {
-                    viewModel.refreshKeys()
+                    passwordViewModel.getAllKeys()
+                    passwordViewModel.getAllUsernames()
                 })
                 .navigationBarTitle("Coffre fort")
                 .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
@@ -66,8 +73,7 @@ struct PasswordListView: View {
            
                 
             .sheet(isPresented: $showPasswordView, content: {
-                PasswordView(key: $chosenKey, viewModel: viewModel, isPresented: $showPasswordView, settings: settings)
-                    .navigationBarTitle("ddd")
+                PasswordView(key: $chosenKey, viewModel: passwordViewModel, isPresented: $showPasswordView, settings: settings, username: $currentUsername)
                     .environment(\.colorScheme, colorScheme)
                     .accentColor(settings.colors[settings.accentColorIndex])
         })
@@ -78,6 +84,6 @@ struct PasswordListView: View {
 
 struct PasswordListView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordListView(viewModel: PasswordListViewModel(), settings: SettingsViewModel())
+        PasswordListView(passwordViewModel: PasswordListViewModel(), settings: SettingsViewModel())
     }
 }

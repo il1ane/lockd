@@ -11,6 +11,22 @@ import KeychainSwift
 class PasswordListViewModel: ObservableObject {
     
     @Published var keys = [String]()
+    @Published var usernames = [String]()
+    
+    let separator = ":separator:"
+    
+    func saveToKeychain(password: String, username: String) {
+        
+        let key = password + separator + username
+        
+        keychain.set(password, forKey: key)
+    }
+    
+    func getAllUsernames() {
+        for key in keys {
+            usernames =  key.components(separatedBy: separator)
+        }
+    }
     
     init() {
        keys = keychain.allKeys
@@ -21,7 +37,7 @@ class PasswordListViewModel: ObservableObject {
         keychain.delete(key)
     }
     
-    func refreshKeys() {
+    func getAllKeys() {
         keys = keychain.allKeys
     }
 }

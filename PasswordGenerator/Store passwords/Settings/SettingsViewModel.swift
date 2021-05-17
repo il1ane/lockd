@@ -10,7 +10,7 @@ import SwiftUI
 import LocalAuthentication
 
 class SettingsViewModel: ObservableObject {
-    
+
     @Published var isUnlocked = false
     
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
@@ -70,7 +70,8 @@ class SettingsViewModel: ObservableObject {
         case unknown
     }
     
-        func authenticate() {
+        func biometricAuthentication() -> Bool {
+            var getKeychainItems = false
             let context = LAContext()
             var error: NSError?
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
@@ -78,8 +79,10 @@ class SettingsViewModel: ObservableObject {
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                     DispatchQueue.main.async {
                         if success {
-                            self.isUnlocked = true
-                            print("Success")
+                            print("success")
+                           self.isUnlocked = true
+                           getKeychainItems = true
+                            
                             
                         } else {
                             self.isUnlocked = false
@@ -90,6 +93,7 @@ class SettingsViewModel: ObservableObject {
             } else {
                 print("No biometrics")
     }
+            return getKeychainItems
 }
     
     func addBiometricAuthentication() {
@@ -120,5 +124,6 @@ class SettingsViewModel: ObservableObject {
     func turnOffBiometricAuthentication() {
         self.faceIdDefault = false
    }
+
 }
 

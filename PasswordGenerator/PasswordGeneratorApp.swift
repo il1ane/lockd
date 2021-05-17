@@ -11,12 +11,13 @@ import SwiftUI
 struct PasswordGeneratorApp: App {
     let persistenceController = PersistenceController.shared
     @ObservedObject var settingsViewModel = SettingsViewModel()
+    @ObservedObject var passwordViewModel = PasswordListViewModel()
     
     var body: some Scene {
         WindowGroup {
             
             if settingsViewModel.isUnlocked {
-            MainView(viewModel: settingsViewModel)
+                MainView(viewModel: settingsViewModel, passwordViewModel: passwordViewModel)
                 
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
@@ -26,18 +27,21 @@ struct PasswordGeneratorApp: App {
             }
             
             if !settingsViewModel.isUnlocked {
-                LoggingView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType())
+                LoggingView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel)
                     .preferredColorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
                     
                     .onAppear(perform: {
                         
                         if settingsViewModel.faceIdDefault == false {
                             settingsViewModel.isUnlocked = true
+                            passwordViewModel.getAllKeys()
                             print("No biometric authentication")
                         }
                         
                         if settingsViewModel.faceIdDefault == true {
-                            settingsViewModel.authenticate()
+                            if settingsViewModel.biometricAuthentication() {
+                                passwordViewModel.getAllKeys()
+                            }
                             print("Biometric authentication")
                         }
                 })

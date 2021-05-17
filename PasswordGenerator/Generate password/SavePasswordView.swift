@@ -14,7 +14,6 @@ struct SavePasswordView: View {
     @Binding var password: String
     @Binding var sheetIsPresented: Bool
     @ObservedObject var editedPassword = TextBindingManager(limit: 30)
-    @State private var passwordTitle = ""
     @State private var username = ""
     @State private var isEditingPassword = false
     @State private var showKeyboard = false
@@ -89,16 +88,12 @@ struct SavePasswordView: View {
                         })
                     }
                     
-                    Section(header: Text("Intitulé").foregroundColor(.gray), footer: showTitleMissingFooter ? Text("Champ obligatoire").foregroundColor(.red) : nil) {
-                        TextField("ex: Facebook", text: $passwordTitle)
+                    Section(header: Text("Nom de compte").foregroundColor(.gray), footer: showTitleMissingFooter ? Text("Champ obligatoire").foregroundColor(.red) : nil ) {
+                        TextField("ex: Facebook", text: $username)
                     }.alert(isPresented: $showMissingTitleAlert, content: {
-                        Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un titre a votre mot de passe."), dismissButton: .cancel(Text("OK!")))
+                        Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un nom de compte a votre mot de passe."), dismissButton: .cancel(Text("OK!")))
                         
                     })
-                    
-                    Section(header: Text("Nom de compte (optionel)").foregroundColor(.gray)) {
-                        TextField("ex: momail@icloud.com", text: $username)
-                    }
                     
                 }.alert(isPresented: $showMissingPasswordAndTitleAlert, content: {
                     Alert(title: Text("Champs vides"), message: Text("Le champ mot de passe et intitulé ne peuvent pas être vides."), dismissButton: .cancel(Text("OK!")))
@@ -113,22 +108,22 @@ struct SavePasswordView: View {
                 }), trailing: Button(action: {
                     
                     if !isEditingPassword {
-                        if passwordTitle.isEmpty && editedPassword.text.isEmpty {
+                        if username.isEmpty && editedPassword.text.isEmpty {
                             showMissingPasswordAndTitleAlert.toggle()
                             print("Password and title missing")
-                        } else if passwordTitle.isEmpty && editedPassword.text.isEmpty == false {
-                            print("Title missing")
+                        } else if username.isEmpty && editedPassword.text.isEmpty == false {
+                            print("Username missing")
                             showTitleMissingFooter = true
                             showMissingTitleAlert.toggle()
                         }
-                        else if editedPassword.text.isEmpty && passwordTitle.isEmpty == false {
+                        else if editedPassword.text.isEmpty && username.isEmpty == false {
                             showMissingPasswordAlert.toggle()
                             print("Password missing")
                         }
                         else {
                             sheetIsPresented.toggle()
-                            keychain.set(editedPassword.text, forKey: passwordTitle)
-                            viewModel.refreshKeys()
+                            viewModel.saveToKeychain(password: editedPassword.text, username: username)
+                            viewModel.getAllKeys()
                         }
                     }
                     
