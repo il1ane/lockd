@@ -16,6 +16,8 @@ struct SettingsView: View {
     @State private var removePasswordAlert = false
     @State private var bgColor = Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
     
+    
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -101,19 +103,19 @@ struct SettingsView: View {
                                 Text("Mode nuit")
                                 
                             } },
-                                icon: {
-                                    
-                                    if settings.appAppearance == "Auto" {
-                                        Image(systemName: "moon.circle")
-                                    }
-                                    if settings.appAppearance == "Nuit" {
-                                        Image(systemName: "moon.fill")
-                                    }
-                                    if settings.appAppearance == "Jour" {
-                                    Image(systemName: "sun.min")
-                                    }
-                                    
+                            icon: {
+                                
+                                if settings.appAppearance == "Auto" {
+                                    Image(systemName: "moon.circle")
                                 }
+                                if settings.appAppearance == "Nuit" {
+                                    Image(systemName: "moon.fill")
+                                }
+                                if settings.appAppearance == "Jour" {
+                                    Image(systemName: "sun.min")
+                                }
+                                
+                            }
                         ), content: {
                             Text("Automatique").tag("Auto")
                             Text("Nuit").tag("Nuit")
@@ -127,19 +129,24 @@ struct SettingsView: View {
                         })
                         
                     }
-                    Label(
-                        title: { Text("Noter l'application") },
-                        icon: { Image(systemName: "star.fill") })
                     
-                    Section(header: Text("Section 3")) {
+                    Section {
+                        HStack {
+                            Image(systemName: "chevron.left.slash.chevron.right").foregroundColor(settings.colors[settings.accentColorIndex])
+                            Link("Code source (GitHub)", destination: URL(string: "https://github.com/il1ane/PasswordGenerator")!)
+                        }
+                        HStack {
+                            Text("Version")
+                            Spacer()
+                            Text("1.0 beta 1").foregroundColor(.gray)
+                        }
+                        
+                    }
+                    
+                    Section {
                         Button(action: { removePasswordAlert.toggle() }, label: {
                             Text("Effacer tous les mots de passes").foregroundColor(.red)
                         }).buttonStyle(PlainButtonStyle())
-                    }
-                    HStack {
-                        Text("Version")
-                        Spacer()
-                        Text("1.0 beta 1").foregroundColor(.gray)
                     }
                 }
                 
