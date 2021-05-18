@@ -8,14 +8,31 @@
 import Foundation
 import SwiftUI
 import LocalAuthentication
+import CoreHaptics
 
 class SettingsViewModel: ObservableObject {
+    
+    init() {
+    self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? true
+    self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? true
+    self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 0
+    supportsHaptics = hapticCapability.supportsHaptics
+       
+    }
+
+    
+    var supportsHaptics: Bool = false
+    let hapticCapability = CHHapticEngine.capabilitiesForHardware()
+    
+    
+    
+    
 
     @Published var isUnlocked = false
     
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
     
-    @Published var appAppearanceToggle: Bool = false
+    @AppStorage("appAppearanceToggle") var appAppearanceToggle: Bool = false
     
     @Published var accentColorIndex: Int {
         didSet {
@@ -34,12 +51,7 @@ class SettingsViewModel: ObservableObject {
             UserDefaults.standard.set(faceIdDefault, forKey: "biometricAuthentication")
         }
     }
-        init() {
-        self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? true
-        self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? true
-        self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 0
-        }
-    
+       
     let colors = [Color.green, Color.blue, Color.red, Color.pink, Color.purple, Color.yellow]
    
     
