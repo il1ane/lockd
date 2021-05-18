@@ -49,7 +49,7 @@ struct PasswordListView: View {
                                         showPasswordView.toggle()
                                         currentUsername = username[1]
                                 },
-                                label: Text("\(username[1])").foregroundColor(.black))
+                                label: Text("\(username[1])").foregroundColor(settings.appAppearance == "Nuit" ? .white : .black))
                             }
                         }
                     }

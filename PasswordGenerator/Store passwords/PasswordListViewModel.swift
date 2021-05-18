@@ -12,6 +12,7 @@ class PasswordListViewModel: ObservableObject {
     
     @Published var keys = [String]()
     @Published var usernames = [String]()
+    @Published var showAnimation = false
     
     let separator = ":separator:"
     
@@ -20,6 +21,9 @@ class PasswordListViewModel: ObservableObject {
         let key = password + separator + username
         
         keychain.set(password, forKey: key)
+        showAnimation = true
+        print("Saved to keychain")
+        
     }
     
     func getAllUsernames() {

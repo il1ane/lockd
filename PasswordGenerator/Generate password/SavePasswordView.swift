@@ -23,7 +23,7 @@ struct SavePasswordView: View {
     @State private var showMissingPasswordAndTitleAlert = false
     @State private var showTitleMissingFooter = false
     @State var generatedPasswordIsPresented: Bool
-    @ObservedObject var viewModel = PasswordListViewModel()
+    @ObservedObject var viewModel: PasswordListViewModel
     @ObservedObject var settings:SettingsViewModel
     let keyboard = Keyboard()
     let keychain = KeychainSwift()

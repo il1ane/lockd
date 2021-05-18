@@ -12,14 +12,17 @@ struct MainView: View {
     
     @ObservedObject var viewModel: SettingsViewModel
     @ObservedObject var passwordViewModel: PasswordListViewModel
+   
+
     
     var body: some View {
         
         
         VStack {
+            
             TabView(
                 content:  {
-                    PasswordGeneratorView(settings: viewModel).tabItem { Label(
+                    PasswordGeneratorView(settings: viewModel, passwordViewModel: passwordViewModel).tabItem { Label(
                         title: { Text("Générateur") },
                         icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
                     ).padding() }.tag(0)
@@ -33,7 +36,11 @@ struct MainView: View {
                         
                     ).padding() }.tag(2)
                 })
-        }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+        }
+        
+        
+        
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             if viewModel.faceIdDefault {
             viewModel.isUnlocked = false
             }
