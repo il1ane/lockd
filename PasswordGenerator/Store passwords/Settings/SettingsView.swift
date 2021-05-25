@@ -15,12 +15,13 @@ struct SettingsView: View {
     let keychain = KeychainSwift()
     @State private var removePasswordAlert = false
     @State private var bgColor = Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
+    @ObservedObject var passwordViewModel: PasswordListViewModel
     
     
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
                 Form {
                     Section(header: Text("Sécurité")) {
                         
@@ -149,7 +150,13 @@ struct SettingsView: View {
                         }).buttonStyle(PlainButtonStyle())
                     }
                 }
-                
+                if passwordViewModel.showAnimation {
+                    
+                    SavePasswordAnimation()
+                        .onAppear(perform: { animationDisappear() })
+                        .animation(.easeInOut(duration: 0.5))
+    
+                }
             }
             
             .alert(isPresented: $removePasswordAlert, content: {
@@ -168,10 +175,18 @@ struct SettingsView: View {
             .navigationBarTitle("Préférences")
         }.accentColor(settings.colors[settings.accentColorIndex])
     }
+    
+    func animationDisappear() {
+       
+       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+           passwordViewModel.showAnimation = false
+           print("Show animation")
+               }
+   }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(settings: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.face)
+        SettingsView(settings: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.face, passwordViewModel: PasswordListViewModel())
     }
 }

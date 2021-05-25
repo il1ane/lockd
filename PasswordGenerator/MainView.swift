@@ -32,7 +32,7 @@ struct MainView: View {
                         title: { Text("Coffre fort") },
                         icon: { Image(systemName: "tray.2") }
                     ).padding() }.tag(1)
-                    SettingsView( settings: viewModel, biometricType: viewModel.biometricType() ).tabItem { Label(
+                    SettingsView( settings: viewModel, biometricType: viewModel.biometricType(), passwordViewModel: passwordViewModel ).tabItem { Label(
                         title: { Text("Préfèrences") },
                         icon: { Image(systemName: "gear") }
                         

@@ -24,8 +24,9 @@ struct PasswordListView: View {
     var body: some View {
         
         NavigationView {
-            VStack {
-                
+            
+            
+            ZStack {
                 if passwordViewModel.keys.isEmpty {
                     
                     VStack {
@@ -71,6 +72,15 @@ struct PasswordListView: View {
                     Image(systemName: "plus")
                 }))
                 
+                
+                if passwordViewModel.showAnimation {
+                    
+                    SavePasswordAnimation()
+                        .onAppear(perform: { animationDisappear() })
+                        .animation(.easeInOut(duration: 0.5))
+    
+                }
+                
                 }
             
            
@@ -88,15 +98,8 @@ struct PasswordListView: View {
        
        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
            passwordViewModel.showAnimation = false
-           showAnimation = false
            print("Show animation")
                }
-   }
-   
-    func successHaptic() {
-       let generator = UINotificationFeedbackGenerator()
-       generator.notificationOccurred(.success)
-       print("Simple haptic")
    }
 }
 
