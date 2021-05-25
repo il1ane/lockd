@@ -12,9 +12,8 @@ struct MainView: View {
     
     @ObservedObject var viewModel: SettingsViewModel
     @ObservedObject var passwordViewModel: PasswordListViewModel
+    @State private var currentTab = 0
    
-
-    
     var body: some View {
         
         
@@ -22,7 +21,10 @@ struct MainView: View {
             
             TabView(
                 content:  {
-                    PasswordGeneratorView(settings: viewModel, passwordViewModel: passwordViewModel).tabItem { Label(
+                    
+                    PasswordGeneratorView(settings: viewModel, passwordViewModel: passwordViewModel)
+                        .onAppear(perform : { currentTab = 0 })
+                        .tabItem { Label(
                         title: { Text("Générateur") },
                         icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
                     ).padding() }.tag(0)
@@ -45,6 +47,9 @@ struct MainView: View {
             viewModel.isUnlocked = false
             }
         }
+    }
+    func setCurrentTab(tab: Int) {
+        currentTab = tab
     }
 }
 

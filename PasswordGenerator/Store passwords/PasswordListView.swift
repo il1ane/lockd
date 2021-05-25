@@ -19,6 +19,7 @@ struct PasswordListView: View {
     @State private var password = ""
     @ObservedObject var settings:SettingsViewModel
     @State private var currentUsername = ""
+    @State private var showAnimation = false
     
     var body: some View {
         
@@ -69,7 +70,9 @@ struct PasswordListView: View {
                 .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
                     Image(systemName: "plus")
                 }))
+                
                 }
+            
            
                 
             .sheet(isPresented: $showPasswordView, content: {
@@ -77,8 +80,24 @@ struct PasswordListView: View {
                     .environment(\.colorScheme, colorScheme)
                     .accentColor(settings.colors[settings.accentColorIndex])
         })
+            
         }
+        
     }
+    func animationDisappear() {
+       
+       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+           passwordViewModel.showAnimation = false
+           showAnimation = false
+           print("Show animation")
+               }
+   }
+   
+    func successHaptic() {
+       let generator = UINotificationFeedbackGenerator()
+       generator.notificationOccurred(.success)
+       print("Simple haptic")
+   }
 }
 
 

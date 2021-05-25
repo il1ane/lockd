@@ -25,6 +25,7 @@ struct PasswordGeneratorView: View {
     @ObservedObject var passwordViewModel: PasswordListViewModel
     @State private var showAnimation = false
     
+    
     var body: some View {
         
         NavigationView {
@@ -101,8 +102,9 @@ struct PasswordGeneratorView: View {
             }))
                 
                 if passwordViewModel.showAnimation {
+                    
                     SavePasswordAnimation()
-                        .onAppear(perform: { animationDisappear(); successHaptic() })
+                        .onAppear(perform: { animationDisappear() })
                         .animation(.easeInOut(duration: 0.5))
     
                 }
@@ -135,20 +137,16 @@ struct PasswordGeneratorView: View {
             generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
         })
     }
+    
      func animationDisappear() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             passwordViewModel.showAnimation = false
-            showAnimation = false
             print("Show animation")
-                }
-    }
+            
+            }
     
-     func successHaptic() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-        print("Simple haptic")
-    }
+   }
 }
 
 

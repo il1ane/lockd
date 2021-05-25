@@ -7,6 +7,8 @@
 
 import Foundation
 import KeychainSwift
+import CoreHaptics
+import SwiftUI
 
 class PasswordListViewModel: ObservableObject {
     
@@ -21,10 +23,17 @@ class PasswordListViewModel: ObservableObject {
         let key = password + separator + username
         
         keychain.set(password, forKey: key)
+        successHaptic()
         showAnimation = true
         print("Saved to keychain")
         
     }
+    
+    func successHaptic() {
+       let generator = UINotificationFeedbackGenerator()
+       generator.notificationOccurred(.success)
+       print("Simple haptic")
+   }
     
     func getAllUsernames() {
         for key in keys {
@@ -37,6 +46,7 @@ class PasswordListViewModel: ObservableObject {
     }
     
     @Published var keychain = KeychainSwift()
+    
     func deletePassword(key: String) {
         keychain.delete(key)
     }
