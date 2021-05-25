@@ -17,8 +17,7 @@ struct SettingsView: View {
     @State private var bgColor = Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
     @ObservedObject var passwordViewModel: PasswordListViewModel
     
-    
-    
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -152,7 +151,7 @@ struct SettingsView: View {
                 }
                 if passwordViewModel.showAnimation {
                     
-                    SavePasswordAnimation()
+                    SavePasswordAnimation(settings: settings)
                         .onAppear(perform: { animationDisappear() })
                         .animation(.easeInOut(duration: 0.5))
     
@@ -162,6 +161,7 @@ struct SettingsView: View {
             .alert(isPresented: $removePasswordAlert, content: {
                 Alert(title: Text("Effacer TOUS les mots de passes"), message: Text("Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible."), primaryButton: .cancel(), secondaryButton: .destructive(Text("TOUT supprimer"), action: {
                     keychain.clear()
+                    passwordViewModel.successHaptic()
                 }))
             })
             

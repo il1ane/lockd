@@ -8,27 +8,36 @@
 import SwiftUI
 
 struct SavePasswordAnimation: View {
+    
+    @ObservedObject var settings: SettingsViewModel
 
     var body: some View {
         
         ZStack {
+            
             VStack {
-            RoundedRectangle(cornerRadius: 20)
                 
-                .foregroundColor(.gray)
-                .opacity(100)
+            RoundedRectangle(cornerRadius: 20)
+                .foregroundColor(settings.appAppearance == "Nuit" ? .black : .gray)
+                .opacity(0.5)
                 .frame(width: 200, height: 200)
+                
+                
+                
+
+                
+                
             }
                 
             Image(systemName: "checkmark.circle")
                 .font(.system(size: 70)).foregroundColor(.white)
-                .opacity(100)
+               
         }
     }
 }
 
 struct savePasswordAnimation_Previews: PreviewProvider {
     static var previews: some View {
-        SavePasswordAnimation()
+        SavePasswordAnimation(settings: SettingsViewModel())
     }
 }

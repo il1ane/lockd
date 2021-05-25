@@ -75,7 +75,7 @@ struct PasswordListView: View {
                 
                 if passwordViewModel.showAnimation {
                     
-                    SavePasswordAnimation()
+                    SavePasswordAnimation(settings: settings)
                         .onAppear(perform: { animationDisappear() })
                         .animation(.easeInOut(duration: 0.5))
     
