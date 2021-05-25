@@ -18,7 +18,7 @@ struct SavePasswordAnimation: View {
             VStack {
                 
             RoundedRectangle(cornerRadius: 20)
-                .foregroundColor(settings.appAppearance == "Nuit" ? .black : .gray)
+                .foregroundColor(settings.appAppearance == "Nuit" ? .gray : .black)
                 .opacity(0.5)
                 .frame(width: 200, height: 200)
                 
