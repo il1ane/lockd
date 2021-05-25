@@ -29,6 +29,11 @@ class PasswordListViewModel: ObservableObject {
         
     }
     
+    func updatePassword(key: String, password: String) {
+        keychain.set(password, forKey: key)
+        print("password update")
+    }
+    
     func successHaptic() {
        let generator = UINotificationFeedbackGenerator()
        generator.notificationOccurred(.success)

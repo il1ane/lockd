@@ -56,7 +56,7 @@ struct PasswordView: View {
                                 //showKeyboard doesn't change anything but Xcode stop complaining
                                 //not always working
                                 password = editedPassword
-                                
+                                viewModel.updatePassword(key: key, password: password)
                                 
                             }, label: {
                                 Image(systemName: "checkmark")
