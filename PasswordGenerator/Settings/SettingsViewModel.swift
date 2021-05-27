@@ -13,16 +13,16 @@ import CoreHaptics
 class SettingsViewModel: ObservableObject {
     
     init() {
-    self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? true
-    self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? true
-    self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 0
+    self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? false
+    self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? false
+    self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 1
     supportsHaptics = hapticCapability.supportsHaptics
-       
+    self.isFirstLaunch = UserDefaults.standard.object(forKey: "isFirstLaunch") as? Bool ?? true
     }
 
     
     var supportsHaptics: Bool = false
-    let hapticCapability = CHHapticEngine.capabilitiesForHardware()
+    let hapticCapability = CHHapticEngine.capabilitiesForHardware() 
     
     
     
@@ -33,6 +33,12 @@ class SettingsViewModel: ObservableObject {
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
     
     @AppStorage("appAppearanceToggle") var appAppearanceToggle: Bool = false
+    
+    @Published var isFirstLaunch: Bool {
+        didSet {
+            UserDefaults.standard.set(isFirstLaunch, forKey: "isFirstLaunch")
+        }
+    }
     
     @Published var accentColorIndex: Int {
         didSet {

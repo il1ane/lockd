@@ -10,41 +10,55 @@ import LocalAuthentication
 
 struct MainView: View {
     
-    @ObservedObject var viewModel: SettingsViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var passwordViewModel: PasswordListViewModel
     @State private var currentTab = 0
+    @State private var onBoardingSheetIsPresented = false
+    @Environment(\.colorScheme) var colorScheme
+    
    
     var body: some View {
         
         
         VStack {
-            
+           
             TabView(
                 content:  {
                     
-                    PasswordGeneratorView(settings: viewModel, passwordViewModel: passwordViewModel)
+                    PasswordGeneratorView(settings: settingsViewModel, passwordViewModel: passwordViewModel)
                         .onAppear(perform : { currentTab = 0 })
                         .tabItem { Label(
                         title: { Text("Générateur") },
                         icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
-                    ).padding() }.tag(0)
-                    PasswordListView(passwordViewModel: passwordViewModel, settings: viewModel).tabItem { Label(
+                    ) }.tag(0)
+                    PasswordListView(passwordViewModel: passwordViewModel, settings: settingsViewModel).tabItem { Label(
                         title: { Text("Coffre fort") },
                         icon: { Image(systemName: "tray.2") }
-                    ).padding() }.tag(1)
-                    SettingsView( settings: viewModel, biometricType: viewModel.biometricType(), passwordViewModel: passwordViewModel ).tabItem { Label(
+                    ) }.tag(1)
+                    SettingsView( settings: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel ).tabItem { Label(
                         title: { Text("Préfèrences") },
                         icon: { Image(systemName: "gear") }
                         
-                    ).padding() }.tag(2)
+                    ) }.tag(2)
                 })
         }
+        
+        .onAppear(perform: {
+            if settingsViewModel.isFirstLaunch {
+                onBoardingSheetIsPresented = true
+            }
+        })
+        
+        .sheet(isPresented: $onBoardingSheetIsPresented, onDismiss: { settingsViewModel.isFirstLaunch = false } , content: {
+            OnboardingView(settings: settingsViewModel, isPresented: $onBoardingSheetIsPresented)
+                .environment(\.colorScheme, colorScheme)
+        })
         
         
         
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            if viewModel.faceIdDefault {
-            viewModel.isUnlocked = false
+            if settingsViewModel.faceIdDefault {
+            settingsViewModel.isUnlocked = false
             }
         }
     }
@@ -57,6 +71,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(viewModel: SettingsViewModel(), passwordViewModel: PasswordListViewModel())
+        MainView(settingsViewModel: SettingsViewModel(), passwordViewModel: PasswordListViewModel())
     }
 }
