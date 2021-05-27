@@ -27,6 +27,8 @@
 		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
 		91D89AC62653DE0100CF22E1 /* SavePasswordAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */; };
+		91E6084C265E4D8300678CD3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084B265E4D8300678CD3 /* OnboardingView.swift */; };
+		91E6084E265E51D700678CD3 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084D265E51D700678CD3 /* OnboardingCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		9158C046264736D8005C8B0C /* ToFix.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToFix.md; sourceTree = "<group>"; };
 		9158C0472647F71D005C8B0C /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
 		91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordAnimation.swift; sourceTree = "<group>"; };
+		91E6084B265E4D8300678CD3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		91E6084D265E51D700678CD3 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +77,6 @@
 				912B03E12644660D001C5FCA /* PasswordListView.swift */,
 				91438210264857A200819C15 /* PasswordView.swift */,
 				9143820C2648526B00819C15 /* PasswordListViewModel.swift */,
-				914382122648AD3300819C15 /* Settings */,
 			);
 			path = "Store passwords";
 			sourceTree = "<group>";
@@ -112,11 +115,14 @@
 				912B03CB2643D6EF001C5FCA /* ContentView.swift */,
 				9103AC102645B30A00CA6EB6 /* TODO.md */,
 				9158C046264736D8005C8B0C /* ToFix.md */,
+				91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
 				9145A5762649E23600594C11 /* LoggingView.swift */,
-				91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */,
+				91E6084B265E4D8300678CD3 /* OnboardingView.swift */,
+				91E6084D265E51D700678CD3 /* OnboardingCell.swift */,
 				9103AC0B26459F8A00CA6EB6 /* Generate password */,
 				9103AC0A26459F5C00CA6EB6 /* Store passwords */,
+				914382122648AD3300819C15 /* Settings */,
 				912B03CD2643D6F1001C5FCA /* Assets.xcassets */,
 				912B03D22643D6F1001C5FCA /* Persistence.swift */,
 				912B03D72643D6F1001C5FCA /* Info.plist */,
@@ -234,7 +240,9 @@
 				912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */,
 				912B03CA2643D6EF001C5FCA /* PasswordGeneratorApp.swift in Sources */,
 				9145A5772649E23600594C11 /* LoggingView.swift in Sources */,
+				91E6084E265E51D700678CD3 /* OnboardingCell.swift in Sources */,
 				914382142648AD4700819C15 /* SettingsView.swift in Sources */,
+				91E6084C265E4D8300678CD3 /* OnboardingView.swift in Sources */,
 				914382162648AF6B00819C15 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
