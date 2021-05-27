@@ -98,35 +98,37 @@ struct SettingsView: View {
                             
                         })
                         
-                        Picker(selection: settings.$appAppearance, label: Label(
-                            title: { HStack {
-                                Text("Mode nuit")
-                                
-                            } },
-                            icon: {
-                                
-                                if settings.appAppearance == "Auto" {
-                                    Image(systemName: "moon.circle")
-                                }
-                                if settings.appAppearance == "Nuit" {
-                                    Image(systemName: "moon.fill")
-                                }
-                                if settings.appAppearance == "Jour" {
-                                    Image(systemName: "sun.min")
-                                }
-                                
-                            }
-                        ), content: {
-                            Text("Automatique").tag("Auto")
-                            Text("Nuit").tag("Nuit")
-                            Text("Jour").tag("Jour")
-                        }).pickerStyle(MenuPickerStyle()).onChange(of: settings.appAppearance, perform: { value in
-                            if settings.appAppearance == "Nuit" {
-                                settings.appAppearanceToggle = true
-                            } else if settings.appAppearance == "Jour" {
-                                settings.appAppearanceToggle = false
-                            }
-                        })
+                        //override dark mode settings feature
+                        
+//                        Picker(selection: settings.$appAppearance, label: Label(
+//                            title: { HStack {
+//                                Text("Mode nuit")
+//
+//                            } },
+//                            icon: {
+//
+//                                if settings.appAppearance == "Auto" {
+//                                    Image(systemName: "moon.circle")
+//                                }
+//                                if settings.appAppearance == "Nuit" {
+//                                    Image(systemName: "moon.fill")
+//                                }
+//                                if settings.appAppearance == "Jour" {
+//                                    Image(systemName: "sun.min")
+//                                }
+//
+//                            }
+//                        ), content: {
+//                            Text("Automatique").tag("Auto")
+//                            Text("Nuit").tag("Nuit")
+//                            Text("Jour").tag("Jour")
+//                        }).pickerStyle(MenuPickerStyle()).onChange(of: settings.appAppearance, perform: { value in
+//                            if settings.appAppearance == "Nuit" {
+//                                settings.appAppearanceToggle = true
+//                            } else if settings.appAppearance == "Jour" {
+//                                settings.appAppearanceToggle = false
+//                            }
+//                        })
                         
                     }
                     

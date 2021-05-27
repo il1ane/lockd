@@ -16,12 +16,15 @@ struct PasswordGeneratorApp: App {
     var body: some Scene {
         WindowGroup {
             
+            
+            
             if settingsViewModel.isUnlocked {
-                MainView(viewModel: settingsViewModel, passwordViewModel: passwordViewModel)
+                
+                MainView(settingsViewModel: settingsViewModel, passwordViewModel: passwordViewModel)
                 
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
-                .colorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
+               // .colorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
                 
         
             }

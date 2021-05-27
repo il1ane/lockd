@@ -20,7 +20,7 @@ struct SavePasswordAnimation: View {
             RoundedRectangle(cornerRadius: 20)
                 .foregroundColor(settings.appAppearance == "Nuit" ? .gray : .black)
                 .opacity(0.5)
-                .frame(width: 200, height: 200)
+                .frame(minWidth: 150, maxWidth: 200, minHeight: 150, maxHeight: 200)
                 
                 
                 
