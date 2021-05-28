@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 import Security
 import KeychainSwift
 
@@ -20,82 +21,89 @@ struct PasswordListView: View {
     @ObservedObject var settings:SettingsViewModel
     @State private var currentUsername = ""
     @State private var showAnimation = false
+    @State private var searchText = ""
     
     var body: some View {
         
         NavigationView {
             
             
-            ZStack {
-                if passwordViewModel.keys.isEmpty {
+            
+            VStack {
+               
+                SearchBar("Rechercher un mot de passe", text: $searchText)
+                ZStack {
                     
-                    VStack {
-                    Spacer()
-                    Text("🤷")
-                    .font(.system(size: 100))
-                    Text("Aucun mot de passe a l'horizon...").bold()
-                    Spacer()
+                    if passwordViewModel.keys.isEmpty {
+
+                        VStack {
+                        Spacer()
+                        Text("Aucun mot de passe a l'horizon...")
+                        Spacer()
+                        }
+
                     }
                     
-                }
-                
-                if passwordViewModel.keys.isEmpty == false {
-                Form {
-                    Section(header: Text("Total : \(passwordViewModel.keys.count)")) {
-                        List {
-                        ForEach(passwordViewModel.keys, id: \.self) { key in
-                            let username = key.components(separatedBy: passwordViewModel.separator)
-                            HStack {
-                                Button(action: {
-                                        chosenKey = key
-                                        showPasswordView.toggle()
-                                        currentUsername = username[1]
-                                },
-                                label: Text("\(username[1])").foregroundColor(settings.appAppearance == "Nuit" ? .white : .black))
+                    if passwordViewModel.keys.isEmpty == false {
+                        
+                    Form {
+                        
+                        Section(header: Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.contains(self.searchText) }.count )")) {
+                            List {
+                                ForEach(self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.contains(self.searchText) }, id: \.self) { key in
+                                    
+                                let username = key.components(separatedBy: passwordViewModel.separator)
+                                HStack {
+                                    Button(action: {
+                                            chosenKey = key
+                                            showPasswordView.toggle()
+                                            currentUsername = username[1]
+                                    },
+                                    label: Text("\(username[1])").foregroundColor(settings.appAppearance == "Nuit" ? .white : .black))
+                                }
                             }
                         }
                     }
                 }
             }
-        }
-                VStack{}
-                .sheet(isPresented: $addSheetIsShowing, content: {
-                    SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings).environment(\.colorScheme, colorScheme)
-                        .accentColor(settings.colors[settings.accentColorIndex])
-                })
-                .onAppear(perform: {
-                    passwordViewModel.getAllKeys()
-                    passwordViewModel.getAllUsernames()
-                })
-                .navigationBarTitle("Coffre fort")
-                .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
-                    Image(systemName: "plus")
-                }))
-                
-                
-                if passwordViewModel.showAnimation {
+                    VStack{}
+                    .sheet(isPresented: $addSheetIsShowing, content: {
+                        SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings).environment(\.colorScheme, colorScheme)
+                            .accentColor(settings.colors[settings.accentColorIndex])
+                    })
+                    .onAppear(perform: {
+                        passwordViewModel.getAllKeys()
+                        passwordViewModel.getAllUsernames()
+                    })
+                    .navigationBarTitle("Coffre fort")
+                    .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
+                        Image(systemName: "plus")
+                    }))
                     
-                    SavePasswordAnimation(settings: settings)
-                        .onAppear(perform: { animationDisappear() })
-                        .animation(.easeInOut(duration: 0.5))
-    
-                }
+                    
+                    if passwordViewModel.showAnimation {
+                        
+                        SavePasswordAnimation(settings: settings)
+                            .onAppear(perform: { animationDisappear() })
+                            .animation(.easeInOut(duration: 0.5))
+        
+                    }
+                    
+                    }
                 
-                }
-            
-           
-                
-            .sheet(isPresented: $showPasswordView, content: {
-                PasswordView(key: $chosenKey, viewModel: passwordViewModel, isPresented: $showPasswordView, settings: settings, username: $currentUsername)
-                    .environment(\.colorScheme, colorScheme)
-                    .accentColor(settings.colors[settings.accentColorIndex])
-        })
+               
+                    
+                .sheet(isPresented: $showPasswordView, content: {
+                    PasswordView(key: $chosenKey, viewModel: passwordViewModel, isPresented: $showPasswordView, settings: settings, username: $currentUsername)
+                        .environment(\.colorScheme, colorScheme)
+                        .accentColor(settings.colors[settings.accentColorIndex])
+            })
+            }
             
         }
         
     }
     func animationDisappear() {
-       
        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
            passwordViewModel.showAnimation = false
            print("Show animation")
