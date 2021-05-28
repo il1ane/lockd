@@ -92,6 +92,15 @@
 			path = "Generate password";
 			sourceTree = "<group>";
 		};
+		9123B3C72660E74D000DB711 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				91E6084B265E4D8300678CD3 /* OnboardingView.swift */,
+				91E6084D265E51D700678CD3 /* OnboardingCell.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
 		912B03BD2643D6EF001C5FCA = {
 			isa = PBXGroup;
 			children = (
@@ -118,8 +127,7 @@
 				91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
 				9145A5762649E23600594C11 /* LoggingView.swift */,
-				91E6084B265E4D8300678CD3 /* OnboardingView.swift */,
-				91E6084D265E51D700678CD3 /* OnboardingCell.swift */,
+				9123B3C72660E74D000DB711 /* OnBoarding */,
 				9103AC0B26459F8A00CA6EB6 /* Generate password */,
 				9103AC0A26459F5C00CA6EB6 /* Store passwords */,
 				914382122648AD3300819C15 /* Settings */,
