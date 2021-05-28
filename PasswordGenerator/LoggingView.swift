@@ -27,8 +27,8 @@ struct LoggingView: View {
                 Spacer()
                 Button(action: { if viewModel.biometricAuthentication() { passwordViewModel.getAllKeys() }}, label: {
                     Label(
-                        title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("") },
-                        icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "") }
+                        title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Entrer le mot mot de passe") },
+                        icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
                     )
                 }).foregroundColor(.white).padding().background(viewModel.colors[viewModel.accentColorIndex]).cornerRadius(15)
                 

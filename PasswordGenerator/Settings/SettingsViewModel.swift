@@ -65,7 +65,7 @@ class SettingsViewModel: ObservableObject {
      func biometricType() -> BiometricType {
         let authContext = LAContext()
         if #available(iOS 11, *) {
-            let _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+            let _ = authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
             switch(authContext.biometryType) {
             case .none:
                 return .none
@@ -77,7 +77,7 @@ class SettingsViewModel: ObservableObject {
                 return .unknown
             }
         } else {
-            return authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touch : .none
+            return authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) ? .touch : .none
         }
     }
 
@@ -92,9 +92,9 @@ class SettingsViewModel: ObservableObject {
             var getKeychainItems = false
             let context = LAContext()
             var error: NSError?
-            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
                 let reason = "Déverouiller vos mots de passe"
-                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
                     DispatchQueue.main.async {
                         if success {
                             print("success")
@@ -117,9 +117,9 @@ class SettingsViewModel: ObservableObject {
     func addBiometricAuthentication() {
         let context = LAContext()
         var error: NSError?
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Sécurisez vos mots de passes avec l'authentication biometrique."
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            let reason = "Sécurisez vos mots de passes."
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if success {
                         print("Success")

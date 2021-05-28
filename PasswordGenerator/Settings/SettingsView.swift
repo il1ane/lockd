@@ -22,13 +22,14 @@ struct SettingsView: View {
         NavigationView {
             ZStack {
                 Form {
-                    Section(header: Text("Sécurité")) {
+                    
+                        Section(header: Text("Sécurité")) {
                         
-                        if settings.biometricType() != .none {
+                     
                             Toggle(isOn: $settings.faceIdToggle, label: {
                                 Label(
-                                    title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("") },
-                                    icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "") }
+                                    title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
+                                    icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
                                 )
                             }).toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                             
@@ -44,8 +45,9 @@ struct SettingsView: View {
                                 }
                                 
                             })
-                        }
+                        
                     }
+                    
                     Section(header: Text("Personalisation")) {
                         Picker(selection: $settings.accentColorIndex, label: Label(
                             title: { Text("Couleur principale") },
