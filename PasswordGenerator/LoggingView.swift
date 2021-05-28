@@ -18,11 +18,11 @@ struct LoggingView: View {
             VStack {
                 VStack {
                 Spacer().frame(maxHeight : 120)
-                Text("🥳")
+                Image(systemName: "key.fill")
+                    .foregroundColor(viewModel.colors[viewModel.accentColorIndex])
                     .font(.system(size: 100))
                     .scaleEffect(scale)
                     .animateForever(using: .easeInOut(duration: 1), autoreverses: true, { scale = 0.95 })
-                Text("Ravis de vous revoir!").bold()
                 }.padding()
                 Spacer()
                 Button(action: { if viewModel.biometricAuthentication() { passwordViewModel.getAllKeys() }}, label: {

@@ -29,11 +29,11 @@ struct MainView: View {
                         .onAppear(perform : { currentTab = 0 })
                         .tabItem { Label(
                         title: { Text("Générateur") },
-                        icon: { Image(systemName: "rectangle.and.pencil.and.ellipsis") }
+                        icon: { Image(systemName: "die.face.5.fill") }
                     ) }.tag(0)
                     PasswordListView(passwordViewModel: passwordViewModel, settings: settingsViewModel).tabItem { Label(
-                        title: { Text("Coffre fort") },
-                        icon: { Image(systemName: "tray.2") }
+                        title: { Text("Mots de passe") },
+                        icon: { Image(systemName: "tray.2.fill") }
                     ) }.tag(1)
                     SettingsView( settings: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel ).tabItem { Label(
                         title: { Text("Préfèrences") },
