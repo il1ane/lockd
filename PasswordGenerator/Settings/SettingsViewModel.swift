@@ -10,7 +10,7 @@ import SwiftUI
 import LocalAuthentication
 import CoreHaptics
 
-class SettingsViewModel: ObservableObject {
+final class SettingsViewModel: ObservableObject {
     
     init() {
     self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? false

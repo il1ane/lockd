@@ -10,7 +10,7 @@ import KeychainSwift
 import CoreHaptics
 import SwiftUI
 
-class PasswordListViewModel: ObservableObject {
+final class PasswordListViewModel: ObservableObject {
     
     @Published var keys = [String]()
     @Published var usernames = [String]()

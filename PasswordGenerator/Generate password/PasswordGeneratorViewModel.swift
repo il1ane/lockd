@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PasswordGeneratorViewModel: ObservableObject {
+final class PasswordGeneratorViewModel: ObservableObject {
     
     @Published var generatedPassword = ""
     let range = 1...30.0
