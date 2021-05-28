@@ -65,7 +65,7 @@ struct PasswordGeneratorView: View {
                     
                     Section(header: Text("Nombre de caractères")) {
                         HStack {
-                            Slider(value: $numberOfCharacter, in: viewModel.range, step: 1)
+                            Slider(value: $numberOfCharacter, in: viewModel.passwordLenghtRange, step: 1)
                                 .accentColor(numberOfCharacter < 9 ? settings.colors[settings.accentColorIndex].opacity(0.5) : numberOfCharacter < 14 ?  settings.colors[settings.accentColorIndex].opacity(0.7) : settings.colors[settings.accentColorIndex].opacity(1))
                             
                             Divider().frame(minWidth: 20)
