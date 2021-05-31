@@ -15,6 +15,7 @@ struct MainView: View {
     @State private var currentTab = 0
     @State private var onBoardingSheetIsPresented = false
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.scenePhase) var scenePhase
     
    
     var body: some View {
@@ -56,13 +57,21 @@ struct MainView: View {
                 .environment(\.colorScheme, colorScheme)
         })
         
+        .onChange(of: scenePhase) { newPhase in
+                        if newPhase == .inactive {
+                            print("App is in inactive phase")
+                        } else if newPhase == .active {
+                            settingsViewModel.lockAppTimerIsRunning = false
+                            print("App is in active phase")
+                        } else if newPhase == .background {
+                            print("App is in background phase")
+                            if settingsViewModel.faceIdDefault {
+                                settingsViewModel.lockAppInBackground()
+                            }
+                        }
+                    }
         
         
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            if settingsViewModel.faceIdDefault {
-            settingsViewModel.isUnlocked = false
-            }
-        }
         } else {
             
             LoggingView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel)
