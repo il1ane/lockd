@@ -17,36 +17,57 @@ struct SettingsView: View {
     @State private var bgColor = Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
     @ObservedObject var passwordViewModel: PasswordListViewModel
     
-
+    
     var body: some View {
         NavigationView {
             ZStack {
                 Form {
                     
-                        Section(header: Text("Sécurité")) {
+                    Section(header: Text("Sécurité")) {
                         
-                     
-                            Toggle(isOn: $settings.faceIdToggle, label: {
-                                Label(
-                                    title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
-                                    icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
-                                )
-                            }).toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
+                        
+                        Toggle(isOn: $settings.faceIdToggle, label: {
+                            Label(
+                                title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
+                                icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
+                            )
+                        }).toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
+                        
+                        .onChange(of: settings.faceIdToggle, perform: { _ in
                             
-                            .onChange(of: settings.faceIdToggle, perform: { _ in
-                                
-                                if settings.faceIdToggle {
-                                    settings.addBiometricAuthentication()
-                                    print("Waiting for auth")
-                                }
-                                
-                                if !settings.faceIdToggle {
-                                    settings.turnOffBiometricAuthentication()
-                                }
-                                
-                            })
+                            if settings.faceIdToggle {
+                                settings.addBiometricAuthentication()
+                                print("Waiting for auth")
+                            }
+                            
+                            if !settings.faceIdToggle {
+                                settings.turnOffBiometricAuthentication()
+                            }
+                            
+                        })
+                        
+                        .onChange(of: settings.autoLock, perform: {_ in
+                            print(settings.autoLock)
+                            
+                        })
+                        
+                        if settings.faceIdDefault {
+                        Picker(selection: $settings.autoLock, label: Label(
+                            title: { Text("Vérouillage auto.") },
+                            icon: { Image(systemName: "lock.fill") }
+                        ), content: {
+                            
+                            Text("Immédiat").tag(0)
+                            Text("1 minute").tag(1)
+                            Text("5 minutes").tag(5)
+                            Text("15 minutes").tag(15)
+                            Text("30 minutes").tag(30)
+                            
+                        })
+                        }
                         
                     }
+                    
                     
                     Section(header: Text("Personalisation")) {
                         Picker(selection: $settings.accentColorIndex, label: Label(
@@ -102,35 +123,35 @@ struct SettingsView: View {
                         
                         //override dark mode settings feature
                         
-//                        Picker(selection: settings.$appAppearance, label: Label(
-//                            title: { HStack {
-//                                Text("Mode nuit")
-//
-//                            } },
-//                            icon: {
-//
-//                                if settings.appAppearance == "Auto" {
-//                                    Image(systemName: "moon.circle")
-//                                }
-//                                if settings.appAppearance == "Nuit" {
-//                                    Image(systemName: "moon.fill")
-//                                }
-//                                if settings.appAppearance == "Jour" {
-//                                    Image(systemName: "sun.min")
-//                                }
-//
-//                            }
-//                        ), content: {
-//                            Text("Automatique").tag("Auto")
-//                            Text("Nuit").tag("Nuit")
-//                            Text("Jour").tag("Jour")
-//                        }).pickerStyle(MenuPickerStyle()).onChange(of: settings.appAppearance, perform: { value in
-//                            if settings.appAppearance == "Nuit" {
-//                                settings.appAppearanceToggle = true
-//                            } else if settings.appAppearance == "Jour" {
-//                                settings.appAppearanceToggle = false
-//                            }
-//                        })
+                        //                        Picker(selection: settings.$appAppearance, label: Label(
+                        //                            title: { HStack {
+                        //                                Text("Mode nuit")
+                        //
+                        //                            } },
+                        //                            icon: {
+                        //
+                        //                                if settings.appAppearance == "Auto" {
+                        //                                    Image(systemName: "moon.circle")
+                        //                                }
+                        //                                if settings.appAppearance == "Nuit" {
+                        //                                    Image(systemName: "moon.fill")
+                        //                                }
+                        //                                if settings.appAppearance == "Jour" {
+                        //                                    Image(systemName: "sun.min")
+                        //                                }
+                        //
+                        //                            }
+                        //                        ), content: {
+                        //                            Text("Automatique").tag("Auto")
+                        //                            Text("Nuit").tag("Nuit")
+                        //                            Text("Jour").tag("Jour")
+                        //                        }).pickerStyle(MenuPickerStyle()).onChange(of: settings.appAppearance, perform: { value in
+                        //                            if settings.appAppearance == "Nuit" {
+                        //                                settings.appAppearanceToggle = true
+                        //                            } else if settings.appAppearance == "Jour" {
+                        //                                settings.appAppearanceToggle = false
+                        //                            }
+                        //                        })
                         
                     }
                     
@@ -152,13 +173,14 @@ struct SettingsView: View {
                             Text("Effacer tous les mots de passes").foregroundColor(.red)
                         }).buttonStyle(PlainButtonStyle())
                     }
+                    
                 }
                 if passwordViewModel.showAnimation {
                     
                     SavePasswordAnimation(settings: settings)
                         .onAppear(perform: { animationDisappear() })
                         .animation(.easeInOut(duration: 0.5))
-    
+                    
                 }
             }
             
@@ -181,12 +203,12 @@ struct SettingsView: View {
     }
     
     func animationDisappear() {
-       
-       DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-           passwordViewModel.showAnimation = false
-           print("Show animation")
-               }
-   }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            passwordViewModel.showAnimation = false
+            print("Show animation")
+        }
+    }
 }
 
 struct SettingsView_Previews: PreviewProvider {

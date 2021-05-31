@@ -18,6 +18,7 @@ final class SettingsViewModel: ObservableObject {
     self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 1
     supportsHaptics = hapticCapability.supportsHaptics
     self.isFirstLaunch = UserDefaults.standard.object(forKey: "isFirstLaunch") as? Bool ?? true
+    self.autoLock = UserDefaults.standard.object(forKey: "autoLock") as? Int ?? 1
     }
 
     
@@ -32,6 +33,12 @@ final class SettingsViewModel: ObservableObject {
     @Published var lockAppTimerIsRunning = false
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
     @AppStorage("appAppearanceToggle") var appAppearanceToggle: Bool = false
+    
+    @Published var autoLock: Int {
+        didSet {
+            UserDefaults.standard.set(autoLock, forKey: "autoLock")
+        }
+    }
     
     @Published var isFirstLaunch: Bool {
         didSet {
@@ -145,8 +152,10 @@ final class SettingsViewModel: ObservableObject {
     func lockAppInBackground() {
         
         lockAppTimerIsRunning = true
+        let seconds:Int = autoLock * 60
+        let dispatchAfter = DispatchTimeInterval.seconds(seconds)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + dispatchAfter) {
             if self.lockAppTimerIsRunning {
             self.isUnlocked = false
                 print("App is locked")
