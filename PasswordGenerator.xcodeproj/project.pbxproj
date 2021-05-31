@@ -29,6 +29,7 @@
 		91D89AC62653DE0100CF22E1 /* SavePasswordAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */; };
 		91E6084C265E4D8300678CD3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084B265E4D8300678CD3 /* OnboardingView.swift */; };
 		91E6084E265E51D700678CD3 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084D265E51D700678CD3 /* OnboardingCell.swift */; };
+		91E89EFB2664EA43007A478A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 91E89EFD2664EA43007A478A /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,8 @@
 		91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordAnimation.swift; sourceTree = "<group>"; };
 		91E6084B265E4D8300678CD3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		91E6084D265E51D700678CD3 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
+		91E89EFC2664EA43007A478A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		91E89EFE2664EB4F007A478A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,7 @@
 				9158C046264736D8005C8B0C /* ToFix.md */,
 				91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
+				91E89EFD2664EA43007A478A /* Localizable.strings */,
 				9145A5762649E23600594C11 /* LoggingView.swift */,
 				9123B3C72660E74D000DB711 /* OnBoarding */,
 				9103AC0B26459F8A00CA6EB6 /* Generate password */,
@@ -202,6 +206,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 912B03BD2643D6EF001C5FCA;
 			packageReferences = (
@@ -223,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				912B03D12643D6F1001C5FCA /* Preview Assets.xcassets in Resources */,
+				91E89EFB2664EA43007A478A /* Localizable.strings in Resources */,
 				912B03CE2643D6F1001C5FCA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,11 +263,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		91E89EFD2664EA43007A478A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				91E89EFC2664EA43007A478A /* en */,
+				91E89EFE2664EB4F007A478A /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		912B03D82643D6F1001C5FCA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -323,6 +342,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
