@@ -13,6 +13,7 @@ struct PasswordGeneratorApp: App {
     @ObservedObject var settingsViewModel = SettingsViewModel()
     @ObservedObject var passwordViewModel = PasswordListViewModel()
     
+    
     var body: some Scene {
         WindowGroup {
             

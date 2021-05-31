@@ -61,7 +61,7 @@ struct SavePasswordView: View {
                                     }
                                     
                                 }, label: {
-                                    Text("Edit")
+                                    Text("Modifier")
                                 })
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(settings.colors[settings.accentColorIndex])
@@ -96,9 +96,9 @@ struct SavePasswordView: View {
                     })
                     
                 }.alert(isPresented: $showMissingPasswordAndTitleAlert, content: {
-                    Alert(title: Text("Champs vides"), message: Text("Le champ mot de passe et intitulé ne peuvent pas être vides."), dismissButton: .cancel(Text("OK!")))
+                    Alert(title: Text("Champs manquants"), message: Text("Le champ mot de passe et intitulé ne peuvent pas être vides."), dismissButton: .cancel(Text("OK!")))
                 })
-                .navigationBarTitle("Enregistrement")
+                .navigationBarTitle("Enregistrer")
                 .navigationBarItems(leading: Button(action: {
                     
                     sheetIsPresented.toggle()
