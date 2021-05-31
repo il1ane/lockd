@@ -1,0 +1,83 @@
+/* 
+  Localizable.strings
+  PasswordGenerator
+
+  Created by Iliane Zedadra on 31/05/2021.
+  
+*/
+
+//MainView
+"Générateur" = "Generator";
+"Mots de passe" = "Password";
+"Préférences" = "Settings";
+
+//LoggingView
+"Déverouiller avec Face ID" = "Unlock with FaceID";
+"Déverouiller avec Touch ID" = "Unlock with TouchID";
+"Entrer le mot mot de passe" =  "Enter password";
+
+//OnboardingView
+"Génerez aléatoirement vos mots de passe sur-mesure" = "Randomly generate password";
+"Mots de passe aléatoires" = "Random passwords";
+"Stockez vos mots de passe de manière sécurisé" = "Safely save your passwords";
+"Sécurisé" = "Safe";
+"Modifiez les couleurs de l'application" = "Change app color";
+"Personnalisable" = "Customizable";
+"Continuer" = "Continue";
+
+//PasswordGeneratorView
+"Mot de passe généré aléatoirement" = "Randomly generated password";
+"Ajouter au coffre fort" = "Add to safe";
+"Nombre de caractères" = "Number of characters";
+"Note : chaque paramètre actif renforce la sécurité du mot de passe." = "Note: each active parameter reinforces the security of the password.";
+"Caractères spéciaux" = "Special characters";
+"Majuscules" = "Uppercase";
+"Chiffres" = "Figures";
+
+//SavePasswordView
+"Mot de passe" = "Password";
+"Le mot de passe ne peut pas être vide"= "Password cannot be empty";
+"Modifier" = "Edit";
+"Mot de passe invalide" = "Invalid password";
+"Le champ mot de passe ne peut pas être vide" = "Password field cannot be empty";
+"Nom de compte" = "Username";
+"Champ obligatoire" = "Required Field";
+"Champ manquant" = "Champ manquant";
+"Vous devez au moins donner un nom de compte a votre mot de passe." = "You must at least give your password an username.";
+"Champs manquants" = "Missing fields";
+"Le champ mot de passe et intitulé ne peuvent pas être vides." = "The password and title field cannot be empty.";
+"Enregistrer" = "Save";
+
+//PasswordListView
+"Rechercher un mot de passe" = "Find a password";
+"Coffre fort" = "Safe";
+
+//PasswordView
+"Copier" = "Copy";
+"Supprimer le mot de passe" = "Delete password";
+"Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "Are you sure you want to delete your password? This action is irreversible.";
+"Supprimer definitivement" = "Delete";
+
+//SettingsView
+"Code source (GitHub)" = "Source code (GitHub)";
+"Effacer tous les mots de passes" = "Clear all passwords";
+"Effacer TOUS les mots de passes" = "Clear ALL passwords";
+"Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible." = "Your passwords will be permanently deleted. This action is irreversible.";
+"TOUT supprimer" = "Delete ALL";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
