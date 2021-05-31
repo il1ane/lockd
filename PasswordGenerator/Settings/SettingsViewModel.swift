@@ -152,13 +152,12 @@ final class SettingsViewModel: ObservableObject {
     func lockAppInBackground() {
         
         lockAppTimerIsRunning = true
-        let seconds:Int = autoLock * 60
+        let seconds:Int = 1 + autoLock * 60 
         let dispatchAfter = DispatchTimeInterval.seconds(seconds)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + dispatchAfter) {
             if self.lockAppTimerIsRunning {
             self.isUnlocked = false
-                print("App is locked")
             }
         }
     }
