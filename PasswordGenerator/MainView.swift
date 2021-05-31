@@ -20,6 +20,7 @@ struct MainView: View {
     var body: some View {
         
         
+        if settingsViewModel.isUnlocked {
         VStack {
            
             TabView(
@@ -43,6 +44,7 @@ struct MainView: View {
                 })
         }
         
+        
         .onAppear(perform: {
             if settingsViewModel.isFirstLaunch {
                 onBoardingSheetIsPresented = true
@@ -61,9 +63,27 @@ struct MainView: View {
             settingsViewModel.isUnlocked = false
             }
         }
-    }
-    func setCurrentTab(tab: Int) {
-        currentTab = tab
+        } else {
+            
+            LoggingView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel)
+                .colorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
+                
+                .onAppear(perform: {
+                    
+                    if settingsViewModel.faceIdDefault == false {
+                        settingsViewModel.isUnlocked = true
+                        passwordViewModel.getAllKeys()
+                        print("No biometric authentication")
+                    }
+                    
+                    if settingsViewModel.faceIdDefault == true {
+                        if settingsViewModel.biometricAuthentication() {
+                            passwordViewModel.getAllKeys()
+                        }
+                        print("Biometric authentication")
+                    }
+            })
+        }
     }
 }
 
