@@ -32,17 +32,8 @@ struct PasswordListView: View {
             VStack {
                
                 SearchBar("Rechercher un mot de passe", text: $searchText)
+                Spacer()
                 ZStack {
-                    
-                    if passwordViewModel.keys.isEmpty {
-
-                        VStack {
-                        Spacer()
-                        Text("Aucun mot de passe a l'horizon...")
-                        Spacer()
-                        }
-
-                    }
                     
                     if passwordViewModel.keys.isEmpty == false {
                         
