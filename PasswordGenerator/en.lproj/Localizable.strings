@@ -64,7 +64,8 @@
 "Effacer TOUS les mots de passes" = "Clear ALL passwords";
 "Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible." = "Your passwords will be permanently deleted. This action is irreversible.";
 "TOUT supprimer" = "Delete ALL";
-
+"Vérouillage auto." = "Lock automatically";
+"Immédiat" = "Instantly";
 
 
 
