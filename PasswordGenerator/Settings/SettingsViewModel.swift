@@ -29,9 +29,8 @@ final class SettingsViewModel: ObservableObject {
     
 
     @Published var isUnlocked = false
-    
+    @Published var lockAppTimerIsRunning = false
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
-    
     @AppStorage("appAppearanceToggle") var appAppearanceToggle: Bool = false
     
     @Published var isFirstLaunch: Bool {
@@ -142,6 +141,18 @@ final class SettingsViewModel: ObservableObject {
     func turnOffBiometricAuthentication() {
         self.faceIdDefault = false
    }
+    
+    func lockAppInBackground() {
+        
+        lockAppTimerIsRunning = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 60) {
+            if self.lockAppTimerIsRunning {
+            self.isUnlocked = false
+                print("App is locked")
+            }
+        }
+    }
 
 }
 
