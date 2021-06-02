@@ -21,6 +21,6 @@ struct PasswordGeneratorApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
                // .colorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
-        }
+        } 
     }
 }

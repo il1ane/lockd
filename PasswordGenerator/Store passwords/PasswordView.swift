@@ -41,12 +41,12 @@ struct PasswordView: View {
                             }
                             Spacer()
                             Button(action: { editingPassword.toggle()
-                            editedPassword = password
-                        }, label: {
-                            Image(systemName: "pencil")
-                            
-                            
-                        })
+                                editedPassword = password
+                            }, label: {
+                                Image(systemName: "pencil")
+                                
+                                
+                            })
                             .foregroundColor(!revealPassword ? .gray : settings.colors[settings.accentColorIndex])
                             .buttonStyle(PlainButtonStyle())
                             .disabled(!revealPassword)
@@ -82,13 +82,13 @@ struct PasswordView: View {
                         VStack {
                             Button(action: {
                                     UIPasteboard.general.string = password }, label: {
-                                    
-                                    HStack {
-                                        Spacer()
-                                        Text("Copier")
-                                        Spacer()
-                                    }
-                                })
+                                        
+                                        HStack {
+                                            Spacer()
+                                            Text("Copier")
+                                            Spacer()
+                                        }
+                                    })
                         }
                     }
                 }
@@ -96,25 +96,24 @@ struct PasswordView: View {
                 Section(header: Text("Nom de compte")) {
                     
                     if !editingUsername {
-                    
-                    HStack {
-                        Spacer()
-                        Text(username)
-                        Spacer()
-                        Button(action: { editingUsername.toggle()
-                        editedUsername = username
-                    }, label: {
-                        Image(systemName: "pencil")
                         
-                        
-                    })
-                    }
+                        HStack {
+                            Spacer()
+                            Text(username)
+                            Spacer()
+                            Button(action: { editingUsername.toggle()
+                                editedUsername = username
+                            }, label: {
+                                Image(systemName: "pencil")
+                                
+                                
+                            })
+                        }
                     } else {
                         HStack {
                             
-                            CocoaTextField(username, text: $editedUsername)
+                            TextField(username, text: $editedUsername)
                                 .keyboardType(.asciiCapable)
-                                .isFirstResponder(true)
                                 .disableAutocorrection(true)
                             
                             Button(action: {
@@ -125,21 +124,20 @@ struct PasswordView: View {
                                 password = viewModel.keychain.get(key)!
                                 let newKey = viewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
                                 key = newKey
-                                viewModel.getAllKeys()
                                 
-                                
-                            }, label: {
+                            }
+                            , label: {
                                 Image(systemName: "checkmark")
                             })
                             
                             .buttonStyle(PlainButtonStyle())
                             .foregroundColor(settings.colors[settings.accentColorIndex])
-                        
+                            
+                        }
                     }
-                }
                     
-            }
-               
+                }
+                
                 Section {
                     HStack {
                         Spacer()
@@ -149,21 +147,21 @@ struct PasswordView: View {
                 }
             }
             .actionSheet(isPresented: $showAlert, content: {
-                ActionSheet(title: Text("Supprimer le mot de passe"), message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."), buttons: [.cancel(), .destructive(Text("Supprimer definitivement"), action: { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.getAllKeys() })])
+                ActionSheet(title: Text("Supprimer le mot de passe"), message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."), buttons: [.cancel(), .destructive(Text("Supprimer definitivement"), action:
+                                                                                                                                                { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.getAllKeys() })])
             })
+            .navigationBarTitle(title)
             .navigationBarItems(leading:
                                     Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")),
-                trailing:
-                    Button(action: {
-                        password = viewModel.keychain.get(key)!
-                        revealPassword.toggle()
-                        viewModel.getAllUsernames()
-                        viewModel.getAllKeys()
-                    }, label: { revealPassword ?
-                        Image(systemName: "eye.slash") : Image(systemName: "eye")
-                    }).buttonStyle(PlainButtonStyle()).foregroundColor(settings.colors[settings.accentColorIndex])
-            )
-            .navigationBarTitle(title)
+                                trailing:
+                                    Button(action: {
+                                        password = viewModel.keychain.get(key)!
+                                        revealPassword.toggle()
+                                        viewModel.getAllUsernames()
+                                        viewModel.getAllKeys()
+                                    }, label: { revealPassword ?
+                                        Image(systemName: "eye.slash") : Image(systemName: "eye")
+                                    }).foregroundColor(settings.colors[settings.accentColorIndex]))
         }
     }
 }
