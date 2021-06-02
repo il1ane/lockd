@@ -197,13 +197,6 @@ struct SettingsView: View {
                         
                     }
                     
-                    if passwordViewModel.showAnimation {
-                        
-                        SavePasswordAnimation(settings: settings)
-                            .onAppear(perform: { animationDisappear() })
-                            .animation(.easeInOut(duration: 0.5))
-                        
-                    }
                 }
                 
                 .alert(isPresented: $removePasswordAlert, content: {
@@ -223,14 +216,6 @@ struct SettingsView: View {
                 .navigationBarTitle("Préférences")
             }
         }.accentColor(settings.colors[settings.accentColorIndex])
-    }
-    
-    func animationDisappear() {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            passwordViewModel.showAnimation = false
-            print("Show animation")
-        }
     }
 }
 

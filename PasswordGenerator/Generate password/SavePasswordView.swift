@@ -117,6 +117,7 @@ struct SavePasswordView: View {
                     Image(systemName: "xmark")
                 }), trailing: Button(action: {
                     
+                    withAnimation {
                     if !isEditingPassword {
                         
                         if title.isEmpty || editedPassword.text.isEmpty {
@@ -129,6 +130,7 @@ struct SavePasswordView: View {
                             viewModel.saveToKeychain(password: editedPassword.text, username: username, title: title)
                             viewModel.getAllKeys()
                         }
+                    }
                     }
                     
                 }, label: {
