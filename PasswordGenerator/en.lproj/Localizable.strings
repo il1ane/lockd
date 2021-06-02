@@ -8,7 +8,7 @@
 
 //MainView
 "Générateur" = "Generator";
-"Mots de passe" = "Password";
+"Mots de passe" = "Passwords";
 "Préférences" = "Settings";
 
 //LoggingView
@@ -33,9 +33,10 @@
 "Caractères spéciaux" = "Special characters";
 "Majuscules" = "Uppercase";
 "Chiffres" = "Figures";
+"Inclure" = "Include";
 
 //SavePasswordView
-"Mot de passe" = "Password";
+"Titre" = "Title";
 "Le mot de passe ne peut pas être vide"= "Password cannot be empty";
 "Modifier" = "Edit";
 "Mot de passe invalide" = "Invalid password";
@@ -49,16 +50,18 @@
 "Enregistrer" = "Save";
 
 //PasswordListView
-"Rechercher un mot de passe" = "Find a password";
+"Rechercher un mot de passe" = "Search";
 "Coffre fort" = "Safe";
 
 //PasswordView
+"Mot de passe" = "Password";
 "Copier" = "Copy";
 "Supprimer le mot de passe" = "Delete password";
 "Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "Are you sure you want to delete your password? This action is irreversible.";
 "Supprimer definitivement" = "Delete";
 
 //SettingsView
+"Sécurité" = "Safety";
 "Code source (GitHub)" = "Source code (GitHub)";
 "Effacer tous les mots de passes" = "Clear all passwords";
 "Effacer TOUS les mots de passes" = "Clear ALL passwords";
@@ -66,9 +69,15 @@
 "TOUT supprimer" = "Delete ALL";
 "Vérouillage auto." = "Lock automatically";
 "Immédiat" = "Instantly";
-
-
-
+"Liens" = "Links";
+"Couleur principale" = "Accent color";
+"Suivez moi sur Twitter" = "Follow me on Twitter";
+"Vert" = "Green";
+"Bleu" = "Blue";
+"Rouge" = "Red";
+"Rose" = "Pink";
+"Violet" = "Purple";
+"Jaune" = "Yellow";
 
 
 
