@@ -92,12 +92,12 @@ struct SavePasswordView: View {
                     
                     Section(header: Text("Nom de compte").foregroundColor(.gray)) {
                         TextField("ex: example@icloud.com", text: $username)
-                            .foregroundColor(.black)
+                            
                     }
                     
                     Section(header: Text("Titre").foregroundColor(title.isEmpty ? .red : .gray), footer: title.isEmpty ? Text("Champ obligatoire").foregroundColor(.red) : nil ) {
                         TextField("ex: Twitter", text: $title)
-                            .foregroundColor(.black)
+                            
                     }
                     .alert(isPresented: $showMissingTitleAlert, content: {
                         Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un nom de compte a votre mot de passe."), dismissButton: .cancel(Text("OK!")))

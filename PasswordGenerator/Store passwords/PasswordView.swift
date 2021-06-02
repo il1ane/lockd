@@ -125,6 +125,7 @@ struct PasswordView: View {
                                 let newKey = viewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
                                 key = newKey
                                 
+                    
                             }
                             , label: {
                                 Image(systemName: "checkmark")
@@ -135,6 +136,15 @@ struct PasswordView: View {
                             
                         }
                     }
+                    Button(action: { UIPasteboard.general.string = username }) {
+                        
+                        HStack {
+                            Spacer()
+                        Text("Copy")
+                            Spacer()
+                        }
+                        
+                    }.disabled(editingUsername)
                     
                 }
                 

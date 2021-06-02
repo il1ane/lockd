@@ -57,7 +57,7 @@ struct PasswordListView: View {
                                                 print(keyArray[1])
                                                 print(keyArray[2])
                                             },
-                                            label: Text("\(keyArray[2])").foregroundColor(settings.appAppearance == "Nuit" ? .white : .black))
+                                            label: Text("\(keyArray[2])"))
                                         }
                                     }
                                 }
