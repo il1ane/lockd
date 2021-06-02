@@ -18,17 +18,20 @@ struct PasswordView: View {
     @State private var revealPassword = false
     @Binding var isPresented: Bool
     @ObservedObject var settings:SettingsViewModel
-    @State private var editingMode = false
+    @State private var editingPassword = false
     @State private var editedPassword = ""
-    @Binding var username: String
+    @State private var editingUsername = false
+    @State private var editedUsername = ""
+    @Binding var title: String
+    @Binding var username:String
     
     var body: some View {
         
         NavigationView {
             Form {
                 
-                Section {
-                    if !editingMode {
+                Section(header: Text("Mot de passe")) {
+                    if !editingPassword {
                         HStack {
                             
                             HStack {
@@ -37,10 +40,17 @@ struct PasswordView: View {
                                 Spacer()
                             }
                             Spacer()
-                            Button(action: { password = viewModel.keychain.get(key)!; revealPassword.toggle()
-                            }, label: { editingMode ?
-                                Image(systemName: "eye.slash") : Image(systemName: "eye")
-                            }).buttonStyle(PlainButtonStyle()).foregroundColor(settings.colors[settings.accentColorIndex])
+                            Button(action: { editingPassword.toggle()
+                            editedPassword = password
+                        }, label: {
+                            Image(systemName: "pencil")
+                            
+                            
+                        })
+                            .foregroundColor(!revealPassword ? .gray : settings.colors[settings.accentColorIndex])
+                            .buttonStyle(PlainButtonStyle())
+                            .disabled(!revealPassword)
+                            
                         }
                     } else {
                         HStack {
@@ -52,22 +62,23 @@ struct PasswordView: View {
                             
                             Button(action: {
                                 
-                                editingMode.toggle()
+                                editingPassword.toggle()
                                 //showKeyboard doesn't change anything but Xcode stop complaining
                                 //not always working
                                 password = editedPassword
-                                viewModel.updatePassword(key: key, password: password)
+                                viewModel.updatePassword(key: key, newPassword: password)
                                 
                             }, label: {
                                 Image(systemName: "checkmark")
                             })
+                            
+                            
                             .buttonStyle(PlainButtonStyle())
                             .foregroundColor(settings.colors[settings.accentColorIndex])
                         }
                     }
                     if revealPassword {
                         
-                   
                         VStack {
                             Button(action: {
                                     UIPasteboard.general.string = password }, label: {
@@ -77,14 +88,58 @@ struct PasswordView: View {
                                         Text("Copier")
                                         Spacer()
                                     }
-                                    
                                 })
                         }
                     }
                 }
+                
+                Section(header: Text("Nom de compte")) {
+                    
+                    if !editingUsername {
+                    
+                    HStack {
+                        Spacer()
+                        Text(username)
+                        Spacer()
+                        Button(action: { editingUsername.toggle()
+                        editedUsername = username
+                    }, label: {
+                        Image(systemName: "pencil")
+                        
+                        
+                    })
+                    }
+                    } else {
+                        HStack {
+                            
+                            CocoaTextField(username, text: $editedUsername)
+                                .keyboardType(.asciiCapable)
+                                .isFirstResponder(true)
+                                .disableAutocorrection(true)
+                            
+                            Button(action: {
+                                
+                                editingUsername.toggle()
+                                
+                                username = editedUsername
+                                password = viewModel.keychain.get(key)!
+                                let newKey = viewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
+                                key = newKey
+                                viewModel.getAllKeys()
+                                
+                                
+                            }, label: {
+                                Image(systemName: "checkmark")
+                            })
+                            
+                            .buttonStyle(PlainButtonStyle())
+                            .foregroundColor(settings.colors[settings.accentColorIndex])
+                        
+                    }
+                }
+                    
+            }
                
-                
-                
                 Section {
                     HStack {
                         Spacer()
@@ -92,24 +147,29 @@ struct PasswordView: View {
                         Spacer()
                     }
                 }
-                
-                
-                
-            }        .actionSheet(isPresented: $showAlert, content: {
+            }
+            .actionSheet(isPresented: $showAlert, content: {
                 ActionSheet(title: Text("Supprimer le mot de passe"), message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."), buttons: [.cancel(), .destructive(Text("Supprimer definitivement"), action: { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.getAllKeys() })])
             })
-            .navigationBarItems(leading: Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")), trailing: Button(action: { editingMode.toggle()
-                editedPassword = password
-            }, label: {
-                Image(systemName: "pencil")
-            }).disabled(!revealPassword))
-            .navigationBarTitle(username)
+            .navigationBarItems(leading:
+                                    Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")),
+                trailing:
+                    Button(action: {
+                        password = viewModel.keychain.get(key)!
+                        revealPassword.toggle()
+                        viewModel.getAllUsernames()
+                        viewModel.getAllKeys()
+                    }, label: { revealPassword ?
+                        Image(systemName: "eye.slash") : Image(systemName: "eye")
+                    }).buttonStyle(PlainButtonStyle()).foregroundColor(settings.colors[settings.accentColorIndex])
+            )
+            .navigationBarTitle(title)
         }
     }
 }
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView(key: .constant("clérandom"), viewModel: PasswordListViewModel(), isPresented: .constant(true), settings: SettingsViewModel(), username: .constant("username"))
+        PasswordView(key: .constant("clérandom"), viewModel: PasswordListViewModel(), isPresented: .constant(true), settings: SettingsViewModel(), title: .constant("usernafame"), username: .constant("username"))
     }
 }

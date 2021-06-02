@@ -45,6 +45,7 @@ struct PasswordGeneratorView: View {
                                 UIPasteboard.general.string = generatedPassword
                             }, label: {
                                 Image(systemName: "doc.on.doc")
+                                    .foregroundColor(settings.colors[settings.accentColorIndex])
                                 
                                 
                             }).buttonStyle(PlainButtonStyle())

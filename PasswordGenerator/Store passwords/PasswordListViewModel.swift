@@ -18,9 +18,9 @@ final class PasswordListViewModel: ObservableObject {
     
     let separator = ":separator:"
     
-    func saveToKeychain(password: String, username: String) {
+    func saveToKeychain(password: String, username: String, title: String) {
         
-        let key = password + separator + username
+        let key = password + separator + username + separator + title
         
         keychain.set(password, forKey: key)
         successHaptic()
@@ -29,9 +29,17 @@ final class PasswordListViewModel: ObservableObject {
         
     }
     
-    func updatePassword(key: String, password: String) {
-        keychain.set(password, forKey: key)
+    func updatePassword(key: String, newPassword: String) {
+        keychain.set(newPassword, forKey: key)
         print("password update")
+    }
+    
+    func updateUsername(key: String, password: String, newUsername: String, title: String) -> String {
+        keychain.delete(key)
+        let newKey = password + separator + newUsername + separator + title
+        keychain.set(password, forKey: newKey)
+        print("username update")
+        return newKey
     }
     
     func successHaptic() {

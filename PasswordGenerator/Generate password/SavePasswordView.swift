@@ -15,13 +15,15 @@ struct SavePasswordView: View {
     @Binding var sheetIsPresented: Bool
     @ObservedObject var editedPassword = TextBindingManager(limit: 30)
     @State private var username = ""
+    @State private var title = ""
     @State private var isEditingPassword = false
     @State private var showKeyboard = false
     @State private var passwordLenght = ""
     @State private var showMissingTitleAlert = false
     @State private var showMissingPasswordAlert = false
     @State private var showMissingPasswordAndTitleAlert = false
-    @State private var showTitleMissingFooter = false
+    @State private var showMissingUsernameFooter = false
+    @State private var showMissingTitleFooter = false
     @State var generatedPasswordIsPresented: Bool
     @ObservedObject var viewModel: PasswordListViewModel
     @ObservedObject var settings:SettingsViewModel
@@ -88,15 +90,23 @@ struct SavePasswordView: View {
                         })
                     }
                     
-                    Section(header: Text("Nom de compte").foregroundColor(.gray), footer: showTitleMissingFooter ? Text("Champ obligatoire").foregroundColor(.red) : nil ) {
-                        TextField("ex: Facebook", text: $username)
-                    }.alert(isPresented: $showMissingTitleAlert, content: {
+                    Section(header: Text("Nom de compte").foregroundColor(.gray)) {
+                        TextField("ex: example@icloud.com", text: $username)
+                            .foregroundColor(.black)
+                    }
+                    
+                    Section(header: Text("Titre").foregroundColor(title.isEmpty ? .red : .gray), footer: title.isEmpty ? Text("Champ obligatoire").foregroundColor(.red) : nil ) {
+                        TextField("ex: Twitter", text: $title)
+                            .foregroundColor(.black)
+                    }
+                    .alert(isPresented: $showMissingTitleAlert, content: {
                         Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un nom de compte a votre mot de passe."), dismissButton: .cancel(Text("OK!")))
                         
                     })
                     
-                }.alert(isPresented: $showMissingPasswordAndTitleAlert, content: {
-                    Alert(title: Text("Champs manquants"), message: Text("Le champ mot de passe et intitulé ne peuvent pas être vides."), dismissButton: .cancel(Text("OK!")))
+                }
+                .alert(isPresented: $showMissingPasswordAndTitleAlert, content: {
+                    Alert(title: Text("Champs manquants"), message: Text("Champ(s) manquant(s)."), dismissButton: .cancel(Text("OK!")))
                 })
                 .navigationBarTitle("Enregistrer")
                 .navigationBarItems(leading: Button(action: {
@@ -108,21 +118,15 @@ struct SavePasswordView: View {
                 }), trailing: Button(action: {
                     
                     if !isEditingPassword {
-                        if username.isEmpty && editedPassword.text.isEmpty {
+                        
+                        if title.isEmpty || editedPassword.text.isEmpty {
                             showMissingPasswordAndTitleAlert.toggle()
-                            print("Password and title missing")
-                        } else if username.isEmpty && editedPassword.text.isEmpty == false {
-                            print("Username missing")
-                            showTitleMissingFooter = true
-                            showMissingTitleAlert.toggle()
+                            print("Missing fields")
                         }
-                        else if editedPassword.text.isEmpty && username.isEmpty == false {
-                            showMissingPasswordAlert.toggle()
-                            print("Password missing")
-                        }
-                        else {
+
+                        else if !title.isEmpty && !editedPassword.text.isEmpty {
                             sheetIsPresented.toggle()
-                            viewModel.saveToKeychain(password: editedPassword.text, username: username)
+                            viewModel.saveToKeychain(password: editedPassword.text, username: username, title: title)
                             viewModel.getAllKeys()
                         }
                     }
@@ -147,6 +151,6 @@ struct SavePasswordView: View {
 
 struct SavePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), sheetIsPresented: .constant(true), generatedPasswordIsPresented: true, viewModel: PasswordListViewModel(), settings: SettingsViewModel()).accentColor(.green)
+        SavePasswordView(password: .constant("MotDePasseExtremementCompliqué"), sheetIsPresented: .constant(true), generatedPasswordIsPresented: true, viewModel: PasswordListViewModel(), settings: SettingsViewModel())
     }
 }

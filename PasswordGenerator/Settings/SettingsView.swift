@@ -14,191 +14,214 @@ struct SettingsView: View {
     @State var biometricType: SettingsViewModel.BiometricType
     let keychain = KeychainSwift()
     @State private var removePasswordAlert = false
-    @State private var bgColor = Color(.sRGB, red: 0.98, green: 0.9, blue: 0.2)
     @ObservedObject var passwordViewModel: PasswordListViewModel
     
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Form {
-                    
-                    Section(header: Text("Sécurité")) {
+            VStack {
+                ZStack {
+                    Form {
                         
-                        
-                        Toggle(isOn: $settings.faceIdToggle, label: {
-                            Label(
-                                title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
-                                icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
-                            )
-                        }).toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
-                        
-                        .onChange(of: settings.faceIdToggle, perform: { _ in
+                        Section(header: Text("Sécurité")) {
                             
-                            if settings.faceIdToggle {
-                                settings.addBiometricAuthentication()
-                                print("Waiting for auth")
+                            
+                            Toggle(isOn: $settings.faceIdToggle, label: {
+                                Label(
+                                    title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
+                                    icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
+                                )
+                            }).toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
+                            
+                            .onChange(of: settings.faceIdToggle, perform: { _ in
+                                
+                                if settings.faceIdToggle {
+                                    settings.addBiometricAuthentication()
+                                    print("Waiting for auth")
+                                }
+                                
+                                if !settings.faceIdToggle {
+                                    settings.turnOffBiometricAuthentication()
+                                }
+                                
+                            })
+                            
+                            .onChange(of: settings.autoLock, perform: {_ in
+                                print(settings.autoLock)
+                                
+                            })
+                            
+                            if settings.faceIdDefault {
+                                Picker(selection: $settings.autoLock, label: Label(
+                                    title: { Text("Vérouillage auto.") },
+                                    icon: { Image(systemName: "lock.fill") }
+                                ), content: {
+                                    
+                                    Text("Immédiat").tag(0)
+                                    Text("1 minute").tag(1)
+                                    Text("5 minutes").tag(5)
+                                    Text("15 minutes").tag(15)
+                                    Text("30 minutes").tag(30)
+                                    
+                                })
                             }
                             
-                            if !settings.faceIdToggle {
-                                settings.turnOffBiometricAuthentication()
-                            }
-                            
-                        })
-                        
-                        .onChange(of: settings.autoLock, perform: {_ in
-                            print(settings.autoLock)
-                            
-                        })
-                        
-                        if settings.faceIdDefault {
-                        Picker(selection: $settings.autoLock, label: Label(
-                            title: { Text("Vérouillage auto.") },
-                            icon: { Image(systemName: "lock.fill") }
-                        ), content: {
-                            
-                            Text("Immédiat").tag(0)
-                            Text("1 minute").tag(1)
-                            Text("5 minutes").tag(5)
-                            Text("15 minutes").tag(15)
-                            Text("30 minutes").tag(30)
-                            
-                        })
                         }
                         
-                    }
-                    
-                    
-                    Section(header: Text("Personalisation")) {
-                        Picker(selection: $settings.accentColorIndex, label: Label(
-                            title: { Text("Couleur principale") },
-                            icon: { Image(systemName: "eyedropper.halffull") }
-                        )             , content: {
+                        
+                        Section(header: Text("Personalisation")) {
+                            Picker(selection: $settings.accentColorIndex, label: Label(
+                                title: { Text("Couleur principale") },
+                                icon: { Image(systemName: "eyedropper.halffull") }
+                            )             , content: {
+                                
+                                List {
+                                    Label(
+                                        title: { Text("Vert") },
+                                        icon: { Image(systemName: "circle.fill")
+                                            .foregroundColor(settings.colors[0])
+                                            
+                                        }).tag(0)
+                                    
+                                    Label(
+                                        title: { Text("Bleu") },
+                                        icon: { Image(systemName: "circle.fill")
+                                            .foregroundColor(settings.colors[1])
+                                            
+                                        }).tag(1)
+                                    
+                                    Label(
+                                        title: { Text("Rouge") },
+                                        icon: { Image(systemName: "circle.fill")
+                                            .foregroundColor(settings.colors[2])
+                                            
+                                        }).tag(2)
+                                    
+                                    Label(
+                                        title: { Text("Rose") },
+                                        icon: { Image(systemName: "circle.fill")
+                                            .foregroundColor(settings.colors[3])
+                                            
+                                        }).tag(3)
+                                    
+                                    Label(
+                                        title: { Text("Violet") },
+                                        icon: { Image(systemName: "circle.fill")
+                                            .foregroundColor(settings.colors[4])
+                                            
+                                        }).tag(4)
+                                    
+                                    Label(
+                                        title: { Text("Jaune") },
+                                        icon: { Image(systemName: "circle.fill")
+                                            .foregroundColor(settings.colors[5])
+                                            
+                                        }).tag(5)
+                                }
+                                
+                            })
                             
-                            List {
-                                Label(
-                                    title: { Text("Vert") },
-                                    icon: { Image(systemName: "circle.fill")
-                                        .foregroundColor(settings.colors[0])
-                                        
-                                    }).tag(0)
+                            //override dark mode settings feature
+                            
+                            //                        Picker(selection: settings.$appAppearance, label: Label(
+                            //                            title: { HStack {
+                            //                                Text("Mode nuit")
+                            //
+                            //                            } },
+                            //                            icon: {
+                            //
+                            //                                if settings.appAppearance == "Auto" {
+                            //                                    Image(systemName: "moon.circle")
+                            //                                }
+                            //                                if settings.appAppearance == "Nuit" {
+                            //                                    Image(systemName: "moon.fill")
+                            //                                }
+                            //                                if settings.appAppearance == "Jour" {
+                            //                                    Image(systemName: "sun.min")
+                            //                                }
+                            //
+                            //                            }
+                            //                        ), content: {
+                            //                            Text("Automatique").tag("Auto")
+                            //                            Text("Nuit").tag("Nuit")
+                            //                            Text("Jour").tag("Jour")
+                            //                        }).pickerStyle(MenuPickerStyle()).onChange(of: settings.appAppearance, perform: { value in
+                            //                            if settings.appAppearance == "Nuit" {
+                            //                                settings.appAppearanceToggle = true
+                            //                            } else if settings.appAppearance == "Jour" {
+                            //                                settings.appAppearanceToggle = false
+                            //                            }
+                            //                        })
+                            
+                        }
+                        
+                        Section(header: Text("Liens")) {
+                            Link(destination: URL(string: "https://github.com/il1ane/PasswordGenerator")!) {
                                 
                                 Label(
-                                    title: { Text("Bleu") },
-                                    icon: { Image(systemName: "circle.fill")
-                                        .foregroundColor(settings.colors[1])
-                                        
-                                    }).tag(1)
-                                
-                                Label(
-                                    title: { Text("Rouge") },
-                                    icon: { Image(systemName: "circle.fill")
-                                        .foregroundColor(settings.colors[2])
-                                        
-                                    }).tag(2)
-                                
-                                Label(
-                                    title: { Text("Rose") },
-                                    icon: { Image(systemName: "circle.fill")
-                                        .foregroundColor(settings.colors[3])
-                                        
-                                    }).tag(3)
-                                
-                                Label(
-                                    title: { Text("Violet") },
-                                    icon: { Image(systemName: "circle.fill")
-                                        .foregroundColor(settings.colors[4])
-                                        
-                                    }).tag(4)
-                                
-                                Label(
-                                    title: { Text("Jaune") },
-                                    icon: { Image(systemName: "circle.fill")
-                                        .foregroundColor(settings.colors[5])
-                                        
-                                    }).tag(5)
+                                    title: { Text("Code source (GitHub)") },
+                                    icon: { Image(systemName: "chevron.left.slash.chevron.right") }
+                                )
                             }
                             
-                        })
-                        
-                        //override dark mode settings feature
-                        
-                        //                        Picker(selection: settings.$appAppearance, label: Label(
-                        //                            title: { HStack {
-                        //                                Text("Mode nuit")
-                        //
-                        //                            } },
-                        //                            icon: {
-                        //
-                        //                                if settings.appAppearance == "Auto" {
-                        //                                    Image(systemName: "moon.circle")
-                        //                                }
-                        //                                if settings.appAppearance == "Nuit" {
-                        //                                    Image(systemName: "moon.fill")
-                        //                                }
-                        //                                if settings.appAppearance == "Jour" {
-                        //                                    Image(systemName: "sun.min")
-                        //                                }
-                        //
-                        //                            }
-                        //                        ), content: {
-                        //                            Text("Automatique").tag("Auto")
-                        //                            Text("Nuit").tag("Nuit")
-                        //                            Text("Jour").tag("Jour")
-                        //                        }).pickerStyle(MenuPickerStyle()).onChange(of: settings.appAppearance, perform: { value in
-                        //                            if settings.appAppearance == "Nuit" {
-                        //                                settings.appAppearanceToggle = true
-                        //                            } else if settings.appAppearance == "Jour" {
-                        //                                settings.appAppearanceToggle = false
-                        //                            }
-                        //                        })
-                        
-                    }
-                    
-                    Section {
-                        HStack {
-                            Image(systemName: "chevron.left.slash.chevron.right").foregroundColor(settings.colors[settings.accentColorIndex])
-                            Link("Code source (GitHub)", destination: URL(string: "https://github.com/il1ane/PasswordGenerator")!)
+                            
+                            
+                            Link(destination: URL(string: "https://twitter.com/il1ane")!) {
+                                
+                                Label(
+                                    title: { Text("Suivez moi sur Twitter") },
+                                    icon: { Image(systemName: "heart.fill") }
+                                )
+                            }
+                            
+                            
+                            
                         }
-                        HStack {
-                            Text("Version")
+                        
+                        Section(footer:
+                                    
+                                    VStack {
+                                        Spacer()
+                                            .frame(height: 5)
+                            HStack {
                             Spacer()
-                            Text("beta").foregroundColor(.gray)
+                            Text("beta")
+                            Spacer()
+                            }
+                        }) {
+                            Button(action: { removePasswordAlert.toggle() }, label: {
+                                Text("Effacer tous les mots de passes").foregroundColor(.red)
+                            })
+                            .buttonStyle(PlainButtonStyle())
                         }
                         
                     }
                     
-                    Section {
-                        Button(action: { removePasswordAlert.toggle() }, label: {
-                            Text("Effacer tous les mots de passes").foregroundColor(.red)
-                        }).buttonStyle(PlainButtonStyle())
+                    if passwordViewModel.showAnimation {
+                        
+                        SavePasswordAnimation(settings: settings)
+                            .onAppear(perform: { animationDisappear() })
+                            .animation(.easeInOut(duration: 0.5))
+                        
                     }
-                    
                 }
-                if passwordViewModel.showAnimation {
-                    
-                    SavePasswordAnimation(settings: settings)
-                        .onAppear(perform: { animationDisappear() })
-                        .animation(.easeInOut(duration: 0.5))
-                    
-                }
+                
+                .alert(isPresented: $removePasswordAlert, content: {
+                    Alert(title: Text("Effacer TOUS les mots de passes"), message: Text("Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible."), primaryButton: .cancel(), secondaryButton: .destructive(Text("TOUT supprimer"), action: {
+                        keychain.clear()
+                        passwordViewModel.successHaptic()
+                    }))
+                })
+                
+                .onAppear(perform: {
+                    //set biometric type for device
+                    biometricType = settings.biometricType()
+                })
+                
+                
+                
+                .navigationBarTitle("Préférences")
             }
-            
-            .alert(isPresented: $removePasswordAlert, content: {
-                Alert(title: Text("Effacer TOUS les mots de passes"), message: Text("Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible."), primaryButton: .cancel(), secondaryButton: .destructive(Text("TOUT supprimer"), action: {
-                    keychain.clear()
-                    passwordViewModel.successHaptic()
-                }))
-            })
-            
-            .onAppear(perform: {
-                //set biometric type for device
-                biometricType = settings.biometricType()
-            })
-            
-            
-            
-            .navigationBarTitle("Préférences")
         }.accentColor(settings.colors[settings.accentColorIndex])
     }
     
