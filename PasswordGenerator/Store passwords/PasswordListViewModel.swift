@@ -13,14 +13,15 @@ import SwiftUI
 final class PasswordListViewModel: ObservableObject {
     
     @Published var keys = [String]()
-    @Published var usernames = [String]().sorted()
+    @Published var usernames = [String]()
     @Published var showAnimation = false
+    @Published var sortSelection = 0
     
     let separator = ":separator:"
     
     func saveToKeychain(password: String, username: String, title: String) {
         
-        let key = password + separator + username + separator + title
+        let key = title + separator + username
         
         keychain.set(password, forKey: key)
         successHaptic()
@@ -65,6 +66,10 @@ final class PasswordListViewModel: ObservableObject {
     }
     
     func getAllKeys() {
-        keys = keychain.allKeys.sorted()
+        if sortSelection == 0 {
+            keys = keychain.allKeys.sorted()
+        } else {
+            keys = keychain.allKeys.sorted().reversed()
+        }
     }
 }

@@ -106,10 +106,10 @@ struct PasswordView: View {
                             }, label: {
                                 Image(systemName: "pencil")
                                 
-                                
                             })
                         }
                     } else {
+                        
                         HStack {
                             
                             TextField(username, text: $editedUsername)
@@ -125,7 +125,6 @@ struct PasswordView: View {
                                 let newKey = viewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
                                 key = newKey
                                 
-                    
                             }
                             , label: {
                                 Image(systemName: "checkmark")
@@ -133,7 +132,6 @@ struct PasswordView: View {
                             
                             .buttonStyle(PlainButtonStyle())
                             .foregroundColor(settings.colors[settings.accentColorIndex])
-                            
                         }
                     }
                     Button(action: { UIPasteboard.general.string = username }) {
@@ -145,7 +143,6 @@ struct PasswordView: View {
                         }
                         
                     }.disabled(editingUsername)
-                    
                 }
                 
                 Section {
@@ -156,19 +153,24 @@ struct PasswordView: View {
                     }
                 }
             }
-            .actionSheet(isPresented: $showAlert, content: {
-                ActionSheet(title: Text("Supprimer le mot de passe"), message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."), buttons: [.cancel(), .destructive(Text("Supprimer definitivement"), action:
-                                                                                                                                                { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.getAllKeys() })])
+            .actionSheet(isPresented: $showAlert,
+                         content: {
+                ActionSheet(title: Text("Supprimer le mot de passe"),
+                            message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
+                            buttons: [.cancel(), .destructive(Text("Supprimer definitivement"),
+                            action: { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.getAllKeys() })])
             })
             .navigationBarTitle(title)
             .navigationBarItems(leading:
                                     Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")),
                                 trailing:
                                     Button(action: {
+                                        
                                         password = viewModel.keychain.get(key)!
                                         revealPassword.toggle()
                                         viewModel.getAllUsernames()
                                         viewModel.getAllKeys()
+                                        
                                     }, label: { revealPassword ?
                                         Image(systemName: "eye.slash") : Image(systemName: "eye")
                                     }).foregroundColor(settings.colors[settings.accentColorIndex]))

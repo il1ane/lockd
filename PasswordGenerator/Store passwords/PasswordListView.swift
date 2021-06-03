@@ -41,23 +41,41 @@ struct PasswordListView: View {
                         
                         Form {
                             
-                            Section(header: Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[2].starts(with: self.searchText) }.count )")) {
+                            Section(header: HStack {
+                                Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[2].starts(with: self.searchText) }.count )")
+                                Spacer()
+                                
+                                Picker(selection: $passwordViewModel.sortSelection, label: passwordViewModel.sortSelection == 0 ? Text("A-Z") : Text("Z-A"), content: {
+                                    Text("A-Z").tag(0)
+                                    Text("Z-A").tag(1)
+                                })
+                                .pickerStyle(MenuPickerStyle())
+                            }) {
                                 List {
-                                    ForEach(self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[2].starts(with: self.searchText) }, id: \.self) { key in
+                                    ForEach(passwordViewModel.sortSelection == 0 ?
+                                                
+                                                self.passwordViewModel.keys.sorted().filter {
+                                                    self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }
+                                                :
+                                                self.passwordViewModel.keys.sorted().reversed().filter  {  self.searchText.isEmpty ? true :
+                                                    $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }, id: \.self) { key in
                                         
                                         let keyArray = key.components(separatedBy: passwordViewModel.separator)
+                                        
                                         HStack {
                                             Button(action: {
+    
                                                 chosenKey = key
                                                 showPasswordView.toggle()
-                                                title = keyArray[2]
+                                                title = keyArray[0]
                                                 username = keyArray[1]
                                                 print(keyArray.count)
                                                 print(keyArray[0])
                                                 print(keyArray[1])
-                                                print(keyArray[2])
+                                               
+                                                print(key)
                                             },
-                                            label: Text("\(keyArray[2])"))
+                                            label: Text("\(keyArray[0])"))
                                         }
                                     }
                                 }
@@ -72,6 +90,7 @@ struct PasswordListView: View {
                         .onAppear(perform: {
                             passwordViewModel.getAllKeys()
                             passwordViewModel.getAllUsernames()
+                            print(passwordViewModel.keys)
                         })
                         .navigationBarTitle("Coffre fort")
                         .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
