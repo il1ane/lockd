@@ -17,6 +17,7 @@ final class PasswordListViewModel: ObservableObject {
     @Published var showAnimation = false
     @Published var sortSelection = 0
     
+    
     let separator = ":separator:"
     
     func saveToKeychain(password: String, username: String, title: String) {
@@ -56,10 +57,17 @@ final class PasswordListViewModel: ObservableObject {
     }
     
     init() {
+        self.keychainSyncWithIcloud = UserDefaults.standard.object(forKey: "keychainSyncWithIcloud") as? Bool ?? false
        keys = keychain.allKeys
     }
     
     @Published var keychain = KeychainSwift()
+    
+    @Published var keychainSyncWithIcloud: Bool {
+        didSet {
+            UserDefaults.standard.set(keychainSyncWithIcloud, forKey: "keychainSyncWithIcloud")
+        }
+    }
     
     func deletePassword(key: String) {
         keychain.delete(key)

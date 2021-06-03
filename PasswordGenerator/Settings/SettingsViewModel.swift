@@ -21,14 +21,9 @@ final class SettingsViewModel: ObservableObject {
     self.autoLock = UserDefaults.standard.object(forKey: "autoLock") as? Int ?? 1
     }
 
-    
     var supportsHaptics: Bool = false
     let hapticCapability = CHHapticEngine.capabilitiesForHardware() 
     
-    
-    
-    
-
     @Published var isUnlocked = false
     @Published var lockAppTimerIsRunning = false
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
