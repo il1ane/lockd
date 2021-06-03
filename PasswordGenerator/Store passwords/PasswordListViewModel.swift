@@ -13,7 +13,7 @@ import SwiftUI
 final class PasswordListViewModel: ObservableObject {
     
     @Published var keys = [String]()
-    @Published var usernames = [String]()
+    @Published var usernames = [String]().sorted()
     @Published var showAnimation = false
     
     let separator = ":separator:"
@@ -65,6 +65,6 @@ final class PasswordListViewModel: ObservableObject {
     }
     
     func getAllKeys() {
-        keys = keychain.allKeys
+        keys = keychain.allKeys.sorted()
     }
 }

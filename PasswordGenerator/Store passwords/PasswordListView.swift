@@ -41,9 +41,9 @@ struct PasswordListView: View {
                         
                         Form {
                             
-                            Section(header: Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.contains(self.searchText) }.count )")) {
+                            Section(header: Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[2].starts(with: self.searchText) }.count )")) {
                                 List {
-                                    ForEach(self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.contains(self.searchText) }, id: \.self) { key in
+                                    ForEach(self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[2].starts(with: self.searchText) }, id: \.self) { key in
                                         
                                         let keyArray = key.components(separatedBy: passwordViewModel.separator)
                                         HStack {
