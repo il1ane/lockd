@@ -38,7 +38,7 @@ final class PasswordListViewModel: ObservableObject {
     
     func updateUsername(key: String, password: String, newUsername: String, title: String) -> String {
         keychain.delete(key)
-        let newKey = password + separator + newUsername + separator + title
+        let newKey = title + separator + newUsername
         keychain.set(password, forKey: newKey)
         print("username update")
         return newKey
