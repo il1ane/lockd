@@ -36,7 +36,7 @@ struct SavePasswordView: View {
             VStack {
                 
                 Form {
-                    Section(header: Text("Mot de passe").foregroundColor(.gray), footer: passwordLenght.isEmpty ? Text("Le mot de passe ne peut pas être vide").foregroundColor(.red) : nil) {
+                    Section(header: Text("Mot de passe").foregroundColor(.gray), footer: passwordLenght.isEmpty ? Text("Champ obligatoire").foregroundColor(.red) : Text("")) {
                         HStack {
                             Spacer()
                             
@@ -94,7 +94,7 @@ struct SavePasswordView: View {
                             
                     }
                     
-                    Section(header: Text("Titre").foregroundColor(title.isEmpty ? .red : .gray), footer: title.isEmpty ? Text("Champ obligatoire").foregroundColor(.red) : nil ) {
+                    Section(header: Text("Titre").foregroundColor(.gray), footer: title.isEmpty ? Text("Champ obligatoire").foregroundColor(.red) : Text("") ) {
                         TextField("ex: Twitter", text: $title)
                             
                     }
@@ -134,13 +134,14 @@ struct SavePasswordView: View {
                     
                 }, label: {
                     Image(systemName: "tray.and.arrow.down")
-                }).disabled(isEditingPassword ? true : false)
-                )
-                
-            }.onChange(of: editedPassword.text.count, perform: { _ in
+                })
+                .disabled(isEditingPassword ? true : false))
+            }
+            .onChange(of: editedPassword.text.count, perform: { _ in
                 passwordLenght = editedPassword.text
-            })
-        }.onAppear(perform: {
+           })
+        }
+        .onAppear(perform: {
             if !generatedPasswordIsPresented {
                 isEditingPassword = true
             }

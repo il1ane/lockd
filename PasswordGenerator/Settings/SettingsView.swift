@@ -107,7 +107,7 @@ struct SettingsView: View {
                                         }).tag(1)
                                     
                                     Label(
-                                        title: { Text("Rouge") },
+                                        title: { Text("Orange") },
                                         icon: { Image(systemName: "circle.fill")
                                             .foregroundColor(settings.colors[2])
                                             
@@ -206,7 +206,11 @@ struct SettingsView: View {
                             }
                         }) {
                             Button(action: { removePasswordAlert.toggle() }, label: {
-                                Text("Effacer tous les mots de passes").foregroundColor(.red)
+                                Label(
+                                    title: { Text("Effacer tous les mots de passes").foregroundColor(.red)},
+                                    icon: { Image(systemName: "trash.fill").foregroundColor(.red)
+                                    }
+)
                             })
                             .buttonStyle(PlainButtonStyle())
                         }

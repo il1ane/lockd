@@ -59,7 +59,7 @@ final class SettingsViewModel: ObservableObject {
         }
     }
        
-    let colors = [Color.green, Color.blue, Color.red, Color.pink, Color.purple, Color.yellow]
+    let colors = [Color.green, Color.blue, Color.orange, Color.pink, Color.purple, Color.yellow]
    
     
     //check if device have touchID, faceID or no biometric activated
