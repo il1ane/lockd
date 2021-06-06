@@ -52,6 +52,7 @@
 //PasswordListView
 "Rechercher un mot de passe" = "Search";
 "Coffre fort" = "Safe";
+"Annuler" = "Cancel";
 
 //PasswordView
 "Mot de passe" = "Password";
@@ -80,6 +81,8 @@
 "Jaune" = "Yellow";
 "Déverouiller avec votre mot de passe" = "Unlock with password";
 
+//plist
+"Déverouiller vos mots de passes" = "Unlock your passwords";
 
 
 
