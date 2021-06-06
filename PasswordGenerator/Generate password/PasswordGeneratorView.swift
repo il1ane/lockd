@@ -24,6 +24,7 @@ struct PasswordGeneratorView: View {
     @ObservedObject var settings: SettingsViewModel
     @ObservedObject var passwordViewModel: PasswordListViewModel
     @State private var showAnimation = false
+    @State private var characters = [String]()
     
     
     var body: some View {
@@ -36,10 +37,15 @@ struct PasswordGeneratorView: View {
                         
                         HStack {
                             Spacer()
-                            Text(generatedPassword)
-                                .foregroundColor(.gray)
-                                .font(numberOfCharacter > 25 ? .system(size: 15) : .body)
-                                .animation(.easeOut)
+                            
+                                    
+                            HStack(spacing: 0) {
+                                ForEach(characters, id: \.self) { character in
+                                    
+                                    Text(character).foregroundColor(viewModel.specialCharactersArray.contains(character) ? .pink : viewModel.numbersArray.contains(character) ? .teal : viewModel.alphabet.contains(character) ? .gray : .yellow)
+                                }
+                            }                                .font(numberOfCharacter > 25 ? .system(size: 15) : .body)
+                            .animation(.easeOut(duration: 0.1))
                             Spacer()
                             Button(action: {
                                 UIPasteboard.general.string = generatedPassword
@@ -63,6 +69,8 @@ struct PasswordGeneratorView: View {
                             Spacer()
                         }
                     }
+                    
+
                     
                     Section(header: Text("Nombre de caractères")) {
                         HStack {
@@ -97,7 +105,10 @@ struct PasswordGeneratorView: View {
                 }.navigationBarTitle("Générateur")
                 
                  .navigationBarItems(trailing: Button(action: {
-                    generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+                    
+                    characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+                    generatedPassword = characters.joined()
+                    
                 }, label: {
                     Image(systemName: "die.face.5.fill")
                         
@@ -124,19 +135,25 @@ struct PasswordGeneratorView: View {
    
         //Triggers that generate a new password
         .onChange(of: numberOfCharacter, perform: { value in
-            generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            generatedPassword = characters.joined()
         })
         .onChange(of: uppercased, perform: { value in
-            generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            generatedPassword = characters.joined()
         })
         .onChange(of: specialCharacters, perform: { value in
-            generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            generatedPassword = characters.joined()
         })
         .onChange(of: withNumbers, perform: { value in
-            generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            generatedPassword = characters.joined()
         })
         .onAppear(perform: {
-            generatedPassword = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            generatedPassword = characters.joined()
+            
         })
     }
     

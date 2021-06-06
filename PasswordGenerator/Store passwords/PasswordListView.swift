@@ -30,14 +30,17 @@ struct PasswordListView: View {
             
             VStack {
                 
-                SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
+
+                HStack {
+                    SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
+                    .returnKeyType(.done)
                     .searchBarStyle(.minimal)
-                    .showsCancelButton(searchText.isEmpty ? false : true)
+                    .showsCancelButton(true)
                     .onCancel {
                         searchText = ""
                     }
-                    .frame(maxWidth: 370)
-                    
+                        .frame(maxWidth: 370)
+                }
                 
                 Spacer()
                 ZStack {

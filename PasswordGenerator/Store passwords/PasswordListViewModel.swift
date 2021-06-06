@@ -16,7 +16,7 @@ final class PasswordListViewModel: ObservableObject {
     @Published var usernames = [String]()
     @Published var showAnimation = false
     @Published var sortSelection = 0
-    
+
     
     let separator = ":separator:"
     

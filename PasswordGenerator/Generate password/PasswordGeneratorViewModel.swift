@@ -9,14 +9,14 @@ import Foundation
 
 final class PasswordGeneratorViewModel: ObservableObject {
     
-    @Published var generatedPassword = ""
+    @Published var generatedPassword = [String]()
     let passwordLenghtRange = 1...30.0
     
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let specialCharactersArray: [String] = ["(",")","{","}","[","]","/","+","*","$",">",".","|","^","?"]
     let numbersArray: [String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     
-    func generatePassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> String {
+    func generatePassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> [String] {
         
         //All parameters
         if uppercase && specialCharacters && numbers {
@@ -38,7 +38,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
         }
     }
     
-    func lowercasePassword(lenght: Int) -> String {
+    func lowercasePassword(lenght: Int) -> [String] {
         
         var password: [String] = [""]
 
@@ -50,10 +50,10 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 password.remove(at: 0)
             }
         }
-                return password.joined()
+                return password
     }
     
-    func oneParameterPassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> String {
+    func oneParameterPassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> [String] {
         
         var password: [String] = [""]
         var uppercasedAlphabet: [String] = []
@@ -78,7 +78,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 }
             }
             
-            return password.joined()
+            return password
         }
         
         if uppercase {
@@ -96,7 +96,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
                     password.remove(at: 0)
                 }
             }
-            return password.joined()
+            return password
         }
         
         if numbers {
@@ -114,15 +114,12 @@ final class PasswordGeneratorViewModel: ObservableObject {
                     password.remove(at: 0)
                 }
             }
-            return password.joined()
+            return password
         }
-        
-        else {
-            return "Error"
-        }
+        return password
     }
     
-    func twoParameterPassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> String {
+    func twoParameterPassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> [String] {
         
         var password: [String] = [""]
         var uppercasedAlphabet: [String] = []
@@ -153,7 +150,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 }
             }
             
-            return password.joined()
+            return password
         }
         
         if uppercase && numbers {
@@ -178,7 +175,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 }
             }
             
-            return password.joined()
+            return password
         }
         
         if numbers && specialCharacters {
@@ -203,16 +200,12 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 }
             }
             
-            return password.joined()
+            return password
         }
-        
-        else {
-            return "Error"
-        }
-       
+       return password
     }
     
-    func threeParameterPassword(lenght: Int) -> String {
+    func threeParameterPassword(lenght: Int) -> [String] {
         
         var password: [String] = [""]
         var uppercasedAlphabet: [String] = []
@@ -245,7 +238,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
             }
         }
         
-        return password.joined()
+        return password
     }
     
 }
