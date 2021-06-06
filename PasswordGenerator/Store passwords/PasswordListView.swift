@@ -32,7 +32,12 @@ struct PasswordListView: View {
                 
                 SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
                     .searchBarStyle(.minimal)
+                    .showsCancelButton(searchText.isEmpty ? false : true)
+                    .onCancel {
+                        searchText = ""
+                    }
                     .frame(maxWidth: 370)
+                    
                 
                 Spacer()
                 ZStack {
@@ -93,6 +98,7 @@ struct PasswordListView: View {
                             print(passwordViewModel.keys)
                         })
                         .navigationBarTitle("Coffre fort")
+                        
                         .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
                             Image(systemName: "plus")
                         }))
