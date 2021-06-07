@@ -1,5 +1,7 @@
 # lockd
 Generate your passwords and save them!  
+
+Support english & french
  
 ![Simulator Screen Recording - iPhone 12 - 2021-06-06 at 19 27 10](https://user-images.githubusercontent.com/61360545/120934117-516c2700-c6fd-11eb-8890-acaea44d61d5.gif)
 
