@@ -53,7 +53,7 @@ struct MainView: View {
         })
         
         .sheet(isPresented: $onBoardingSheetIsPresented, onDismiss: { settingsViewModel.isFirstLaunch = false } , content: {
-            OnboardingView(settings: settingsViewModel, isPresented: $onBoardingSheetIsPresented)
+            OnboardingView(settings: settingsViewModel, isPresented: $onBoardingSheetIsPresented, biometricType: settingsViewModel.biometricType())
                 .environment(\.colorScheme, colorScheme)
         })
         

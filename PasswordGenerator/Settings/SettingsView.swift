@@ -85,7 +85,7 @@ struct SettingsView: View {
                         }
                         
                         
-                        Section(header: Text("Personalisation")) {
+                        Section(header: Text("Personalisation (readabilty issues?)")) {
                             Picker(selection: $settings.accentColorIndex, label: Label(
                                 title: { Text("Couleur principale") },
                                 icon: { Image(systemName: "eyedropper.halffull") }

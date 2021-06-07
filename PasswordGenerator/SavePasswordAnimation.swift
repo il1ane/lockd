@@ -26,7 +26,7 @@ struct SavePasswordAnimation: View {
                     .font(.system(size: 70)).foregroundColor(.white)
                    
             }.transition(.scale)
-            .animation(.easeIn)
+            .animation(.easeIn(duration: 0.5))
         
     }
 }

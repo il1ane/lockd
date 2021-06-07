@@ -12,18 +12,25 @@
 "Préférences" = "Settings";
 
 //LoggingView
-"Déverouiller avec Face ID" = "Unlock with FaceID";
-"Déverouiller avec Touch ID" = "Unlock with TouchID";
+"Déverouiller avec Face ID" = "Unlock with Face ID";
+"Déverouiller avec Touch ID" = "Unlock with Touch ID";
 "Entrer le mot mot de passe" =  "Enter password";
 
 //OnboardingView
-"Génerez aléatoirement vos mots de passe sur-mesure" = "Randomly generate password";
+"Génerez vos mots de passe sécurisés sur-mesure" = "Generate secure passwords";
 "Mots de passe aléatoires" = "Random passwords";
-"Stockez vos mots de passe de manière sécurisé" = "Safely save your passwords";
-"Sécurisé" = "Safe";
+"Stockez vos mots de passe dans votre coffre et retrouvez les rapidement" = "
+Store your passwords in your safe and find them quickly";
+"Sécurisé" = "Secure";
 "Modifiez les couleurs de l'application" = "Change app color";
+"Coffre fort" = "Safe";
 "Personnalisable" = "Customizable";
 "Continuer" = "Continue";
+"Bienvenue sur lockd" = "Welcome to lockd";
+"Protégez vos mots de passes avec Face ID" = "Protect your passwords with Face ID";
+"Protégez vos mots de passes avec Touch ID" = "Protect your passwords with Touch ID";
+"Protégez vos mots de passes avec votre code de verouillage d'iPhone" = "Protect your passwords with your iPhone passcode";
+
 
 //PasswordGeneratorView
 "Mot de passe généré aléatoirement" = "Randomly generated password";

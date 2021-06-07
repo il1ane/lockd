@@ -11,19 +11,25 @@ struct OnboardingView: View {
     
     @ObservedObject var settings: SettingsViewModel
     @Binding var isPresented: Bool
+    @State var biometricType: SettingsViewModel.BiometricType
     
     var body: some View {
         VStack {
             Spacer()
-            Text("Bienvenue").font(.title).bold()
+            Text("Bienvenue sur lockd").font(.title).bold()
             Spacer()
             VStack(alignment: .leading) {
                 
-                OnboardingCell(image: "die.face.5.fill", color: settings.colors[settings.accentColorIndex], text: "Génerez aléatoirement vos mots de passe sur-mesure", title: "Mots de passe aléatoires").padding()
+                OnboardingCell(image: "key.fill", color: settings.colors[settings.accentColorIndex], text: "Génerez vos mots de passe sécurisés sur-mesure", title: "Mots de passe").padding()
                 
-                OnboardingCell(image: "lock.fill", color: settings.colors[settings.accentColorIndex], text: "Stockez vos mots de passe de manière sécurisé", title: "Sécurisé").padding()
+                OnboardingCell(image: "lock.square", color: settings.colors[settings.accentColorIndex], text: "Stockez vos mots de passe dans votre coffre et retrouvez les rapidement", title: "Coffre fort").padding()
                 
-                OnboardingCell(image: "paintpalette.fill", color: settings.colors[settings.accentColorIndex], text: "Modifiez les couleurs de l'application", title: "Personnalisable").padding()
+                OnboardingCell(image: biometricType == .face ? "faceid" : biometricType == .touch ? "touchid" : "key", color: settings.colors[settings.accentColorIndex], text: biometricType == .face ? "Protégez vos mots de passes avec Face ID" : biometricType == .touch ? "Protégez vos mots de passes avec Touch ID" : "Protégez vos mots de passes avec votre code de verouillage d'iPhone", title: "Sécurisé").padding()
+                
+//                Label(
+//                    title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Entrer le mot mot de passe") },
+//                    icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
+//                )
                 
             }.padding()
             Spacer()
@@ -40,11 +46,16 @@ struct OnboardingView: View {
                 .cornerRadius(10)
             Spacer()
         }.font(.body)
+        .onAppear(perform: {
+            //set biometric type for device
+            biometricType = settings.biometricType()
+        })
+        
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingView(settings: SettingsViewModel(), isPresented: .constant(true))
+        OnboardingView(settings: SettingsViewModel(), isPresented: .constant(true), biometricType: .touch)
     }
 }

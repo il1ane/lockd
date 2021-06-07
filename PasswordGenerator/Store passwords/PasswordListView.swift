@@ -98,21 +98,13 @@ struct PasswordListView: View {
                         .onAppear(perform: {
                             passwordViewModel.getAllKeys()
                             passwordViewModel.getAllUsernames()
-                            print(passwordViewModel.keys)
                         })
+                        
                         .navigationBarTitle("Coffre fort")
                         
                         .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
                             Image(systemName: "plus")
                         }))
-                    
-                    if passwordViewModel.showAnimation {
-                        
-                        SavePasswordAnimation(settings: settings)
-                            .onAppear(perform: { animationDisappear() })
-                            .animation(.easeInOut(duration: 0.5))
-                        
-                    }
                 }
                 
                 .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
@@ -121,13 +113,6 @@ struct PasswordListView: View {
                         .accentColor(settings.colors[settings.accentColorIndex])
                 })
             }
-        }
-    }
-    
-    func animationDisappear() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            passwordViewModel.showAnimation = false
-            print("Show animation")
         }
     }
 }

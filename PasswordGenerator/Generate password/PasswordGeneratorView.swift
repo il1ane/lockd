@@ -118,7 +118,7 @@ struct PasswordGeneratorView: View {
                     
                     SavePasswordAnimation(settings: settings)
                         .onAppear(perform: { animationDisappear() })
-                        .animation(.easeInOut(duration: 0.5))
+                        .animation(.easeInOut(duration: 0.1))
     
                 }
             }
