@@ -35,7 +35,6 @@
 /* Begin PBXFileReference section */
 		9103AC0C2645A00600CA6EB6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordView.swift; sourceTree = "<group>"; };
-		9103AC102645B30A00CA6EB6 /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		912B03C62643D6EF001C5FCA /* PasswordGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasswordGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorApp.swift; sourceTree = "<group>"; };
 		912B03CB2643D6EF001C5FCA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,7 +51,6 @@
 		914382132648AD4700819C15 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		914382152648AF6B00819C15 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		9145A5762649E23600594C11 /* LoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingView.swift; sourceTree = "<group>"; };
-		9158C046264736D8005C8B0C /* ToFix.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ToFix.md; sourceTree = "<group>"; };
 		9158C0472647F71D005C8B0C /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
 		91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordAnimation.swift; sourceTree = "<group>"; };
 		91E6084B265E4D8300678CD3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -125,8 +123,6 @@
 			children = (
 				912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */,
 				912B03CB2643D6EF001C5FCA /* ContentView.swift */,
-				9103AC102645B30A00CA6EB6 /* TODO.md */,
-				9158C046264736D8005C8B0C /* ToFix.md */,
 				91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
 				91E89EFD2664EA43007A478A /* Localizable.strings */,
