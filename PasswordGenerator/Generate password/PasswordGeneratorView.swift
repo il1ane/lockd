@@ -135,6 +135,7 @@ struct PasswordGeneratorView: View {
    
         //Triggers that generate a new password
         .onChange(of: numberOfCharacter, perform: { value in
+            viewModel.sliderMediumHaptic()
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
         })
