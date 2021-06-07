@@ -70,7 +70,7 @@ struct SettingsView: View {
                                 Label(
                                     title: { Text("iCloud keychain") },
                                     icon: { Image(systemName: "key.icloud.fill") }
-)
+                                )
                             }).toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                             .onChange(of: passwordViewModel.keychainSyncWithIcloud, perform: { value in
                                 if passwordViewModel.keychainSyncWithIcloud {
@@ -180,8 +180,6 @@ struct SettingsView: View {
                                 )
                             }
                             
-                            
-                            
                             Link(destination: URL(string: "https://twitter.com/il1ane")!) {
                                 
                                 Label(
@@ -199,18 +197,18 @@ struct SettingsView: View {
                                     VStack {
                                         Spacer()
                                             .frame(height: 5)
-                            HStack {
-                            Spacer()
-                            Text("beta")
-                            Spacer()
-                            }
-                        }) {
+                                        HStack {
+                                            Spacer()
+                                            Text("beta")
+                                            Spacer()
+                                        }
+                                    }) {
                             Button(action: { removePasswordAlert.toggle() }, label: {
                                 Label(
                                     title: { Text("Effacer tous les mots de passes").foregroundColor(.red)},
                                     icon: { Image(systemName: "trash.fill").foregroundColor(.red)
                                     }
-)
+                                )
                             })
                             .buttonStyle(PlainButtonStyle())
                         }

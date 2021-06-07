@@ -36,9 +36,9 @@ struct PasswordGeneratorView: View {
                     Section(header: Text("Mot de passe généré aléatoirement")) {
                         
                         HStack {
+                            
                             Spacer()
                             
-                                    
                             HStack(spacing: 0) {
                                 ForEach(characters, id: \.self) { character in
                                     
@@ -46,7 +46,9 @@ struct PasswordGeneratorView: View {
                                 }
                             }                                .font(numberOfCharacter > 25 ? .system(size: 15) : .body)
                             .animation(.easeOut(duration: 0.1))
+                            
                             Spacer()
+                            
                             Button(action: {
                                 UIPasteboard.general.string = generatedPassword
                             }, label: {
@@ -56,6 +58,7 @@ struct PasswordGeneratorView: View {
                                 
                             }).buttonStyle(PlainButtonStyle())
                         }
+                        
                         HStack {
                             Spacer()
                             Button(action: { savePasswordSheetIsPresented.toggle()
@@ -63,14 +66,12 @@ struct PasswordGeneratorView: View {
                             }, label: {
                                 Text("Ajouter au coffre fort")
                                     .foregroundColor(settings.colors[settings.accentColorIndex])
-                              
+                                
                                 
                             }).buttonStyle(PlainButtonStyle())
                             Spacer()
                         }
                     }
-                    
-
                     
                     Section(header: Text("Nombre de caractères")) {
                         HStack {
@@ -103,36 +104,29 @@ struct PasswordGeneratorView: View {
                     }
                     
                 }.navigationBarTitle("Générateur")
-                
-                 .navigationBarItems(trailing: Button(action: {
-                    
+            
+                 .navigationBarItems(trailing:
+                    Button(action: {
                     characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
                     generatedPassword = characters.joined()
-                    
-                }, label: {
+                }
+                          ,label: {
                     Image(systemName: "die.face.5.fill")
-                        
-            }))
+                }))
                 
                 if passwordViewModel.showAnimation {
-                    
                     SavePasswordAnimation(settings: settings)
                         .onAppear(perform: { animationDisappear() })
                         .animation(.easeInOut(duration: 0.1))
-    
                 }
             }
-            
-            
             
         }.sheet(isPresented: $savePasswordSheetIsPresented ,  content: {
             SavePasswordView(password: $generatedPassword, sheetIsPresented: $savePasswordSheetIsPresented, generatedPasswordIsPresented: true, viewModel: passwordViewModel, settings: settings)
                 .environment(\.colorScheme, colorScheme)
                 .foregroundColor(settings.colors[settings.accentColorIndex])
-            
         })
         
-   
         //Triggers that generate a new password
         .onChange(of: numberOfCharacter, perform: { value in
             viewModel.sliderMediumHaptic()
@@ -158,15 +152,13 @@ struct PasswordGeneratorView: View {
         })
     }
     
-     func animationDisappear() {
+    func animationDisappear() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
             passwordViewModel.showAnimation = false
             print("Show animation")
-            
-            }
-    
-   }
+        }
+    }
 }
 
 

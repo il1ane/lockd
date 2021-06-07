@@ -16,24 +16,23 @@ struct OnboardingCell: View {
     
     var body: some View {
         
-                    HStack {
-                Image(systemName: image)
-                    .frame(minWidth: 50, maxWidth: 60, minHeight: 50, maxHeight: 60)
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                    .background(color)
-                    .clipShape(Circle())
-                        
-                VStack(alignment: .leading) {
-                    
-                    Text(title).bold()
-                    Spacer().frame(height: 5)
-                    Text(text)
-                        .font(.body)
-                        .foregroundColor(.gray)
-                }.padding()
-            }
-        
+        HStack {
+            Image(systemName: image)
+                .frame(minWidth: 50, maxWidth: 60, minHeight: 50, maxHeight: 60)
+                .font(.largeTitle)
+                .foregroundColor(.white)
+                .background(color)
+                .clipShape(Circle())
+            
+            VStack(alignment: .leading) {
+                
+                Text(title).bold()
+                Spacer().frame(height: 5)
+                Text(text)
+                    .font(.body)
+                    .foregroundColor(.gray)
+            }.padding()
+        }
         
     }
 }

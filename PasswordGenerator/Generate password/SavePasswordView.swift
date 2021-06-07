@@ -91,12 +91,12 @@ struct SavePasswordView: View {
                     
                     Section(header: Text("Nom de compte").foregroundColor(.gray)) {
                         TextField("ex: example@icloud.com", text: $username)
-                            
+                        
                     }
                     
                     Section(header: Text("Titre").foregroundColor(.gray), footer: title.isEmpty ? Text("Champ obligatoire").foregroundColor(.red) : Text("") ) {
                         TextField("ex: Twitter", text: $title)
-                            
+                        
                     }
                     .alert(isPresented: $showMissingTitleAlert, content: {
                         Alert(title: Text("Champ manquant"), message: Text("Vous devez au moins donner un nom de compte a votre mot de passe."), dismissButton: .cancel(Text("OK!")))
@@ -117,19 +117,20 @@ struct SavePasswordView: View {
                 }), trailing: Button(action: {
                     
                     withAnimation {
-                    if !isEditingPassword {
                         
-                        if title.isEmpty || editedPassword.text.isEmpty {
-                            showMissingPasswordAndTitleAlert.toggle()
-                            print("Missing fields")
+                        if !isEditingPassword {
+                            
+                            if title.isEmpty || editedPassword.text.isEmpty {
+                                showMissingPasswordAndTitleAlert.toggle()
+                                print("Missing fields")
+                            }
+                            
+                            else if !title.isEmpty && !editedPassword.text.isEmpty {
+                                sheetIsPresented.toggle()
+                                viewModel.saveToKeychain(password: editedPassword.text, username: username, title: title)
+                                viewModel.getAllKeys()
+                            }
                         }
-
-                        else if !title.isEmpty && !editedPassword.text.isEmpty {
-                            sheetIsPresented.toggle()
-                            viewModel.saveToKeychain(password: editedPassword.text, username: username, title: title)
-                            viewModel.getAllKeys()
-                        }
-                    }
                     }
                     
                 }, label: {
@@ -139,7 +140,7 @@ struct SavePasswordView: View {
             }
             .onChange(of: editedPassword.text.count, perform: { _ in
                 passwordLenght = editedPassword.text
-           })
+            })
         }
         .onAppear(perform: {
             if !generatedPasswordIsPresented {

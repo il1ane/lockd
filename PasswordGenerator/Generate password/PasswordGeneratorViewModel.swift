@@ -12,8 +12,8 @@ import SwiftUI
 final class PasswordGeneratorViewModel: ObservableObject {
     
     @Published var generatedPassword = [String]()
-    let passwordLenghtRange = 1...30.0
     
+    let passwordLenghtRange = 1...30.0
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     let specialCharactersArray: [String] = ["(",")","{","}","[","]","/","+","*","$",">",".","|","^","?"]
     let numbersArray: [String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -21,7 +21,6 @@ final class PasswordGeneratorViewModel: ObservableObject {
     func sliderMediumHaptic() {
         let generator = UIImpactFeedbackGenerator(style: .rigid)
         generator.impactOccurred(intensity: 1)
-       print("Simple haptic")
    }
     
     func generatePassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> [String] {

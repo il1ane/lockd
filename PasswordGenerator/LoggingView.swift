@@ -18,19 +18,24 @@ struct LoggingView: View {
        
         ZStack {
             
-            Color.blue.edgesIgnoringSafeArea(.all)
+            Color.blue
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-                    
                     VStack {
-                    Spacer().frame(maxHeight : 120)
+                        
+                    Spacer()
+                        
+                        .frame(maxHeight : 120)
                     Image(systemName: "lock.fill")
                         .foregroundColor(.white)
                         .font(.system(size: 120))
                         .scaleEffect(scale)
                         .animateForever(using: .easeInOut(duration: 1), autoreverses: true, { scale = 0.95 })
                     }.padding()
+                
                     Spacer()
+                
                     Button(action: { if viewModel.biometricAuthentication() {
                             passwordViewModel.getAllKeys() }}, label: {
                         Label(
@@ -40,24 +45,17 @@ struct LoggingView: View {
                     })
                         .foregroundColor(.white)
                         .padding()
-                      
-                        .overlay(
-                                        RoundedRectangle(cornerRadius: 25)
-                                            .stroke(Color.white, lineWidth: 1)
-                                )
+                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 1))
                        
-                        
-                
-                
-//                    .background(viewModel.colors[viewModel.accentColorIndex]).cornerRadius(15)
-                    
-                    Spacer().frame(maxHeight : 30)
+                    Spacer()
+                        .frame(maxHeight : 30)
                 
             } .onAppear(perform: {
-                //set biometric type for device
                 biometricType = viewModel.biometricType()
         })
+            
         }.statusBar(hidden: true)
+        .transition(.identity)
     }
 }
 

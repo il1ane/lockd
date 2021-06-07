@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TextBindingManager: ObservableObject {
+final class TextBindingManager: ObservableObject {
     
     @Published var text = "" {
         didSet {
