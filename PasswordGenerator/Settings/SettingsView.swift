@@ -222,7 +222,7 @@ struct SettingsView: View {
                 .alert(isPresented: $removePasswordAlert, content: {
                     Alert(title: Text("Effacer TOUS les mots de passes"), message: Text("Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible."), primaryButton: .cancel(), secondaryButton: .destructive(Text("TOUT supprimer"), action: {
                         keychain.clear()
-                        passwordViewModel.successHaptic()
+                        passwordViewModel.addedPasswordHaptic()
                     }))
                 })
                 

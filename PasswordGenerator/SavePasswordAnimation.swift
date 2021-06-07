@@ -22,11 +22,20 @@ struct SavePasswordAnimation: View {
                       
                 }
                     
-                Image(systemName: "checkmark.circle")
-                    .font(.system(size: 70)).foregroundColor(.white)
+                VStack {
+                    Image(systemName: "checkmark.circle")
+                        .font(.system(size: 70)).foregroundColor(.white)
+                    Spacer()
+                        .frame(maxHeight : 20)
+                        
+                    Text("Ajouté au coffre")
+                        .bold()
+                        .foregroundColor(.white)
+                }
+                
                    
-            }.transition(.scale)
-            .animation(.easeIn(duration: 0.5))
+            }
+            
         
     }
 }

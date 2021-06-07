@@ -25,7 +25,7 @@ final class PasswordListViewModel: ObservableObject {
         let key = title + separator + username
         
         keychain.set(password, forKey: key)
-        successHaptic()
+        addedPasswordHaptic()
         showAnimation = true
         print("Saved to keychain")
         
@@ -44,9 +44,15 @@ final class PasswordListViewModel: ObservableObject {
         return newKey
     }
     
-    func successHaptic() {
+    func addedPasswordHaptic() {
        let generator = UINotificationFeedbackGenerator()
        generator.notificationOccurred(.success)
+       print("Simple haptic")
+   }
+    
+    func deletedPasswordHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred(intensity: 1)
        print("Simple haptic")
    }
     

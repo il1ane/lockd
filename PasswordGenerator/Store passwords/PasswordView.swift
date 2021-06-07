@@ -12,7 +12,7 @@ import MobileCoreServices
 struct PasswordView: View {
     
     @Binding var key: String
-    @ObservedObject var viewModel:PasswordListViewModel
+    @ObservedObject var passwordListViewModel:PasswordListViewModel
     @State private var password = ""
     @State private var showAlert = false
     @State private var revealPassword = false
@@ -66,7 +66,7 @@ struct PasswordView: View {
                                 //showKeyboard doesn't change anything but Xcode stop complaining
                                 //not always working
                                 password = editedPassword
-                                viewModel.updatePassword(key: key, newPassword: password)
+                                passwordListViewModel.updatePassword(key: key, newPassword: password)
                                 
                             }, label: {
                                 Image(systemName: "checkmark")
@@ -121,8 +121,8 @@ struct PasswordView: View {
                                 editingUsername.toggle()
                                 
                                 username = editedUsername
-                                password = viewModel.keychain.get(key)!
-                                let newKey = viewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
+                                password = passwordListViewModel.keychain.get(key)!
+                                let newKey = passwordListViewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
                                 key = newKey
                                 
                             }
@@ -158,7 +158,9 @@ struct PasswordView: View {
                 ActionSheet(title: Text("Supprimer le mot de passe"),
                             message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
                             buttons: [.cancel(), .destructive(Text("Supprimer definitivement"),
-                            action: { viewModel.keychain.delete(key); isPresented.toggle(); viewModel.getAllKeys() })])
+                            action: { passwordListViewModel.keychain.delete(key); isPresented.toggle(); passwordListViewModel.getAllKeys()
+                                passwordListViewModel.deletedPasswordHaptic()
+                            })])
             })
             .navigationBarTitle(title)
             .navigationBarItems(leading:
@@ -166,10 +168,10 @@ struct PasswordView: View {
                                 trailing:
                                     Button(action: {
                                         
-                                        password = viewModel.keychain.get(key)!
+                                        password = passwordListViewModel.keychain.get(key)!
                                         revealPassword.toggle()
-                                        viewModel.getAllUsernames()
-                                        viewModel.getAllKeys()
+                                        passwordListViewModel.getAllUsernames()
+                                        passwordListViewModel.getAllKeys()
                                         
                                     }, label: { revealPassword ?
                                         Image(systemName: "eye.slash") : Image(systemName: "eye")
@@ -180,6 +182,6 @@ struct PasswordView: View {
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView(key: .constant("clérandom"), viewModel: PasswordListViewModel(), isPresented: .constant(true), settings: SettingsViewModel(), title: .constant("usernafame"), username: .constant("username"))
+        PasswordView(key: .constant("clérandom"), passwordListViewModel: PasswordListViewModel(), isPresented: .constant(true), settings: SettingsViewModel(), title: .constant("usernafame"), username: .constant("username"))
     }
 }

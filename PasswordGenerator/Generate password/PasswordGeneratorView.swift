@@ -160,7 +160,7 @@ struct PasswordGeneratorView: View {
     
      func animationDisappear() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
             passwordViewModel.showAnimation = false
             print("Show animation")
             
