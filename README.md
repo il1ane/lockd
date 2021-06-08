@@ -2,7 +2,8 @@
 Generate strong passwords and save them in Keychain.
  
  
-![Simulator Screen Recording - iPhone 12 - 2021-06-08 at 11 58 46](https://user-images.githubusercontent.com/61360545/121165988-fb0ffd00-c850-11eb-8c94-56d22215cdbf.gif)
+![Simulator Screen Recording - iPhone 12 - 2021-06-08 at 11 58 46](https://user-images.githubusercontent.com/61360545/121167641-6a3a2100-c852-11eb-9bce-37b7b852e95d.gif)
+
 
 
 **Features:**  
