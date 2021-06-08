@@ -1,7 +1,8 @@
 # lockd
 Generate strong passwords and save them in Keychain.
  
-![Simulator Screen Recording - iPhone 12 - 2021-06-06 at 19 27 10](https://user-images.githubusercontent.com/61360545/120934117-516c2700-c6fd-11eb-8890-acaea44d61d5.gif)
+![Simulator Screen Recording - iPhone 12 - 2021-06-08 at 11 58 46](https://user-images.githubusercontent.com/61360545/121165988-fb0ffd00-c850-11eb-8c94-56d22215cdbf.gif)
+
 
 **Features:**  
 
