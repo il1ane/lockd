@@ -77,21 +77,17 @@ struct PasswordView: View {
                             .foregroundColor(settings.colors[settings.accentColorIndex])
                         }
                     }
-                    if revealPassword {
-                        
-                        VStack {
-                            Button(action: {
-                                    UIPasteboard.general.string = password }, label: {
-                                        
-                                        HStack {
-                                            Spacer()
-                                            Text("Copier")
-                                            Spacer()
-                                        }
-                                    })
-                        }
-                    }
-                }
+                
+                        Button(action: {
+                                UIPasteboard.general.string = password }, label: {
+                                    
+                                    HStack {
+                                        Spacer()
+                                        Text("Copier")
+                                        Spacer()
+                                    }
+                                }).disabled(revealPassword ? false : true)
+                             }
                 
                 Section(header: Text("Nom de compte")) {
                     
@@ -138,7 +134,7 @@ struct PasswordView: View {
                         
                         HStack {
                             Spacer()
-                        Text("Copy")
+                            Text("Copier")
                             Spacer()
                         }
                         
@@ -155,13 +151,13 @@ struct PasswordView: View {
             }
             .actionSheet(isPresented: $showAlert,
                          content: {
-                ActionSheet(title: Text("Supprimer le mot de passe"),
-                            message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
-                            buttons: [.cancel(), .destructive(Text("Supprimer definitivement"),
-                            action: { passwordListViewModel.keychain.delete(key); isPresented.toggle(); passwordListViewModel.getAllKeys()
-                                passwordListViewModel.deletedPasswordHaptic()
-                            })])
-            })
+                            ActionSheet(title: Text("Supprimer le mot de passe"),
+                                        message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
+                                        buttons: [.cancel(), .destructive(Text("Supprimer definitivement"),
+                                                                          action: { passwordListViewModel.keychain.delete(key); isPresented.toggle(); passwordListViewModel.getAllKeys()
+                                                                            passwordListViewModel.deletedPasswordHaptic()
+                                                                          })])
+                         })
             .navigationBarTitle(title)
             .navigationBarItems(leading:
                                     Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")),
