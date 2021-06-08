@@ -34,7 +34,7 @@ Store your passwords in your safe and find them quickly";
 //PasswordGeneratorView
 "Mot de passe généré aléatoirement" = "Randomly generated password";
 "Ajouter au coffre fort" = "Add to safe";
-"Nombre de caractères" = "Number of characters";
+"Nombre de caractères" = "Character count";
 "Note : chaque paramètre actif renforce la sécurité du mot de passe." = "Note: each active parameter reinforces the security of the password.";
 "Caractères spéciaux" = "Special characters";
 "Majuscules" = "Uppercase";
