@@ -25,7 +25,7 @@ struct PasswordGeneratorView: View {
     @ObservedObject var passwordViewModel: PasswordListViewModel
     @State private var showAnimation = false
     @State private var characters = [String]()
-    
+    @State private var clipboardSaveAnimation = false
     
     var body: some View {
         
@@ -39,10 +39,10 @@ struct PasswordGeneratorView: View {
                             
                             Spacer()
                             
-                            HStack(spacing: 0) {
+                            HStack(spacing: 0.5) {
                                 ForEach(characters, id: \.self) { character in
                                     
-                                    Text(character).foregroundColor(viewModel.specialCharactersArray.contains(character) ? .pink : viewModel.numbersArray.contains(character) ? .teal : viewModel.alphabet.contains(character) ? .gray : .yellow)
+                                    Text(character).foregroundColor(viewModel.specialCharactersArray.contains(character) ? Color.init(hexadecimal: "#f16581") : viewModel.numbersArray.contains(character) ? Color.init(hexadecimal: "#4EB3BC") : viewModel.alphabet.contains(character) ? .gray : Color.init(hexadecimal: "#ffbc42"))
                                 }
                             }                                .font(numberOfCharacter > 25 ? .system(size: 15) : .body)
                             .animation(.easeOut(duration: 0.1))
@@ -51,6 +51,9 @@ struct PasswordGeneratorView: View {
                             
                             Button(action: {
                                 UIPasteboard.general.string = generatedPassword
+                                clipboardSaveAnimation = true
+                                viewModel.copyPasswordHaptic()
+                                
                             }, label: {
                                 Image(systemName: "doc.on.doc")
                                     .foregroundColor(settings.colors[settings.accentColorIndex])
@@ -90,15 +93,25 @@ struct PasswordGeneratorView: View {
                     Section(header: Text("Inclure"), footer: Text("Note : chaque paramètre actif renforce la sécurité du mot de passe.").padding()) {
                         
                         Toggle(isOn: $specialCharacters, label: {
-                            Text("Caractères spéciaux")
+                            HStack {
+                                Text("Caractères spéciaux")
+                                Text("&-$").foregroundColor(Color.init(hexadecimal: "#f16581"))
+                            }
                         })
                         .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                         Toggle(isOn: $uppercased, label: {
-                            Text("Majuscules")
+                            HStack {
+                                Text("Majuscules")
+                                Text("A-Z").foregroundColor(Color.init(hexadecimal: "#4EB3BC"))
+                            }
+                            
                         })
                         .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                         Toggle(isOn: $withNumbers, label: {
-                            Text("Chiffres")
+                            HStack {
+                                Text("Chiffres")
+                                Text("0-9").foregroundColor(Color.init(hexadecimal: "#ffbc42"))
+                            }
                         })
                         .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                     }
@@ -115,8 +128,14 @@ struct PasswordGeneratorView: View {
                 }))
                 
                 if passwordViewModel.showAnimation {
-                    SavePasswordAnimation(settings: settings)
+                    PopupAnimation(settings: settings, message: "Ajouté au coffre")
                         .onAppear(perform: { animationDisappear() })
+                        .animation(.easeInOut(duration: 0.1))
+                }
+                
+                if clipboardSaveAnimation {
+                    PopupAnimation(settings: settings, message: "Copié!")
+                        .onAppear(perform: { clipBoardAnimationDisapear() })
                         .animation(.easeInOut(duration: 0.1))
                 }
             }
@@ -129,7 +148,7 @@ struct PasswordGeneratorView: View {
         
         //Triggers that generate a new password
         .onChange(of: numberOfCharacter, perform: { value in
-            viewModel.sliderMediumHaptic()
+            viewModel.sliderHaptic()
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
         })
@@ -158,6 +177,18 @@ struct PasswordGeneratorView: View {
             passwordViewModel.showAnimation = false
             print("Show animation")
         }
+        
+        
+    }
+    
+    func clipBoardAnimationDisapear() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+            clipboardSaveAnimation = false
+            print("Show animation")
+        }
+        
+        
     }
 }
 

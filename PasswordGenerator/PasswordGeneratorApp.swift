@@ -12,12 +12,13 @@ struct PasswordGeneratorApp: App {
     let persistenceController = PersistenceController.shared
     @ObservedObject var settingsViewModel = SettingsViewModel()
     @ObservedObject var passwordViewModel = PasswordListViewModel()
+    @ObservedObject var passwordGeneratorViewModel = PasswordGeneratorViewModel()
     
     
     var body: some Scene {
         WindowGroup {
             
-                MainView(settingsViewModel: settingsViewModel, passwordViewModel: passwordViewModel)
+            MainView(settingsViewModel: settingsViewModel, passwordViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
                // .colorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)

@@ -19,6 +19,7 @@ struct PasswordListView: View {
     @State private var addSheetIsShowing = false
     @State private var password = ""
     @ObservedObject var settings:SettingsViewModel
+    @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
     @State private var title = ""
     @State private var showAnimation = false
     @State private var searchText = ""
@@ -100,6 +101,7 @@ struct PasswordListView: View {
                             passwordViewModel.getAllUsernames()
                         })
                         
+                        
                         .navigationBarTitle("Coffre fort")
                         
                         .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
@@ -108,7 +110,7 @@ struct PasswordListView: View {
                 }
                 
                 .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
-                    PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, isPresented: $showPasswordView, settings: settings, title: $title, username: $username)
+                    PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, isPresented: $showPasswordView, settings: settings, title: $title, username: $username)
                         .environment(\.colorScheme, colorScheme)
                         .accentColor(settings.colors[settings.accentColorIndex])
                 })
@@ -120,6 +122,6 @@ struct PasswordListView: View {
 
 struct PasswordListView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordListView(passwordViewModel: PasswordListViewModel(), settings: SettingsViewModel())
+        PasswordListView(passwordViewModel: PasswordListViewModel(), settings: SettingsViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel())
     }
 }

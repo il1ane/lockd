@@ -12,6 +12,7 @@ struct MainView: View {
     
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var passwordViewModel: PasswordListViewModel
+    @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
     @State private var currentTab = 0
     @State private var onBoardingSheetIsPresented = false
     @Environment(\.colorScheme) var colorScheme
@@ -33,7 +34,7 @@ struct MainView: View {
                         }.tag(0)
                     
                     PasswordListView(passwordViewModel: passwordViewModel,
-                                     settings: settingsViewModel)
+                                     settings: settingsViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
                         .tabItem {
                             Label(title: { Text("Mots de passe") },
                                   icon: { Image(systemName: "tray.2.fill") })
@@ -103,6 +104,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(settingsViewModel: SettingsViewModel(), passwordViewModel: PasswordListViewModel())
+        MainView(settingsViewModel: SettingsViewModel(), passwordViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel())
     }
 }

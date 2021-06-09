@@ -13,6 +13,7 @@ struct PasswordView: View {
     
     @Binding var key: String
     @ObservedObject var passwordListViewModel:PasswordListViewModel
+    @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
     @State private var password = ""
     @State private var showAlert = false
     @State private var revealPassword = false
@@ -79,7 +80,9 @@ struct PasswordView: View {
                     }
                 
                         Button(action: {
-                                UIPasteboard.general.string = password }, label: {
+                                UIPasteboard.general.string = password
+                            passwordGeneratorViewModel.copyPasswordHaptic()
+                        }, label: {
                                     
                                     HStack {
                                         Spacer()
@@ -99,6 +102,7 @@ struct PasswordView: View {
                             Spacer()
                             Button(action: { editingUsername.toggle()
                                 editedUsername = username
+                                
                             }, label: {
                                 Image(systemName: "pencil")
                                 
@@ -130,7 +134,10 @@ struct PasswordView: View {
                             .foregroundColor(settings.colors[settings.accentColorIndex])
                         }
                     }
-                    Button(action: { UIPasteboard.general.string = username }) {
+                    Button(action: { UIPasteboard.general.string = username
+                        passwordGeneratorViewModel.copyPasswordHaptic()
+                    })
+                    {
                         
                         HStack {
                             Spacer()
@@ -148,8 +155,7 @@ struct PasswordView: View {
                         Spacer()
                     }
                 }
-            }
-            .actionSheet(isPresented: $showAlert,
+            }.actionSheet(isPresented: $showAlert,
                          content: {
                             ActionSheet(title: Text("Supprimer le mot de passe"),
                                         message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
@@ -178,6 +184,6 @@ struct PasswordView: View {
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView(key: .constant("clérandom"), passwordListViewModel: PasswordListViewModel(), isPresented: .constant(true), settings: SettingsViewModel(), title: .constant("usernafame"), username: .constant("username"))
+        PasswordView(key: .constant("clérandom"), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), isPresented: .constant(true), settings: SettingsViewModel(), title: .constant("usernafame"), username: .constant("username"))
     }
 }

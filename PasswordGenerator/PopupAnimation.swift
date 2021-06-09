@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct SavePasswordAnimation: View {
+struct PopupAnimation: View {
     
     @ObservedObject var settings: SettingsViewModel
+    let message:String
 
     var body: some View {
         
@@ -28,7 +29,7 @@ struct SavePasswordAnimation: View {
                     Spacer()
                         .frame(maxHeight : 20)
                         
-                    Text("Ajouté au coffre")
+                    Text(message)
                         .bold()
                         .foregroundColor(.white)
                 }
@@ -42,6 +43,6 @@ struct SavePasswordAnimation: View {
 
 struct savePasswordAnimation_Previews: PreviewProvider {
     static var previews: some View {
-        SavePasswordAnimation(settings: SettingsViewModel())
+        PopupAnimation(settings: SettingsViewModel(), message: "")
     }
 }

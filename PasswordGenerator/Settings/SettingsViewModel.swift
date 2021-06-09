@@ -153,6 +153,7 @@ final class SettingsViewModel: ObservableObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + dispatchAfter) {
             if self.lockAppTimerIsRunning {
             self.isUnlocked = false
+            UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
             }
         }
     }
