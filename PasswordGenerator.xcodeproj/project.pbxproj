@@ -27,7 +27,7 @@
 		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
 		91B63F97266FF8960092F2B0 /* PasswordGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
-		91D89AC62653DE0100CF22E1 /* SavePasswordAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */; };
+		91D89AC62653DE0100CF22E1 /* PopupAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */; };
 		91E6084C265E4D8300678CD3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084B265E4D8300678CD3 /* OnboardingView.swift */; };
 		91E6084E265E51D700678CD3 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084D265E51D700678CD3 /* OnboardingCell.swift */; };
 		91E89EFB2664EA43007A478A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 91E89EFD2664EA43007A478A /* Localizable.strings */; };
@@ -66,7 +66,7 @@
 		91B63F94266FF8960092F2B0 /* PasswordGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasswordGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorTests.swift; sourceTree = "<group>"; };
 		91B63F98266FF8960092F2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordAnimation.swift; sourceTree = "<group>"; };
+		91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimation.swift; sourceTree = "<group>"; };
 		91E6084B265E4D8300678CD3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		91E6084D265E51D700678CD3 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		91E89EFC2664EA43007A478A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 			children = (
 				912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */,
 				912B03CB2643D6EF001C5FCA /* ContentView.swift */,
-				91D89AC52653DE0100CF22E1 /* SavePasswordAnimation.swift */,
+				91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
 				91E89EFD2664EA43007A478A /* Localizable.strings */,
 				9145A5762649E23600594C11 /* LoggingView.swift */,
@@ -306,7 +306,7 @@
 				912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */,
 				9143820D2648526B00819C15 /* PasswordListViewModel.swift in Sources */,
 				91438211264857A200819C15 /* PasswordView.swift in Sources */,
-				91D89AC62653DE0100CF22E1 /* SavePasswordAnimation.swift in Sources */,
+				91D89AC62653DE0100CF22E1 /* PopupAnimation.swift in Sources */,
 				912B03D32643D6F1001C5FCA /* Persistence.swift in Sources */,
 				9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */,
 				912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */,
