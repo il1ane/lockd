@@ -25,159 +25,177 @@ struct PasswordView: View {
     @State private var editedUsername = ""
     @Binding var title: String
     @Binding var username:String
+    @State private var clipboardSaveAnimation = false
     
     var body: some View {
         
-        NavigationView {
-            Form {
-                
-                Section(header: Text("Mot de passe")) {
-                    if !editingPassword {
-                        HStack {
+        ZStack {
+            NavigationView {
+                Form {
+                    
+                    Section(header: Text("Mot de passe")) {
+                        if !editingPassword {
+                            HStack {
+                                
+                                HStack {
+                                    Spacer()
+                                    Text(revealPassword ? password : "****************************")
+                                    Spacer()
+                                }
+                                Spacer()
+                                Button(action: { editingPassword.toggle()
+                                    editedPassword = password
+                                }, label: {
+                                    Image(systemName: "pencil")
+                                    
+                                    
+                                })
+                                .foregroundColor(!revealPassword ? .gray : settings.colors[settings.accentColorIndex])
+                                .buttonStyle(PlainButtonStyle())
+                                .disabled(!revealPassword)
+                                
+                            }
+                        } else {
+                            HStack {
+                                
+                                CocoaTextField(password, text: $editedPassword)
+                                    .keyboardType(.asciiCapable)
+                                    .isFirstResponder(true)
+                                    .disableAutocorrection(true)
+                                
+                                Button(action: {
+                                    
+                                    editingPassword.toggle()
+                                    //showKeyboard doesn't change anything but Xcode stop complaining
+                                    //not always working
+                                    password = editedPassword
+                                    passwordListViewModel.updatePassword(key: key, newPassword: password)
+                                    
+                                }, label: {
+                                    Image(systemName: "checkmark")
+                                })
+                                
+                                
+                                .buttonStyle(PlainButtonStyle())
+                                .foregroundColor(settings.colors[settings.accentColorIndex])
+                            }
+                        }
+                        
+                        Button(action: {
+                            UIPasteboard.general.string = password
+                            passwordGeneratorViewModel.copyPasswordHaptic()
+                            clipboardSaveAnimation = true
+                        }, label: {
                             
                             HStack {
                                 Spacer()
-                                Text(revealPassword ? password : "****************************")
+                                Text("Copier")
                                 Spacer()
                             }
-                            Spacer()
-                            Button(action: { editingPassword.toggle()
-                                editedPassword = password
-                            }, label: {
-                                Image(systemName: "pencil")
-                                
-                                
-                            })
-                            .foregroundColor(!revealPassword ? .gray : settings.colors[settings.accentColorIndex])
-                            .buttonStyle(PlainButtonStyle())
-                            .disabled(!revealPassword)
-                            
-                        }
-                    } else {
-                        HStack {
-                            
-                            CocoaTextField(password, text: $editedPassword)
-                                .keyboardType(.asciiCapable)
-                                .isFirstResponder(true)
-                                .disableAutocorrection(true)
-                            
-                            Button(action: {
-                                
-                                editingPassword.toggle()
-                                //showKeyboard doesn't change anything but Xcode stop complaining
-                                //not always working
-                                password = editedPassword
-                                passwordListViewModel.updatePassword(key: key, newPassword: password)
-                                
-                            }, label: {
-                                Image(systemName: "checkmark")
-                            })
-                            
-                            
-                            .buttonStyle(PlainButtonStyle())
-                            .foregroundColor(settings.colors[settings.accentColorIndex])
-                        }
+                        }).disabled(revealPassword ? false : true)
                     }
-                
-                        Button(action: {
-                                UIPasteboard.general.string = password
-                            passwordGeneratorViewModel.copyPasswordHaptic()
-                        }, label: {
-                                    
-                                    HStack {
-                                        Spacer()
-                                        Text("Copier")
-                                        Spacer()
-                                    }
-                                }).disabled(revealPassword ? false : true)
-                             }
-                
-                Section(header: Text("Nom de compte")) {
                     
-                    if !editingUsername {
+                    Section(header: Text("Nom de compte")) {
                         
-                        HStack {
-                            Spacer()
-                            Text(username)
-                            Spacer()
-                            Button(action: { editingUsername.toggle()
-                                editedUsername = username
-                                
-                            }, label: {
-                                Image(systemName: "pencil")
-                                
-                            })
-                        }
-                    } else {
-                        
-                        HStack {
+                        if !editingUsername {
                             
-                            TextField(username, text: $editedUsername)
-                                .keyboardType(.asciiCapable)
-                                .disableAutocorrection(true)
-                            
-                            Button(action: {
-                                
-                                editingUsername.toggle()
-                                
-                                username = editedUsername
-                                password = passwordListViewModel.keychain.get(key)!
-                                let newKey = passwordListViewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
-                                key = newKey
-                                
+                            HStack {
+                                Spacer()
+                                Text(username)
+                                Spacer()
+                                Button(action: { editingUsername.toggle()
+                                    editedUsername = username
+                                    
+                                }, label: {
+                                    Image(systemName: "pencil")
+                                    
+                                })
                             }
-                            , label: {
-                                Image(systemName: "checkmark")
-                            })
+                        } else {
                             
-                            .buttonStyle(PlainButtonStyle())
-                            .foregroundColor(settings.colors[settings.accentColorIndex])
+                            HStack {
+                                
+                                TextField(username, text: $editedUsername)
+                                    .keyboardType(.asciiCapable)
+                                    .disableAutocorrection(true)
+                                
+                                Button(action: {
+                                    
+                                    editingUsername.toggle()
+                                    
+                                    username = editedUsername
+                                    password = passwordListViewModel.keychain.get(key)!
+                                    let newKey = passwordListViewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
+                                    key = newKey
+                                    
+                                }
+                                , label: {
+                                    Image(systemName: "checkmark")
+                                })
+                                
+                                .buttonStyle(PlainButtonStyle())
+                                .foregroundColor(settings.colors[settings.accentColorIndex])
+                            }
                         }
+                        Button(action: { UIPasteboard.general.string = username
+                            passwordGeneratorViewModel.copyPasswordHaptic()
+                            clipboardSaveAnimation = true
+                        })
+                        {
+                            
+                            HStack {
+                                Spacer()
+                                Text("Copier")
+                                Spacer()
+                            }
+                            
+                        }.disabled(editingUsername)
                     }
-                    Button(action: { UIPasteboard.general.string = username
-                        passwordGeneratorViewModel.copyPasswordHaptic()
-                    })
-                    {
-                        
+                    
+                    Section {
                         HStack {
                             Spacer()
-                            Text("Copier")
+                            Button(action: { showAlert.toggle() }, label: Text("Supprimer le mot de passe")).foregroundColor(.red)
                             Spacer()
                         }
-                        
-                    }.disabled(editingUsername)
-                }
-                
-                Section {
-                    HStack {
-                        Spacer()
-                        Button(action: { showAlert.toggle() }, label: Text("Supprimer le mot de passe")).foregroundColor(.red)
-                        Spacer()
                     }
-                }
-            }.actionSheet(isPresented: $showAlert,
-                         content: {
-                            ActionSheet(title: Text("Supprimer le mot de passe"),
-                                        message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
-                                        buttons: [.cancel(), .destructive(Text("Supprimer definitivement"),
-                                                                          action: { passwordListViewModel.keychain.delete(key); isPresented.toggle(); passwordListViewModel.getAllKeys()
-                                                                            passwordListViewModel.deletedPasswordHaptic()
-                                                                          })])
-                         })
-            .navigationBarTitle(title)
-            .navigationBarItems(leading:
-                                    Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")),
-                                trailing:
-                                    Button(action: {
-                                        
-                                        password = passwordListViewModel.keychain.get(key)!
-                                        revealPassword.toggle()
-                                        passwordListViewModel.getAllUsernames()
-                                        passwordListViewModel.getAllKeys()
-                                        
-                                    }, label: { revealPassword ?
-                                        Image(systemName: "eye.slash") : Image(systemName: "eye")
-                                    }).foregroundColor(settings.colors[settings.accentColorIndex]))
+                }.actionSheet(isPresented: $showAlert,
+                              content: {
+                                ActionSheet(title: Text("Supprimer le mot de passe"),
+                                            message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
+                                            buttons: [.cancel(), .destructive(Text("Supprimer definitivement"),
+                                                                              action: { passwordListViewModel.keychain.delete(key); isPresented.toggle(); passwordListViewModel.getAllKeys()
+                                                                                passwordListViewModel.deletedPasswordHaptic()
+                                                                              })])
+                              })
+                .navigationBarTitle(title)
+                .navigationBarItems(leading:
+                                        Button(action: { isPresented.toggle() }, label: Image(systemName: "xmark")),
+                                    trailing:
+                                        Button(action: {
+                                            
+                                            password = passwordListViewModel.keychain.get(key)!
+                                            revealPassword.toggle()
+                                            passwordListViewModel.getAllUsernames()
+                                            passwordListViewModel.getAllKeys()
+                                            
+                                        }, label: { revealPassword ?
+                                            Image(systemName: "eye.slash") : Image(systemName: "eye")
+                                        }).foregroundColor(settings.colors[settings.accentColorIndex]))
+            }
+            if clipboardSaveAnimation {
+                PopupAnimation(settings: settings, message: "Copié!")
+                    .onAppear(perform: { clipBoardAnimationDisapear() })
+                    .animation(.easeInOut(duration: 0.1))
+            }
+        }
+    }
+    
+    func clipBoardAnimationDisapear() {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+            clipboardSaveAnimation = false
+            print("Show animation")
         }
     }
 }
