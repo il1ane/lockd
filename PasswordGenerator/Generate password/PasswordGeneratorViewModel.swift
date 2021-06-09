@@ -18,10 +18,74 @@ final class PasswordGeneratorViewModel: ObservableObject {
     let specialCharactersArray: [String] = ["(",")","{","}","[","]","/","+","*","$",">",".","|","^","?", "&"]
     let numbersArray: [String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     
-    func sliderHaptic() {
-        let generator = UIImpactFeedbackGenerator(style: .rigid)
-        generator.impactOccurred(intensity: 1)
+    func sliderHaptic(entropy: Double) {
+        
+        switch entropy {
+        case 128.0...200:
+            let generator = UIImpactFeedbackGenerator(style: .rigid)
+            generator.impactOccurred(intensity: 1)
+        case 60.0...128:
+            let generator = UIImpactFeedbackGenerator(style: .rigid)
+            generator.impactOccurred(intensity: 0.8)
+        case 36.0...60:
+            let generator = UIImpactFeedbackGenerator(style: .rigid)
+            generator.impactOccurred(intensity: 0.5)
+        case 28.0...36:
+            let generator = UIImpactFeedbackGenerator(style: .rigid)
+            generator.impactOccurred(intensity: 0.3)
+        default:
+            let generator = UIImpactFeedbackGenerator(style: .rigid)
+            generator.impactOccurred(intensity: 0.2)
+        }
+
+        
+        
    }
+    
+    func calculatePasswordEntropy(password: String) -> Double {
+        
+        var pool = 0
+        let lenght = password.count
+        let lettersArray = Array(password)
+        var uppercasedAlphabet: [String] = []
+        
+        for character in alphabet {
+            uppercasedAlphabet.append(character.uppercased())
+        }
+        
+        for char in lettersArray {
+            if alphabet.contains(String(char)) {
+                pool += alphabet.count
+                break
+            }
+        }
+        
+        for char in lettersArray {
+            if uppercasedAlphabet.contains(String(char)) {
+                pool += uppercasedAlphabet.count
+                break
+            }
+        }
+        
+        for char in lettersArray {
+            if numbersArray.contains(String(char)) {
+                pool += numbersArray.count
+                break
+            }
+        }
+        
+        for char in lettersArray {
+            if specialCharactersArray.contains(String(char)) {
+                pool += specialCharactersArray.count
+                break
+            }
+        }
+        
+        let entropy = log2(Double(pool))
+        print(entropy * Double(lenght))
+        return entropy * Double(lenght)
+        
+    }
     
     func copyPasswordHaptic() {
         let generator = UINotificationFeedbackGenerator()

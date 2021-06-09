@@ -155,7 +155,10 @@ struct PasswordView: View {
                     Section {
                         HStack {
                             Spacer()
-                            Button(action: { showAlert.toggle() }, label: Text("Supprimer le mot de passe")).foregroundColor(.red)
+                            Button(action: { showAlert.toggle() }, label:
+                                    Text("Supprimer le mot de passe")
+                                    .foregroundColor(.red))
+                            
                             Spacer()
                         }
                     }

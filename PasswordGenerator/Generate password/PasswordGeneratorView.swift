@@ -26,6 +26,7 @@ struct PasswordGeneratorView: View {
     @State private var showAnimation = false
     @State private var characters = [String]()
     @State private var clipboardSaveAnimation = false
+    @State private var currentPasswordEntropy = 0.0
     
     var body: some View {
         
@@ -33,7 +34,19 @@ struct PasswordGeneratorView: View {
             ZStack {
                 Form {
                     
-                    Section(header: Text("Mot de passe généré aléatoirement")) {
+                    Section(header: Text("Mot de passe généré aléatoirement"), footer:
+                                
+                                
+                                VStack {
+                                    
+                                    HStack {
+                                        Spacer()
+                                        PasswordStrenghtView(entropy: currentPasswordEntropy)
+                                    
+                                        Spacer()
+                                    }
+                                }
+                    ) {
                         
                         HStack {
                             
@@ -118,14 +131,6 @@ struct PasswordGeneratorView: View {
                     
                 }.navigationBarTitle("Générateur")
             
-                 .navigationBarItems(trailing:
-                    Button(action: {
-                    characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
-                    generatedPassword = characters.joined()
-                }
-                          ,label: {
-                    Image(systemName: "die.face.5.fill")
-                }))
                 
                 if passwordViewModel.showAnimation {
                     PopupAnimation(settings: settings, message: "Ajouté au coffre")
@@ -148,25 +153,30 @@ struct PasswordGeneratorView: View {
         
         //Triggers that generate a new password
         .onChange(of: numberOfCharacter, perform: { value in
-            viewModel.sliderHaptic()
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
+            currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
+            viewModel.sliderHaptic(entropy: currentPasswordEntropy)
         })
         .onChange(of: uppercased, perform: { value in
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
+            currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
         })
         .onChange(of: specialCharacters, perform: { value in
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
+            currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
         })
         .onChange(of: withNumbers, perform: { value in
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
+            currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
         })
         .onAppear(perform: {
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
+            currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
             
         })
     }
