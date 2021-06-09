@@ -85,57 +85,57 @@ struct SettingsView: View {
                         }
                         
                         
-                        Section(header: Text("Personalisation (readabilty issues?)")) {
-                            Picker(selection: $settings.accentColorIndex, label: Label(
-                                title: { Text("Couleur principale") },
-                                icon: { Image(systemName: "eyedropper.halffull") }
-                            )             , content: {
-                                
-                                List {
-                                    Label(
-                                        title: { Text("Vert") },
-                                        icon: { Image(systemName: "circle.fill")
-                                            .foregroundColor(settings.colors[0])
-                                            
-                                        }).tag(0)
-                                    
-                                    Label(
-                                        title: { Text("Bleu") },
-                                        icon: { Image(systemName: "circle.fill")
-                                            .foregroundColor(settings.colors[1])
-                                            
-                                        }).tag(1)
-                                    
-                                    Label(
-                                        title: { Text("Orange") },
-                                        icon: { Image(systemName: "circle.fill")
-                                            .foregroundColor(settings.colors[2])
-                                            
-                                        }).tag(2)
-                                    
-                                    Label(
-                                        title: { Text("Rose") },
-                                        icon: { Image(systemName: "circle.fill")
-                                            .foregroundColor(settings.colors[3])
-                                            
-                                        }).tag(3)
-                                    
-                                    Label(
-                                        title: { Text("Violet") },
-                                        icon: { Image(systemName: "circle.fill")
-                                            .foregroundColor(settings.colors[4])
-                                            
-                                        }).tag(4)
-                                    
-                                    Label(
-                                        title: { Text("Jaune") },
-                                        icon: { Image(systemName: "circle.fill")
-                                            .foregroundColor(settings.colors[5])
-                                            
-                                        }).tag(5)
-                                }
-                                
-                            })
+//                        Section(header: Text("Personalisation (readabilty issues?)")) {
+//                            Picker(selection: $settings.accentColorIndex, label: Label(
+//                                title: { Text("Couleur principale") },
+//                                icon: { Image(systemName: "eyedropper.halffull") }
+//                            )             , content: {
+//                                
+//                                List {
+//                                    Label(
+//                                        title: { Text("Vert") },
+//                                        icon: { Image(systemName: "circle.fill")
+//                                            .foregroundColor(settings.colors[0])
+//                                            
+//                                        }).tag(0)
+//                                    
+//                                    Label(
+//                                        title: { Text("Bleu") },
+//                                        icon: { Image(systemName: "circle.fill")
+//                                            .foregroundColor(settings.colors[1])
+//                                            
+//                                        }).tag(1)
+//                                    
+//                                    Label(
+//                                        title: { Text("Orange") },
+//                                        icon: { Image(systemName: "circle.fill")
+//                                            .foregroundColor(settings.colors[2])
+//                                            
+//                                        }).tag(2)
+//                                    
+//                                    Label(
+//                                        title: { Text("Rose") },
+//                                        icon: { Image(systemName: "circle.fill")
+//                                            .foregroundColor(settings.colors[3])
+//                                            
+//                                        }).tag(3)
+//                                    
+//                                    Label(
+//                                        title: { Text("Violet") },
+//                                        icon: { Image(systemName: "circle.fill")
+//                                            .foregroundColor(settings.colors[4])
+//                                            
+//                                        }).tag(4)
+//                                    
+//                                    Label(
+//                                        title: { Text("Jaune") },
+//                                        icon: { Image(systemName: "circle.fill")
+//                                            .foregroundColor(settings.colors[5])
+//                                            
+//                                        }).tag(5)
+//                                }
+//                                
+//                            })
                             
                             //override dark mode settings feature
                             
@@ -169,7 +169,7 @@ struct SettingsView: View {
                             //                            }
                             //                        })
                             
-                        }
+//                        }
                         
                         Section(header: Text("Liens")) {
                             Link(destination: URL(string: "https://github.com/il1ane/PasswordGenerator")!) {
