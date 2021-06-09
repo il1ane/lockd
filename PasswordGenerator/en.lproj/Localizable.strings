@@ -66,6 +66,7 @@ Store your passwords in your safe and find them quickly";
 "Supprimer le mot de passe" = "Delete password";
 "Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "Are you sure you want to delete your password? This action is irreversible.";
 "Supprimer definitivement" = "Delete";
+"Copié!" = "Copied!";
 
 //SettingsView
 "Sécurité" = "Safety";
