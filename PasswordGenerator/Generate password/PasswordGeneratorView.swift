@@ -115,7 +115,7 @@ struct PasswordGeneratorView: View {
                         Toggle(isOn: $uppercased, label: {
                             HStack {
                                 Text("Majuscules")
-                                Text("A-Z").foregroundColor(Color.init(hexadecimal: "#4EB3BC"))
+                                Text("A-Z").foregroundColor(Color.init(hexadecimal: "#ffbc42"))
                             }
                             
                         })
@@ -123,7 +123,7 @@ struct PasswordGeneratorView: View {
                         Toggle(isOn: $withNumbers, label: {
                             HStack {
                                 Text("Chiffres")
-                                Text("0-9").foregroundColor(Color.init(hexadecimal: "#ffbc42"))
+                                Text("0-9").foregroundColor(Color.init(hexadecimal: "#4EB3BC"))
                             }
                         })
                         .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))

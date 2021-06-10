@@ -38,8 +38,6 @@ final class PasswordGeneratorViewModel: ObservableObject {
             generator.impactOccurred(intensity: 0.2)
         }
 
-        
-        
    }
     
     func calculatePasswordEntropy(password: String) -> Double {
