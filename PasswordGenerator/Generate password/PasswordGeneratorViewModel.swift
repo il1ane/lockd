@@ -80,7 +80,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
         }
         
         let entropy = log2(Double(pool))
-        print(entropy * Double(lenght))
+        print("Password entropy : \(entropy * Double(lenght))")
         return entropy * Double(lenght)
         
     }
