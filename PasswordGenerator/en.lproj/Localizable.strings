@@ -91,7 +91,16 @@ Store your passwords in your safe and find them quickly";
 //plist
 "Déverouiller vos mots de passes" = "Unlock your passwords";
 
+//PasswordStrenghtView
+"Très robuste" = "Very strong";
+"Robuste" = "Strong";
+"Moyen" = "Reasonable";
+"Faible" = "Weak";
+"Très faible" = "Very weak";
 
+
+
+//Text(entropy > 128.0 ? "Très fort" : entropy > 60.0 ? "Fort" : entropy > 36.0 ? "Moyen" : entropy > 28.0 ? "Faible" : "Très faible")
 
 
 

@@ -15,7 +15,7 @@ struct PasswordStrenghtView: View {
     var body: some View {
         
             HStack {
-                Text(entropy > 128.0 ? "Très fort" : entropy > 60.0 ? "Fort" : entropy > 36.0 ? "Moyen" : entropy > 28.0 ? "Faible" : "Très faible")
+                Text(entropy > 128.0 ? "Très robuste" : entropy > 60.0 ? "Robuste" : entropy > 36.0 ? "Moyen" : entropy > 28.0 ? "Faible" : "Très faible")
                     .foregroundColor(.white)
                 
             }.padding(5).background(entropy > 128.0 ? .blue : entropy > 60.0 ? .green: entropy > 36.0 ? .orange : entropy > 28.0 ? .yellow : .red)
