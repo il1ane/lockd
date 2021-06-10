@@ -29,10 +29,10 @@ final class PasswordGeneratorViewModel: ObservableObject {
             generator.impactOccurred(intensity: 0.8)
         case 36.0...60:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
-            generator.impactOccurred(intensity: 0.5)
+            generator.impactOccurred(intensity: 0.6)
         case 28.0...36:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
-            generator.impactOccurred(intensity: 0.3)
+            generator.impactOccurred(intensity: 0.4)
         default:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
             generator.impactOccurred(intensity: 0.2)
