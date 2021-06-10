@@ -23,18 +23,23 @@ final class PasswordGeneratorViewModel: ObservableObject {
         switch entropy {
         case 128.0...200:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
+            print("haptic feedback intensity : 1")
             generator.impactOccurred(intensity: 1)
         case 60.0...128:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
+            print("haptic feedback intensity : 0.8")
             generator.impactOccurred(intensity: 0.8)
         case 36.0...60:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
+            print("haptic feedback intensity : 0.6")
             generator.impactOccurred(intensity: 0.6)
         case 28.0...36:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
+            print("haptic feedback intensity : 0.4")
             generator.impactOccurred(intensity: 0.4)
         default:
             let generator = UIImpactFeedbackGenerator(style: .rigid)
+            print("haptic feedback intensity : 0.2")
             generator.impactOccurred(intensity: 0.2)
         }
 
