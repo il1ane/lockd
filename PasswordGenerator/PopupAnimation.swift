@@ -18,7 +18,7 @@ struct PopupAnimation: View {
             ZStack {
                 VStack {
                 RoundedRectangle(cornerRadius: 20)
-                    .opacity(0.5)
+                    .opacity(0.7)
                     .frame(minWidth: 150, maxWidth: 200, minHeight: 150, maxHeight: 200)
                       
                 }
