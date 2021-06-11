@@ -185,6 +185,7 @@ struct PasswordView: View {
                                             revealPassword.toggle()
                                             passwordListViewModel.getAllUsernames()
                                             passwordListViewModel.getAllKeys()
+                                            passwordListViewModel.deletedPasswordHaptic()
                                             
                                         }, label: { revealPassword ?
                                             Image(systemName: "eye.slash") : Image(systemName: "eye")

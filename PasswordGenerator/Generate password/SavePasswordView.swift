@@ -46,9 +46,8 @@ struct SavePasswordView: View {
                                 
                             } else {
                                 
-                                CocoaTextField(password, text: $editedPassword.text)
+                                TextField(password, text: $editedPassword.text)
                                     .keyboardType(.asciiCapable)
-                                    .isFirstResponder(true)
                                     .disableAutocorrection(true)
                                 
                             }
@@ -76,6 +75,7 @@ struct SavePasswordView: View {
                                         //showKeyboard doesn't change anything but Xcode stop complaining
                                         //not always working
                                         showKeyboard = keyboard.isShowing
+                                        viewModel.addedPasswordHaptic()
                                     }
                                     
                                 }, label: {

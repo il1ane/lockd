@@ -31,15 +31,15 @@ struct PasswordListView: View {
             
             VStack {
                 
-
+                
                 HStack {
                     SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
-                    .returnKeyType(.done)
-                    .searchBarStyle(.minimal)
-                    .showsCancelButton(true)
-                    .onCancel {
-                        searchText = ""
-                    }
+                        .returnKeyType(.done)
+                        .searchBarStyle(.minimal)
+                        .showsCancelButton(true)
+                        .onCancel {
+                            searchText = ""
+                        }
                         .frame(maxWidth: 370)
                 }
                 
@@ -73,28 +73,28 @@ struct PasswordListView: View {
                                         
                                         HStack {
                                             Button(action: {
-    
+                                                
                                                 chosenKey = key
                                                 showPasswordView.toggle()
                                                 title = keyArray[0]
                                                 username = keyArray[1]
-                                                print(keyArray.count)
-                                                print(keyArray[0])
-                                                print(keyArray[1])
-                                               
-                                                print(key)
+                                                
                                             },
                                             label: Text("\(keyArray[0])"))
+                                            
                                         }
                                     }
-                                } .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
-                                    PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, isPresented: $showPasswordView, settings: settings, title: $title, username: $username)
-                                        .environment(\.colorScheme, colorScheme)
-                                        .accentColor(settings.colors[settings.accentColorIndex])
-                                })
-                            }
+                                }                            }
                         }
+                        
                     }
+                    
+                    VStack {}
+                        .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
+                            PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, isPresented: $showPasswordView, settings: settings, title: $title, username: $username)
+                                .environment(\.colorScheme, colorScheme)
+                                .accentColor(settings.colors[settings.accentColorIndex])
+                        })
                     VStack {}
                         .sheet(isPresented: $addSheetIsShowing, content: {
                             SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings).environment(\.colorScheme, colorScheme)
