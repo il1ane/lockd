@@ -58,7 +58,7 @@ struct PasswordView: View {
                         } else {
                             HStack {
                                 
-                                CocoaTextField(password, text: $editedPassword)
+                                CocoaTextField("password", text: $editedPassword)
                                     .keyboardType(.asciiCapable)
                                     .isFirstResponder(true)
                                     .disableAutocorrection(true)
@@ -73,9 +73,9 @@ struct PasswordView: View {
                                     
                                 }, label: {
                                     Image(systemName: "checkmark")
+                                        .foregroundColor(!editedPassword.isEmpty ? .green : .blue)
                                 })
-                                
-                                
+                                .disabled(editedPassword.isEmpty)
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(settings.colors[settings.accentColorIndex])
                             }
@@ -132,7 +132,6 @@ struct PasswordView: View {
                                 , label: {
                                     Image(systemName: "checkmark")
                                 })
-                                
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(settings.colors[settings.accentColorIndex])
                             }

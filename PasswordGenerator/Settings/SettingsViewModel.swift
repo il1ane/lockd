@@ -19,12 +19,14 @@ final class SettingsViewModel: ObservableObject {
     supportsHaptics = hapticCapability.supportsHaptics
     self.isFirstLaunch = UserDefaults.standard.object(forKey: "isFirstLaunch") as? Bool ?? true
     self.autoLock = UserDefaults.standard.object(forKey: "autoLock") as? Int ?? 1
+    self.privacyMode = UserDefaults.standard.object(forKey: "privacyMode") as? Bool ?? true
     }
 
     var supportsHaptics: Bool = false
     let hapticCapability = CHHapticEngine.capabilitiesForHardware() 
     
     @Published var isUnlocked = false
+    @Published var hideInAppSwitcher = false
     @Published var lockAppTimerIsRunning = false
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
     @AppStorage("appAppearanceToggle") var appAppearanceToggle: Bool = false
@@ -32,6 +34,12 @@ final class SettingsViewModel: ObservableObject {
     @Published var autoLock: Int {
         didSet {
             UserDefaults.standard.set(autoLock, forKey: "autoLock")
+        }
+    }
+    
+    @Published var privacyMode: Bool {
+        didSet {
+            UserDefaults.standard.set(privacyMode, forKey: "privacyMode")
         }
     }
     

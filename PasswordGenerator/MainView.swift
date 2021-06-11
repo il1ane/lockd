@@ -22,6 +22,7 @@ struct MainView: View {
         
         if settingsViewModel.isUnlocked {
             
+            if !settingsViewModel.hideInAppSwitcher {
             VStack {
                 TabView(content: {
                     
@@ -61,21 +62,11 @@ struct MainView: View {
                 OnboardingView(settings: settingsViewModel, isPresented: $onBoardingSheetIsPresented, biometricType: settingsViewModel.biometricType())
                     .environment(\.colorScheme, colorScheme)
             })
-            
-            .onChange(of: scenePhase) { newPhase in
-                if newPhase == .inactive {
-                    print("App is in inactive phase")
-                } else if newPhase == .active {
-                    settingsViewModel.lockAppTimerIsRunning = false
-                    print("App is in active phase")
-                } else if newPhase == .background {
-                    print("App is in background phase")
-                    
-                    if settingsViewModel.faceIdDefault {
-                        settingsViewModel.lockAppInBackground()
-                    }
-                }
+            } else if settingsViewModel.hideInAppSwitcher {
+                PrivacyView()
             }
+
+
             
         } else {
             

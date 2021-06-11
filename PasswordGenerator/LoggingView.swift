@@ -52,6 +52,7 @@ struct LoggingView: View {
                 
             } .onAppear(perform: {
                 biometricType = viewModel.biometricType()
+                
         })
             
         }.statusBar(hidden: true)

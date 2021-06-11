@@ -79,7 +79,10 @@ struct SavePasswordView: View {
                                     
                                 }, label: {
                                     Image(systemName: "checkmark")
+                                        .foregroundColor(!editedPassword.text.isEmpty ? .green : .blue)
                                 })
+                                .animation(.easeIn)
+                                .disabled(editedPassword.text.isEmpty)
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(settings.colors[settings.accentColorIndex])
                             }

@@ -16,7 +16,6 @@ struct SettingsView: View {
     @State private var removePasswordAlert = false
     @ObservedObject var passwordViewModel: PasswordListViewModel
     
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -81,6 +80,14 @@ struct SettingsView: View {
                                     print("iCloud sync turned off")
                                 }
                             })
+                            
+                            Toggle(isOn: $settings.privacyMode, label: {
+                                Label(
+                                    title: { Text("Cacher dans le multitâche") },
+                                    icon: { Image(systemName: "eye.slash") }
+)
+                                
+                            }).toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                             
                         }
                         
