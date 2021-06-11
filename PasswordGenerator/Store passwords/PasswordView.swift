@@ -70,6 +70,7 @@ struct PasswordView: View {
                                     //not always working
                                     password = editedPassword
                                     passwordListViewModel.updatePassword(key: key, newPassword: password)
+                                    passwordListViewModel.addedPasswordHaptic()
                                     
                                 }, label: {
                                     Image(systemName: "checkmark")
@@ -115,22 +116,26 @@ struct PasswordView: View {
                             
                             HStack {
                                 
-                                TextField(username, text: $editedUsername)
+                                CocoaTextField("Username", text: $editedUsername)
                                     .keyboardType(.asciiCapable)
+                                    .isFirstResponder(true)
                                     .disableAutocorrection(true)
                                 
                                 Button(action: {
                                     
+                            
                                     editingUsername.toggle()
-                                    
                                     username = editedUsername
                                     password = passwordListViewModel.keychain.get(key)!
                                     let newKey = passwordListViewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
                                     key = newKey
+                                    passwordListViewModel.addedPasswordHaptic()
                                     
                                 }
                                 , label: {
                                     Image(systemName: "checkmark")
+                                        .foregroundColor(!editedPassword.isEmpty ? .green : .blue)
+
                                 })
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(settings.colors[settings.accentColorIndex])
