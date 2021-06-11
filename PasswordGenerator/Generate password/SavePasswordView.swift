@@ -46,8 +46,9 @@ struct SavePasswordView: View {
                                 
                             } else {
                                 
-                                TextField(password, text: $editedPassword.text)
+                                CocoaTextField(password, text: $editedPassword.text)
                                     .keyboardType(.asciiCapable)
+                                    .isFirstResponder(true)
                                     .disableAutocorrection(true)
                                 
                             }
