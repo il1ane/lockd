@@ -22,7 +22,7 @@ Join lockd Beta on TestFlight: https://testflight.apple.com/join/xJ5AlvS3
 - App lock itself in background   
 - Dark & light mode
 - Change accent color 
-- Sync to iCloud keychain
+- Sync to iCloud keychain (not tested yet)
 - Clear all keychain  
 - Support english & French languages
 
