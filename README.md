@@ -11,7 +11,7 @@ Join lockd Beta on TestFlight: https://testflight.apple.com/join/xJ5AlvS3
 - Generate strong custom passwords  
 - Save passwords on Keychain  
 - Haptic feedbacks
-- Password strenght calculator
+- Password strenght calculator (entropy)
 - Privacy mode (hides content in app switcher)
 -  Animations
 - Search for passwords  
