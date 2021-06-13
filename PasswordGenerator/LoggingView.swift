@@ -22,17 +22,18 @@ struct LoggingView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
+                
                     VStack {
-                        
                     Spacer()
                         
-                        .frame(maxHeight : 120)
+                        .frame(maxHeight : 30)
                     Image(systemName: "lock.fill")
                         .foregroundColor(.white)
-                        .font(.system(size: 120))
+                        .font(.system(size: 80))
                         .scaleEffect(scale)
                         .animateForever(using: .easeInOut(duration: 1), autoreverses: true, { scale = 0.95 })
-                    }.padding()
+                    }
+                    .padding()
                 
                     Spacer()
                 
@@ -41,18 +42,17 @@ struct LoggingView: View {
                         Label(
                             title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Entrer le mot mot de passe") },
                             icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
-                        )
-                    })
-                        .foregroundColor(.white)
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 1))
+                        )})
+                      .foregroundColor(.white)
+                      .padding()
+                      .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 1))
                        
                     Spacer()
                         .frame(maxHeight : 30)
                 
-            } .onAppear(perform: {
+            }
+            .onAppear(perform: {
                 biometricType = viewModel.biometricType()
-                
         })
             
         }.statusBar(hidden: true)

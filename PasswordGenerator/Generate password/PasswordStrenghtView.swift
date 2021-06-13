@@ -17,17 +17,15 @@ struct PasswordStrenghtView: View {
             HStack {
                 Text(entropy > 128.0 ? "Très robuste" : entropy > 60.0 ? "Robuste" : entropy > 36.0 ? "Moyen" : entropy > 28.0 ? "Faible" : "Très faible")
                     .foregroundColor(.white)
-                
-            }.padding(5).background(entropy > 128.0 ? .blue : entropy > 60.0 ? .green: entropy > 36.0 ? .yellow : entropy > 28.0 ? .orange : .red)
+            }
+            .padding(5)
+            .background(entropy > 128.0 ? .blue : entropy > 60.0 ? .green: entropy > 36.0 ? .yellow : entropy > 28.0 ? .orange : .red)
             .cornerRadius(7)
             .animation(animate ? .easeInOut : nil)
             .transition(.identity)
             .onChange(of: entropy, perform: { value in
                 animate = true
             })
-        
-        
-            
     }
 }
 

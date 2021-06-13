@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct PasswordGeneratorApp: App {
-    let persistenceController = PersistenceController.shared
+
     @ObservedObject var settingsViewModel = SettingsViewModel()
     @ObservedObject var passwordViewModel = PasswordListViewModel()
     @ObservedObject var passwordGeneratorViewModel = PasswordGeneratorViewModel()
@@ -17,12 +17,11 @@ struct PasswordGeneratorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            
+        
             MainView(settingsViewModel: settingsViewModel, passwordViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
-               // .colorScheme(settingsViewModel.appAppearanceToggle && settingsViewModel.appAppearance != "Auto" ? .dark : .light)
-        } .onChange(of: scenePhase) { newPhase in
+        }
+        .onChange(of: scenePhase) { newPhase in
             if newPhase == .inactive {
                 if settingsViewModel.privacyMode {
                 settingsViewModel.hideInAppSwitcher = false
@@ -39,7 +38,6 @@ struct PasswordGeneratorApp: App {
                 settingsViewModel.hideInAppSwitcher = true
                 }
                 print("App is in background phase")
-                
                 if settingsViewModel.faceIdDefault {
                     settingsViewModel.lockAppInBackground()
                 }

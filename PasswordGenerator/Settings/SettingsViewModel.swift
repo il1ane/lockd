@@ -13,15 +13,15 @@ import CoreHaptics
 final class SettingsViewModel: ObservableObject {
     
     init() {
-    self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? false
-    self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? false
-    self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 1
-    supportsHaptics = hapticCapability.supportsHaptics
-    self.isFirstLaunch = UserDefaults.standard.object(forKey: "isFirstLaunch") as? Bool ?? true
-    self.autoLock = UserDefaults.standard.object(forKey: "autoLock") as? Int ?? 1
-    self.privacyMode = UserDefaults.standard.object(forKey: "privacyMode") as? Bool ?? true
+        self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? false
+        self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? false
+        self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 1
+        supportsHaptics = hapticCapability.supportsHaptics
+        self.isFirstLaunch = UserDefaults.standard.object(forKey: "isFirstLaunch") as? Bool ?? true
+        self.autoLock = UserDefaults.standard.object(forKey: "autoLock") as? Int ?? 1
+        self.privacyMode = UserDefaults.standard.object(forKey: "privacyMode") as? Bool ?? true
     }
-
+    
     var supportsHaptics: Bool = false
     let hapticCapability = CHHapticEngine.capabilitiesForHardware() 
     
@@ -66,12 +66,10 @@ final class SettingsViewModel: ObservableObject {
             UserDefaults.standard.set(faceIdDefault, forKey: "biometricAuthentication")
         }
     }
-       
-    let colors = [Color.green, Color.blue, Color.orange, Color.pink, Color.purple, Color.yellow]
-   
     
-    //check if device have touchID, faceID or no biometric activated
-     func biometricType() -> BiometricType {
+    let colors = [Color.green, Color.blue, Color.orange, Color.pink, Color.purple, Color.yellow]
+    
+    func biometricType() -> BiometricType {
         let authContext = LAContext()
         if #available(iOS 11, *) {
             let _ = authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil)
@@ -89,7 +87,7 @@ final class SettingsViewModel: ObservableObject {
             return authContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: nil) ? .touch : .none
         }
     }
-
+    
     enum BiometricType {
         case none
         case touch
@@ -97,31 +95,31 @@ final class SettingsViewModel: ObservableObject {
         case unknown
     }
     
-        func biometricAuthentication() -> Bool {
-            var getKeychainItems = false
-            let context = LAContext()
-            var error: NSError?
-            if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-                let reason = "Déverouiller vos mots de passe"
-                context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
-                    DispatchQueue.main.async {
-                        if success {
-                            print("success")
-                           self.isUnlocked = true
-                           getKeychainItems = true
-                            
-                            
-                        } else {
-                            self.isUnlocked = false
-                            print("Failed to authenticate")
-                        }
+    func biometricAuthentication() -> Bool {
+        var getKeychainItems = false
+        let context = LAContext()
+        var error: NSError?
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            let reason = "Déverouiller vos mots de passe"
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+                DispatchQueue.main.async {
+                    if success {
+                        print("success")
+                        self.isUnlocked = true
+                        getKeychainItems = true
+                        
+                        
+                    } else {
+                        self.isUnlocked = false
+                        print("Failed to authenticate")
                     }
                 }
-            } else {
-                print("No biometrics")
+            }
+        } else {
+            print("No biometrics")
+        }
+        return getKeychainItems
     }
-            return getKeychainItems
-}
     
     func addBiometricAuthentication() {
         let context = LAContext()
@@ -145,12 +143,12 @@ final class SettingsViewModel: ObservableObject {
             print("No biometrics")
             self.faceIdDefault = false
             
+        }
     }
-}
     
     func turnOffBiometricAuthentication() {
         self.faceIdDefault = false
-   }
+    }
     
     func lockAppInBackground() {
         
@@ -160,11 +158,10 @@ final class SettingsViewModel: ObservableObject {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + dispatchAfter) {
             if self.lockAppTimerIsRunning {
-            self.isUnlocked = false
-            UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
+                self.isUnlocked = false
+                UIApplication.shared.windows.first?.rootViewController?.dismiss(animated: true, completion: nil)
             }
         }
     }
-
 }
 

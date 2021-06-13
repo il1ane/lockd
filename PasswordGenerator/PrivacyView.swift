@@ -9,13 +9,14 @@ import SwiftUI
 
 struct PrivacyView: View {
     var body: some View {
+        
         ZStack {
             Color.blue.edgesIgnoringSafeArea(.all)
             Image(systemName: "eye.slash")
                 .foregroundColor(.white)
                 .font(.system(size: 80))
         }
-        
+        .animation(.easeIn)
     }
 }
 

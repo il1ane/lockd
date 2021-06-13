@@ -42,7 +42,7 @@ struct MainView: View {
                             
                         }.tag(1)
                     
-                    SettingsView(settings: settingsViewModel,
+                    SettingsView(settingsViewModel: settingsViewModel,
                                  biometricType: settingsViewModel.biometricType(),
                                  passwordViewModel: passwordViewModel )
                         .tabItem {
@@ -59,7 +59,7 @@ struct MainView: View {
             })
             
             .sheet(isPresented: $onBoardingSheetIsPresented, onDismiss: { settingsViewModel.isFirstLaunch = false } , content: {
-                OnboardingView(settings: settingsViewModel, isPresented: $onBoardingSheetIsPresented, biometricType: settingsViewModel.biometricType())
+                OnboardingView(settingsViewModel: settingsViewModel, isPresented: $onBoardingSheetIsPresented, biometricType: settingsViewModel.biometricType())
                     .environment(\.colorScheme, colorScheme)
             })
             } else if settingsViewModel.hideInAppSwitcher {

@@ -16,8 +16,6 @@ final class PasswordListViewModel: ObservableObject {
     @Published var usernames = [String]()
     @Published var showAnimation = false
     @Published var sortSelection = 0
-
-    
     let separator = ":separator:"
     
     func saveToKeychain(password: String, username: String, title: String) {
@@ -28,7 +26,6 @@ final class PasswordListViewModel: ObservableObject {
         addedPasswordHaptic()
         showAnimation = true
         print("Saved to keychain")
-        
     }
     
     func updatePassword(key: String, newPassword: String) {

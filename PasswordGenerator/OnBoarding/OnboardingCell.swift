@@ -33,7 +33,6 @@ struct OnboardingCell: View {
                     .foregroundColor(.gray)
             }.padding()
         }
-        
     }
 }
 

@@ -56,23 +56,19 @@ struct PasswordView: View {
                                 
                             }
                         } else {
+                            
                             HStack {
-                                
                                 CocoaTextField("password", text: $editedPassword)
                                     .keyboardType(.asciiCapable)
                                     .isFirstResponder(true)
                                     .disableAutocorrection(true)
                                 
                                 Button(action: {
-                                    
                                     editingPassword.toggle()
-                                    //showKeyboard doesn't change anything but Xcode stop complaining
-                                    //not always working
                                     password = editedPassword
                                     passwordListViewModel.updatePassword(key: key, newPassword: password)
                                     passwordListViewModel.addedPasswordHaptic()
-                                    
-                                }, label: {
+                                },     label: {
                                     Image(systemName: "checkmark")
                                         .foregroundColor(!editedPassword.isEmpty ? .green : .blue)
                                 })
@@ -86,14 +82,16 @@ struct PasswordView: View {
                             UIPasteboard.general.string = password
                             passwordGeneratorViewModel.copyPasswordHaptic()
                             clipboardSaveAnimation = true
-                        }, label: {
+                            }, label: {
                             
                             HStack {
                                 Spacer()
                                 Text("Copier")
                                 Spacer()
                             }
-                        }).disabled(revealPassword ? false : true)
+                                
+                        })
+                        .disabled(revealPassword ? false : true)
                     }
                     
                     Section(header: Text("Nom de compte")) {
@@ -109,21 +107,17 @@ struct PasswordView: View {
                                     
                                 }, label: {
                                     Image(systemName: "pencil")
-                                    
                                 })
                             }
                         } else {
                             
                             HStack {
-                                
                                 CocoaTextField("Username", text: $editedUsername)
                                     .keyboardType(.asciiCapable)
                                     .isFirstResponder(true)
                                     .disableAutocorrection(true)
                                 
                                 Button(action: {
-                                    
-                            
                                     editingUsername.toggle()
                                     username = editedUsername
                                     password = passwordListViewModel.keychain.get(key)!
@@ -144,36 +138,39 @@ struct PasswordView: View {
                         Button(action: { UIPasteboard.general.string = username
                             passwordGeneratorViewModel.copyPasswordHaptic()
                             clipboardSaveAnimation = true
-                        })
-                        {
+                        }) {
                             
                             HStack {
                                 Spacer()
                                 Text("Copier")
                                 Spacer()
                             }
-                            
-                        }.disabled(editingUsername)
+                        }
+                        .disabled(editingUsername)
                     }
                     
                     Section {
+                        
                         HStack {
                             Spacer()
                             Button(action: { showAlert.toggle() }, label:
                                     Text("Supprimer le mot de passe")
                                     .foregroundColor(.red))
-                            
                             Spacer()
                         }
                     }
-                }.actionSheet(isPresented: $showAlert,
+                }
+                .actionSheet(isPresented: $showAlert,
                               content: {
                                 ActionSheet(title: Text("Supprimer le mot de passe"),
                                             message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
                                             buttons: [.cancel(), .destructive(Text("Supprimer definitivement"),
-                                                                              action: { passwordListViewModel.keychain.delete(key); isPresented.toggle(); passwordListViewModel.getAllKeys()
-                                                                                passwordListViewModel.deletedPasswordHaptic()
-                                                                              })])
+                                            action: {
+                                            passwordListViewModel.keychain.delete(key);
+                                            isPresented.toggle();
+                                            passwordListViewModel.getAllKeys()
+                                            passwordListViewModel.deletedPasswordHaptic()
+                                            })])
                               })
                 .navigationBarTitle(title)
                 .navigationBarItems(leading:

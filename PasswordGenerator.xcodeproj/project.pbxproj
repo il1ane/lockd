@@ -10,10 +10,8 @@
 		9103AC0D2645A00600CA6EB6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103AC0C2645A00600CA6EB6 /* MainView.swift */; };
 		9103AC0F2645A7BD00CA6EB6 /* SavePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */; };
 		912B03CA2643D6EF001C5FCA /* PasswordGeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */; };
-		912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03CB2643D6EF001C5FCA /* ContentView.swift */; };
 		912B03CE2643D6F1001C5FCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 912B03CD2643D6F1001C5FCA /* Assets.xcassets */; };
 		912B03D12643D6F1001C5FCA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 912B03D02643D6F1001C5FCA /* Preview Assets.xcassets */; };
-		912B03D32643D6F1001C5FCA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03D22643D6F1001C5FCA /* Persistence.swift */; };
 		912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 912B03D42643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld */; };
 		912B03DE2643DDE2001C5FCA /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */; };
 		912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */; };
@@ -50,10 +48,8 @@
 		9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordView.swift; sourceTree = "<group>"; };
 		912B03C62643D6EF001C5FCA /* PasswordGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasswordGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorApp.swift; sourceTree = "<group>"; };
-		912B03CB2643D6EF001C5FCA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		912B03CD2643D6F1001C5FCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		912B03D02643D6F1001C5FCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		912B03D22643D6F1001C5FCA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		912B03D52643D6F1001C5FCA /* PasswordGenerator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PasswordGenerator.xcdatamodel; sourceTree = "<group>"; };
 		912B03D72643D6F1001C5FCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
@@ -150,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */,
-				912B03CB2643D6EF001C5FCA /* ContentView.swift */,
 				91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */,
 				91869B0D2673669C008BE7C4 /* PrivacyView.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
@@ -161,7 +156,6 @@
 				9103AC0A26459F5C00CA6EB6 /* Store passwords */,
 				914382122648AD3300819C15 /* Settings */,
 				912B03CD2643D6F1001C5FCA /* Assets.xcassets */,
-				912B03D22643D6F1001C5FCA /* Persistence.swift */,
 				912B03D72643D6F1001C5FCA /* Info.plist */,
 				912B03D42643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld */,
 				912B03CF2643D6F1001C5FCA /* Preview Content */,
@@ -314,9 +308,7 @@
 				91438211264857A200819C15 /* PasswordView.swift in Sources */,
 				91D89AC62653DE0100CF22E1 /* PopupAnimation.swift in Sources */,
 				91869B0E2673669C008BE7C4 /* PrivacyView.swift in Sources */,
-				912B03D32643D6F1001C5FCA /* Persistence.swift in Sources */,
 				9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */,
-				912B03CC2643D6EF001C5FCA /* ContentView.swift in Sources */,
 				912B03CA2643D6EF001C5FCA /* PasswordGeneratorApp.swift in Sources */,
 				9145A5772649E23600594C11 /* LoggingView.swift in Sources */,
 				91E6084E265E51D700678CD3 /* OnboardingCell.swift in Sources */,
@@ -482,7 +474,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"PasswordGenerator/Preview Content\"";
 				DEVELOPMENT_TEAM = 2JQP4MV635;
 				ENABLE_PREVIEWS = YES;
@@ -506,7 +498,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"PasswordGenerator/Preview Content\"";
 				DEVELOPMENT_TEAM = 2JQP4MV635;
 				ENABLE_PREVIEWS = YES;
