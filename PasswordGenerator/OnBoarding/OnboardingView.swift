@@ -27,6 +27,7 @@ struct OnboardingView: View {
                 
                 OnboardingCell(image: "lock.square", color: settingsViewModel.colors[settingsViewModel.accentColorIndex], text: "Stockez vos mots de passe dans votre coffre et retrouvez les rapidement", title: "Coffre fort").padding()
                 
+                
                 OnboardingCell(image: biometricType == .face ? "faceid" : biometricType == .touch ? "touchid" : "key", color: settingsViewModel.colors[settingsViewModel.accentColorIndex], text: biometricType == .face ? "Protégez vos mots de passes avec Face ID" : biometricType == .touch ? "Protégez vos mots de passes avec Touch ID" : "Protégez vos mots de passes avec votre code de verouillage d'iPhone", title: "Sécurisé").padding()
             }.padding()
             

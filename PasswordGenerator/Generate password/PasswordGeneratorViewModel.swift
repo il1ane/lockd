@@ -42,7 +42,6 @@ final class PasswordGeneratorViewModel: ObservableObject {
             print("haptic feedback intensity : 0.2")
             generator.impactOccurred(intensity: 0.2)
         }
-
    }
     
     func calculatePasswordEntropy(password: String) -> Double {
@@ -316,8 +315,6 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 password.remove(at: 0)
             }
         }
-        
         return password
     }
-    
 }

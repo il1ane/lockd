@@ -22,22 +22,36 @@ final class PasswordListViewModel: ObservableObject {
         
         let key = title + separator + username
         
-        keychain.set(password, forKey: key)
-        addedPasswordHaptic()
-        showAnimation = true
-        print("Saved to keychain")
+        if keychain.set(password, forKey: key) {
+            addedPasswordHaptic()
+            showAnimation = true
+            print("Successfully saved to Keychain")
+        } else {
+            print("Error saving to Keychain")
+        }
     }
     
     func updatePassword(key: String, newPassword: String) {
-        keychain.set(newPassword, forKey: key)
-        print("password update")
+        if keychain.set(newPassword, forKey: key, withAccess: .accessibleWhenUnlocked) {
+            print("Successfully updated password")
+        } else {
+            print("Error updating password")
+        }
     }
     
     func updateUsername(key: String, password: String, newUsername: String, title: String) -> String {
-        keychain.delete(key)
+        
         let newKey = title + separator + newUsername
-        keychain.set(password, forKey: newKey)
-        print("username update")
+        
+        if keychain.delete(key) {
+            if keychain.set(password, forKey: newKey, withAccess: .accessibleWhenUnlocked) {
+                print("Username successfully updated")
+            } else {
+                print("Error updating username")
+            }
+        } else {
+            print("failed to delete key")
+        }
         return newKey
     }
     
@@ -67,7 +81,11 @@ final class PasswordListViewModel: ObservableObject {
     }
     
     func deletePassword(key: String) {
-        keychain.delete(key)
+        if keychain.delete(key) {
+            print("Successfully deleted")
+        } else {
+            print("Error deleting password")
+        }
     }
     
     func getAllKeys() {
