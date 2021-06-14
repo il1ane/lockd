@@ -72,8 +72,6 @@ struct SavePasswordView: View {
                                 Button(action: {
                                     withAnimation(.default) {
                                         isEditingPassword.toggle()
-                                        //showKeyboard doesn't change anything but Xcode stop complaining
-                                        //not always working
                                         showKeyboard = keyboard.isShowing
                                         viewModel.addedPasswordHaptic()
                                     }

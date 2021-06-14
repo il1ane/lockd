@@ -53,12 +53,6 @@ final class PasswordListViewModel: ObservableObject {
        print("Simple haptic")
    }
     
-    func getAllUsernames() {
-        for key in keys {
-            usernames =  key.components(separatedBy: separator)
-        }
-    }
-    
     init() {
         self.keychainSyncWithIcloud = UserDefaults.standard.object(forKey: "keychainSyncWithIcloud") as? Bool ?? false
        keys = keychain.allKeys

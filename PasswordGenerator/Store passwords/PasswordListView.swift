@@ -31,7 +31,6 @@ struct PasswordListView: View {
             
             VStack {
                 
-                
                 HStack {
                     SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
                         .returnKeyType(.done)
@@ -51,7 +50,7 @@ struct PasswordListView: View {
                         Form {
                             
                             Section(header: HStack {
-                                Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }.count )")
+                                Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }.count )")
                                 Spacer()
                                 
                                 Picker(selection: $passwordViewModel.sortSelection, label: passwordViewModel.sortSelection == 0 ? Text("A-Z") : Text("Z-A"), content: {
@@ -62,47 +61,45 @@ struct PasswordListView: View {
                             }) {
                                 List {
                                     ForEach(passwordViewModel.sortSelection == 0 ?
-                                                
+                                            
                                                 self.passwordViewModel.keys.sorted().filter {
-                                                    self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }
+                                                    self.searchText.isEmpty ? true : $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }
                                                 :
                                                 self.passwordViewModel.keys.sorted().reversed().filter  {  self.searchText.isEmpty ? true :
-                                                    $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }, id: \.self) { key in
+                                                    $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }, id: \.self) { key in
                                         
                                         let keyArray = key.components(separatedBy: passwordViewModel.separator)
                                         
                                         HStack {
                                             Button(action: {
-                                                
                                                 chosenKey = key
                                                 showPasswordView.toggle()
                                                 title = keyArray[0]
                                                 username = keyArray[1]
-                                                
                                             },
                                             label: Text("\(keyArray[0])"))
-                                            
-                                        }
                                     }
-                                }                            }
+                                }
+                            }
                         }
-                        
                     }
-                    
+                }
+
                     VStack {}
                         .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
                             PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, isPresented: $showPasswordView, settings: settings, title: $title, username: $username)
                                 .environment(\.colorScheme, colorScheme)
                                 .accentColor(settings.colors[settings.accentColorIndex])
                         })
+                    
                     VStack {}
                         .sheet(isPresented: $addSheetIsShowing, content: {
-                            SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings).environment(\.colorScheme, colorScheme)
+                            SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings)
+                                .environment(\.colorScheme, colorScheme)
                                 .accentColor(settings.colors[settings.accentColorIndex])
                         })
                         .onAppear(perform: {
                             passwordViewModel.getAllKeys()
-                            passwordViewModel.getAllUsernames()
                         })
                         
                         

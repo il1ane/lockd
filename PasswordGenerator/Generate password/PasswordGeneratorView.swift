@@ -90,13 +90,10 @@ struct PasswordGeneratorView: View {
                     }
                     
                     Section(header: Text("Nombre de caractères")) {
+                        
                         HStack {
-                            
                             Slider(value: $numberOfCharacter, in: viewModel.passwordLenghtRange, step: 1)
-//                                .accentColor(numberOfCharacter < 9 ? settings.colors[settings.accentColorIndex].opacity(0.5) : numberOfCharacter < 14 ?  settings.colors[settings.accentColorIndex].opacity(0.7) : settings.colors[settings.accentColorIndex].opacity(1))
-                            
                             Divider().frame(minWidth: 20)
-                            
                             Text("\(Int(numberOfCharacter)) ")
                                 .frame(minWidth: 25)
                             
@@ -150,8 +147,6 @@ struct PasswordGeneratorView: View {
                 .environment(\.colorScheme, colorScheme)
                 .foregroundColor(settings.colors[settings.accentColorIndex])
         })
-        
-        //Triggers that generate a new password
         .onChange(of: numberOfCharacter, perform: { value in
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
@@ -181,24 +176,20 @@ struct PasswordGeneratorView: View {
         })
     }
     
-    func animationDisappear() {
+   private func animationDisappear() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
             passwordViewModel.showAnimation = false
             print("Show animation")
         }
-        
-        
     }
     
-    func clipBoardAnimationDisapear() {
+   private func clipBoardAnimationDisapear() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
             clipboardSaveAnimation = false
             print("Show animation")
         }
-        
-        
     }
 }
 

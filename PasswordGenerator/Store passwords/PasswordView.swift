@@ -180,7 +180,6 @@ struct PasswordView: View {
                                             
                                             password = passwordListViewModel.keychain.get(key)!
                                             revealPassword.toggle()
-                                            passwordListViewModel.getAllUsernames()
                                             passwordListViewModel.getAllKeys()
                                             passwordListViewModel.deletedPasswordHaptic()
                                             

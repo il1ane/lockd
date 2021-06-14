@@ -31,7 +31,8 @@ struct OnboardingCell: View {
                 Text(text)
                     .font(.body)
                     .foregroundColor(.gray)
-            }.padding()
+            }
+            .padding()
         }
     }
 }
