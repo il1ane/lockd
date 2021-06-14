@@ -91,6 +91,11 @@ struct SettingsView: View {
                             Link(destination: URL(string: "https://twitter.com/il1ane")!) {
                                 Label(title: { Text("Suivez moi sur Twitter") },
                                       icon: { Image(systemName: "heart.fill") }) }
+                            
+                            Button(action: { settingsViewModel.requestAppStoreReview() },
+                                   label:
+                                   Label(title: { Text("Noter sur l'App Store") },
+                                         icon: { Image(systemName: "star.fill") }))
                         }
                         
                         Section(footer:

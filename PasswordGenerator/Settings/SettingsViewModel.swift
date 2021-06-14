@@ -31,6 +31,12 @@ final class SettingsViewModel: ObservableObject {
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
     @AppStorage("appAppearanceToggle") var appAppearanceToggle: Bool = false
     
+    @IBAction func requestAppStoreReview() {
+        guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1571284259?action=write-review")
+            else { fatalError("Expected a valid URL") }
+        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+    }
+    
     @Published var autoLock: Int {
         didSet {
             UserDefaults.standard.set(autoLock, forKey: "autoLock")
