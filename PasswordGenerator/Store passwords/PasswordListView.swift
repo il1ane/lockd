@@ -103,7 +103,7 @@ struct PasswordListView: View {
                         })
                         
                         
-                        .navigationBarTitle("Mots de passe")
+                        .navigationBarTitle("Coffre fort")
                         
                         .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
                             Image(systemName: "plus")

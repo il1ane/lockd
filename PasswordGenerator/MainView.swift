@@ -37,8 +37,8 @@ struct MainView: View {
                     PasswordListView(passwordViewModel: passwordViewModel,
                                      settings: settingsViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
                         .tabItem {
-                            Label(title: { Text("Mots de passe") },
-                                  icon: { Image(systemName: "tray.2.fill") })
+                            Label(title: { Text("Coffre fort") },
+                                  icon: { Image(systemName: "lock.square") })
                             
                         }.tag(1)
                     
