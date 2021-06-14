@@ -56,23 +56,25 @@ struct SettingsView: View {
                                 })
                             }
                             
-                            Toggle(isOn: $passwordViewModel.keychainSyncWithIcloud, label: {
-                                Label(
-                                    title: { Text("iCloud keychain") },
-                                    icon: { Image(systemName: "key.icloud.fill") }
-                                )
-                            })
-                            .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
+                            //iCloud sync, need testing before adding this feature
                             
-                            .onChange(of: passwordViewModel.keychainSyncWithIcloud, perform: { value in
-                                if passwordViewModel.keychainSyncWithIcloud {
-                                    passwordViewModel.keychain.synchronizable = true
-                                    print("iCloud sync on")
-                                } else {
-                                    passwordViewModel.keychain.synchronizable = false
-                                    print("iCloud sync turned off")
-                                }
-                            })
+//                            Toggle(isOn: $passwordViewModel.keychainSyncWithIcloud, label: {
+//                                Label(
+//                                    title: { Text("iCloud keychain") },
+//                                    icon: { Image(systemName: "key.icloud.fill") }
+//                                )
+//                            })
+//                            .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
+//
+//                            .onChange(of: passwordViewModel.keychainSyncWithIcloud, perform: { value in
+//                                if passwordViewModel.keychainSyncWithIcloud {
+//                                    passwordViewModel.keychain.synchronizable = true
+//                                    print("iCloud sync on")
+//                                } else {
+//                                    passwordViewModel.keychain.synchronizable = false
+//                                    print("iCloud sync turned off")
+//                                }
+//                            })
                             
                             Toggle(isOn: $settingsViewModel.privacyMode,
                                    label: {
@@ -98,14 +100,7 @@ struct SettingsView: View {
                                          icon: { Image(systemName: "star.fill") }))
                         }
                         
-                        Section(footer:
-                                    VStack {
-                                        Spacer().frame(height: 5)
-                                        HStack {
-                                            Spacer()
-                                            Text("beta")
-                                            Spacer()
-                                        }}) {
+                        Section() {
                             Button(action: { removePasswordAlert.toggle() }, label: {
                                 Label(
                                     title: { Text("Effacer tous les mots de passes").foregroundColor(.red)},
