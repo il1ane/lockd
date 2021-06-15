@@ -18,11 +18,9 @@
 
 //OnboardingView
 "Génerez vos mots de passe sécurisés sur-mesure" = "Generate secure passwords";
-"Mots de passe aléatoires" = "Random passwords";
-"Stockez vos mots de passe dans votre coffre et retrouvez les rapidement" = "
-Store your passwords in your safe and find them quickly";
+"Mots de passe" = "Passwords";
+"Stockez vos mots de passe dans votre coffre et retrouvez les rapidement" = "Store your passwords in your safe and retrieve them quickly";
 "Sécurisé" = "Secure";
-"Modifiez les couleurs de l'application" = "Change app color";
 "Coffre fort" = "Safe";
 "Personnalisable" = "Customizable";
 "Continuer" = "Continue";

@@ -11,8 +11,8 @@ struct OnboardingCell: View {
     
     let image:String
     let color:Color
-    let text:String
-    let title:String
+    let text:LocalizedStringKey
+    let title:LocalizedStringKey
     
     var body: some View {
         
