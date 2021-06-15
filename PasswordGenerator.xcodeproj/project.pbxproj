@@ -24,6 +24,7 @@
 		9145A5772649E23600594C11 /* LoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145A5762649E23600594C11 /* LoggingView.swift */; };
 		914D803326713CDE004063FD /* PasswordStrenghtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D803226713CDE004063FD /* PasswordStrenghtView.swift */; };
 		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
+		918626362678CF690022DB90 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 918626382678CF690022DB90 /* InfoPlist.strings */; };
 		91869B0E2673669C008BE7C4 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91869B0D2673669C008BE7C4 /* PrivacyView.swift */; };
 		91B63F97266FF8960092F2B0 /* PasswordGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
@@ -62,6 +63,8 @@
 		9145A5762649E23600594C11 /* LoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingView.swift; sourceTree = "<group>"; };
 		914D803226713CDE004063FD /* PasswordStrenghtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrenghtView.swift; sourceTree = "<group>"; };
 		9158C0472647F71D005C8B0C /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
+		918626372678CF690022DB90 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		918626392678CF850022DB90 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		91869B0D2673669C008BE7C4 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		91B63F94266FF8960092F2B0 /* PasswordGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasswordGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorTests.swift; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 				914382122648AD3300819C15 /* Settings */,
 				912B03CD2643D6F1001C5FCA /* Assets.xcassets */,
 				912B03D72643D6F1001C5FCA /* Info.plist */,
+				918626382678CF690022DB90 /* InfoPlist.strings */,
 				912B03D42643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld */,
 				912B03CF2643D6F1001C5FCA /* Preview Content */,
 			);
@@ -279,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				912B03D12643D6F1001C5FCA /* Preview Assets.xcassets in Resources */,
+				918626362678CF690022DB90 /* InfoPlist.strings in Resources */,
 				91E89EFB2664EA43007A478A /* Localizable.strings in Resources */,
 				912B03CE2643D6F1001C5FCA /* Assets.xcassets in Resources */,
 			);
@@ -338,6 +343,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		918626382678CF690022DB90 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				918626372678CF690022DB90 /* en */,
+				918626392678CF850022DB90 /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		91E89EFD2664EA43007A478A /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -474,7 +488,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"PasswordGenerator/Preview Content\"";
 				DEVELOPMENT_TEAM = 2JQP4MV635;
 				ENABLE_PREVIEWS = YES;
@@ -484,7 +498,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilianezedadra.passwordGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -498,7 +512,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"PasswordGenerator/Preview Content\"";
 				DEVELOPMENT_TEAM = 2JQP4MV635;
 				ENABLE_PREVIEWS = YES;
@@ -508,7 +522,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilianezedadra.passwordGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

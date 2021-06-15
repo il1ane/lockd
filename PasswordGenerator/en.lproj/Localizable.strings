@@ -53,10 +53,12 @@
 "Le champ mot de passe et intitulé ne peuvent pas être vides." = "The password and title field cannot be empty.";
 "Enregistrer" = "Save";
 
+
 //PasswordListView
 "Rechercher un mot de passe" = "Search";
 "Coffre fort" = "Safe";
 "Annuler" = "Cancel";
+"Ajouter un nom de compte";
 
 //PasswordView
 "Mot de passe" = "Password";
@@ -97,6 +99,9 @@
 "Moyen" = "Reasonable";
 "Faible" = "Weak";
 "Très faible" = "Very weak";
+
+//PopupAnimation
+"Ajouté au coffre" = "Added to safe";
 
 
 

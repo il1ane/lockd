@@ -10,7 +10,7 @@ import SwiftUI
 struct PopupAnimation: View {
     
     @ObservedObject var settings: SettingsViewModel
-    let message:String
+    let message:LocalizedStringKey
 
     var body: some View {
         
