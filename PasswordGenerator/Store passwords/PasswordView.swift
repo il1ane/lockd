@@ -150,11 +150,13 @@ struct PasswordView: View {
                                 }
                             }
                             .disabled(editingUsername)
-                        }
+                        }.animation(showUsernameSection ? nil : .easeInOut)
                     } else {
                         HStack {
                             Spacer()
-                            Button(action : { showUsernameSection = true }, label: Text("Ajouter un nom de compte"))
+                            Button(action : { withAnimation {
+                                    showUsernameSection = true
+                            }},    label: Text("Ajouter un nom de compte"))
                             Spacer()
                         }
                     }
