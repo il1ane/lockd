@@ -5,3 +5,4 @@
   Created by Iliane Zedadra on 15/06/2021.
   
 */
+NSFaceIDUsageDescription = "Déverouiller vos mots de passes.";

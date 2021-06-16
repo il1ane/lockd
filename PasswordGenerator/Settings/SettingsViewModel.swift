@@ -104,16 +104,16 @@ final class SettingsViewModel: ObservableObject {
     func biometricAuthentication() -> Bool {
         var getKeychainItems = false
         let context = LAContext()
+        context.localizedFallbackTitle = "Déverouiller vos mots de passes."
         var error: NSError?
+        let reason = "Déverouiller vos mots de passes."
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            let reason = "Déverouiller vos mots de passe"
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if success {
                         print("success")
                         self.isUnlocked = true
                         getKeychainItems = true
-                        
                         
                     } else {
                         self.isUnlocked = false
@@ -130,8 +130,9 @@ final class SettingsViewModel: ObservableObject {
     func addBiometricAuthentication() {
         let context = LAContext()
         var error: NSError?
+        let reason = "Déverouiller vos mots de passes."
+        context.localizedFallbackTitle = "Déverouiller vos mots de passes."
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            let reason = "Sécurisez vos mots de passes."
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if success {

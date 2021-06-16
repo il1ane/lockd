@@ -1,4 +1,4 @@
-/* 
+/*
   InfoPlist.strings
   PasswordGenerator
 
@@ -6,4 +6,5 @@
   
 */
 
-NSFaceIDUsageDescription = "Unlock your passwords";
+NSFaceIDUsageDescription = "Unlock your passwords.";
+

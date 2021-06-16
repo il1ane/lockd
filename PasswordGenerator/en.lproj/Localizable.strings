@@ -58,7 +58,7 @@
 "Rechercher un mot de passe" = "Search";
 "Coffre fort" = "Safe";
 "Annuler" = "Cancel";
-"Ajouter un nom de compte";
+"Ajouter un nom de compte" = "Add a username";
 
 //PasswordView
 "Mot de passe" = "Password";
@@ -69,6 +69,7 @@
 "Copié!" = "Copied!";
 
 //SettingsView
+"Déverouiller vos mots de passes" = "Unlock your passwords";
 "Sécurité" = "Safety";
 "Code source (GitHub)" = "Source code (GitHub)";
 "Effacer tous les mots de passes" = "Clear all passwords";
@@ -92,6 +93,7 @@
 
 //plist
 "Déverouiller vos mots de passes" = "Unlock your passwords";
+"Déverouiller vos mots de passes." = "Unlock your passwords";
 
 //PasswordStrenghtView
 "Très robuste" = "Very strong";
