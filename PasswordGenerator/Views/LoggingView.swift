@@ -45,7 +45,8 @@ struct LoggingView: View {
                         )})
                       .foregroundColor(.white)
                       .padding()
-                      .overlay(RoundedRectangle(cornerRadius: 25).stroke(Color.white, lineWidth: 1))
+                      .overlay(RoundedRectangle(cornerRadius: 25)
+                                .stroke(Color.white, lineWidth: 1))
                        
                     Spacer()
                         .frame(maxHeight : 30)

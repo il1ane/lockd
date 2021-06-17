@@ -147,6 +147,7 @@ struct SavePasswordView: View {
         .onAppear(perform: {
             if !generatedPasswordIsPresented {
                 isEditingPassword = true
+                
             }
             editedPassword.text = password
             passwordLenght = password

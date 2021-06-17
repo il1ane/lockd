@@ -100,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				912B03E12644660D001C5FCA /* PasswordListView.swift */,
+				9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */,
 				91438210264857A200819C15 /* PasswordView.swift */,
 				9143820C2648526B00819C15 /* PasswordListViewModel.swift */,
 			);
@@ -113,7 +114,6 @@
 				912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */,
 				9158C0472647F71D005C8B0C /* TextBindingManager.swift */,
 				914D803226713CDE004063FD /* PasswordStrenghtView.swift */,
-				9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */,
 			);
 			path = "Generate password";
 			sourceTree = "<group>";
@@ -149,11 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				912B03C92643D6EF001C5FCA /* PasswordGeneratorApp.swift */,
-				91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */,
-				91869B0D2673669C008BE7C4 /* PrivacyView.swift */,
-				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
-				91E89EFD2664EA43007A478A /* Localizable.strings */,
-				9145A5762649E23600594C11 /* LoggingView.swift */,
+				9186263A267A98140022DB90 /* Views */,
+				9186263C267A986C0022DB90 /* Localizable */,
 				9123B3C72660E74D000DB711 /* OnBoarding */,
 				9103AC0B26459F8A00CA6EB6 /* Generate password */,
 				9103AC0A26459F5C00CA6EB6 /* Store passwords */,
@@ -182,6 +179,25 @@
 				914382152648AF6B00819C15 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		9186263A267A98140022DB90 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				91869B0D2673669C008BE7C4 /* PrivacyView.swift */,
+				9145A5762649E23600594C11 /* LoggingView.swift */,
+				91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */,
+				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9186263C267A986C0022DB90 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				91E89EFD2664EA43007A478A /* Localizable.strings */,
+			);
+			path = Localizable;
 			sourceTree = "<group>";
 		};
 		91B63F95266FF8960092F2B0 /* PasswordGeneratorTests */ = {
@@ -488,7 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PasswordGenerator/Preview Content\"";
 				DEVELOPMENT_TEAM = 2JQP4MV635;
 				ENABLE_PREVIEWS = YES;
@@ -498,7 +514,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilianezedadra.passwordGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -512,7 +528,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PasswordGenerator/Preview Content\"";
 				DEVELOPMENT_TEAM = 2JQP4MV635;
 				ENABLE_PREVIEWS = YES;
@@ -522,7 +538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilianezedadra.passwordGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
