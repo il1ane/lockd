@@ -8,7 +8,6 @@
 import SwiftUI
 import MobileCoreServices
 import LocalAuthentication
-import CoreHaptics
 
 struct PasswordGeneratorView: View {
     
@@ -34,19 +33,15 @@ struct PasswordGeneratorView: View {
             ZStack {
                 Form {
                     
-                    Section(header: Text("Mot de passe généré aléatoirement"), footer:
-                                
-                                
+                    Section(header: Text("Mot de passe généré aléatoirement"),
+                            footer:
                                 VStack {
-                                    
                                     HStack {
                                         Spacer()
                                         PasswordStrenghtView(entropy: currentPasswordEntropy)
-                                    
                                         Spacer()
                                     }
-                                }
-                    ) {
+                                }) {
                         
                         HStack {
                             
@@ -98,6 +93,28 @@ struct PasswordGeneratorView: View {
                                 .frame(minWidth: 25)
                             
                         }
+                        Button(action: {
+                            viewModel.generateButtonHaptic()
+                            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+                                generatedPassword = characters.joined()
+                                currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
+                                viewModel.adaptativeSliderHaptic(entropy: currentPasswordEntropy)
+                            
+                            
+                            
+                            
+                        },
+                               label: {
+                            HStack {
+                                Spacer()
+                                Label(
+                                    title: { Text("Générer") },
+                                    icon: { Image(systemName: "arrow.clockwise") })
+                                Spacer()
+                            }
+                        })
+                        .foregroundColor(settings.colors[settings.accentColorIndex])
+                        .buttonStyle(PlainButtonStyle())
                     }
                     
                     Section(header: Text("Inclure"), footer: Text("Note : chaque paramètre actif renforce la sécurité du mot de passe.").padding()) {
@@ -128,7 +145,6 @@ struct PasswordGeneratorView: View {
                     
                 }.navigationBarTitle("Générateur")
             
-                
                 if passwordViewModel.showAnimation {
                     PopupAnimation(settings: settings, message: "Ajouté au coffre")
                         .onAppear(perform: { animationDisappear() })
@@ -147,27 +163,28 @@ struct PasswordGeneratorView: View {
                 .environment(\.colorScheme, colorScheme)
                 .foregroundColor(settings.colors[settings.accentColorIndex])
         })
-        .onChange(of: numberOfCharacter, perform: { value in
+        .onChange(of: numberOfCharacter, perform: { _ in
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
             currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
-            viewModel.sliderHaptic(entropy: currentPasswordEntropy)
+            viewModel.adaptativeSliderHaptic(entropy: currentPasswordEntropy)
         })
-        .onChange(of: uppercased, perform: { value in
-            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
-            generatedPassword = characters.joined()
-            currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
-        })
-        .onChange(of: specialCharacters, perform: { value in
+        .onChange(of: uppercased, perform: { _ in
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
             currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
         })
-        .onChange(of: withNumbers, perform: { value in
+        .onChange(of: specialCharacters, perform: { _ in
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
             currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
         })
+        .onChange(of: withNumbers, perform: { _ in
+            characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+            generatedPassword = characters.joined()
+            currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
+        })
+        
         .onAppear(perform: {
             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()

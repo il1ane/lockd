@@ -18,7 +18,12 @@ final class PasswordGeneratorViewModel: ObservableObject {
     let specialCharactersArray: [String] = ["(",")","{","}","[","]","/","+","*","$",">",".","|","^","?", "&"]
     let numbersArray: [String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     
-    func sliderHaptic(entropy: Double) {
+    func generateButtonHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .rigid)
+        generator.impactOccurred(intensity: 1)
+    }
+    
+    func adaptativeSliderHaptic(entropy: Double) {
         
         switch entropy {
         case 128.0...200:
@@ -42,7 +47,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
             print("haptic feedback intensity : 0.2")
             generator.impactOccurred(intensity: 0.2)
         }
-   }
+    }
     
     func calculatePasswordEntropy(password: String) -> Double {
         
@@ -119,16 +124,17 @@ final class PasswordGeneratorViewModel: ObservableObject {
     func lowercasePassword(lenght: Int) -> [String] {
         
         var password: [String] = [""]
-
-            for _ in 0...lenght {
-                password.append(alphabet.randomElement()!)
-            }
+        
+        for _ in 0...lenght {
+            password.append(alphabet.randomElement()!)
+        }
+        
         if password.joined().count != lenght {
             while password.joined().count > lenght {
                 password.remove(at: 0)
             }
         }
-                return password
+        return password
     }
     
     func oneParameterPassword(lenght: Int, specialCharacters: Bool, uppercase: Bool, numbers: Bool) -> [String] {
@@ -207,7 +213,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
         }
         
         if uppercase && specialCharacters {
-
+            
             for _ in 0...lenght / 3 {
                 password.append(uppercasedAlphabet.randomElement()!)
             }
@@ -227,12 +233,11 @@ final class PasswordGeneratorViewModel: ObservableObject {
                     password.remove(at: 0)
                 }
             }
-            
             return password
         }
         
         if uppercase && numbers {
-
+            
             for _ in 0...lenght / 3 {
                 password.append(uppercasedAlphabet.randomElement()!)
             }
@@ -252,12 +257,11 @@ final class PasswordGeneratorViewModel: ObservableObject {
                     password.remove(at: 0)
                 }
             }
-            
             return password
         }
         
         if numbers && specialCharacters {
-
+            
             for _ in 0...lenght / 3 {
                 password.append(numbersArray.randomElement()!)
             }
@@ -277,10 +281,9 @@ final class PasswordGeneratorViewModel: ObservableObject {
                     password.remove(at: 0)
                 }
             }
-            
             return password
         }
-       return password
+        return password
     }
     
     func threeParameterPassword(lenght: Int) -> [String] {

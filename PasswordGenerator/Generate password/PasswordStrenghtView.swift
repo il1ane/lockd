@@ -15,17 +15,52 @@ struct PasswordStrenghtView: View {
     var body: some View {
         
             HStack {
-                Text(entropy > 128.0 ? "Très robuste" : entropy > 60.0 ? "Robuste" : entropy > 36.0 ? "Moyen" : entropy > 28.0 ? "Faible" : "Très faible")
+                Text(entropyText(entropy: entropy))
                     .foregroundColor(.white)
             }
             .padding(5)
-            .background(entropy > 128.0 ? .blue : entropy > 60.0 ? .green: entropy > 36.0 ? .yellow : entropy > 28.0 ? .orange : .red)
+            .background(entropyColor(entropy: entropy))
             .cornerRadius(7)
             .animation(animate ? .easeInOut : nil)
             .transition(.identity)
             .onChange(of: entropy, perform: { value in
                 animate = true
             })
+    }
+}
+
+extension View {
+    
+    func entropyText(entropy: Double) -> String {
+        
+        switch entropy {
+        case 128.0...200:
+            return "Très robuste"
+        case 60.0...128:
+            return "Robuste"
+        case 36.0...60:
+            return "Moyen"
+        case 28.0...36:
+            return "Faible"
+        default:
+            return "Très faible"
+        }
+    }
+    
+    func entropyColor(entropy: Double) -> Color {
+        
+        switch entropy {
+        case 128.0...200:
+            return .blue
+        case 60.0...128:
+            return .green
+        case 36.0...60:
+            return .yellow
+        case 28.0...36:
+            return .orange
+        default:
+            return .red
+        }
     }
 }
 
