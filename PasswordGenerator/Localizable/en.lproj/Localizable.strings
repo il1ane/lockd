@@ -38,6 +38,7 @@
 "Majuscules" = "Uppercase";
 "Chiffres" = "Figures";
 "Inclure" = "Include";
+"Générer" = "Generate";
 
 //SavePasswordView
 "Titre" = "Title";
@@ -105,9 +106,6 @@
 //PopupAnimation
 "Ajouté au coffre" = "Added to safe";
 
-
-
-//Text(entropy > 128.0 ? "Très fort" : entropy > 60.0 ? "Fort" : entropy > 36.0 ? "Moyen" : entropy > 28.0 ? "Faible" : "Très faible")
 
 
 
