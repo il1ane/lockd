@@ -3,8 +3,9 @@ Generate strong passwords and save them in Keychain.
  
  ![Simulator Screen Recording - iPhone 12 - 2021-06-10 at 23 49 11](https://user-images.githubusercontent.com/61360545/121601803-bb126b00-ca46-11eb-8163-ea77ef7dbc0b.gif)
 
+Download lockd on the App Store: https://apps.apple.com/us/app/lockd/id1571284259
 
-Join lockd Beta on TestFlight: https://testflight.apple.com/join/xJ5AlvS3
+Test new features on TestFlight : https://testflight.apple.com/join/xJ5AlvS3
 
 **Features:**  
 
