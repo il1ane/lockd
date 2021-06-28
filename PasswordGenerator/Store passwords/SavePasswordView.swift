@@ -36,7 +36,8 @@ struct SavePasswordView: View {
             VStack {
                 
                 Form {
-                    Section(header: Text("Mot de passe").foregroundColor(.gray), footer: passwordLenght.isEmpty ? Text("Champ obligatoire").foregroundColor(.red) : Text("")) {
+                    Section(header: Text("Mot de passe").foregroundColor(.gray), footer: passwordLenght.isEmpty ? Text("Champ obligatoire")
+                                .foregroundColor(.red) : Text("")) {
                         HStack {
                             Spacer()
                             
