@@ -20,6 +20,7 @@ final class SettingsViewModel: ObservableObject {
         self.isFirstLaunch = UserDefaults.standard.object(forKey: "isFirstLaunch") as? Bool ?? true
         self.autoLock = UserDefaults.standard.object(forKey: "autoLock") as? Int ?? 1
         self.privacyMode = UserDefaults.standard.object(forKey: "privacyMode") as? Bool ?? true
+        self.ephemeralClipboard = UserDefaults.standard.object(forKey: "ephemeralClipboard") as? Bool ?? true
     }
     
     var supportsHaptics: Bool = false
@@ -33,13 +34,30 @@ final class SettingsViewModel: ObservableObject {
     
     @IBAction func requestAppStoreReview() {
         guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1571284259?action=write-review")
-            else { fatalError("Expected a valid URL") }
+        else { fatalError("Expected a valid URL") }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+    }
+    
+    func copyToClipboard(password: String) {
+        
+        if ephemeralClipboard {
+            let expireDate = Date().addingTimeInterval(TimeInterval(60))
+            UIPasteboard.general.setItems([[UIPasteboard.typeAutomatic: password]],
+                                          options: [UIPasteboard.OptionsKey.expirationDate: expireDate])
+        } else {
+            UIPasteboard.general.string = password
+        }
     }
     
     @Published var autoLock: Int {
         didSet {
             UserDefaults.standard.set(autoLock, forKey: "autoLock")
+        }
+    }
+    
+    @Published var ephemeralClipboard: Bool {
+        didSet {
+            UserDefaults.standard.set(ephemeralClipboard, forKey: "ephemeralClipboard")
         }
     }
     

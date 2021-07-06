@@ -23,67 +23,77 @@ struct SettingsView: View {
                     Form {
                         
                         Section(header: Text("Sécurité")) {
-                
+                            
                             Toggle(isOn: $settingsViewModel.faceIdToggle,
                                    label: {
-                                Label(title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
-                                      icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
-                                )
-                            }).toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
-                            
-                            .onChange(of: settingsViewModel.faceIdToggle, perform: { _ in
+                                    Label(title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
+                                          icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
+                                    )
+                                   })
+                                .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
                                 
-                                if settingsViewModel.faceIdToggle {
-                                    settingsViewModel.addBiometricAuthentication()
-                                    print("Waiting for auth")
-                                }
-                                
-                                if !settingsViewModel.faceIdToggle {
-                                    settingsViewModel.turnOffBiometricAuthentication()
-                                }
-                            })
+                                .onChange(of: settingsViewModel.faceIdToggle, perform: { _ in
+                                    
+                                    if settingsViewModel.faceIdToggle {
+                                        settingsViewModel.addBiometricAuthentication()
+                                        print("Waiting for auth")
+                                    }
+                                    
+                                    if !settingsViewModel.faceIdToggle {
+                                        settingsViewModel.turnOffBiometricAuthentication()
+                                    }
+                                })
                             
                             if settingsViewModel.faceIdDefault {
                                 Picker(selection: $settingsViewModel.autoLock, label: Label(
-                                    title: { Text("Vérouillage auto.") },
-                                    icon: { Image(systemName: "lock.fill") }),
-                                    content: {
-                                    Text("Immédiat").tag(0)
-                                    Text("1 minute").tag(1)
-                                    Text("5 minutes").tag(5)
-                                    Text("15 minutes").tag(15)
-                                    Text("30 minutes").tag(30)
-                                })
+                                        title: { Text("Vérouillage auto.") },
+                                        icon: { Image(systemName: "lock.fill") }),
+                                       content: {
+                                        Text("Immédiat").tag(0)
+                                        Text("1 minute").tag(1)
+                                        Text("5 minutes").tag(5)
+                                        Text("15 minutes").tag(15)
+                                        Text("30 minutes").tag(30)
+                                       })
                             }
                             
                             //iCloud sync, need testing before adding this feature
                             
-//                            Toggle(isOn: $passwordViewModel.keychainSyncWithIcloud, label: {
-//                                Label(
-//                                    title: { Text("iCloud keychain") },
-//                                    icon: { Image(systemName: "key.icloud.fill") }
-//                                )
-//                            })
-//                            .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
-//
-//                            .onChange(of: passwordViewModel.keychainSyncWithIcloud, perform: { value in
-//                                if passwordViewModel.keychainSyncWithIcloud {
-//                                    passwordViewModel.keychain.synchronizable = true
-//                                    print("iCloud sync on")
-//                                } else {
-//                                    passwordViewModel.keychain.synchronizable = false
-//                                    print("iCloud sync turned off")
-//                                }
-//                            })
+                            //                            Toggle(isOn: $passwordViewModel.keychainSyncWithIcloud, label: {
+                            //                                Label(
+                            //                                    title: { Text("iCloud keychain") },
+                            //                                    icon: { Image(systemName: "key.icloud.fill") }
+                            //                                )
+                            //                            })
+                            //                            .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
+                            //
+                            //                            .onChange(of: passwordViewModel.keychainSyncWithIcloud, perform: { value in
+                            //                                if passwordViewModel.keychainSyncWithIcloud {
+                            //                                    passwordViewModel.keychain.synchronizable = true
+                            //                                    print("iCloud sync on")
+                            //                                } else {
+                            //                                    passwordViewModel.keychain.synchronizable = false
+                            //                                    print("iCloud sync turned off")
+                            //                                }
+                            //                            })
                             
                             Toggle(isOn: $settingsViewModel.privacyMode,
                                    label: {
-                                Label(title: { Text("Cacher dans le multitâche") },
-                                      icon: { Image(systemName: "eye.slash") })
-                            })
-                            .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
+                                    Label(title: { Text("Cacher dans le multitâche") },
+                                          icon: { Image(systemName: "eye.slash") })
+                                   })
+                                .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
                         }
- 
+                        
+                        Section(header: Text(""), footer: Text("Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes.")) {
+                        Toggle(isOn: $settingsViewModel.ephemeralClipboard, label: {
+                            Label(
+                                title: { Text("Presse papier éphémère") },
+                                icon: { Image(systemName: "doc.on.doc") })
+                        })
+                        .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
+                        }
+                        
                         Section(header: Text("Liens")) {
                             
                             Link(destination: URL(string: "https://github.com/il1ane/PasswordGenerator")!) {
@@ -96,8 +106,8 @@ struct SettingsView: View {
                             
                             Button(action: { settingsViewModel.requestAppStoreReview() },
                                    label:
-                                   Label(title: { Text("Noter sur l'App Store") },
-                                         icon: { Image(systemName: "star.fill") }))
+                                    Label(title: { Text("Noter sur l'App Store") },
+                                          icon: { Image(systemName: "star.fill") }))
                         }
                         
                         Section() {
@@ -112,7 +122,7 @@ struct SettingsView: View {
                     }
                 }
                 .onAppear(perform: {
-                    biometricType = settingsViewModel.biometricType() })
+                            biometricType = settingsViewModel.biometricType() })
                 .navigationBarTitle("Préférences")
                 
                 .alert(isPresented: $removePasswordAlert, content: {
@@ -120,10 +130,10 @@ struct SettingsView: View {
                           message: Text("Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible."),
                           primaryButton: .cancel(),
                           secondaryButton: .destructive(Text("TOUT supprimer"),
-                          action: {
-                           keychain.clear()
-                           passwordViewModel.addedPasswordHaptic()
-                          }))
+                                                        action: {
+                                                            keychain.clear()
+                                                            passwordViewModel.addedPasswordHaptic()
+                                                        }))
                 })
             }
         }.accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])

@@ -58,7 +58,7 @@ struct PasswordGeneratorView: View {
                             Spacer()
                             
                             Button(action: {
-                                UIPasteboard.general.string = generatedPassword
+                                settings.copyToClipboard(password: generatedPassword)
                                 clipboardSaveAnimation = true
                                 viewModel.copyPasswordHaptic()
                                 
@@ -152,7 +152,7 @@ struct PasswordGeneratorView: View {
                 }
                 
                 if clipboardSaveAnimation {
-                    PopupAnimation(settings: settings, message: "Copié!")
+                    PopupAnimation(settings: settings, message: settings.ephemeralClipboard ? "Copié! (60s)" : "Copié!")
                         .onAppear(perform: { clipBoardAnimationDisapear() })
                         .animation(.easeInOut(duration: 0.1))
                 }

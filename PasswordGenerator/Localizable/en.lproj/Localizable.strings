@@ -68,6 +68,9 @@
 "Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "Are you sure you want to delete your password? This action is irreversible.";
 "Supprimer definitivement" = "Delete";
 "Copié!" = "Copied!";
+"Copié! (60s)" = "Copied! (60s)";
+"Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "If this option is active, the contents of the clipboard will be automatically cleared after 60 seconds.";
+"Presse papier éphémère" = "Ephemeral clipboard";
 
 //SettingsView
 "Déverouiller vos mots de passes" = "Unlock your passwords";

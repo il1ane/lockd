@@ -81,7 +81,7 @@ struct PasswordView: View {
                         }
                         
                         Button(action: {
-                            UIPasteboard.general.string = password
+                            settings.copyToClipboard(password: password)
                             passwordGeneratorViewModel.copyPasswordHaptic()
                             clipboardSaveAnimation = true
                             }, label: {
@@ -138,7 +138,8 @@ struct PasswordView: View {
                                     .foregroundColor(settings.colors[settings.accentColorIndex])
                                 }
                             }
-                            Button(action: { UIPasteboard.general.string = username
+                            Button(action: {
+                                settings.copyToClipboard(password: username)
                                 passwordGeneratorViewModel.copyPasswordHaptic()
                                 clipboardSaveAnimation = true
                             }) {
@@ -207,7 +208,7 @@ struct PasswordView: View {
                 
             }
             if clipboardSaveAnimation {
-                PopupAnimation(settings: settings, message: "Copié!")
+                PopupAnimation(settings: settings, message: settings.ephemeralClipboard ? "Copié! (60s)" : "Copié!")
                     .onAppear(perform: { clipBoardAnimationDisapear() })
                     .animation(.easeInOut(duration: 0.1))
             }
