@@ -13,6 +13,7 @@ struct LoggingView: View {
     @ObservedObject var viewModel: SettingsViewModel
     @State var biometricType: SettingsViewModel.BiometricType
     @ObservedObject var passwordViewModel: PasswordListViewModel
+    @ObservedObject var settingsViewModel: SettingsViewModel
     @State private var animate = false
     var body: some View {
        
@@ -54,6 +55,18 @@ struct LoggingView: View {
             }
             .onAppear(perform: {
                 biometricType = viewModel.biometricType()
+                if settingsViewModel.faceIdDefault == false {
+                    settingsViewModel.isUnlocked = true
+                    passwordViewModel.getAllKeys()
+                    print("No biometric authentication")
+                }
+                
+                if settingsViewModel.faceIdDefault == true {
+                    if settingsViewModel.biometricAuthentication() {
+                        passwordViewModel.getAllKeys()
+                    }
+                    print("Biometric authentication")
+                }
         })
             
         }.statusBar(hidden: true)
@@ -75,6 +88,6 @@ extension View {
 
 struct LoggingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoggingView(viewModel: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.touch, passwordViewModel: PasswordListViewModel())
+        LoggingView(viewModel: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.touch, passwordViewModel: PasswordListViewModel(), settingsViewModel: SettingsViewModel())
     }
 }

@@ -24,31 +24,17 @@ final class SettingsViewModel: ObservableObject {
     }
     
     var supportsHaptics: Bool = false
-    let hapticCapability = CHHapticEngine.capabilitiesForHardware() 
+    let hapticCapability = CHHapticEngine.capabilitiesForHardware()
+    let colors = [Color.green, Color.blue, Color.orange, Color.pink, Color.purple, Color.yellow]
     
     @Published var isUnlocked = false
-    @Published var hideInAppSwitcher = false
+    @Published var onBoardingSheetIsPresented = false
+    @Published var isHiddenInAppSwitcher = false
     @Published var lockAppTimerIsRunning = false
     @AppStorage("isDarkMode") var appAppearance: String = "Auto"
     @AppStorage("appAppearanceToggle") var appAppearanceToggle: Bool = false
     
-    @IBAction func requestAppStoreReview() {
-        guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1571284259?action=write-review")
-        else { fatalError("Expected a valid URL") }
-        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
-    }
-    
-    func copyToClipboard(password: String) {
-        
-        if ephemeralClipboard {
-            let expireDate = Date().addingTimeInterval(TimeInterval(60))
-            UIPasteboard.general.setItems([[UIPasteboard.typeAutomatic: password]],
-                                          options: [UIPasteboard.OptionsKey.expirationDate: expireDate])
-        } else {
-            UIPasteboard.general.string = password
-        }
-    }
-    
+    //Userdefaults values
     @Published var autoLock: Int {
         didSet {
             UserDefaults.standard.set(autoLock, forKey: "autoLock")
@@ -91,7 +77,22 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    let colors = [Color.green, Color.blue, Color.orange, Color.pink, Color.purple, Color.yellow]
+    @IBAction func requestAppStoreReview() {
+        guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1571284259?action=write-review")
+        else { fatalError("Expected a valid URL") }
+        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+    }
+    
+    func copyToClipboard(password: String) {
+        
+        if ephemeralClipboard {
+            let expireDate = Date().addingTimeInterval(TimeInterval(60))
+            UIPasteboard.general.setItems([[UIPasteboard.typeAutomatic: password]],
+                                          options: [UIPasteboard.OptionsKey.expirationDate: expireDate])
+        } else {
+            UIPasteboard.general.string = password
+        }
+    }
     
     func biometricType() -> BiometricType {
         let authContext = LAContext()

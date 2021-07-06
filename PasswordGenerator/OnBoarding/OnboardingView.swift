@@ -12,24 +12,38 @@ struct OnboardingView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     @Binding var isPresented: Bool
     @State var biometricType: SettingsViewModel.BiometricType
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         
         VStack {
             Spacer()
+            
             Text("Bienvenue sur lockd")
                 .font(.title)
                 .bold()
+            
             Spacer()
             
             VStack(alignment: .leading) {
-                OnboardingCell(image: "key.fill", color: settingsViewModel.colors[settingsViewModel.accentColorIndex], text: "Génerez vos mots de passe sécurisés sur-mesure", title: "Mots de passe").padding()
                 
-                OnboardingCell(image: "lock.square", color: settingsViewModel.colors[settingsViewModel.accentColorIndex], text: "Stockez vos mots de passe dans votre coffre et retrouvez les rapidement", title: "Coffre fort").padding()
+                OnboardingCell(image: "key.fill",
+                               text: "Génerez vos mots de passe sécurisés sur-mesure",
+                               title: "Mots de passe")
+                    .padding()
                 
+                OnboardingCell(image: "lock.square",
+                               text: "Stockez vos mots de passe dans votre coffre et retrouvez les rapidement",
+                               title: "Coffre fort")
+                    .padding()
                 
-                OnboardingCell(image: biometricType == .face ? "faceid" : biometricType == .touch ? "touchid" : "key", color: settingsViewModel.colors[settingsViewModel.accentColorIndex], text: biometricType == .face ? "Protégez vos mots de passes avec Face ID" : biometricType == .touch ? "Protégez vos mots de passes avec Touch ID" : "Protégez vos mots de passes avec votre code de verouillage d'iPhone", title: "Sécurisé").padding()
-            }.padding()
+                OnboardingCell(image: adaptativeImage(biometricType: biometricType),
+                               text: adaptativeMessage(biometricType: biometricType),
+                               title: "Sécurisé")
+                    .padding()
+                
+            }
+            .padding()
             
             Spacer()
             
@@ -48,10 +62,41 @@ struct OnboardingView: View {
             Spacer()
             
         }
+        .environment(\.colorScheme, colorScheme)
         .font(.body)
         .onAppear(perform: {
             biometricType = settingsViewModel.biometricType()
         })
+    }
+}
+
+extension OnboardingView {
+    func adaptativeImage(biometricType: SettingsViewModel.BiometricType) -> String {
+        
+        switch biometricType {
+        case .none:
+            return "key"
+        case .touch:
+            return "touchid"
+        case .face:
+            return "faceid"
+        case .unknown:
+            return "key"
+        }
+    }
+    
+    func adaptativeMessage(biometricType: SettingsViewModel.BiometricType) -> LocalizedStringKey  {
+        
+        switch biometricType {
+        case .none:
+            return "Protégez vos mots de passes avec votre code de verouillage d'iPhone"
+        case .touch:
+            return "Protégez vos mots de passes avec Touch ID"
+        case .face:
+            return "Protégez vos mots de passes avec Face ID"
+        case .unknown:
+            return "Protégez vos mots de passes avec votre code de verouillage d'iPhone"
+        }
     }
 }
 

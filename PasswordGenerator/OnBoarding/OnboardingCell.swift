@@ -10,7 +10,6 @@ import SwiftUI
 struct OnboardingCell: View {
     
     let image:String
-    let color:Color
     let text:LocalizedStringKey
     let title:LocalizedStringKey
     
@@ -21,13 +20,16 @@ struct OnboardingCell: View {
                 .frame(minWidth: 50, maxWidth: 60, minHeight: 50, maxHeight: 60)
                 .font(.largeTitle)
                 .foregroundColor(.white)
-                .background(color)
+                .background(.blue)
                 .clipShape(Circle())
             
             VStack(alignment: .leading) {
                 
                 Text(title).bold()
-                Spacer().frame(height: 5)
+                
+                Spacer()
+                    .frame(height: 5)
+                
                 Text(text)
                     .font(.body)
                     .foregroundColor(.gray)
@@ -39,6 +41,6 @@ struct OnboardingCell: View {
 
 struct OnboardingCell_Previews: PreviewProvider {
     static var previews: some View {
-        OnboardingCell(image: "lock.fill", color: .blue, text: "Ajsqdfoifjazkfafafniaf aberaiunrafarv avunrrah vahbva.", title: "Sécurisé")
+        OnboardingCell(image: "lock.fill", text: "Ajsqdfoifjazkfafafniaf aberaiunrafarv avunrrah vahbva.", title: "Sécurisé")
     }
 }

@@ -16,32 +16,48 @@ struct PasswordGeneratorApp: App {
     @Environment(\.scenePhase) var scenePhase
     
     var body: some Scene {
-        WindowGroup {
         
+        WindowGroup {
+            
             MainView(settingsViewModel: settingsViewModel, passwordViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
+                
+                //Onboarding sheet
+                .onAppear(perform: {
+                    if settingsViewModel.isFirstLaunch {
+                        settingsViewModel.onBoardingSheetIsPresented = true
+                    }
+                })
+                
+                .sheet(isPresented: $settingsViewModel.onBoardingSheetIsPresented, onDismiss: { settingsViewModel.isFirstLaunch = false } , content: {
+                    OnboardingView(settingsViewModel: settingsViewModel, isPresented: $settingsViewModel.onBoardingSheetIsPresented, biometricType: settingsViewModel.biometricType())
+                })
         }
+        
         .onChange(of: scenePhase) { newPhase in
+            
             if newPhase == .inactive {
                 if settingsViewModel.privacyMode {
-                settingsViewModel.hideInAppSwitcher = false
+                settingsViewModel.isHiddenInAppSwitcher = false
                 }
-                print("App is in inactive phase")
-            } else if newPhase == .active {
+            }
+            
+            else if newPhase == .active {
                 if settingsViewModel.privacyMode {
-                settingsViewModel.hideInAppSwitcher = false
+                settingsViewModel.isHiddenInAppSwitcher = false
                 }
                 settingsViewModel.lockAppTimerIsRunning = false
-                print("App is in active phase")
-            } else if newPhase == .background {
+            }
+            
+            else if newPhase == .background {
                 if settingsViewModel.privacyMode {
-                settingsViewModel.hideInAppSwitcher = true
+                settingsViewModel.isHiddenInAppSwitcher = true
                 }
-                print("App is in background phase")
                 if settingsViewModel.faceIdDefault {
                     settingsViewModel.lockAppInBackground()
                 }
             }
+            
         }
     }
 }
