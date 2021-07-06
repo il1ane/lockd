@@ -42,7 +42,7 @@ struct LoggingView: View {
                             passwordViewModel.getAllKeys() }}, label: {
                         Label(
                             title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Entrer le mot mot de passe") },
-                            icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
+                            icon: { Image(systemName: adaptativeImage(biometricType: biometricType)) }
                         )})
                       .foregroundColor(.white)
                       .padding()

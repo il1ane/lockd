@@ -70,7 +70,7 @@ struct OnboardingView: View {
     }
 }
 
-extension OnboardingView {
+extension View {
     func adaptativeImage(biometricType: SettingsViewModel.BiometricType) -> String {
         
         switch biometricType {
