@@ -29,6 +29,6 @@ Test new features on TestFlight : https://testflight.apple.com/join/xJ5AlvS3
 
 **Dependencies:**  
 
-- KeychainSwift  
-- SwiftUIX  
+- KeychainSwift (https://github.com/evgenyneu/keychain-swift)
+- SwiftUIX  (https://github.com/SwiftUIX/SwiftUIX)
 
