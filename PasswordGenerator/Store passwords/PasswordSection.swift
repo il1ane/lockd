@@ -25,7 +25,7 @@ struct PasswordSection: View {
     var body: some View {
         
         //Shown if password is not in editing state (initial state)
-        
+      
         if !isEditingPassword {
             
             NotEditingPasswordView(revealPassword: $revealPassword,
@@ -65,7 +65,7 @@ struct PasswordSection: View {
             }
             
         })
-        .disabled(revealPassword ? false : true)
+        .disabled(!revealPassword || isEditingPassword)
         
     }
 }
