@@ -16,7 +16,9 @@
 		912B03DE2643DDE2001C5FCA /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */; };
 		912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */; };
 		912B03E22644660D001C5FCA /* PasswordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B03E12644660D001C5FCA /* PasswordListView.swift */; };
+		9130A9702695CA34003B0B9A /* PasswordSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9130A96F2695CA34003B0B9A /* PasswordSection.swift */; };
 		9134F8EF2694C86500858F0E /* TabViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134F8EE2694C86500858F0E /* TabViews.swift */; };
+		9134F8F12695B52B00858F0E /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9134F8F02695B52B00858F0E /* ViewExtensions.swift */; };
 		9143820B26484D7A00819C15 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9143820A26484D7A00819C15 /* KeychainSwift */; };
 		9143820D2648526B00819C15 /* PasswordListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9143820C2648526B00819C15 /* PasswordListViewModel.swift */; };
 		91438211264857A200819C15 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91438210264857A200819C15 /* PasswordView.swift */; };
@@ -57,7 +59,9 @@
 		912B03DD2643DDE2001C5FCA /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
 		912B03DF2643E566001C5FCA /* PasswordGeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorViewModel.swift; sourceTree = "<group>"; };
 		912B03E12644660D001C5FCA /* PasswordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListView.swift; sourceTree = "<group>"; };
+		9130A96F2695CA34003B0B9A /* PasswordSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordSection.swift; sourceTree = "<group>"; };
 		9134F8EE2694C86500858F0E /* TabViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViews.swift; sourceTree = "<group>"; };
+		9134F8F02695B52B00858F0E /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		9143820C2648526B00819C15 /* PasswordListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordListViewModel.swift; sourceTree = "<group>"; };
 		91438210264857A200819C15 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		914382132648AD4700819C15 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 				912B03E12644660D001C5FCA /* PasswordListView.swift */,
 				9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */,
 				91438210264857A200819C15 /* PasswordView.swift */,
+				9130A96F2695CA34003B0B9A /* PasswordSection.swift */,
 				9143820C2648526B00819C15 /* PasswordListViewModel.swift */,
 			);
 			path = "Store passwords";
@@ -189,6 +194,7 @@
 				91869B0D2673669C008BE7C4 /* PrivacyView.swift */,
 				9145A5762649E23600594C11 /* LoggingView.swift */,
 				91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */,
+				9134F8F02695B52B00858F0E /* ViewExtensions.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
 				9134F8EE2694C86500858F0E /* TabViews.swift */,
 			);
@@ -329,6 +335,7 @@
 				912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */,
 				912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */,
 				9143820D2648526B00819C15 /* PasswordListViewModel.swift in Sources */,
+				9130A9702695CA34003B0B9A /* PasswordSection.swift in Sources */,
 				91438211264857A200819C15 /* PasswordView.swift in Sources */,
 				91D89AC62653DE0100CF22E1 /* PopupAnimation.swift in Sources */,
 				91869B0E2673669C008BE7C4 /* PrivacyView.swift in Sources */,
@@ -340,6 +347,7 @@
 				914D803326713CDE004063FD /* PasswordStrenghtView.swift in Sources */,
 				91E6084C265E4D8300678CD3 /* OnboardingView.swift in Sources */,
 				914382162648AF6B00819C15 /* SettingsViewModel.swift in Sources */,
+				9134F8F12695B52B00858F0E /* ViewExtensions.swift in Sources */,
 				9134F8EF2694C86500858F0E /* TabViews.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

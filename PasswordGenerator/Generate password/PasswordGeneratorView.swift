@@ -94,14 +94,12 @@ struct PasswordGeneratorView: View {
                             
                         }
                         Button(action: {
+                            
                             viewModel.generateButtonHaptic()
                             characters = viewModel.generatePassword(lenght: Int(numberOfCharacter), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
                                 generatedPassword = characters.joined()
                                 currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
                                 viewModel.adaptativeSliderHaptic(entropy: currentPasswordEntropy)
-                            
-                            
-                            
                             
                         },
                                label: {

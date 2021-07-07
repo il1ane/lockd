@@ -21,14 +21,14 @@ struct TabViews: View {
                         
                         PasswordGeneratorView(settings: settingsViewModel,
                                               passwordViewModel: passwordListViewModel)
-                            .onAppear(perform : { currentTab = 0 })
                             .tabItem {
                                 Label(title: { Text("Générateur") },
                                       icon: { Image(systemName: "die.face.5.fill") })
                             }.tag(0)
                         
                         PasswordListView(passwordViewModel: passwordListViewModel,
-                                         settings: settingsViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
+                                         settings: settingsViewModel,
+                                         passwordGeneratorViewModel: passwordGeneratorViewModel)
                             .tabItem {
                                 Label(title: { Text("Coffre fort") },
                                       icon: { Image(systemName: "lock.square") })

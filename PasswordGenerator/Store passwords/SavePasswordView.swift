@@ -36,7 +36,8 @@ struct SavePasswordView: View {
             VStack {
                 
                 Form {
-                    Section(header: Text("Mot de passe").foregroundColor(.gray), footer: passwordLenght.isEmpty ? Text("Champ obligatoire")
+                    Section(header: Text("Mot de passe").foregroundColor(.gray),
+                            footer: passwordLenght.isEmpty ? Text("Champ obligatoire")
                                 .foregroundColor(.red) : Text("")) {
                         HStack {
                             Spacer()
@@ -86,7 +87,8 @@ struct SavePasswordView: View {
                                 .buttonStyle(PlainButtonStyle())
                                 .foregroundColor(settings.colors[settings.accentColorIndex])
                             }
-                        }.alert(isPresented: $showMissingPasswordAlert, content: {
+                        }
+                        .alert(isPresented: $showMissingPasswordAlert, content: {
                             Alert(title: Text("Mot de passe invalide"), message: Text("Le champ mot de passe ne peut pas être vide."), dismissButton: .cancel(Text("OK!")))
                             
                         })

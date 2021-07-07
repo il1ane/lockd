@@ -87,7 +87,7 @@ struct PasswordListView: View {
 
                     VStack {}
                         .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
-                            PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, isPresented: $showPasswordView, settings: settings, title: $title, username: $username)
+                            PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settings, isPresented: $showPasswordView, title: $title, username: $username)
                                 .environment(\.colorScheme, colorScheme)
                                 .accentColor(settings.colors[settings.accentColorIndex])
                         })

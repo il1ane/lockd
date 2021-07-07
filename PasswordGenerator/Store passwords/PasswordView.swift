@@ -15,19 +15,19 @@ struct PasswordView: View {
     @Binding var key: String
     @ObservedObject var passwordListViewModel:PasswordListViewModel
     @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
-    @State private var password = ""
-    @State private var showAlert = false
-    @State private var revealPassword = false
-    @Binding var isPresented: Bool
     @ObservedObject var settings:SettingsViewModel
-    @State private var editingPassword = false
-    @State private var editedPassword = ""
-    @State private var editingUsername = false
-    @State private var editedUsername = ""
+    @State private var showAlert = false
+    @Binding var isPresented: Bool
     @Binding var title: String
     @Binding var username:String
     @State private var clipboardSaveAnimation = false
     @State private var showUsernameSection = true
+    @State private var revealPassword = false
+    @State private var password = ""
+    @State private var editingUsername = false
+    @State private var editedUsername = ""
+    @State private var editingPassword = false
+    @State private var editedPassword = ""
     
     var body: some View {
         
@@ -36,90 +36,43 @@ struct PasswordView: View {
                 Form {
                     
                     Section(header: Text("Mot de passe")) {
-                        if !editingPassword {
-                            HStack {
-                                
-                                HStack {
-                                    Spacer()
-                                    Text(revealPassword ? password : "****************************")
-                                    Spacer()
-                                }
-                                Spacer()
-                                Button(action: { editingPassword.toggle()
-                                    editedPassword = password
-                                }, label: {
-                                    Image(systemName: "pencil")
-                                    
-                                    
-                                })
-                                .foregroundColor(!revealPassword ? .gray : settings.colors[settings.accentColorIndex])
-                                .buttonStyle(PlainButtonStyle())
-                                .disabled(!revealPassword)
-                                
-                            }
-                        } else {
-                            
-                            HStack {
-                                CocoaTextField("password", text: $editedPassword)
-                                    .keyboardType(.asciiCapable)
-                                    .isFirstResponder(true)
-                                    .disableAutocorrection(true)
-                                
-                                Button(action: {
-                                    editingPassword.toggle()
-                                    password = editedPassword
-                                    passwordListViewModel.updatePassword(key: key, newPassword: password)
-                                    passwordListViewModel.addedPasswordHaptic()
-                                },     label: {
-                                    Image(systemName: "checkmark")
-                                        .foregroundColor(!editedPassword.isEmpty ? .green : .blue)
-                                })
-                                .disabled(editedPassword.isEmpty)
-                                .buttonStyle(PlainButtonStyle())
-                                .foregroundColor(settings.colors[settings.accentColorIndex])
-                            }
-                        }
-                        
-                        Button(action: {
-                            settings.copyToClipboard(password: password)
-                            passwordGeneratorViewModel.copyPasswordHaptic()
-                            clipboardSaveAnimation = true
-                            }, label: {
-                            
-                            HStack {
-                                Spacer()
-                                Text("Copier")
-                                Spacer()
-                            }
-                                
-                        })
-                        .disabled(revealPassword ? false : true)
-                    }
                     
+                    PasswordSection(password: $password,
+                                    revealPassword: $revealPassword,
+                                    key: $key,
+                                    clipboardSaveAnimation: $clipboardSaveAnimation,
+                                    passwordListViewModel: passwordListViewModel,
+                                    passwordGeneratorViewModel: passwordGeneratorViewModel,
+                                    settings: settings,
+                                    isEditingPassword: $editingPassword,
+                                    editedPassword: $editedPassword)
+                        
+                    }
+              
                     if showUsernameSection {
                         Section(header: Text("Nom de compte")) {
-                            
+
                             if !editingUsername {
-                                
+
                                 HStack {
                                     Spacer()
                                     Text(username)
                                     Spacer()
                                     Button(action: { editingUsername.toggle()
                                         editedUsername = username
-                                        
+
                                     }, label: {
                                         Image(systemName: "pencil")
                                     })
                                 }
                             } else {
-                                
+
                                 HStack {
                                     CocoaTextField("Username", text: $editedUsername)
                                         .keyboardType(.asciiCapable)
                                         .isFirstResponder(true)
                                         .disableAutocorrection(true)
-                                    
+
                                     Button(action: {
                                         editingUsername.toggle()
                                         username = editedUsername
@@ -127,7 +80,7 @@ struct PasswordView: View {
                                         let newKey = passwordListViewModel.updateUsername(key: key, password: password, newUsername: username, title: title)
                                         key = newKey
                                         passwordListViewModel.addedPasswordHaptic()
-                                        
+
                                     }
                                     , label: {
                                         Image(systemName: "checkmark")
@@ -143,7 +96,7 @@ struct PasswordView: View {
                                 passwordGeneratorViewModel.copyPasswordHaptic()
                                 clipboardSaveAnimation = true
                             }) {
-                                
+
                                 HStack {
                                     Spacer()
                                     Text("Copier")
@@ -161,7 +114,7 @@ struct PasswordView: View {
                             Spacer()
                         }
                     }
-                    
+
                     Section {
                         
                         HStack {
@@ -204,14 +157,15 @@ struct PasswordView: View {
                                         })
                                         .padding(5)
                                         .foregroundColor(settings.colors[settings.accentColorIndex]))
-                
-                
+
             }
+            
             if clipboardSaveAnimation {
                 PopupAnimation(settings: settings, message: settings.ephemeralClipboard ? "Copié! (60s)" : "Copié!")
                     .onAppear(perform: { clipBoardAnimationDisapear() })
                     .animation(.easeInOut(duration: 0.1))
             }
+            
         }.onAppear(perform: { if username.isEmpty { showUsernameSection = false }})
     }
     
@@ -226,6 +180,7 @@ struct PasswordView: View {
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView(key: .constant("clérandom"), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), isPresented: .constant(true), settings: SettingsViewModel(), title: .constant("usernafame"), username: .constant(""))
+        PasswordView(key: .constant("clérandom"), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settings: SettingsViewModel(), isPresented: .constant(true), title: .constant("usernafame"), username: .constant(""))
     }
 }
+
