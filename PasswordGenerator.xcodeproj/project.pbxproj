@@ -25,13 +25,20 @@
 		91438211264857A200819C15 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91438210264857A200819C15 /* PasswordView.swift */; };
 		914382142648AD4700819C15 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914382132648AD4700819C15 /* SettingsView.swift */; };
 		914382162648AF6B00819C15 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914382152648AF6B00819C15 /* SettingsViewModel.swift */; };
-		9145A5772649E23600594C11 /* LoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145A5762649E23600594C11 /* LoggingView.swift */; };
+		9145A5772649E23600594C11 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9145A5762649E23600594C11 /* AuthenticationView.swift */; };
 		914D803326713CDE004063FD /* PasswordStrenghtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D803226713CDE004063FD /* PasswordStrenghtView.swift */; };
 		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
 		918626362678CF690022DB90 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 918626382678CF690022DB90 /* InfoPlist.strings */; };
 		91869B0E2673669C008BE7C4 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91869B0D2673669C008BE7C4 /* PrivacyView.swift */; };
 		91B63F97266FF8960092F2B0 /* PasswordGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
+		91C577A2269763FB00F16A23 /* LockTimerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577A1269763FB00F16A23 /* LockTimerPicker.swift */; };
+		91C577A42697656B00F16A23 /* UnlockMethodToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577A32697656B00F16A23 /* UnlockMethodToggle.swift */; };
+		91C577A62697679800F16A23 /* PrivacyModeToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577A52697679800F16A23 /* PrivacyModeToggle.swift */; };
+		91C577A8269767C600F16A23 /* EphemeralClipboardToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577A7269767C600F16A23 /* EphemeralClipboardToggle.swift */; };
+		91C577AA269767EC00F16A23 /* ExternalLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577A9269767EC00F16A23 /* ExternalLinks.swift */; };
+		91C577AC2697682100F16A23 /* iCloudSyncToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577AB2697682100F16A23 /* iCloudSyncToggle.swift */; };
+		91C577AE2697684B00F16A23 /* ClearPasswordsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577AD2697684B00F16A23 /* ClearPasswordsButton.swift */; };
 		91D89AC62653DE0100CF22E1 /* PopupAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */; };
 		91E6084C265E4D8300678CD3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084B265E4D8300678CD3 /* OnboardingView.swift */; };
 		91E6084E265E51D700678CD3 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E6084D265E51D700678CD3 /* OnboardingCell.swift */; };
@@ -68,7 +75,7 @@
 		91438210264857A200819C15 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 		914382132648AD4700819C15 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		914382152648AF6B00819C15 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		9145A5762649E23600594C11 /* LoggingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingView.swift; sourceTree = "<group>"; };
+		9145A5762649E23600594C11 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
 		914D803226713CDE004063FD /* PasswordStrenghtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrenghtView.swift; sourceTree = "<group>"; };
 		9158C0472647F71D005C8B0C /* TextBindingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingManager.swift; sourceTree = "<group>"; };
 		918626372678CF690022DB90 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -77,6 +84,13 @@
 		91B63F94266FF8960092F2B0 /* PasswordGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasswordGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorTests.swift; sourceTree = "<group>"; };
 		91B63F98266FF8960092F2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		91C577A1269763FB00F16A23 /* LockTimerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockTimerPicker.swift; sourceTree = "<group>"; };
+		91C577A32697656B00F16A23 /* UnlockMethodToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockMethodToggle.swift; sourceTree = "<group>"; };
+		91C577A52697679800F16A23 /* PrivacyModeToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyModeToggle.swift; sourceTree = "<group>"; };
+		91C577A7269767C600F16A23 /* EphemeralClipboardToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EphemeralClipboardToggle.swift; sourceTree = "<group>"; };
+		91C577A9269767EC00F16A23 /* ExternalLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalLinks.swift; sourceTree = "<group>"; };
+		91C577AB2697682100F16A23 /* iCloudSyncToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudSyncToggle.swift; sourceTree = "<group>"; };
+		91C577AD2697684B00F16A23 /* ClearPasswordsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearPasswordsButton.swift; sourceTree = "<group>"; };
 		91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupAnimation.swift; sourceTree = "<group>"; };
 		91E6084B265E4D8300678CD3 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		91E6084D265E51D700678CD3 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
@@ -107,12 +121,12 @@
 		9103AC0A26459F5C00CA6EB6 /* Store passwords */ = {
 			isa = PBXGroup;
 			children = (
+				9143820C2648526B00819C15 /* PasswordListViewModel.swift */,
 				912B03E12644660D001C5FCA /* PasswordListView.swift */,
 				9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */,
 				91438210264857A200819C15 /* PasswordView.swift */,
 				9130A9712695EA5B003B0B9A /* UsernameSection.swift */,
 				9130A96F2695CA34003B0B9A /* PasswordSection.swift */,
-				9143820C2648526B00819C15 /* PasswordListViewModel.swift */,
 			);
 			path = "Store passwords";
 			sourceTree = "<group>";
@@ -185,8 +199,15 @@
 		914382122648AD3300819C15 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				914382132648AD4700819C15 /* SettingsView.swift */,
 				914382152648AF6B00819C15 /* SettingsViewModel.swift */,
+				914382132648AD4700819C15 /* SettingsView.swift */,
+				91C577A32697656B00F16A23 /* UnlockMethodToggle.swift */,
+				91C577A52697679800F16A23 /* PrivacyModeToggle.swift */,
+				91C577A7269767C600F16A23 /* EphemeralClipboardToggle.swift */,
+				91C577A9269767EC00F16A23 /* ExternalLinks.swift */,
+				91C577AB2697682100F16A23 /* iCloudSyncToggle.swift */,
+				91C577A1269763FB00F16A23 /* LockTimerPicker.swift */,
+				91C577AD2697684B00F16A23 /* ClearPasswordsButton.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -195,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				91869B0D2673669C008BE7C4 /* PrivacyView.swift */,
-				9145A5762649E23600594C11 /* LoggingView.swift */,
+				9145A5762649E23600594C11 /* AuthenticationView.swift */,
 				91D89AC52653DE0100CF22E1 /* PopupAnimation.swift */,
 				9134F8F02695B52B00858F0E /* ViewExtensions.swift */,
 				9103AC0C2645A00600CA6EB6 /* MainView.swift */,
@@ -333,10 +354,14 @@
 			files = (
 				9103AC0F2645A7BD00CA6EB6 /* SavePasswordView.swift in Sources */,
 				912B03E22644660D001C5FCA /* PasswordListView.swift in Sources */,
+				91C577A8269767C600F16A23 /* EphemeralClipboardToggle.swift in Sources */,
+				91C577A42697656B00F16A23 /* UnlockMethodToggle.swift in Sources */,
 				9103AC0D2645A00600CA6EB6 /* MainView.swift in Sources */,
 				912B03DE2643DDE2001C5FCA /* PasswordGeneratorView.swift in Sources */,
+				91C577AA269767EC00F16A23 /* ExternalLinks.swift in Sources */,
 				912B03E02643E566001C5FCA /* PasswordGeneratorViewModel.swift in Sources */,
 				912B03D62643D6F1001C5FCA /* PasswordGenerator.xcdatamodeld in Sources */,
+				91C577A2269763FB00F16A23 /* LockTimerPicker.swift in Sources */,
 				9143820D2648526B00819C15 /* PasswordListViewModel.swift in Sources */,
 				9130A9702695CA34003B0B9A /* PasswordSection.swift in Sources */,
 				91438211264857A200819C15 /* PasswordView.swift in Sources */,
@@ -344,13 +369,16 @@
 				91869B0E2673669C008BE7C4 /* PrivacyView.swift in Sources */,
 				9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */,
 				912B03CA2643D6EF001C5FCA /* PasswordGeneratorApp.swift in Sources */,
-				9145A5772649E23600594C11 /* LoggingView.swift in Sources */,
+				9145A5772649E23600594C11 /* AuthenticationView.swift in Sources */,
 				91E6084E265E51D700678CD3 /* OnboardingCell.swift in Sources */,
 				9130A9722695EA5B003B0B9A /* UsernameSection.swift in Sources */,
 				914382142648AD4700819C15 /* SettingsView.swift in Sources */,
+				91C577A62697679800F16A23 /* PrivacyModeToggle.swift in Sources */,
 				914D803326713CDE004063FD /* PasswordStrenghtView.swift in Sources */,
 				91E6084C265E4D8300678CD3 /* OnboardingView.swift in Sources */,
+				91C577AC2697682100F16A23 /* iCloudSyncToggle.swift in Sources */,
 				914382162648AF6B00819C15 /* SettingsViewModel.swift in Sources */,
+				91C577AE2697684B00F16A23 /* ClearPasswordsButton.swift in Sources */,
 				9134F8F12695B52B00858F0E /* ViewExtensions.swift in Sources */,
 				9134F8EF2694C86500858F0E /* TabViews.swift in Sources */,
 			);
@@ -530,7 +558,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilianezedadra.passwordGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -554,7 +582,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ilianezedadra.passwordGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
