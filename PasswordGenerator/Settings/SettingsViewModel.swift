@@ -13,7 +13,7 @@ import CoreHaptics
 final class SettingsViewModel: ObservableObject {
     
     init() {
-        self.faceIdDefault = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? false
+        self.unlockMethodIsActive = UserDefaults.standard.object(forKey: "biometricAuthentication") as? Bool ?? false
         self.faceIdToggle = UserDefaults.standard.object(forKey: "faceIdToggle") as? Bool ?? false
         self.accentColorIndex = UserDefaults.standard.object(forKey: "accentColorIndex") as? Int ?? 1
         supportsHaptics = hapticCapability.supportsHaptics
@@ -71,9 +71,9 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    @Published var faceIdDefault: Bool {
+    @Published var unlockMethodIsActive: Bool {
         didSet {
-            UserDefaults.standard.set(faceIdDefault, forKey: "biometricAuthentication")
+            UserDefaults.standard.set(unlockMethodIsActive, forKey: "biometricAuthentication")
         }
     }
     
@@ -156,24 +156,24 @@ final class SettingsViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     if success {
                         print("Success")
-                        self.faceIdDefault = true
+                        self.unlockMethodIsActive = true
                         
                     } else {
                         self.faceIdToggle = false
-                        self.faceIdDefault = false
+                        self.unlockMethodIsActive = false
                         print("Failed to authenticate")
                     }
                 }
             }
         } else {
             print("No biometrics")
-            self.faceIdDefault = false
+            self.unlockMethodIsActive = false
             
         }
     }
     
     func turnOffBiometricAuthentication() {
-        self.faceIdDefault = false
+        self.unlockMethodIsActive = false
     }
     
     func lockAppInBackground() {

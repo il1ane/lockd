@@ -53,7 +53,7 @@ struct PasswordGeneratorApp: App {
                 if settingsViewModel.privacyMode {
                 settingsViewModel.isHiddenInAppSwitcher = true
                 }
-                if settingsViewModel.faceIdDefault {
+                if settingsViewModel.unlockMethodIsActive {
                     settingsViewModel.lockAppInBackground()
                 }
             }

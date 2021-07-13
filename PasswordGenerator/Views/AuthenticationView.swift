@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoggingView: View {
+struct AuthenticationView: View {
     
     @State private var scale: CGFloat = 1
     @ObservedObject var viewModel: SettingsViewModel
@@ -38,8 +38,13 @@ struct LoggingView: View {
                 
                     Spacer()
                 
-                    Button(action: { if viewModel.biometricAuthentication() {
-                            passwordViewModel.getAllKeys() }}, label: {
+                    Button(action: {
+                            if viewModel.biometricAuthentication() {
+                            
+                            passwordViewModel.getAllKeys() }
+                        
+                    },
+                           label: {
                         Label(
                             title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Entrer le mot mot de passe") },
                             icon: { Image(systemName: adaptativeImage(biometricType: biometricType)) }
@@ -55,13 +60,13 @@ struct LoggingView: View {
             }
             .onAppear(perform: {
                 biometricType = viewModel.biometricType()
-                if settingsViewModel.faceIdDefault == false {
+                if settingsViewModel.unlockMethodIsActive == false {
                     settingsViewModel.isUnlocked = true
                     passwordViewModel.getAllKeys()
                     print("No biometric authentication")
                 }
                 
-                if settingsViewModel.faceIdDefault == true {
+                if settingsViewModel.unlockMethodIsActive == true {
                     if settingsViewModel.biometricAuthentication() {
                         passwordViewModel.getAllKeys()
                     }
@@ -88,6 +93,6 @@ extension View {
 
 struct LoggingView_Previews: PreviewProvider {
     static var previews: some View {
-        LoggingView(viewModel: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.touch, passwordViewModel: PasswordListViewModel(), settingsViewModel: SettingsViewModel())
+        AuthenticationView(viewModel: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.touch, passwordViewModel: PasswordListViewModel(), settingsViewModel: SettingsViewModel())
     }
 }

@@ -29,7 +29,7 @@ struct MainView: View {
         
         else if !settingsViewModel.isUnlocked {
             
-            LoggingView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel, settingsViewModel: settingsViewModel)
+            AuthenticationView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel, settingsViewModel: settingsViewModel)
         }
     }
 }

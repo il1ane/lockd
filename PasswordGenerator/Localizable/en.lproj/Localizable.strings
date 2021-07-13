@@ -69,7 +69,7 @@
 "Supprimer definitivement" = "Delete";
 "Copié!" = "Copied!";
 "Copié! (60s)" = "Copied! (60s)";
-"Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "If this option is active, the contents of the clipboard will be automatically cleared after 60 seconds.";
+"Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "If this option is active, the clipboard contents will be automatically cleared after 60 seconds.";
 "Presse papier éphémère" = "Ephemeral clipboard";
 
 //SettingsView
@@ -84,7 +84,7 @@
 "Immédiat" = "Instantly";
 "Liens" = "Links";
 "Couleur principale" = "Accent color";
-"Suivez moi sur Twitter" = "Follow me on Twitter";
+"Suivez nous sur Twitter" = "Follow us on Twitter";
 "Vert" = "Green";
 "Bleu" = "Blue";
 "Rouge" = "Red";

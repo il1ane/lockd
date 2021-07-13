@@ -17,126 +17,57 @@ struct SettingsView: View {
     @ObservedObject var passwordViewModel: PasswordListViewModel
     
     var body: some View {
+        
         NavigationView {
+            
             VStack {
+                
                 ZStack {
+
                     Form {
                         
                         Section(header: Text("Sécurité")) {
                             
-                            Toggle(isOn: $settingsViewModel.faceIdToggle,
-                                   label: {
-                                    Label(title: { biometricType == .face ? Text("Déverouiller avec Face ID") : biometricType == .touch ? Text("Déverouiller avec Touch ID") : Text("Déverouiller avec votre mot de passe") },
-                                          icon: { biometricType == .face ? Image(systemName: "faceid") : biometricType == .touch ? Image(systemName: "touchid") : Image(systemName: "key.fill") }
-                                    )
-                                   })
-                                .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
-                                
-                                .onChange(of: settingsViewModel.faceIdToggle, perform: { _ in
-                                    
-                                    if settingsViewModel.faceIdToggle {
-                                        settingsViewModel.addBiometricAuthentication()
-                                        print("Waiting for auth")
-                                    }
-                                    
-                                    if !settingsViewModel.faceIdToggle {
-                                        settingsViewModel.turnOffBiometricAuthentication()
-                                    }
-                                })
+                            UnlockMethodToggle(settingsViewModel: settingsViewModel,
+                                               biometricType: biometricType)
                             
-                            if settingsViewModel.faceIdDefault {
-                                Picker(selection: $settingsViewModel.autoLock, label: Label(
-                                        title: { Text("Vérouillage auto.") },
-                                        icon: { Image(systemName: "lock.fill") }),
-                                       content: {
-                                        Text("Immédiat").tag(0)
-                                        Text("1 minute").tag(1)
-                                        Text("5 minutes").tag(5)
-                                        Text("15 minutes").tag(15)
-                                        Text("30 minutes").tag(30)
-                                       })
+                            if settingsViewModel.unlockMethodIsActive {
+                                
+                                LockTimerPicker(settingsViewModel: settingsViewModel)
+                                
                             }
                             
-                            //iCloud sync, need testing before adding this feature
+                            PrivacyModeToggle(settingsViewModel: settingsViewModel)
                             
-                            //                            Toggle(isOn: $passwordViewModel.keychainSyncWithIcloud, label: {
-                            //                                Label(
-                            //                                    title: { Text("iCloud keychain") },
-                            //                                    icon: { Image(systemName: "key.icloud.fill") }
-                            //                                )
-                            //                            })
-                            //                            .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
-                            //
-                            //                            .onChange(of: passwordViewModel.keychainSyncWithIcloud, perform: { value in
-                            //                                if passwordViewModel.keychainSyncWithIcloud {
-                            //                                    passwordViewModel.keychain.synchronizable = true
-                            //                                    print("iCloud sync on")
-                            //                                } else {
-                            //                                    passwordViewModel.keychain.synchronizable = false
-                            //                                    print("iCloud sync turned off")
-                            //                                }
-                            //                            })
+                            //need testing before adding this feature
                             
-                            Toggle(isOn: $settingsViewModel.privacyMode,
-                                   label: {
-                                    Label(title: { Text("Cacher dans le multitâche") },
-                                          icon: { Image(systemName: "eye.slash") })
-                                   })
-                                .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
+                            //  iCloudSyncToggle(settingsViewModel: settingsViewModel, passwordViewModel: passwordViewModel)
+                            
                         }
                         
                         Section(header: Text(""), footer: Text("Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes.")) {
-                        Toggle(isOn: $settingsViewModel.ephemeralClipboard, label: {
-                            Label(
-                                title: { Text("Presse papier éphémère") },
-                                icon: { Image(systemName: "doc.on.doc") })
-                        })
-                        .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
+                            
+                            EphemeralClipboardToggle(settingsViewModel: settingsViewModel)
+                            
                         }
                         
-                        Section(header: Text("Liens")) {
-                            
-                            Link(destination: URL(string: "https://github.com/il1ane/PasswordGenerator")!) {
-                                Label(title: { Text("Code source (GitHub)") },
-                                      icon: { Image(systemName: "chevron.left.slash.chevron.right") }) }
-                            
-                            Link(destination: URL(string: "https://twitter.com/il1ane")!) {
-                                Label(title: { Text("Suivez moi sur Twitter") },
-                                      icon: { Image(systemName: "heart.fill") }) }
-                            
-                            Button(action: { settingsViewModel.requestAppStoreReview() },
-                                   label:
-                                    Label(title: { Text("Noter sur l'App Store") },
-                                          icon: { Image(systemName: "star.fill") }))
-                        }
+                        ExternalLinks(settingsViewModel: settingsViewModel)
                         
-                        Section() {
-                            Button(action: { removePasswordAlert.toggle() }, label: {
-                                Label(
-                                    title: { Text("Effacer tous les mots de passes").foregroundColor(.red)},
-                                    icon: { Image(systemName: "trash.fill").foregroundColor(.red)
-                                    }
-                                )
-                            }).buttonStyle(PlainButtonStyle())
-                        }
+                        ClearPasswordsButton(removePasswordAlert: $removePasswordAlert,
+                                             keychain: keychain,
+                                             passwordViewModel: passwordViewModel)
                     }
                 }
                 .onAppear(perform: {
-                            biometricType = settingsViewModel.biometricType() })
-                .navigationBarTitle("Préférences")
-                
-                .alert(isPresented: $removePasswordAlert, content: {
-                    Alert(title: Text("Effacer TOUS les mots de passes"),
-                          message: Text("Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible."),
-                          primaryButton: .cancel(),
-                          secondaryButton: .destructive(Text("TOUT supprimer"),
-                                                        action: {
-                                                            keychain.clear()
-                                                            passwordViewModel.addedPasswordHaptic()
-                                                        }))
+                    
+                    biometricType = settingsViewModel.biometricType()
+                    
                 })
+                
+                .navigationBarTitle("Préférences")
             }
-        }.accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
+        }
+        .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
     }
 }
 
@@ -145,3 +76,4 @@ struct SettingsView_Previews: PreviewProvider {
         SettingsView(settingsViewModel: SettingsViewModel(), biometricType: SettingsViewModel.BiometricType.face, passwordViewModel: PasswordListViewModel())
     }
 }
+
