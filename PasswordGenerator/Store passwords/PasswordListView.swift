@@ -20,10 +20,12 @@ struct PasswordListView: View {
     @State private var password = ""
     @ObservedObject var settings:SettingsViewModel
     @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
+    @ObservedObject var settingsViewModel:SettingsViewModel
     @State private var title = ""
     @State private var showAnimation = false
     @State private var searchText = ""
     @State private var username = ""
+    @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
         
@@ -87,9 +89,10 @@ struct PasswordListView: View {
 
                     VStack {}
                         .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
-                            PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settings, isPresented: $showPasswordView, title: $title, username: $username)
-                                .environment(\.colorScheme, colorScheme)
-                                .accentColor(settings.colors[settings.accentColorIndex])
+                                PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settings, isPresented: $showPasswordView, title: $title, username: $username)
+                                    .environment(\.colorScheme, colorScheme)
+                                    .accentColor(settings.colors[settings.accentColorIndex])
+                            
                         })
                     
                     VStack {}
@@ -110,6 +113,33 @@ struct PasswordListView: View {
                         }))
                 }
             }
+            .onChange(of: scenePhase) { newPhase in
+                
+                if newPhase == .inactive {
+                    if settingsViewModel.privacyMode {
+                    settingsViewModel.isHiddenInAppSwitcher = false
+                    }
+                }
+                
+                else if newPhase == .active {
+                    if settingsViewModel.privacyMode {
+                    settingsViewModel.isHiddenInAppSwitcher = false
+                    }
+                    settingsViewModel.lockAppTimerIsRunning = false
+                }
+                
+                else if newPhase == .background {
+                    if settingsViewModel.privacyMode {
+                    settingsViewModel.isHiddenInAppSwitcher = true
+                    showPasswordView = false 
+                    }
+                    if settingsViewModel.unlockMethodIsActive {
+                        settingsViewModel.lockAppInBackground()
+                    }
+                }
+            }
+
+            
         }
     }
 }
@@ -117,6 +147,6 @@ struct PasswordListView: View {
 
 struct PasswordListView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordListView(passwordViewModel: PasswordListViewModel(), settings: SettingsViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel())
+        PasswordListView(passwordViewModel: PasswordListViewModel(), settings: SettingsViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settingsViewModel: SettingsViewModel())
     }
 }

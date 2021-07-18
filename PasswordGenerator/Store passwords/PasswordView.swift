@@ -31,6 +31,7 @@ struct PasswordView: View {
     
     var body: some View {
         
+        if !settings.isHiddenInAppSwitcher {
         ZStack {
             NavigationView {
                 Form {
@@ -128,6 +129,9 @@ struct PasswordView: View {
             
         }
         .onAppear(perform: { if username.isEmpty { showUsernameSection = false }})
+        } else if settings.isHiddenInAppSwitcher {
+            PrivacyView()
+        }
     }
 }
 

@@ -28,7 +28,7 @@ struct TabViews: View {
                         
                         PasswordListView(passwordViewModel: passwordListViewModel,
                                          settings: settingsViewModel,
-                                         passwordGeneratorViewModel: passwordGeneratorViewModel)
+                                         passwordGeneratorViewModel: passwordGeneratorViewModel, settingsViewModel: settingsViewModel)
                             .tabItem {
                                 Label(title: { Text("Coffre fort") },
                                       icon: { Image(systemName: "lock.square") })
