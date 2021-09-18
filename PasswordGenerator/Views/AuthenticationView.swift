@@ -27,8 +27,11 @@ struct AuthenticationView: View {
                     VStack {
                     Spacer()
                         
-                        .frame(maxHeight : 30)
-                    Image(systemName: "lock.fill")
+                        .frame(maxHeight : 50)
+                    Image("appIcon")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(minWidth: 10, idealWidth: 50, maxWidth: 100, minHeight: 0, idealHeight: 50, maxHeight: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                         .foregroundColor(.white)
                         .font(.system(size: 80))
                         .scaleEffect(scale)

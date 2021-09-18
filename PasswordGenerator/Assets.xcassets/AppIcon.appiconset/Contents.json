@@ -13,6 +13,12 @@
       "size" : "20x20"
     },
     {
+      "filename" : "iPad_Settings_29_1x-1.png",
+      "idiom" : "iphone",
+      "scale" : "1x",
+      "size" : "29x29"
+    },
+    {
       "filename" : "iPhone_Settings_29_2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
@@ -79,7 +85,7 @@
       "size" : "40x40"
     },
     {
-      "filename" : "iPhone_Spotlight_40_2x-1.png",
+      "filename" : "iPad_Spotlight_40_2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
