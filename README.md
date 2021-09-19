@@ -1,5 +1,5 @@
 # lockd
-Generate strong passwords and save them in Keychain.
+Password manager iOS app, generate strong passwords and save them in Keychain.
  
  ![Simulator Screen Recording - iPhone 12 - 2021-06-10 at 23 49 11](https://user-images.githubusercontent.com/61360545/121601803-bb126b00-ca46-11eb-8163-ea77ef7dbc0b.gif)
 
