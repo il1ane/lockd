@@ -101,7 +101,7 @@ struct UsernameSection: View {
 
 extension UsernameSection {
     
-    func updateUsername() {
+     func updateUsername() {
         
         editingUsername.toggle()
         username = editedUsername
@@ -122,7 +122,7 @@ struct UsernameSection_Previews: PreviewProvider {
                         username: .constant(""),
                         key: .constant(""),
                         password: .constant(""),
-                        title: .constant("title"),
+                        title: .constant(""),
                         clipboardSaveAnimation: .constant(true),
                         passwordListViewModel: PasswordListViewModel(),
                         passwordGeneratorViewModel: PasswordGeneratorViewModel(),

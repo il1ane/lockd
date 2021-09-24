@@ -16,7 +16,6 @@ struct PrivacyView: View {
                 .foregroundColor(.white)
                 .font(.system(size: 80))
         }
-        .animation(.easeIn)
     }
 }
 

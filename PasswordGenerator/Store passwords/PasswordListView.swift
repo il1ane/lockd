@@ -13,18 +13,15 @@ import KeychainSwift
 struct PasswordListView: View {
     
     @ObservedObject var passwordViewModel: PasswordListViewModel
+    @State private var password = ""
     @Environment(\.colorScheme) var colorScheme
     @State private var showPasswordView = false
-    @State private var chosenKey = ""
     @State private var addSheetIsShowing = false
-    @State private var password = ""
     @ObservedObject var settings:SettingsViewModel
     @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
     @ObservedObject var settingsViewModel:SettingsViewModel
-    @State private var title = ""
     @State private var showAnimation = false
     @State private var searchText = ""
-    @State private var username = ""
     @Environment(\.scenePhase) var scenePhase
     
     var body: some View {
@@ -62,24 +59,27 @@ struct PasswordListView: View {
                                 .pickerStyle(MenuPickerStyle())
                             }) {
                                 List {
-                                    ForEach(passwordViewModel.sortSelection == 0 ?
+                                    ForEach(enumerating: passwordViewModel.sortSelection == 0 ?
                                             
                                                 self.passwordViewModel.keys.sorted().filter {
                                                     self.searchText.isEmpty ? true : $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }
                                                 :
                                                 self.passwordViewModel.keys.sorted().reversed().filter  {  self.searchText.isEmpty ? true :
-                                                    $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }, id: \.self) { key in
+                                        $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }, id: \.self) { keys,key in
                                         
                                         let keyArray = key.components(separatedBy: passwordViewModel.separator)
                                         
+                                        let title = keyArray[0]
+                                        let username = keyArray[1]
+                                            
+                                        
                                         HStack {
-                                            Button(action: {
-                                                chosenKey = key
-                                                showPasswordView.toggle()
-                                                title = keyArray[0]
-                                                username = keyArray[1]
-                                            },
-                                            label: Text("\(keyArray[0])"))
+                                            NavigationLink(destination: PasswordView(key: key, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settingsViewModel, title: title, username: username)) {
+                                                Label(title, systemImage: "key")
+                                            }
+//                                                
+//                                           
+//
                                     }
                                 }
                             }
@@ -87,13 +87,6 @@ struct PasswordListView: View {
                     }
                 }
 
-                    VStack {}
-                        .sheet(isPresented: $showPasswordView, onDismiss: passwordViewModel.getAllKeys ,content: {
-                                PasswordView(key: $chosenKey, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settings, isPresented: $showPasswordView, title: $title, username: $username)
-                                    .environment(\.colorScheme, colorScheme)
-                                    .accentColor(settings.colors[settings.accentColorIndex])
-                            
-                        })
                     
                     VStack {}
                         .sheet(isPresented: $addSheetIsShowing, content: {
@@ -101,11 +94,9 @@ struct PasswordListView: View {
                                 .environment(\.colorScheme, colorScheme)
                                 .accentColor(settings.colors[settings.accentColorIndex])
                         })
-                        .onAppear(perform: {
-                            passwordViewModel.getAllKeys()
-                        })
                         
                         
+                    VStack {}
                         .navigationBarTitle("Coffre fort")
                         
                         .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
@@ -113,33 +104,11 @@ struct PasswordListView: View {
                         }))
                 }
             }
-            .onChange(of: scenePhase) { newPhase in
-                
-                if newPhase == .inactive {
-                    if settingsViewModel.privacyMode {
-                    settingsViewModel.isHiddenInAppSwitcher = false
-                    }
-                }
-                
-                else if newPhase == .active {
-                    if settingsViewModel.privacyMode {
-                    settingsViewModel.isHiddenInAppSwitcher = false
-                    }
-                    settingsViewModel.lockAppTimerIsRunning = false
-                }
-                
-                else if newPhase == .background {
-                    if settingsViewModel.privacyMode {
-                    settingsViewModel.isHiddenInAppSwitcher = true
-                    showPasswordView = false 
-                    }
-                    if settingsViewModel.unlockMethodIsActive {
-                        settingsViewModel.lockAppInBackground()
-                    }
-                }
-            }
-
             
+            .onAppear(perform: {
+                passwordViewModel.getAllKeys()
+            })
+                        
         }
     }
 }

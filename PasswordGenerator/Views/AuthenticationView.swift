@@ -63,6 +63,7 @@ struct AuthenticationView: View {
             }
             .onAppear(perform: {
                 biometricType = viewModel.biometricType()
+             
                 if settingsViewModel.unlockMethodIsActive == false {
                     settingsViewModel.isUnlocked = true
                     passwordViewModel.getAllKeys()

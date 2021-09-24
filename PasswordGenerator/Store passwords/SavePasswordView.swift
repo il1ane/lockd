@@ -147,6 +147,7 @@ struct SavePasswordView: View {
                 passwordLenght = editedPassword.text
             })
         }
+        .overlay(settings.isHiddenInAppSwitcher ? PrivacyView() : nil)
         .onAppear(perform: {
             if !generatedPasswordIsPresented {
                 isEditingPassword = true

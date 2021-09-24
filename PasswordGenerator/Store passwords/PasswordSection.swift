@@ -14,7 +14,7 @@ struct PasswordSection: View {
     
     @Binding var password: String
     @Binding var revealPassword:Bool
-    @Binding var key: String
+    var key: String
     @Binding var clipboardSaveAnimation: Bool
     @ObservedObject var passwordListViewModel: PasswordListViewModel
     @ObservedObject var passwordGeneratorViewModel: PasswordGeneratorViewModel
@@ -43,7 +43,7 @@ struct PasswordSection: View {
             EditingPasswordView(editedPassword: $editedPassword,
                                 isEditingPassword: $isEditingPassword,
                                 password: $password,
-                                key: $key,
+                                key: key,
                                 passwordListViewModel: passwordListViewModel,
                                 settings: settings)
             
@@ -95,7 +95,9 @@ extension PasswordSection {
                 Button(action: {
                     
                     isEditingPassword.toggle()
+                    
                     editedPassword = password
+                    
                     
                 }, label: {
                     
@@ -115,7 +117,7 @@ extension PasswordSection {
         @Binding var editedPassword: String
         @Binding var isEditingPassword: Bool
         @Binding var password: String
-        @Binding var key: String
+        var key: String
         @ObservedObject var passwordListViewModel:PasswordListViewModel
         @ObservedObject var settings:SettingsViewModel
         
@@ -151,7 +153,13 @@ extension PasswordSection {
     
     struct PasswordSection_Previews: PreviewProvider {
         static var previews: some View {
-            PasswordSection(password: .constant(""), revealPassword: .constant(true), key: .constant(""), clipboardSaveAnimation: .constant(true), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settings: SettingsViewModel(), isEditingPassword: .constant(true), editedPassword: .constant(""))
+            PasswordSection(password: .constant(""), revealPassword: .constant(true), key: "", clipboardSaveAnimation: .constant(true), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settings: SettingsViewModel(), isEditingPassword: .constant(true), editedPassword: .constant(""))
         }
+    }
+}
+
+extension PasswordSection {
+    mutating func updatePassword() {
+        password = editedPassword
     }
 }

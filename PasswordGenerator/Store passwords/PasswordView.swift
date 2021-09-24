@@ -12,14 +12,13 @@ import MobileCoreServices
 struct PasswordView: View {
     
     @Environment(\.presentationMode) var presentation
-    @Binding var key: String
+    @State var key: String
     @ObservedObject var passwordListViewModel:PasswordListViewModel
     @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
     @ObservedObject var settings:SettingsViewModel
     @State private var showAlert = false
-    @Binding var isPresented: Bool
-    @Binding var title: String
-    @Binding var username:String
+    @State var title: String
+    @State var username:String
     @State private var clipboardSaveAnimation = false
     @State private var showUsernameSection = true
     @State private var revealPassword = false
@@ -32,21 +31,36 @@ struct PasswordView: View {
     var body: some View {
         
         if !settings.isHiddenInAppSwitcher {
-        ZStack {
-            NavigationView {
+            ZStack {
+                
                 Form {
                     
                     Section(header: Text("Mot de passe")) {
                         
+                        if #available(iOS 15, *) {
+                        
                         PasswordSection(password: $password,
                                         revealPassword: $revealPassword,
-                                        key: $key,
+                                        key: key,
                                         clipboardSaveAnimation: $clipboardSaveAnimation,
                                         passwordListViewModel: passwordListViewModel,
                                         passwordGeneratorViewModel: passwordGeneratorViewModel,
                                         settings: settings,
                                         isEditingPassword: $editingPassword,
                                         editedPassword: $editedPassword)
+                                .privacySensitive(settings.privacyMode ? true : false)
+                            
+                        } else {
+                            PasswordSection(password: $password,
+                                            revealPassword: $revealPassword,
+                                            key: key,
+                                            clipboardSaveAnimation: $clipboardSaveAnimation,
+                                            passwordListViewModel: passwordListViewModel,
+                                            passwordGeneratorViewModel: passwordGeneratorViewModel,
+                                            settings: settings,
+                                            isEditingPassword: $editingPassword,
+                                            editedPassword: $editedPassword)
+                        }
                         
                     }
                     
@@ -81,56 +95,52 @@ struct PasswordView: View {
                 
                 .actionSheet(isPresented: $showAlert,
                              content: {
-                                ActionSheet(title: Text("Supprimer le mot de passe"),
-                                            message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
-                                            buttons: [.cancel(),
-                                                      .destructive(Text("Supprimer definitivement"),
-                                                                   action: {
-                                                                    
-                                                                    passwordListViewModel.keychain.delete(key)
-                                                                    isPresented.toggle()
-                                                                    passwordListViewModel.getAllKeys()
-                                                                    passwordListViewModel.deletedPasswordHaptic()
-                                                                    
-                                                                   }
+                    ActionSheet(title: Text("Supprimer le mot de passe"),
+                                message: Text("Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible."),
+                                buttons: [.cancel(),
+                                          .destructive(Text("Supprimer definitivement"),
+                                                       action: {
+                        
+                        passwordListViewModel.keychain.delete(key)
+                        //isPresented.toggle()
+                        passwordListViewModel.getAllKeys()
+                        passwordListViewModel.deletedPasswordHaptic()
+                        
+                    }
                                                       )])
-                             })
+                })
                 
                 .navigationBarTitle(title)
                 
-                .navigationBarItems(leading:
-                                        
-                                        Button(action: { isPresented.toggle() },
-                                               label: Image(systemName: "xmark"))
-                                        .padding(5),
-                                    
-                                    trailing:
+                .navigationBarItems(trailing:
                                         
                                         Button(action: {
-                                            
-                                            getPassword()
-                                            
-                                        }, label: { revealPassword ?
-                                            Image(systemName: "eye.slash") : Image(systemName: "eye")
-                                            
-                                        })
+                    
+                    getPassword()
+                    
+                }, label: { revealPassword ?
+                    Image(systemName: "eye.slash") : Image(systemName: "eye")
+                    
+                })
                                         .padding(5)
                                         .foregroundColor(settings.colors[settings.accentColorIndex]))
                 
-            }
-            
-            if clipboardSaveAnimation {
                 
-                PopupAnimation(settings: settings, message: settings.ephemeralClipboard ? "Copié! (60s)" : "Copié!")
-                    .onAppear(perform: { clipBoardAnimationDisapear() })
-                    .animation(.easeInOut(duration: 0.1))
+                if clipboardSaveAnimation {
+                    
+                    PopupAnimation(settings: settings, message: settings.ephemeralClipboard ? "Copié! (60s)" : "Copié!")
+                        .onAppear(perform: { clipBoardAnimationDisapear() })
+                        .animation(.easeInOut(duration: 0.1))
+                    
+                }
                 
             }
+         
             
-        }
-        .onAppear(perform: { if username.isEmpty { showUsernameSection = false }})
-        } else if settings.isHiddenInAppSwitcher {
-            PrivacyView()
+            .onAppear(perform: { if username.isEmpty { showUsernameSection = false }})
+            
+            
+            
         }
     }
 }
@@ -140,6 +150,8 @@ extension PasswordView {
     func getPassword() {
         
         password = passwordListViewModel.keychain.get(key)!
+        
+        print(password)
         revealPassword.toggle()
         passwordListViewModel.getAllKeys()
         passwordListViewModel.getPasswordHaptic()
@@ -157,7 +169,7 @@ extension PasswordView {
 
 struct PasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordView(key: .constant("clérandom"), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settings: SettingsViewModel(), isPresented: .constant(true), title: .constant("usernafame"), username: .constant(""))
+        PasswordView(key: "", passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settings: SettingsViewModel(), title: "", username: "")
     }
 }
 

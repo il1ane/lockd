@@ -12,7 +12,6 @@ struct TabViews: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     @ObservedObject var passwordListViewModel: PasswordListViewModel
     @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
-    @State private var currentTab = 0
     
     var body: some View {
         
@@ -21,26 +20,35 @@ struct TabViews: View {
                         
                         PasswordGeneratorView(settings: settingsViewModel,
                                               passwordViewModel: passwordListViewModel)
+    
                             .tabItem {
+                                
                                 Label(title: { Text("Générateur") },
                                       icon: { Image(systemName: "die.face.5.fill") })
+                                
                             }.tag(0)
                         
                         PasswordListView(passwordViewModel: passwordListViewModel,
                                          settings: settingsViewModel,
                                          passwordGeneratorViewModel: passwordGeneratorViewModel, settingsViewModel: settingsViewModel)
+            
                             .tabItem {
+                    
                                 Label(title: { Text("Coffre fort") },
                                       icon: { Image(systemName: "lock.square") })
+                                
                                 
                             }.tag(1)
                         
                         SettingsView(settingsViewModel: settingsViewModel,
                                      biometricType: settingsViewModel.biometricType(),
                                      passwordViewModel: passwordListViewModel )
+                
                             .tabItem {
+                                
                                 Label(title: { Text("Préférences") },
                                       icon: { Image(systemName: "gear") })
+                                       .animation(.easeIn)
                                 
                             }.tag(2) })
             
