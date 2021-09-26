@@ -37,20 +37,6 @@ struct PasswordView: View {
                     
                     Section(header: Text("Mot de passe")) {
                         
-                        if #available(iOS 15, *) {
-                        
-                        PasswordSection(password: $password,
-                                        revealPassword: $revealPassword,
-                                        key: key,
-                                        clipboardSaveAnimation: $clipboardSaveAnimation,
-                                        passwordListViewModel: passwordListViewModel,
-                                        passwordGeneratorViewModel: passwordGeneratorViewModel,
-                                        settings: settings,
-                                        isEditingPassword: $editingPassword,
-                                        editedPassword: $editedPassword)
-                                .privacySensitive(settings.privacyMode ? true : false)
-                            
-                        } else {
                             PasswordSection(password: $password,
                                             revealPassword: $revealPassword,
                                             key: key,
@@ -60,7 +46,6 @@ struct PasswordView: View {
                                             settings: settings,
                                             isEditingPassword: $editingPassword,
                                             editedPassword: $editedPassword)
-                        }
                         
                     }
                     
