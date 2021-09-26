@@ -10,28 +10,30 @@ import SwiftUI
 struct PasswordStrenghtView: View {
     
     let entropy:Double
+    let characterCount: Double
     @State private var animate = false
     
     var body: some View {
         
+        
+        VStack {
             HStack {
-                Text(entropyText(entropy: entropy))
-                    .foregroundColor(.white)
+                Text("\(Int(characterCount))")
+                    .font(.footnote)
+                    .bold()
+                    .overlay(Image(systemName: "shield")
+                                .foregroundColor(entropyColor(entropy: entropy))
+                                .font(.largeTitle)
+                    )
+                
             }
-            .padding(5)
-            .background(entropyColor(entropy: entropy))
-            .cornerRadius(7)
-            .animation(animate ? .easeInOut : nil)
-            .transition(.identity)
-            .onChange(of: entropy, perform: { value in
-                animate = true
-            })
+        }
     }
 }
 
 extension View {
     
-    func entropyText(entropy: Double) -> String {
+    func entropyText(entropy: Double) -> LocalizedStringKey {
         
         switch entropy {
         case 128.0...200:
@@ -66,6 +68,6 @@ extension View {
 
 struct PasswordStrenghtView_Previews: PreviewProvider {
     static var previews: some View {
-        PasswordStrenghtView(entropy: 200)
+        PasswordStrenghtView(entropy: 200, characterCount: 20)
     }
 }
