@@ -13,7 +13,7 @@ struct SearchableModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         if #available(iOS 15, *) {
-            content.searchable(text: $text, placement: .navigationBarDrawer(displayMode: .always))
+            content.searchable(text: $text, placement: .navigationBarDrawer(displayMode: .automatic))
         } else {
             
         }

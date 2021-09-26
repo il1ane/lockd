@@ -28,12 +28,11 @@ struct PasswordListView: View {
         
         NavigationView {
             
-            VStack {
+            
+            Form {
                 
-                HStack {
+                if #available(iOS 15, *) { } else {
                     
-                    if #available(iOS 15, *) { } else {
-                        
                     SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
                         .returnKeyType(.done)
                         .searchBarStyle(.minimal)
@@ -42,79 +41,69 @@ struct PasswordListView: View {
                             searchText = ""
                         }
                         .frame(maxWidth: 370)
-                    }
                 }
                 
-                Spacer()
-                ZStack {
-                    
-                    if passwordViewModel.keys.isEmpty == false {
-                        
-                        Form {
+                
+                Section(header:
                             
-                            Section(header: HStack {
-                                Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }.count )")
-                                Spacer()
-                                
-                                Picker(selection: $passwordViewModel.sortSelection, label: passwordViewModel.sortSelection == 0 ? Text("A-Z") : Text("Z-A"), content: {
-                                    Text("A-Z").tag(0)
-                                    Text("Z-A").tag(1)
-                                })
-                                .pickerStyle(MenuPickerStyle())
-                            }) {
-                                List {
-                                    ForEach(enumerating: passwordViewModel.sortSelection == 0 ?
-                                            
-                                                self.passwordViewModel.keys.sorted().filter {
-                                                    self.searchText.isEmpty ? true : $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }
-                                                :
-                                                self.passwordViewModel.keys.sorted().reversed().filter  {  self.searchText.isEmpty ? true :
-                                        $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }, id: \.self) { keys,key in
-                                        
-                                        let keyArray = key.components(separatedBy: passwordViewModel.separator)
-                                        let title = keyArray[0]
-                                        let username = keyArray[1]
-                                            
-                                        
-                                        HStack {
-                                            NavigationLink(destination: PasswordView(key: key, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settingsViewModel, title: title, username: username)) {
-                                                Label(title, systemImage: "key")
-                                            }
-                                            
-                                    }
-                                        }.onDelete { offsets in
-                                            passwordViewModel.deleteFromList(offsets: offsets)
-                                        }
-                                        
-                                        
-                                }.animation(.none)
-                        }
-                    }
-                }
-
+                            
                     
-                    VStack {}
-                        .sheet(isPresented: $addSheetIsShowing, content: {
-                            SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings)
-                                .environment(\.colorScheme, colorScheme)
-                                .accentColor(settings.colors[settings.accentColorIndex])
-                        })
-                        
-                        
-                    VStack {}
-                        .navigationBarTitle("Coffre fort")
-                        
-                        .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
-                            Image(systemName: "plus")
-                        }))
+                            HStack {
+                    Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }.count )")
+                    Spacer()
+
+                    Picker(selection: $passwordViewModel.sortSelection, label: passwordViewModel.sortSelection == 0 ? Text("A-Z") : Text("Z-A"), content: {
+                        Text("A-Z").tag(0)
+                        Text("Z-A").tag(1)
+                    })
+                    .pickerStyle(MenuPickerStyle())
+                
                 }
+                
+                ) {
+                List {
+                    ForEach(enumerating: passwordViewModel.sortSelection == 0 ?
+                            
+                            self.passwordViewModel.keys.sorted().filter {
+                        self.searchText.isEmpty ? true : $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }
+                            :
+                                self.passwordViewModel.keys.sorted().reversed().filter  {  self.searchText.isEmpty ? true :
+                        $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }, id: \.self) { keys,key in
+                            
+                            let keyArray = key.components(separatedBy: passwordViewModel.separator)
+                            let title = keyArray[0]
+                            let username = keyArray[1]
+                            
+                            
+                            HStack {
+                                NavigationLink(destination: PasswordView(key: key, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settingsViewModel, title: title, username: username)) {
+                                    Label(title, systemImage: "key")
+                                }
+                            }
+                        }
+                    
+                        .onDelete { offsets in
+                            passwordViewModel.deleteFromList(offsets: offsets)
+                        }
+                }
+                }
+                
             }
+            .sheet(isPresented: $addSheetIsShowing, content: {
+                SavePasswordView(password: $password, sheetIsPresented: $addSheetIsShowing, generatedPasswordIsPresented: false, viewModel: passwordViewModel, settings: settings)
+                    .environment(\.colorScheme, colorScheme)
+                    .accentColor(settings.colors[settings.accentColorIndex])
+            })
+            .navigationBarItems(trailing: Button(action: { addSheetIsShowing.toggle() }, label: {
+                Image(systemName: "plus")
+            }))
+            .navigationBarTitle("Coffre fort")
+            .searchablePasswords(with: $searchText)
             .onAppear(perform: {
                 passwordViewModel.getAllKeys()
             })
             
         }
-        .searchablePasswords(with: $searchText)
     }
 }
 
