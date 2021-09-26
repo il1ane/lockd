@@ -94,6 +94,18 @@ final class PasswordListViewModel: ObservableObject {
         }
     }
     
+    func deleteFromList(offsets: IndexSet) {
+        for offset in offsets {
+            let keyToDelete = keys[offset]
+            deletePassword(key: keyToDelete)
+            
+            //delay before refreshing keys because of an animation glich in list 
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
+                self.getAllKeys()
+            }
+        }
+    }
+    
     func getAllKeys() {
         if sortSelection == 0 {
             keys = keychain.allKeys.sorted()
