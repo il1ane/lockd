@@ -31,6 +31,7 @@ struct TabViews: View {
                         PasswordListView(passwordViewModel: passwordListViewModel,
                                          settings: settingsViewModel,
                                          passwordGeneratorViewModel: passwordGeneratorViewModel, settingsViewModel: settingsViewModel)
+                
             
                             .tabItem {
                     

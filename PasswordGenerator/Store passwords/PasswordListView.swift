@@ -31,6 +31,9 @@ struct PasswordListView: View {
             VStack {
                 
                 HStack {
+                    
+                    if #available(iOS 15, *) { } else {
+                        
                     SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
                         .returnKeyType(.done)
                         .searchBarStyle(.minimal)
@@ -39,6 +42,7 @@ struct PasswordListView: View {
                             searchText = ""
                         }
                         .frame(maxWidth: 370)
+                    }
                 }
                 
                 Spacer()
@@ -68,7 +72,6 @@ struct PasswordListView: View {
                                         $0.lowercased().components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText.lowercased()) }, id: \.self) { keys,key in
                                         
                                         let keyArray = key.components(separatedBy: passwordViewModel.separator)
-                                        
                                         let title = keyArray[0]
                                         let username = keyArray[1]
                                             
@@ -77,12 +80,14 @@ struct PasswordListView: View {
                                             NavigationLink(destination: PasswordView(key: key, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settingsViewModel, title: title, username: username)) {
                                                 Label(title, systemImage: "key")
                                             }
-//                                                
-//                                           
-//
+                                            
                                     }
-                                }
-                            }
+                                        }.onDelete { offsets in
+                                            passwordViewModel.deleteFromList(offsets: offsets)
+                                        }
+                                        
+                                        
+                                }.animation(.none)
                         }
                     }
                 }
@@ -104,14 +109,27 @@ struct PasswordListView: View {
                         }))
                 }
             }
-            
             .onAppear(perform: {
                 passwordViewModel.getAllKeys()
             })
-                        
+            
         }
+        .searchablePasswords(with: $searchText)
     }
 }
+
+extension View {
+    @ViewBuilder
+    func searchablePasswords(with text: Binding<String>) -> some View {
+        
+        if #available(iOS 15, *) {
+            self.modifier(SearchableModifier(text: text))
+                .disableAutocorrection(true)
+        }
+        else { }
+    }
+}
+
 
 
 struct PasswordListView_Previews: PreviewProvider {
