@@ -86,7 +86,18 @@ extension PasswordSection {
                 
                 HStack {
                     Spacer()
+                    
+                    if #available(iOS 15, *) {
+                        
                     Text(revealPassword ? password : "****************************")
+                        .privacySensitive(settings.privacyMode && revealPassword ? true : false)
+                        
+                    } else {
+                        
+                        Text(revealPassword ? password : "****************************")
+                        
+                    }
+                    
                     Spacer()
                 }
                 
