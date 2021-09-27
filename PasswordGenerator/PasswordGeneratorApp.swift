@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PartialSheet
 
 @main
 struct PasswordGeneratorApp: App {
@@ -14,6 +15,7 @@ struct PasswordGeneratorApp: App {
     @ObservedObject var passwordViewModel = PasswordListViewModel()
     @ObservedObject var passwordGeneratorViewModel = PasswordGeneratorViewModel()
     @Environment(\.scenePhase) var scenePhase
+    let sheetManager: PartialSheetManager = PartialSheetManager()
     
     var body: some Scene {
         
@@ -21,6 +23,7 @@ struct PasswordGeneratorApp: App {
             
             MainView(settingsViewModel: settingsViewModel, passwordViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
                 .accentColor(settingsViewModel.colors[settingsViewModel.accentColorIndex])
+                .environmentObject(sheetManager)
                 
                 //Onboarding sheet
                 .onAppear(perform: {

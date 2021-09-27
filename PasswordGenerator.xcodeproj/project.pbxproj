@@ -29,6 +29,7 @@
 		914D803326713CDE004063FD /* PasswordStrenghtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 914D803226713CDE004063FD /* PasswordStrenghtView.swift */; };
 		9158C0482647F71D005C8B0C /* TextBindingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9158C0472647F71D005C8B0C /* TextBindingManager.swift */; };
 		916D42D9270077080079B701 /* SearchableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916D42D8270077080079B701 /* SearchableModifier.swift */; };
+		916D42DC2700F4B30079B701 /* PartialSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 916D42DB2700F4B30079B701 /* PartialSheet */; };
 		918626362678CF690022DB90 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 918626382678CF690022DB90 /* InfoPlist.strings */; };
 		91869B0E2673669C008BE7C4 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91869B0D2673669C008BE7C4 /* PrivacyView.swift */; };
 		9199DD5626FF34EA00326BC2 /* SecurityInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9199DD5526FF34EA00326BC2 /* SecurityInfoView.swift */; };
@@ -107,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916D42DC2700F4B30079B701 /* PartialSheet in Frameworks */,
 				9143820B26484D7A00819C15 /* KeychainSwift in Frameworks */,
 				91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */,
 			);
@@ -267,6 +269,7 @@
 			packageProductDependencies = (
 				91C2716126472A1A0036DC49 /* SwiftUIX */,
 				9143820A26484D7A00819C15 /* KeychainSwift */,
+				916D42DB2700F4B30079B701 /* PartialSheet */,
 			);
 			productName = PasswordGenerator;
 			productReference = 912B03C62643D6EF001C5FCA /* PasswordGenerator.app */;
@@ -321,6 +324,7 @@
 			packageReferences = (
 				91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				9143820926484D7A00819C15 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				916D42DA2700F4B30079B701 /* XCRemoteSwiftPackageReference "PartialSheet" */,
 			);
 			productRefGroup = 912B03C72643D6EF001C5FCA /* Products */;
 			projectDirPath = "";
@@ -679,6 +683,14 @@
 				minimumVersion = 19.0.0;
 			};
 		};
+		916D42DA2700F4B30079B701 /* XCRemoteSwiftPackageReference "PartialSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AndreaMiotto/PartialSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		91C2716026472A1A0036DC49 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
@@ -694,6 +706,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9143820926484D7A00819C15 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		916D42DB2700F4B30079B701 /* PartialSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 916D42DA2700F4B30079B701 /* XCRemoteSwiftPackageReference "PartialSheet" */;
+			productName = PartialSheet;
 		};
 		91C2716126472A1A0036DC49 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;

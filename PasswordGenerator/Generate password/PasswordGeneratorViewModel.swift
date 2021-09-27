@@ -12,6 +12,11 @@ import SwiftUI
 final class PasswordGeneratorViewModel: ObservableObject {
     
     @Published var generatedPassword = [String]()
+    @Published var possibleCombinaisons: Double
+    
+    init() {
+        self.possibleCombinaisons = Double(truncating: NSDecimalNumber(decimal: pow(78, 20)))
+    }
     
     let passwordLenghtRange = 1...30.0
     let alphabet: [String] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -22,6 +27,7 @@ final class PasswordGeneratorViewModel: ObservableObject {
         let generator = UIImpactFeedbackGenerator(style: .rigid)
         generator.impactOccurred(intensity: 1)
     }
+    
     
     func adaptativeSliderHaptic(entropy: Double) {
         
@@ -87,10 +93,16 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 break
             }
         }
+        print("pool \(pool)")
+        let numberPower = pow(Decimal(pool), lenght)
+        print("numberPower \(numberPower)")
+        let numberPowerToDouble = Double(truncating: NSDecimalNumber(decimal: numberPower))
+        possibleCombinaisons = numberPowerToDouble
+        let entropy = log2(numberPowerToDouble)
         
-        let entropy = log2(Double(pool))
         print("Password entropy : \(entropy * Double(lenght))")
-        return entropy * Double(lenght)
+        
+        return entropy 
         
     }
     
@@ -321,3 +333,5 @@ final class PasswordGeneratorViewModel: ObservableObject {
         return password
     }
 }
+
+

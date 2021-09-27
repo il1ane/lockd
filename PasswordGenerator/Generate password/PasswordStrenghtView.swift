@@ -18,13 +18,19 @@ struct PasswordStrenghtView: View {
         
         VStack {
             HStack {
-                Text("\(Int(characterCount))")
-                    .font(.footnote)
-                    .bold()
-                    .overlay(Image(systemName: "shield")
-                                .foregroundColor(entropyColor(entropy: entropy))
-                                .font(.largeTitle)
+                
+                Image(systemName: "shield.fill")
+                            .foregroundColor(entropyColor(entropy: entropy))
+                            .font(.largeTitle)
+            
+                    .overlay(
+                             Text("\(Int(entropy))")
+                                 .foregroundColor(.white)
+                                .font(.footnote)
+                                .bold()
+                             
                     )
+               
                 
             }
         }

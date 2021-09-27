@@ -32,13 +32,15 @@
 //PasswordGeneratorView
 "Mot de passe généré aléatoirement" = "Randomly generated password";
 "Ajouter au coffre fort" = "Add to safe";
-"Nombre de caractères" = "Character count";
+"Nombre de caractères:" = "Character count:";
 "Note : chaque paramètre actif renforce la sécurité du mot de passe." = "Note: each active parameter reinforces the password security.";
 "Caractères spéciaux" = "Special characters";
 "Majuscules" = "Uppercase";
 "Chiffres" = "Figures";
 "Inclure" = "Include";
 "Générer" = "Generate";
+"Entropie:" = "Entropy:";
+"Nombre de combinaisons possibles" = "Possible combinations";
 
 //SavePasswordView
 "Titre" = "Title";

@@ -8,9 +8,11 @@
 import SwiftUI
 import MobileCoreServices
 import LocalAuthentication
+import PartialSheet
 
 struct PasswordGeneratorView: View {
     
+    @EnvironmentObject var partialSheet : PartialSheetManager
     @ObservedObject var viewModel = PasswordGeneratorViewModel()
     @Environment(\.colorScheme) var colorScheme
     @State private var isUnlocked = false
@@ -78,7 +80,10 @@ struct PasswordGeneratorView: View {
                         }
                     }
                     
-                    Section(header: Text("Nombre de caractères")) {
+                    Section(header: HStack {
+                        Text("Nombre de caractères:")
+                        Text("\(Int(characterCount))")
+                    }) {
                         
                         HStack {
                             Slider(value: $characterCount, in: viewModel.passwordLenghtRange, step: 1)
@@ -89,7 +94,7 @@ struct PasswordGeneratorView: View {
                                 .buttonStyle(PlainButtonStyle())
                            
                         }
-                        .sheet(isPresented: $entropySheetIsPresented, content: { SecurityInfoView()})
+    
                         
                         Button(action: {
                             
@@ -139,7 +144,8 @@ struct PasswordGeneratorView: View {
                         .toggleStyle(SwitchToggleStyle(tint: settings.colors[settings.accentColorIndex]))
                     }
                     
-                }.navigationBarTitle("Générateur")
+                }
+                .navigationBarTitle("Générateur")
             
                 if passwordViewModel.showAnimation {
                     PopupAnimation(settings: settings, message: "Ajouté au coffre")
@@ -154,7 +160,11 @@ struct PasswordGeneratorView: View {
                 }
             }
             
-        }.sheet(isPresented: $savePasswordSheetIsPresented ,  content: {
+            
+        }
+        .partialSheet(isPresented: $entropySheetIsPresented, content: { SecurityInfoView(entropy: currentPasswordEntropy, characterCount: characterCount, combinaisons: viewModel.possibleCombinaisons) } )
+        
+        .sheet(isPresented: $savePasswordSheetIsPresented ,  content: {
             SavePasswordView(password: $generatedPassword, sheetIsPresented: $savePasswordSheetIsPresented, generatedPasswordIsPresented: true, viewModel: passwordViewModel, settings: settings)
                 .environment(\.colorScheme, colorScheme)
                 .foregroundColor(settings.colors[settings.accentColorIndex])

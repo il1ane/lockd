@@ -47,8 +47,9 @@ struct PasswordListView: View {
                 Section(header:
                             
                             
-                    
+                
                             HStack {
+                    if passwordViewModel.keys.isEmpty == false {
                     Text("Total : \( self.passwordViewModel.keys.filter {  self.searchText.isEmpty ? true : $0.components(separatedBy: passwordViewModel.separator)[0].starts(with: self.searchText) }.count )")
                     Spacer()
 
@@ -58,6 +59,7 @@ struct PasswordListView: View {
                     })
                     .pickerStyle(MenuPickerStyle())
                 
+                }
                 }
                 
                 ) {
