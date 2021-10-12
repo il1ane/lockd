@@ -22,7 +22,7 @@ struct MainView: View {
             TabViews(settingsViewModel: settingsViewModel, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel)
             .overlay(!settingsViewModel.isUnlocked ? AuthenticationView(viewModel: settingsViewModel, biometricType: settingsViewModel.biometricType(), passwordViewModel: passwordViewModel, settingsViewModel: settingsViewModel) : nil)
             .overlay(settingsViewModel.isHiddenInAppSwitcher ? PrivacyView() : nil)
-            .addPartialSheet()
+           
         
     }
 }
@@ -30,5 +30,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView(settingsViewModel: SettingsViewModel(), passwordViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel())
+        
     }
 }

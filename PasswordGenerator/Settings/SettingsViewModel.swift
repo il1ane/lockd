@@ -25,7 +25,7 @@ final class SettingsViewModel: ObservableObject {
     
     var supportsHaptics: Bool = false
     let hapticCapability = CHHapticEngine.capabilitiesForHardware()
-    let colors = [Color.green, Color.blue, Color.orange, Color.pink, Color.purple, Color.yellow]
+    var colors = [Color.green, Color.blue]
     
     @Published var isUnlocked = false
     @Published var onBoardingSheetIsPresented = false
@@ -85,12 +85,14 @@ final class SettingsViewModel: ObservableObject {
     
     func copyToClipboard(password: String) {
         
+        let copiedPassword = password
+        
         if ephemeralClipboard {
             let expireDate = Date().addingTimeInterval(TimeInterval(60))
-            UIPasteboard.general.setItems([[UIPasteboard.typeAutomatic: password]],
+            UIPasteboard.general.setItems([[UIPasteboard.typeAutomatic: copiedPassword]],
                                           options: [UIPasteboard.OptionsKey.expirationDate: expireDate])
         } else {
-            UIPasteboard.general.string = password
+            UIPasteboard.general.string = copiedPassword
         }
     }
     

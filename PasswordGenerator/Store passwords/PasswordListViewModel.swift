@@ -73,6 +73,16 @@ final class PasswordListViewModel: ObservableObject {
        print("Simple haptic")
    }
     
+    func simpleHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred(intensity: 1)
+    }
+    
+    func heavyHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred(intensity: 1)
+    }
+    
     init() {
         self.keychainSyncWithIcloud = UserDefaults.standard.object(forKey: "keychainSyncWithIcloud") as? Bool ?? false
        keys = keychain.allKeys

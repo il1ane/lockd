@@ -27,6 +27,8 @@ struct PasswordView: View {
     @State private var editedUsername = ""
     @State private var editingPassword = false
     @State private var editedPassword = ""
+    @State private var isLocked = true
+    @State private var savedChangesAnimation = false
     
     var body: some View {
         
@@ -44,7 +46,7 @@ struct PasswordView: View {
                                             passwordListViewModel: passwordListViewModel,
                                             passwordGeneratorViewModel: passwordGeneratorViewModel,
                                             settings: settings,
-                                            isEditingPassword: $editingPassword,
+                                            isEditingPassword: $editingPassword, savedChangesAnimation: $savedChangesAnimation,
                                             editedPassword: $editedPassword)
                         
                     }
@@ -59,7 +61,7 @@ struct PasswordView: View {
                                         key: $key,
                                         password: $password,
                                         title: $title,
-                                        clipboardSaveAnimation: $clipboardSaveAnimation,
+                                        clipboardSaveAnimation: $clipboardSaveAnimation, savedChangesAnimation: $savedChangesAnimation,
                                         passwordListViewModel: passwordListViewModel,
                                         passwordGeneratorViewModel: passwordGeneratorViewModel,
                                         settings: settings)
@@ -96,36 +98,49 @@ struct PasswordView: View {
                 })
                 
                 .navigationBarTitle(title)
-                
                 .navigationBarItems(trailing:
                                         
-                                        Button(action: {
-                    
-                    getPassword()
-                    
-                }, label: { revealPassword ?
-                    Image(systemName: "eye.slash") : Image(systemName: "eye")
-                    
-                })
-                                        .padding(5)
-                                        .foregroundColor(settings.colors[settings.accentColorIndex]))
-                
-                
-                if clipboardSaveAnimation {
-                    
-                    PopupAnimation(settings: settings, message: settings.ephemeralClipboard ? "Copié! (60s)" : "Copié!")
-                        .onAppear(perform: { clipBoardAnimationDisapear() })
-                        .animation(.easeInOut(duration: 0.1))
-                    
-                }
+                    Button(action: {
+                        
+                        getPassword()
+                        
+                    }, label: { revealPassword ?
+                        Image(systemName: "eye.slash") : Image(systemName: "eye")
+                        
+                    })
+                                            .padding(5)
+                                        .foregroundColor(settings.colors[settings.accentColorIndex])
+               
+                   
+                )
                 
             }
+            .popup(isPresented: $clipboardSaveAnimation, type: .toast, position: .top, autohideIn: 2) {
+                VStack(alignment: .center) {
+                    Spacer()
+                        .frame(height: UIScreen.main.bounds.height / 22)
+                    Label(settings.ephemeralClipboard ? "Copié (60sec)" : "Copié", systemImage: settings.ephemeralClipboard ? "timer" : "checkmark.circle.fill")
+                    .padding(14)
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+                    .cornerRadius(30)
+                }
+            }
+            
+            .popup(isPresented: $savedChangesAnimation, type: .toast, position: .top, autohideIn: 2) {
+                VStack(alignment: .center) {
+                    Spacer()
+                        .frame(height: UIScreen.main.bounds.height / 22)
+                    Label("Modifications enregistrées", systemImage: "checkmark.circle.fill")
+                    .padding(14)
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+                    .cornerRadius(30)
+                }
+            }
          
-            
             .onAppear(perform: { if username.isEmpty { showUsernameSection = false }})
-            
-            
-            
+
         }
     }
 }
@@ -135,20 +150,10 @@ extension PasswordView {
     func getPassword() {
         
         password = passwordListViewModel.keychain.get(key)!
-        
-        print(password)
         revealPassword.toggle()
         passwordListViewModel.getAllKeys()
         passwordListViewModel.getPasswordHaptic()
         
-    }
-    
-    func clipBoardAnimationDisapear() {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
-            clipboardSaveAnimation = false
-            print("Show animation")
-        }
     }
 }
 

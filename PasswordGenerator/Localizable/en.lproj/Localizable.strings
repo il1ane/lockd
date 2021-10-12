@@ -31,8 +31,10 @@
 
 //PasswordGeneratorView
 "Mot de passe généré aléatoirement" = "Randomly generated password";
+"Force du mot de passe:" = "Password strenght:";
 "Ajouter au coffre fort" = "Add to safe";
 "Nombre de caractères:" = "Character count:";
+"Nombre de caractères" = "Character count";
 "Note : chaque paramètre actif renforce la sécurité du mot de passe." = "Note: each active parameter reinforces the password security.";
 "Caractères spéciaux" = "Special characters";
 "Majuscules" = "Uppercase";
@@ -40,9 +42,11 @@
 "Inclure" = "Include";
 "Générer" = "Generate";
 "Entropie:" = "Entropy:";
+"Entropie" = "Entropy";
 "Nombre de combinaisons possibles" = "Possible combinations";
 
 //SavePasswordView
+"Nouveau mot de passe" = "New password";
 "Titre" = "Title";
 "Le mot de passe ne peut pas être vide"= "Password cannot be empty";
 "Modifier" = "Edit";
@@ -69,8 +73,9 @@
 "Supprimer le mot de passe" = "Delete password";
 "Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "Are you sure you want to delete your password? This action is irreversible.";
 "Supprimer definitivement" = "Delete";
-"Copié!" = "Copied!";
-"Copié! (60s)" = "Copied! (60s)";
+"Copié" = "Copied";
+"Modifications enregistrées" = "Changes saved";
+"Copié (60sec)" = "Copied (60sec)";
 "Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "If this option is active, the clipboard contents will be automatically cleared after 60 seconds.";
 "Presse papier éphémère" = "Ephemeral clipboard";
 
@@ -86,7 +91,7 @@
 "Immédiat" = "Instantly";
 "Liens" = "Links";
 "Couleur principale" = "Accent color";
-"Suivez nous sur Twitter" = "Follow us on Twitter";
+"Suivez @lockd_app sur Twitter" = "Follow @lockd_app on Twitter";
 "Vert" = "Green";
 "Bleu" = "Blue";
 "Rouge" = "Red";

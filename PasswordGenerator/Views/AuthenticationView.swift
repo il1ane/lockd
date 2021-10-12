@@ -16,11 +16,17 @@ struct AuthenticationView: View {
     @ObservedObject var settingsViewModel: SettingsViewModel
     @State private var animate = false
     var body: some View {
-       
+        
         ZStack {
-            
-            Color.blue
-                .edgesIgnoringSafeArea(.all)
+
+            if #available(iOS 15.0, *) {
+                LinearGradient(colors: [.blue], startPoint: .topTrailing, endPoint: .bottomLeading)
+                    .edgesIgnoringSafeArea(.all)
+                
+            } else {
+                Color.blue.edgesIgnoringSafeArea(.all)
+                // Fallback on earlier versions
+            }
             
             VStack {
                 
@@ -61,6 +67,7 @@ struct AuthenticationView: View {
                         .frame(maxHeight : 30)
                 
             }
+            
             .onAppear(perform: {
                 biometricType = viewModel.biometricType()
              
@@ -78,7 +85,8 @@ struct AuthenticationView: View {
                 }
         })
             
-        }.statusBar(hidden: true)
+        }
+        .statusBar(hidden: true)
         .transition(.identity)
     }
 }

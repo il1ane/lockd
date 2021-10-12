@@ -19,6 +19,7 @@ struct UsernameSection: View {
     @Binding var password: String
     @Binding var title: String
     @Binding var clipboardSaveAnimation: Bool
+    @Binding var savedChangesAnimation: Bool
     @ObservedObject var passwordListViewModel:PasswordListViewModel
     @ObservedObject var passwordGeneratorViewModel:PasswordGeneratorViewModel
     @ObservedObject var settings:SettingsViewModel
@@ -35,8 +36,10 @@ struct UsernameSection: View {
                     Text(username)
                     Spacer()
                     
-                    Button(action: { editingUsername.toggle()
-                           editedUsername = username
+                    Button(action: {
+
+                        editingUsername.toggle()
+                        editedUsername = username
                     },
                            label: {
                         Image(systemName: "pencil")
@@ -55,6 +58,7 @@ struct UsernameSection: View {
                     Button(action: {
                         
                         updateUsername()
+                        savedChangesAnimation = true
                         
                     }
                     , label: {
@@ -65,6 +69,7 @@ struct UsernameSection: View {
                     .buttonStyle(PlainButtonStyle())
                     .foregroundColor(settings.colors[settings.accentColorIndex])
                 }
+               
             }
             
             Button(action: {
@@ -73,7 +78,8 @@ struct UsernameSection: View {
                 passwordGeneratorViewModel.copyPasswordHaptic()
                 clipboardSaveAnimation = true
                 
-            }) {
+            })
+            {
                 
                 HStack {
                     Spacer()
@@ -88,9 +94,9 @@ struct UsernameSection: View {
             HStack {
                 Spacer()
                 
-                Button(action : { withAnimation {
+                Button(action : {
                     showUsernameSection = true
-                }},    label: Text("Ajouter un nom de compte"))
+                },    label: Text("Ajouter un nom de compte"))
                 
                 Spacer()
             }
@@ -123,7 +129,7 @@ struct UsernameSection_Previews: PreviewProvider {
                         key: .constant(""),
                         password: .constant(""),
                         title: .constant(""),
-                        clipboardSaveAnimation: .constant(true),
+                        clipboardSaveAnimation: .constant(true), savedChangesAnimation: .constant(false),
                         passwordListViewModel: PasswordListViewModel(),
                         passwordGeneratorViewModel: PasswordGeneratorViewModel(),
                         settings: SettingsViewModel())

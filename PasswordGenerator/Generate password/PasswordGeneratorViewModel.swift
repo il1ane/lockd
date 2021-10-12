@@ -31,25 +31,22 @@ final class PasswordGeneratorViewModel: ObservableObject {
     
     func adaptativeSliderHaptic(entropy: Double) {
         
+        let generator = UIImpactFeedbackGenerator(style: .rigid)
+        
         switch entropy {
         case 128.0...200:
-            let generator = UIImpactFeedbackGenerator(style: .rigid)
             print("haptic feedback intensity : 1")
             generator.impactOccurred(intensity: 1)
         case 60.0...128:
-            let generator = UIImpactFeedbackGenerator(style: .rigid)
             print("haptic feedback intensity : 0.8")
             generator.impactOccurred(intensity: 0.8)
         case 36.0...60:
-            let generator = UIImpactFeedbackGenerator(style: .rigid)
             print("haptic feedback intensity : 0.6")
             generator.impactOccurred(intensity: 0.6)
         case 28.0...36:
-            let generator = UIImpactFeedbackGenerator(style: .rigid)
             print("haptic feedback intensity : 0.4")
             generator.impactOccurred(intensity: 0.4)
         default:
-            let generator = UIImpactFeedbackGenerator(style: .rigid)
             print("haptic feedback intensity : 0.2")
             generator.impactOccurred(intensity: 0.2)
         }
@@ -93,14 +90,12 @@ final class PasswordGeneratorViewModel: ObservableObject {
                 break
             }
         }
-        print("pool \(pool)")
+       
         let numberPower = pow(Decimal(pool), lenght)
-        print("numberPower \(numberPower)")
+    
         let numberPowerToDouble = Double(truncating: NSDecimalNumber(decimal: numberPower))
         possibleCombinaisons = numberPowerToDouble
         let entropy = log2(numberPowerToDouble)
-        
-        print("Password entropy : \(entropy * Double(lenght))")
         
         return entropy 
         

@@ -8,11 +8,10 @@
 import SwiftUI
 import MobileCoreServices
 import LocalAuthentication
-import PartialSheet
 
 struct PasswordGeneratorView: View {
     
-    @EnvironmentObject var partialSheet : PartialSheetManager
+ 
     @ObservedObject var viewModel = PasswordGeneratorViewModel()
     @Environment(\.colorScheme) var colorScheme
     @State private var isUnlocked = false
@@ -29,11 +28,14 @@ struct PasswordGeneratorView: View {
     @State private var clipboardSaveAnimation = false
     @State private var currentPasswordEntropy = 0.0
     @State private var entropySheetIsPresented = false
+    @State private var strenghtMeterIsShowing = false
+    @State private var copiedPassword = ""
     
     var body: some View {
         
         NavigationView {
             ZStack {
+                
                 Form {
                     
                     Section(header: Text("Mot de passe généré aléatoirement")) {
@@ -48,15 +50,18 @@ struct PasswordGeneratorView: View {
                                     Text(character)
                                         .foregroundColor(viewModel.specialCharactersArray.contains(character) ? Color.init(hexadecimal: "#f16581") : viewModel.numbersArray.contains(character) ? Color.init(hexadecimal: "#4EB3BC") : viewModel.alphabet.contains(character) ? .gray : Color.init(hexadecimal: "#ffbc42"))
                                 }
-                            }                                .font(characterCount > 25 ? .system(size: 15) : .body)
+                            }
+                            .font(characterCount > 25 ? .system(size: 15) : .body)
                             .animation(.easeOut(duration: 0.1))
                             
                             Spacer()
                             
                             Button(action: {
-                                settings.copyToClipboard(password: generatedPassword)
+                            
                                 clipboardSaveAnimation = true
+                                settings.copyToClipboard(password: generatedPassword)
                                 viewModel.copyPasswordHaptic()
+                    
                                 
                             }, label: {
                                 Image(systemName: "doc.on.doc")
@@ -78,44 +83,84 @@ struct PasswordGeneratorView: View {
                             }).buttonStyle(PlainButtonStyle())
                             Spacer()
                         }
+                        
                     }
                     
                     Section(header: HStack {
+                        if !strenghtMeterIsShowing {
                         Text("Nombre de caractères:")
                         Text("\(Int(characterCount))")
+                        } else {
+                            Text("Force du mot de passe:")
+                            Text(entropyText(entropy: currentPasswordEntropy))
+                                .foregroundColor(entropyColor(entropy: currentPasswordEntropy))
+                        }
+                        Spacer()
+                        Button(action: {
+                            
+                            
+                            passwordViewModel.heavyHaptic()
+                            
+                            withAnimation {
+                                strenghtMeterIsShowing.toggle()
+                            }
+                            
+                        }, label:
+                                !strenghtMeterIsShowing ? Image(systemName: "info.circle") : Image(systemName: "info.circle.fill")
+    
+                        )
+                            .font(.body)
                     }) {
                         
                         HStack {
-                            Slider(value: $characterCount, in: viewModel.passwordLenghtRange, step: 1)
-                            Divider().frame(minWidth: 20)
                             
-                            Button(action: { entropySheetIsPresented.toggle() }, label:  PasswordStrenghtView(entropy: currentPasswordEntropy, characterCount: characterCount)
-                                    .frame(minWidth: 25))
-                                .buttonStyle(PlainButtonStyle())
-                           
+                            if !strenghtMeterIsShowing {
+                            Slider(value: $characterCount, in: viewModel.passwordLenghtRange, step: 1)
+                                    .transition(.opacity)
+                                    .transition(.move(edge: .top))
+                                    .animation(.easeOut(duration: 0.8))
+
+                            } else {
+                                StrenghtMeterView(entropy: currentPasswordEntropy, characterCount: characterCount, combinaisons: viewModel.possibleCombinaisons, lenght: generatedPassword.count)
+                                    .transition(.move(edge: .top))
+                                    .animation(.easeInOut)
+                                    
+                            }
                         }
     
+                        VStack(alignment: .leading) {
+                        if !strenghtMeterIsShowing {
+                
+                            
+                            Button(action: {
+                                
+                                viewModel.generateButtonHaptic()
+                                characters = viewModel.generatePassword(lenght: Int(characterCount), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
+                                    generatedPassword = characters.joined()
+                                    currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
+                                    viewModel.adaptativeSliderHaptic(entropy: currentPasswordEntropy)
+                                
+                            },
+                                   label: {
+                         
+                                HStack {
+                                    Spacer()
+                                Text("Générer")
+                                    Spacer()
+                                }
                         
-                        Button(action: {
+                                    
+                            })
+                            .foregroundColor(settings.colors[settings.accentColorIndex])
+                            .buttonStyle(PlainButtonStyle())
+                            .transition(.opacity)
                             
-                            viewModel.generateButtonHaptic()
-                            characters = viewModel.generatePassword(lenght: Int(characterCount), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
-                                generatedPassword = characters.joined()
-                                currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
-                                viewModel.adaptativeSliderHaptic(entropy: currentPasswordEntropy)
+                        } else {
+                            Slider(value: $characterCount, in: viewModel.passwordLenghtRange, step: 1)
+                                .animation(.easeInOut(duration: 0.7))
                             
-                        },
-                               label: {
-                            HStack {
-                                Spacer()
-                                Label(
-                                    title: { Text("Générer") },
-                                    icon: { Image(systemName: "arrow.clockwise") })
-                                Spacer()
-                            }
-                        })
-                        .foregroundColor(settings.colors[settings.accentColorIndex])
-                        .buttonStyle(PlainButtonStyle())
+                        }
+                        }
                     }
                     
                     Section(header: Text("Inclure"), footer: Text("Note : chaque paramètre actif renforce la sécurité du mot de passe.").padding()) {
@@ -147,22 +192,32 @@ struct PasswordGeneratorView: View {
                 }
                 .navigationBarTitle("Générateur")
             
-                if passwordViewModel.showAnimation {
-                    PopupAnimation(settings: settings, message: "Ajouté au coffre")
-                        .onAppear(perform: { animationDisappear() })
-                        .animation(.easeInOut(duration: 0.1))
+            }
+            .popup(isPresented: $passwordViewModel.showAnimation, type: .toast, position: .top, autohideIn: 2) {
+                VStack(alignment: .center) {
+                    Spacer()
+                        .frame(height: UIScreen.main.bounds.height / 22)
+                    Label("Ajouté au coffre", systemImage: "checkmark.circle.fill")
+                    .padding(14)
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+                    .cornerRadius(30)
                 }
-                
-                if clipboardSaveAnimation {
-                    PopupAnimation(settings: settings, message: settings.ephemeralClipboard ? "Copié! (60s)" : "Copié!")
-                        .onAppear(perform: { clipBoardAnimationDisapear() })
-                        .animation(.easeInOut(duration: 0.1))
-                }
+
             }
             
-            
+            .popup(isPresented: $clipboardSaveAnimation, type: .toast, position: .top, autohideIn: 2) {
+                VStack(alignment: .center) {
+                    Spacer()
+                        .frame(height: UIScreen.main.bounds.height / 22)
+                    Label(settings.ephemeralClipboard ? "Copié (60sec)" : "Copié", systemImage: settings.ephemeralClipboard ? "timer" : "checkmark.circle.fill")
+                    .padding(14)
+                    .foregroundColor(Color.white)
+                    .background(Color.blue)
+                    .cornerRadius(30)
+                }
+            }
         }
-        .partialSheet(isPresented: $entropySheetIsPresented, content: { SecurityInfoView(entropy: currentPasswordEntropy, characterCount: characterCount, combinaisons: viewModel.possibleCombinaisons) } )
         
         .sheet(isPresented: $savePasswordSheetIsPresented ,  content: {
             SavePasswordView(password: $generatedPassword, sheetIsPresented: $savePasswordSheetIsPresented, generatedPasswordIsPresented: true, viewModel: passwordViewModel, settings: settings)
@@ -190,33 +245,13 @@ struct PasswordGeneratorView: View {
             generatedPassword = characters.joined()
             currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
         })
-        
         .onAppear(perform: {
             characters = viewModel.generatePassword(lenght: Int(characterCount), specialCharacters: specialCharacters, uppercase: uppercased, numbers: withNumbers)
             generatedPassword = characters.joined()
             currentPasswordEntropy = viewModel.calculatePasswordEntropy(password: characters.joined())
-            
         })
     }
-    
-   private func animationDisappear() {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
-            passwordViewModel.showAnimation = false
-            print("Show animation")
-        }
-    }
-    
-   private func clipBoardAnimationDisapear() {
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
-            clipboardSaveAnimation = false
-            print("Show animation")
-        }
-    }
 }
-
-
 
 struct PasswordGeneratorView_Previews: PreviewProvider {
     static var previews: some View {
