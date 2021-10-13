@@ -14,12 +14,13 @@ struct PasswordSection: View {
     
     @Binding var password: String
     @Binding var revealPassword:Bool
-    @Binding var key: String
+    var key: String
     @Binding var clipboardSaveAnimation: Bool
     @ObservedObject var passwordListViewModel: PasswordListViewModel
     @ObservedObject var passwordGeneratorViewModel: PasswordGeneratorViewModel
     @ObservedObject var settings: SettingsViewModel
     @Binding var isEditingPassword: Bool
+    @Binding var savedChangesAnimation: Bool
     @Binding var editedPassword: String
     
     var body: some View {
@@ -43,7 +44,8 @@ struct PasswordSection: View {
             EditingPasswordView(editedPassword: $editedPassword,
                                 isEditingPassword: $isEditingPassword,
                                 password: $password,
-                                key: $key,
+                                savedChangesAnimation: $savedChangesAnimation,
+                                key: key,
                                 passwordListViewModel: passwordListViewModel,
                                 settings: settings)
             
@@ -86,7 +88,18 @@ extension PasswordSection {
                 
                 HStack {
                     Spacer()
+                    
+                    if #available(iOS 15, *) {
+                        
                     Text(revealPassword ? password : "****************************")
+                        .privacySensitive(settings.privacyMode && revealPassword ? true : false)
+                        
+                    } else {
+                        
+                        Text(revealPassword ? password : "****************************")
+                        
+                    }
+                    
                     Spacer()
                 }
                 
@@ -95,7 +108,9 @@ extension PasswordSection {
                 Button(action: {
                     
                     isEditingPassword.toggle()
+                    
                     editedPassword = password
+                    
                     
                 }, label: {
                     
@@ -115,7 +130,8 @@ extension PasswordSection {
         @Binding var editedPassword: String
         @Binding var isEditingPassword: Bool
         @Binding var password: String
-        @Binding var key: String
+        @Binding var savedChangesAnimation: Bool
+        var key: String
         @ObservedObject var passwordListViewModel:PasswordListViewModel
         @ObservedObject var settings:SettingsViewModel
         
@@ -130,6 +146,7 @@ extension PasswordSection {
                 
                 Button(action: {
                     
+                    savedChangesAnimation = true
                     isEditingPassword.toggle()
                     password = editedPassword
                     passwordListViewModel.updatePassword(key: key, newPassword: password)
@@ -151,7 +168,13 @@ extension PasswordSection {
     
     struct PasswordSection_Previews: PreviewProvider {
         static var previews: some View {
-            PasswordSection(password: .constant(""), revealPassword: .constant(true), key: .constant(""), clipboardSaveAnimation: .constant(true), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settings: SettingsViewModel(), isEditingPassword: .constant(true), editedPassword: .constant(""))
+            PasswordSection(password: .constant(""), revealPassword: .constant(true), key: "", clipboardSaveAnimation: .constant(true), passwordListViewModel: PasswordListViewModel(), passwordGeneratorViewModel: PasswordGeneratorViewModel(), settings: SettingsViewModel(), isEditingPassword: .constant(true), savedChangesAnimation: .constant(false), editedPassword: .constant(""))
         }
+    }
+}
+
+extension PasswordSection {
+    mutating func updatePassword() {
+        password = editedPassword
     }
 }

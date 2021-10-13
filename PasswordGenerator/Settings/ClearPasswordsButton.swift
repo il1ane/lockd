@@ -13,6 +13,7 @@ struct ClearPasswordsButton: View {
     @Binding var removePasswordAlert: Bool
     let keychain: KeychainSwift
     @ObservedObject var passwordViewModel: PasswordListViewModel
+    @Binding var deletedPasswordsPopup: Bool
     
     var body: some View {
         
@@ -33,6 +34,7 @@ struct ClearPasswordsButton: View {
                   primaryButton: .cancel(),
                   secondaryButton: .destructive(Text("TOUT supprimer"),
                                                 action: {
+                deletedPasswordsPopup = true
                                                     keychain.clear()
                                                     passwordViewModel.addedPasswordHaptic()
                                                 }))
@@ -42,6 +44,6 @@ struct ClearPasswordsButton: View {
 
 struct ClearPasswordsButton_Previews: PreviewProvider {
     static var previews: some View {
-        ClearPasswordsButton(removePasswordAlert: .constant(true), keychain: KeychainSwift(), passwordViewModel: PasswordListViewModel())
+        ClearPasswordsButton(removePasswordAlert: .constant(true), keychain: KeychainSwift(), passwordViewModel: PasswordListViewModel(), deletedPasswordsPopup: .constant(false))
     }
 }

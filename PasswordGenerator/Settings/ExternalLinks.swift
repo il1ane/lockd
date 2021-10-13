@@ -14,6 +14,11 @@ struct ExternalLinks: View {
     var body: some View {
         Section(header: Text("Liens")) {
             
+            Button(action: { settingsViewModel.requestAppStoreReview() },
+                   label:
+                    Label(title: { Text("Noter sur l'App Store") },
+                          icon: { Image(systemName: "star.fill") }))
+            
             Link(destination: URL(string: "https://github.com/il1ane/PasswordGenerator")!) {
                 
                 Label(title: { Text("Code source (GitHub)") },
@@ -21,13 +26,9 @@ struct ExternalLinks: View {
             
             Link(destination: URL(string: "https://twitter.com/lockd_app")!) {
                     
-                Label(title: { Text("Suivez nous sur Twitter") },
+                Label(title: { Text("Suivre @lockd_app sur Twitter") },
                       icon: { Image(systemName: "heart.fill") }) }
             
-            Button(action: { settingsViewModel.requestAppStoreReview() },
-                   label:
-                    Label(title: { Text("Noter sur l'App Store") },
-                          icon: { Image(systemName: "star.fill") }))
         }
     }
 }

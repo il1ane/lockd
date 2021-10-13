@@ -73,6 +73,16 @@ final class PasswordListViewModel: ObservableObject {
        print("Simple haptic")
    }
     
+    func simpleHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred(intensity: 1)
+    }
+    
+    func heavyHaptic() {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred(intensity: 1)
+    }
+    
     init() {
         self.keychainSyncWithIcloud = UserDefaults.standard.object(forKey: "keychainSyncWithIcloud") as? Bool ?? false
        keys = keychain.allKeys
@@ -91,6 +101,18 @@ final class PasswordListViewModel: ObservableObject {
             print("Successfully deleted")
         } else {
             print("Error deleting password")
+        }
+    }
+    
+    func deleteFromList(offsets: IndexSet) {
+        for offset in offsets {
+            let keyToDelete = keys[offset]
+            deletePassword(key: keyToDelete)
+            
+            //delay before refreshing keys because of an animation glich in list 
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
+                self.getAllKeys()
+            }
         }
     }
     

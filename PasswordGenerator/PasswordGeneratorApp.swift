@@ -37,8 +37,8 @@ struct PasswordGeneratorApp: App {
         .onChange(of: scenePhase) { newPhase in
             
             if newPhase == .inactive {
-                if settingsViewModel.privacyMode {
-                settingsViewModel.isHiddenInAppSwitcher = false
+                if settingsViewModel.privacyMode && settingsViewModel.isUnlocked {
+                settingsViewModel.isHiddenInAppSwitcher = true
                 }
             }
             
@@ -51,7 +51,7 @@ struct PasswordGeneratorApp: App {
             
             else if newPhase == .background {
                 if settingsViewModel.privacyMode {
-                settingsViewModel.isHiddenInAppSwitcher = true
+                settingsViewModel.isHiddenInAppSwitcher = false
                 }
                 if settingsViewModel.unlockMethodIsActive {
                     settingsViewModel.lockAppInBackground()

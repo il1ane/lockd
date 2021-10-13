@@ -112,14 +112,16 @@ struct SavePasswordView: View {
                 .alert(isPresented: $showMissingPasswordAndTitleAlert, content: {
                     Alert(title: Text("Champs manquants"), message: Text("Champ(s) manquant(s)."), dismissButton: .cancel(Text("OK!")))
                 })
-                .navigationBarTitle("Enregistrer")
+                .navigationBarTitle("Nouveau mot de passe")
                 .navigationBarItems(leading: Button(action: {
                     
                     sheetIsPresented.toggle()
                     
                 }, label: {
-                    Image(systemName: "xmark")
-                }), trailing: Button(action: {
+                    Text("Annuler")
+                })
+                                    
+                                    , trailing: Button(action: {
                     
                     withAnimation {
                         
@@ -139,7 +141,7 @@ struct SavePasswordView: View {
                     }
                     
                 }, label: {
-                    Image(systemName: "tray.and.arrow.down")
+                    Text("Enregistrer")
                 })
                 .disabled(isEditingPassword ? true : false))
             }
@@ -147,6 +149,7 @@ struct SavePasswordView: View {
                 passwordLenght = editedPassword.text
             })
         }
+        .overlay(settings.isHiddenInAppSwitcher ? PrivacyView() : nil)
         .onAppear(perform: {
             if !generatedPasswordIsPresented {
                 isEditingPassword = true
