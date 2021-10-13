@@ -79,6 +79,30 @@ struct PasswordView: View {
                         }
                     }
                 }
+                .popup(isPresented: $clipboardSaveAnimation, type: .toast, position: .top, autohideIn: 2) {
+                    VStack(alignment: .center) {
+                        Spacer()
+                            .frame(height: UIScreen.main.bounds.height / 22)
+                        Label(settings.ephemeralClipboard ? "Copié (60sec)" : "Copié", systemImage: settings.ephemeralClipboard ? "timer" : "checkmark.circle.fill")
+                        .padding(14)
+                        .foregroundColor(Color.white)
+                        .background(Color.blue)
+                        .cornerRadius(30)
+                    }
+                }
+                
+                .popup(isPresented: $savedChangesAnimation, type: .toast, position: .top, autohideIn: 2) {
+                    VStack(alignment: .center) {
+                        Spacer()
+                            .frame(height: UIScreen.main.bounds.height / 22)
+                        Label("Enregistré", systemImage: "checkmark.circle.fill")
+                            .opacity(1)
+                        .padding(14)
+                        .foregroundColor(Color.white)
+                        .background(Color.blue)
+                        .cornerRadius(30)
+                    }
+                }
                 
                 .actionSheet(isPresented: $showAlert,
                              content: {
@@ -89,7 +113,6 @@ struct PasswordView: View {
                                                        action: {
                         
                         passwordListViewModel.keychain.delete(key)
-                        //isPresented.toggle()
                         passwordListViewModel.getAllKeys()
                         passwordListViewModel.deletedPasswordHaptic()
                         
@@ -114,29 +137,6 @@ struct PasswordView: View {
                    
                 )
                 
-            }
-            .popup(isPresented: $clipboardSaveAnimation, type: .toast, position: .top, autohideIn: 2) {
-                VStack(alignment: .center) {
-                    Spacer()
-                        .frame(height: UIScreen.main.bounds.height / 22)
-                    Label(settings.ephemeralClipboard ? "Copié (60sec)" : "Copié", systemImage: settings.ephemeralClipboard ? "timer" : "checkmark.circle.fill")
-                    .padding(14)
-                    .foregroundColor(Color.white)
-                    .background(Color.blue)
-                    .cornerRadius(30)
-                }
-            }
-            
-            .popup(isPresented: $savedChangesAnimation, type: .toast, position: .top, autohideIn: 2) {
-                VStack(alignment: .center) {
-                    Spacer()
-                        .frame(height: UIScreen.main.bounds.height / 22)
-                    Label("Modifications enregistrées", systemImage: "checkmark.circle.fill")
-                    .padding(14)
-                    .foregroundColor(Color.white)
-                    .background(Color.blue)
-                    .cornerRadius(30)
-                }
             }
          
             .onAppear(perform: { if username.isEmpty { showUsernameSection = false }})

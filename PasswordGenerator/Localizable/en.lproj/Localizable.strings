@@ -74,7 +74,7 @@
 "Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "Are you sure you want to delete your password? This action is irreversible.";
 "Supprimer definitivement" = "Delete";
 "Copié" = "Copied";
-"Modifications enregistrées" = "Changes saved";
+"Enregistré" = "Saved";
 "Copié (60sec)" = "Copied (60sec)";
 "Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "If this option is active, the clipboard contents will be automatically cleared after 60 seconds.";
 "Presse papier éphémère" = "Ephemeral clipboard";
@@ -91,7 +91,7 @@
 "Immédiat" = "Instantly";
 "Liens" = "Links";
 "Couleur principale" = "Accent color";
-"Suivez @lockd_app sur Twitter" = "Follow @lockd_app on Twitter";
+"Suivre @lockd_app sur Twitter" = "Follow @lockd_app on Twitter";
 "Vert" = "Green";
 "Bleu" = "Blue";
 "Rouge" = "Red";
@@ -101,6 +101,7 @@
 "Déverouiller avec votre mot de passe" = "Unlock with password";
 "Cacher dans le multitâche" = "Hide in app switcher";
 "Noter sur l'App Store" = "Rate on the App Store";
+"Suppression effectuée" = "Successfully deleted";
 
 //plist
 "Déverouiller vos mots de passes" = "Unlock your passwords";

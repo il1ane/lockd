@@ -15,6 +15,7 @@ struct SettingsView: View {
     let keychain = KeychainSwift()
     @State private var removePasswordAlert = false
     @ObservedObject var passwordViewModel: PasswordListViewModel
+    @State private var deletedPasswordsPopup = false
     
     var body: some View {
         
@@ -55,9 +56,23 @@ struct SettingsView: View {
                         
                         ClearPasswordsButton(removePasswordAlert: $removePasswordAlert,
                                              keychain: keychain,
-                                             passwordViewModel: passwordViewModel)
+                                             passwordViewModel: passwordViewModel, deletedPasswordsPopup: $deletedPasswordsPopup)
                     }
                 }
+                
+                .popup(isPresented: $deletedPasswordsPopup, type: .toast, position: .top, autohideIn: 2) {
+                    VStack(alignment: .center) {
+                        Spacer()
+                            .frame(height: UIScreen.main.bounds.height / 22)
+                        Label("Suppression effectuée", systemImage: "checkmark.circle.fill")
+                        .opacity(1)
+                        .padding(14)
+                        .foregroundColor(Color.white)
+                        .background(Color.blue)
+                        .cornerRadius(30)
+                    }
+                }
+                
                 .onAppear(perform: {
                     
                     biometricType = settingsViewModel.biometricType()

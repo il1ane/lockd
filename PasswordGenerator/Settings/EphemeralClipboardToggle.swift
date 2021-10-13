@@ -16,7 +16,7 @@ struct EphemeralClipboardToggle: View {
         Toggle(isOn: $settingsViewModel.ephemeralClipboard, label: {
             Label(
                 title: { Text("Presse papier éphémère") },
-                icon: { Image(systemName: "doc.on.doc") })
+                icon: { Image(systemName: "timer") })
         })
         .toggleStyle(SwitchToggleStyle(tint: settingsViewModel.colors[settingsViewModel.accentColorIndex]))
         

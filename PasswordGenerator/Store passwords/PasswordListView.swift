@@ -78,7 +78,8 @@ struct PasswordListView: View {
                             
                             
                             HStack {
-                                NavigationLink(destination: PasswordView(key: key, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settingsViewModel, title: title, username: username)) {
+                                NavigationLink(destination: PasswordView(key: key, passwordListViewModel: passwordViewModel, passwordGeneratorViewModel: passwordGeneratorViewModel, settings: settingsViewModel, title: title, username: username))
+                                {
                                     Label(title, systemImage: "key")
                                 }
                             }

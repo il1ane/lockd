@@ -26,7 +26,7 @@ struct ExternalLinks: View {
             
             Link(destination: URL(string: "https://twitter.com/lockd_app")!) {
                     
-                Label(title: { Text("Suivez @lockd_app sur Twitter") },
+                Label(title: { Text("Suivre @lockd_app sur Twitter") },
                       icon: { Image(systemName: "heart.fill") }) }
             
         }
