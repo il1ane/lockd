@@ -28,7 +28,7 @@ Download lockd on the App Store: https://apps.apple.com/us/app/lockd/id157128425
 
 **Dependencies, Libraries:**  
 
-Lockd is built with: 
+lockd is built with: 
 
 - KeychainSwift (https://github.com/evgenyneu/keychain-swift)  
 KeychainSwift is used to save passwords simply and securely
