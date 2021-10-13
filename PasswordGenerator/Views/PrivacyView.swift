@@ -11,13 +11,7 @@ struct PrivacyView: View {
     var body: some View {
         
         ZStack {
-            if #available(iOS 15.0, *) {
-                LinearGradient(colors: [.blue], startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-            } else {
-                Color.blue.edgesIgnoringSafeArea(.all)
-                // Fallback on earlier versions
-            }
+            Color.blue.edgesIgnoringSafeArea(.all)
             
             Image(systemName: "eye.slash")
                 .foregroundColor(.white)
