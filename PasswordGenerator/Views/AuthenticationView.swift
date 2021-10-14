@@ -19,14 +19,7 @@ struct AuthenticationView: View {
         
         ZStack {
 
-            if #available(iOS 15.0, *) {
-                LinearGradient(colors: [.blue], startPoint: .topTrailing, endPoint: .bottomLeading)
-                    .edgesIgnoringSafeArea(.all)
-                
-            } else {
-                Color.blue.edgesIgnoringSafeArea(.all)
-                // Fallback on earlier versions
-            }
+            Color.blue.edgesIgnoringSafeArea(.all)
             
             VStack {
                 

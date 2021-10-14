@@ -29,20 +29,22 @@ struct PasswordListView: View {
         NavigationView {
             
             
-            Form {
+            
+            VStack {
                 
                 if #available(iOS 15, *) { } else {
                     
-                    SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
-                        .returnKeyType(.done)
-                        .searchBarStyle(.minimal)
-                        .showsCancelButton(true)
-                        .onCancel {
-                            searchText = ""
-                        }
-                        .frame(maxWidth: 370)
+                SearchBar(NSLocalizedString("Rechercher un mot de passe", comment: ""), text: $searchText)
+                    .returnKeyType(.done)
+                    .searchBarStyle(.minimal)
+                    .showsCancelButton(true)
+                    .onCancel {
+                        searchText = ""
+                    }
+                    .frame(maxWidth: 370)
                 }
                 
+            Form {
                 
                 Section(header:
                             
@@ -105,7 +107,8 @@ struct PasswordListView: View {
             .onAppear(perform: {
                 passwordViewModel.getAllKeys()
             })
-            
+                
+            }
         }
     }
 }
@@ -118,7 +121,9 @@ extension View {
             self.modifier(SearchableModifier(text: text))
                 .disableAutocorrection(true)
         }
-        else { }
+        else {
+            self.modifier(EmptyModifier())
+        }
     }
 }
 
