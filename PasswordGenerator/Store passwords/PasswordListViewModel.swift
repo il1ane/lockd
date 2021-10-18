@@ -110,7 +110,7 @@ final class PasswordListViewModel: ObservableObject {
             deletePassword(key: keyToDelete)
             
             //delay before refreshing keys because of an animation glich in list 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.getAllKeys()
             }
         }

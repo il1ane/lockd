@@ -9,10 +9,10 @@ import SwiftUI
 
 struct StrenghtMeterView: View {
     
-    @State private var scale: CGFloat = 1
+    @State var offset = CGFloat()
+    @ObservedObject var viewModel = PasswordListViewModel()
     let entropy: Double
     let characterCount: Double
-    @State var offset = CGFloat()
     let gradient = Gradient(stops: [
         .init(color: .red, location: 0.07),
         .init(color: .orange, location: 0.15),
@@ -24,107 +24,77 @@ struct StrenghtMeterView: View {
     let ratio:CGFloat = 250
     let lenght: Int
     let animation:Double = 1.4
-    @ObservedObject var viewModel = PasswordListViewModel(
-    )
+    
     var body: some View {
         
         VStack {
+            
             VStack(alignment: .center) {
-                    Spacer()
-                        .frame(height: 15)
-                        HStack {
-                            Spacer()
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing))
-                                        .frame(width: 190 * UIScreen.main.bounds.width / ratio, height: 17)
-                                    
-                                        .overlay(
-                                            VStack(alignment: .center) {
-                                            Rectangle()
-                                                .fill(LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing))
-                                                .frame(width: 190 * UIScreen.main.bounds.width / ratio, height: 80)
-                                        
-                                            }
-    
-                                                .mask (
-                                                    VStack(alignment: .center) {
-                                                    Image(systemName: "triangle.fill")
-                                                        .rotationEffect(Angle(degrees: 180))
-                                                        .font(.system(size: 10))
-                                                    }
-                                                .offset(x: calculateOffset(entropy: entropy), y: -20)
-                                                .foregroundColor(.blue)
-                                                .shadow(radius: 1)
-                                                        .animation(.easeIn(duration: 0.55))
-                                                        .transition(.opacity)
-
-                                            ))
-                            Spacer()
-                        }
                 
-//                Button(action: { withAnimation {
-//                    infoIsShowing.toggle()
-//                }
-//                    viewModel.simpleHaptic()
-//                }, label: HStack {
-//
-//                    Text("Plus")
-//
-//                    infoIsShowing ?
-//
-//                    Image(systemName: "chevron.down.circle.fill")
-//                        .transition(.opacity)
-//                        .buttonStyle(PlainButtonStyle())
-//                        .foregroundColor(.gray)
-//                        .padding(3)
-//                        .animation(.easeInOut(duration: 0.6))
-//
-//                    : Image(systemName: "chevron.right.circle.fill")
-//                    .transition(.opacity)
-//                    .buttonStyle(PlainButtonStyle())
-//                    .foregroundColor(.gray)
-//                    .padding(3)
-//                    .animation(.easeInOut(duration: 0.6))
-//                })
-    
-            }
-    
-                        VStack {
-                                                    HStack {
-                                                Text("Nombre de combinaisons possibles")
-                                                       Spacer()
-                                                        Text(characterCount > 6 ? "\(combinaisons.scientificFormatted)" : "\(combinaisons.largeNumberFormat)").transition(.opacity)
-                                                    }
-                                                    
-                            
-                                                    Divider().padding()
-                        
-                                                    HStack {
-                                                    Text("Entropie")
-                                                        Spacer()
-                                                    Text("\(Int(entropy)) bits")
-                                                            .transition(.opacity)
-                                                    }
-
-                        
-                            Divider()
-                                .padding()
-                            HStack {
-                                Text("Nombre de caractères")
-                                Spacer()
-                                Text("\(lenght)")
-                                    .transition(.opacity)
+                Spacer().frame(height: 15)
+                
+                HStack {
+        
+                    Spacer()
+                    
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing))
+                        .frame(width: 190 * UIScreen.main.bounds.width / ratio, height: 17)
+                        .overlay(
+                            VStack(alignment: .center) {
+                                Rectangle()
+                                    .fill(LinearGradient(gradient: gradient, startPoint: .leading, endPoint: .trailing))
+                                    .frame(width: 190 * UIScreen.main.bounds.width / ratio, height: 80)
                             }
                             
-                                                    
-                        }
-                        .padding()
-                        
+                                .mask(
+                                    VStack(alignment: .center) {
+                                        Image(systemName: "triangle.fill")
+                                            .rotationEffect(Angle(degrees: 180))
+                                            .font(.system(size: 10))
+                                    }
+                                        .offset(x: calculateOffset(entropy: entropy), y: -20)
+                                        .foregroundColor(.blue)
+                                        .shadow(radius: 1)
+                                        .animation(.easeIn(duration: 0.55))
+                                        .transition(.opacity)))
                     
+                    Spacer()
+                    
+                }
+            }
+            
+            VStack {
+                HStack {
+                    Text("Nombre de combinaisons possibles")
+                    Spacer()
+                    Text(characterCount > 6 ? "\(combinaisons.scientificFormatted)" : "\(combinaisons.largeNumberFormat)").transition(.opacity)
+                }
+                
+                
+                Divider().padding()
+                
+                HStack {
+                    Text("Entropie")
+                    Spacer()
+                    Text("\(Int(entropy)) bits")
+                        .transition(.opacity)
+                }
+                
+                Divider().padding()
+                
+                HStack {
+                    Text("Nombre de caractères")
+                    Spacer()
+                    Text("\(lenght)")
+                        .transition(.opacity)
+                }
+            }
+            .padding()
+            
         }
-        }
-             
     }
+}
 
 
 
@@ -134,7 +104,7 @@ extension StrenghtMeterView {
         
         switch(entropy) {
         case 0...4:
-          return ((-190 * UIScreen.main.bounds.width / ratio) / 2) + 5 * UIScreen.main.bounds.width / ratio
+            return ((-190 * UIScreen.main.bounds.width / ratio) / 2) + 5 * UIScreen.main.bounds.width / ratio
         case 187...189:
             return ((-190 * UIScreen.main.bounds.width / ratio) / 2) + 186 * UIScreen.main.bounds.width / ratio
         default:

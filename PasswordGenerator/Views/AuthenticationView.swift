@@ -15,6 +15,7 @@ struct AuthenticationView: View {
     @ObservedObject var passwordViewModel: PasswordListViewModel
     @ObservedObject var settingsViewModel: SettingsViewModel
     @State private var animate = false
+    
     var body: some View {
         
         ZStack {
@@ -81,18 +82,6 @@ struct AuthenticationView: View {
         }
         .statusBar(hidden: true)
         .transition(.identity)
-    }
-}
-
-extension View {
-    func animateForever(using animation: Animation = Animation.easeInOut(duration: 1), autoreverses: Bool = false, _ action: @escaping () -> Void) -> some View {
-        let repeated = animation.repeatForever(autoreverses: autoreverses)
-
-        return onAppear {
-            withAnimation(repeated) {
-                action()
-            }
-        }
     }
 }
 

@@ -53,7 +53,7 @@ struct PasswordGeneratorView: View {
                             }
                             .font(characterCount > 25 ? .system(size: 15) : .body)
                             .animation(.easeOut(duration: 0.1))
-                            
+                        
                             Spacer()
                             
                             Button(action: {
