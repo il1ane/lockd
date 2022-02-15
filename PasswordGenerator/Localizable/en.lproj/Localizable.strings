@@ -54,7 +54,7 @@
 "Le champ mot de passe ne peut pas être vide" = "Password field cannot be empty";
 "Nom de compte" = "Username";
 "Champ obligatoire" = "Required Field";
-"Champ manquant" = "Champ manquant";
+"Champ manquant" = "Missing field";
 "Vous devez au moins donner un nom de compte a votre mot de passe." = "You must at least give your password an username.";
 "Champs manquants" = "Missing fields";
 "Le champ mot de passe et intitulé ne peuvent pas être vides." = "The password and title field cannot be empty.";
