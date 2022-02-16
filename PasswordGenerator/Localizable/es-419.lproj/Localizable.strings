@@ -1,0 +1,119 @@
+/* 
+  Localizable.strings
+  PasswordGenerator
+
+  Created by Iliane Zedadra on 31/05/2021.
+  
+*/
+
+//MainView
+"Générateur" = "Generador";
+"Mots de passe" = "Contraseñas";
+"Préférences" = "Ajustes";
+
+//LoggingView
+"Déverouiller avec Face ID" = "Desbloquear con Face ID";
+"Déverouiller avec Touch ID" = "Desbloquear con Touch ID";
+"Entrer le mot mot de passe" =  "Introducir la contraseña";
+
+//OnboardingView
+"Génerez vos mots de passe sécurisés sur-mesure" = "Genera contraseñas seguras";
+"Mots de passe" = "Contraseñas";
+"Stockez vos mots de passe dans votre coffre et retrouvez les rapidement" = "Guarde sus contraseñas en su caja fuerte y recupérelas rápidamente";
+"Sécurisé" = "Asegurado";
+"Coffre fort" = "Caja fuerte";
+"Personnalisable" = "Personalizable";
+"Continuer" = "Continuar";
+"Bienvenue sur lockd" = "Bienvenido a lockd";
+"Protégez vos mots de passes avec Face ID" = "Proteja sus contraseñas con Face ID";
+"Protégez vos mots de passes avec Touch ID" = "Proteja sus contraseñas con Touch ID";
+"Protégez vos mots de passes avec votre code de verouillage d'iPhone" = "Proteja sus contraseñas con el código de bloqueo de su iPhone";
+
+//PasswordGeneratorView
+"Mot de passe généré aléatoirement" = "Contraseña generada aleatoriamente";
+"Force du mot de passe:" = "Seguridad de la contraseña:";
+"Ajouter au coffre fort" = "Agregar a la caja fuerte";
+"Nombre de caractères:" = "Número de caracteres:";
+"Nombre de caractères" = "Número de caracteres";
+"Note : chaque paramètre actif renforce la sécurité du mot de passe." = "Nota: Cada parámetro activo refuerza la seguridad de la contraseña.";
+"Caractères spéciaux" = "Caracteres especiales";
+"Majuscules" = "Mayúsculas";
+"Chiffres" = "Números";
+"Inclure" = "Incluir";
+"Générer" = "Generar";
+"Entropie:" = "Entropía:";
+"Entropie" = "Entropía";
+"Nombre de combinaisons possibles" = "Combinaciones posibles";
+
+//SavePasswordView
+"Nouveau mot de passe" = "Nueva contraseña";
+"Titre" = "Título";
+"Le mot de passe ne peut pas être vide"= "La contraseña no puede estar vacía";
+"Modifier" = "Editar";
+"Mot de passe invalide" = "Contraseña invalida";
+"Le champ mot de passe ne peut pas être vide" = "El campo de contraseña no puede estar vacío";
+"Nom de compte" = "Nombre de usuario";
+"Champ obligatoire" = "Campo requerido";
+"Champ manquant" = "Campo faltante";
+"Vous devez au moins donner un nom de compte a votre mot de passe." = "Debe dar al menos un nombre de usuario a su contraseña";
+"Champs manquants" = "Campos faltantes";
+"Le champ mot de passe et intitulé ne peuvent pas être vides." = "El campo de contraseña y título no puede estar vacío.";
+"Enregistrer" = "Guardar";
+
+
+//PasswordListView
+"Rechercher un mot de passe" = "Encuentra una contraseña";
+"Coffre fort" = "Caja fuerte";
+"Annuler" = "Cancelar";
+"Ajouter un nom de compte" = "Agregar nombre de usuario";
+
+//PasswordView
+"Mot de passe" = "Contraseña";
+"Copier" = "Copiar";
+"Supprimer le mot de passe" = "Eliminar contraseña";
+"Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "¿Está seguro de que desea eliminar su contraseña? Esta acción no se puede deshacer.";
+"Supprimer definitivement" = "Eliminar definitivamente";
+"Copié" = "Copiada";
+"Enregistré" = "Guardada";
+"Copié (60sec)" = "Copiado (60 seg)";
+"Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "Si esta opción está activa, el contenido del portapapeles se eliminará automáticamente después de 60 segundos.";
+"Presse papier éphémère" = "Portapapeles efímero";
+"Champ(s) manquant(s)." = "Por favor, completa todos los campos requeridos";
+
+//SettingsView
+"Déverouiller vos mots de passes" = "Desbloquea tus contraseñas";
+"Sécurité" = "Seguridad";
+"Code source (GitHub)" = "Código fuente (GitHub)";
+"Effacer tous les mots de passes" = "Borrar todas las contraseñas";
+"Effacer TOUS les mots de passes" = "Borrar TODAS las contraseñas";
+"Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible." = "Sus contraseñas se eliminarán de forma permanente. Esta acción no se puede deshacer.";
+"TOUT supprimer" = "Eliminar TODO";
+"Vérouillage auto." = "Bloqueo automático";
+"Immédiat" = "Inmediato";
+"Liens" = "Enlaces";
+"Couleur principale" = "Color principal";
+"Suivre @lockd_app sur Twitter" = "Seguir a @lockd_app en Twitter";
+"Vert" = "Verde";
+"Bleu" = "Azul";
+"Rouge" = "Rojo";
+"Rose" = "Rosa";
+"Violet" = "Púrpura";
+"Jaune" = "Amarillo";
+"Déverouiller avec votre mot de passe" = "Desbloquea con tu contraseña";
+"Cacher dans le multitâche" = "Ocultar en multitarea";
+"Noter sur l'App Store" = "Calificar en la App Store";
+"Suppression effectuée" = "Contraseñas eliminadas";
+
+//plist
+"Déverouiller vos mots de passes" = "Desbloquea tus contraseñas";
+"Déverouiller vos mots de passes." = "Desbloquea tus contraseñas.";
+
+//PasswordStrenghtView
+"Très robuste" = "Muy Fuerte";
+"Robuste" = "Fuerte";
+"Moyen" = "Normal";
+"Faible" = "Débil";
+"Très faible" = "Muy débil";
+
+//PopupAnimation
+"Ajouté au coffre" = "Agregada a la caja fuerte";

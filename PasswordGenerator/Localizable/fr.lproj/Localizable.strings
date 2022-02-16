@@ -1,8 +1,120 @@
-/* 
+/*
   Localizable.strings
   PasswordGenerator
 
   Created by Iliane Zedadra on 31/05/2021.
   
 */
+
+//MainView
+"Générateur" = "Générateur";
+"Mots de passe" = "Mots de passe";
+"Préférences" = "Préférences";
+
+//LoggingView
+"Déverouiller avec Face ID" = "Déverouiller avec Face ID";
+"Déverouiller avec Touch ID" = "Déverouiller avec Touch ID";
+"Entrer le mot mot de passe" =  "Entrer le mot mot de passe";
+
+//OnboardingView
+"Génerez vos mots de passe sécurisés sur-mesure" = "Génerez vos mots de passe sécurisés sur-mesure";
+"Mots de passe" = "Mots de passe";
+"Stockez vos mots de passe dans votre coffre et retrouvez les rapidement" = "Stockez vos mots de passe dans votre coffre et retrouvez les rapidement";
+"Sécurisé" = "Sécurisé";
+"Coffre fort" = "Coffre fort";
+"Personnalisable" = "Personnalisable";
+"Continuer" = "Continuer";
+"Bienvenue sur lockd" = "Bienvenue sur lockd";
+"Protégez vos mots de passes avec Face ID" = "Protégez vos mots de passes avec Face ID";
+"Protégez vos mots de passes avec Touch ID" = "Protégez vos mots de passes avec Touch ID";
+"Protégez vos mots de passes avec votre code de verouillage d'iPhone" = "Protégez vos mots de passes avec votre code de verouillage d'iPhone";
+
+//PasswordGeneratorView
+"Mot de passe généré aléatoirement" = "Mot de passe généré aléatoirement";
+"Force du mot de passe:" = "Force du mot de passe:";
+"Ajouter au coffre fort" = "Ajouter au coffre fort";
+"Nombre de caractères:" = "Nombre de caractères:";
+"Nombre de caractères" = "Nombre de caractères";
+"Note : chaque paramètre actif renforce la sécurité du mot de passe." = "Note: chaque paramètre actif renforce la sécurité du mot de passe.";
+"Caractères spéciaux" = "Caractères spéciaux" ;
+"Majuscules" = "Majuscules";
+"Chiffres" = "Chiffres";
+"Inclure" = "Inclure";
+"Générer" = "Générer";
+"Entropie:" = "Entropie:";
+"Entropie" = "Entropie";
+"Nombre de combinaisons possibles" = "Nombre de combinaisons possibles";
+
+//SavePasswordView
+"Nouveau mot de passe" = "Nouveau mot de passe";
+"Titre" = "Titre";
+"Le mot de passe ne peut pas être vide" = "Le mot de passe ne peut pas être vide";
+"Modifier" = "Modifier";
+"Mot de passe invalide" = "Mot de passe invalide";
+"Le champ mot de passe ne peut pas être vide" = "Le champ mot de passe ne peut pas être vide";
+"Nom de compte" = "Nom de compte";
+"Champ obligatoire" = "Champ obligatoire";
+"Champ manquant" = "Champ manquant";
+"Vous devez au moins donner un nom de compte a votre mot de passe." = "Vous devez au moins donner un nom de compte a votre mot de passe.";
+"Champs manquants" = "Champs manquants";
+"Le champ mot de passe et intitulé ne peuvent pas être vides." = "Le champ mot de passe et intitulé ne peuvent pas être vides.";
+"Enregistrer" = "Enregistrer";
+
+
+//PasswordListView
+"Rechercher un mot de passe" = "Rechercher un mot de passe";
+"Coffre fort" = "Coffre fort";
+"Annuler" = "Annuler";
+"Ajouter un nom de compte" = "Ajouter un nom de compte";
+
+//PasswordView
+"Mot de passe" = "Mot de passe";
+"Copier" = "Copier";
+"Supprimer le mot de passe" = "Supprimer le mot de passe";
+"Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible." = "Êtes vous certain de vouloir supprimer votre mot de passe? Cette action est irreversible.";
+"Supprimer definitivement" = "Supprimer definitivement";
+"Copié" = "Copié";
+"Enregistré" = "Enregistré";
+"Copié (60sec)" = "Copié (60sec)";
+"Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes.";
+"Presse papier éphémère" = "Presse papier éphémère";
+"Champ(s) manquant(s)." = "Champ(s) manquant(s).";
+
+//SettingsView
+"Déverouiller vos mots de passes" = "Déverouiller vos mots de passes";
+"Sécurité" = "Sécurité";
+"Code source (GitHub)" = "Code source (GitHub)";
+"Effacer tous les mots de passes" = "Effacer tous les mots de passes";
+"Effacer TOUS les mots de passes" = "Effacer TOUS les mots de passes";
+"Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible." = "Vos mots de passes seront supprimés de manière définitive. Cette action est irreversible.";
+"TOUT supprimer" = "TOUT supprimer";
+"Vérouillage auto." = "Vérouillage auto.";
+"Immédiat" = "Immédiat";
+"Liens" = "Liens";
+"Couleur principale" = "Couleur principale";
+"Suivre @lockd_app sur Twitter" = "Suivre @lockd_app sur Twitter";
+"Vert" = "Vert";
+"Bleu" = "Bleu";
+"Rouge" = "Rouge";
+"Rose" = "Rose";
+"Violet" = "Violet";
+"Jaune" = "Jaune";
+"Déverouiller avec votre mot de passe" = "Déverouiller avec votre mot de passe";
+"Cacher dans le multitâche" = "Cacher dans le multitâche";
+"Noter sur l'App Store" = "Noter sur l'App Store";
+"Suppression effectuée" = "Suppression effectuée";
+
+//plist
+"Déverouiller vos mots de passes" = "Déverouiller vos mots de passes";
+"Déverouiller vos mots de passes." = "Déverouiller vos mots de passes.";
+
+//PasswordStrenghtView
+"Très robuste" = "Très robuste";
+"Robuste" = "Robuste";
+"Moyen" ="Moyen";
+"Faible" = "Faible";
+"Très faible" = "Très faible";
+
+//PopupAnimation
+"Ajouté au coffre" = "Ajouté au coffre";
 

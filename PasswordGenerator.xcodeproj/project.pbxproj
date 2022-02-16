@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38DAA38027BC6CA3009071DD /* SharedLocalizationTestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DAA37F27BC6CA3009071DD /* SharedLocalizationTestHelpers.swift */; };
+		38DAA38327BC6CE1009071DD /* AppLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DAA38227BC6CE1009071DD /* AppLocalizationTests.swift */; };
 		9103AC0D2645A00600CA6EB6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103AC0C2645A00600CA6EB6 /* MainView.swift */; };
 		9103AC0F2645A7BD00CA6EB6 /* SavePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */; };
 		9126F2A7271578BD001E54D3 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9126F2A6271578BD001E54D3 /* PopupView.swift */; };
@@ -33,7 +35,6 @@
 		918626362678CF690022DB90 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 918626382678CF690022DB90 /* InfoPlist.strings */; };
 		91869B0E2673669C008BE7C4 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91869B0D2673669C008BE7C4 /* PrivacyView.swift */; };
 		9199DD5626FF34EA00326BC2 /* StrenghtMeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9199DD5526FF34EA00326BC2 /* StrenghtMeterView.swift */; };
-		91B63F97266FF8960092F2B0 /* PasswordGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */; };
 		91C2716226472A1A0036DC49 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 91C2716126472A1A0036DC49 /* SwiftUIX */; };
 		91C577A2269763FB00F16A23 /* LockTimerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577A1269763FB00F16A23 /* LockTimerPicker.swift */; };
 		91C577A42697656B00F16A23 /* UnlockMethodToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C577A32697656B00F16A23 /* UnlockMethodToggle.swift */; };
@@ -59,6 +60,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38DAA37F27BC6CA3009071DD /* SharedLocalizationTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLocalizationTestHelpers.swift; sourceTree = "<group>"; };
+		38DAA38227BC6CE1009071DD /* AppLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalizationTests.swift; sourceTree = "<group>"; };
+		38DAA38427BC7469009071DD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		38DAA38527BC7469009071DD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		9103AC0C2645A00600CA6EB6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordView.swift; sourceTree = "<group>"; };
 		9126F2A6271578BD001E54D3 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -88,7 +93,6 @@
 		91869B0D2673669C008BE7C4 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		9199DD5526FF34EA00326BC2 /* StrenghtMeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrenghtMeterView.swift; sourceTree = "<group>"; };
 		91B63F94266FF8960092F2B0 /* PasswordGeneratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PasswordGeneratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorTests.swift; sourceTree = "<group>"; };
 		91B63F98266FF8960092F2B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91C577A1269763FB00F16A23 /* LockTimerPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockTimerPicker.swift; sourceTree = "<group>"; };
 		91C577A32697656B00F16A23 /* UnlockMethodToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockMethodToggle.swift; sourceTree = "<group>"; };
@@ -124,6 +128,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38DAA38127BC6CC8009071DD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				38DAA37F27BC6CA3009071DD /* SharedLocalizationTestHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		9103AC0A26459F5C00CA6EB6 /* Store passwords */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,8 +257,9 @@
 		91B63F95266FF8960092F2B0 /* PasswordGeneratorTests */ = {
 			isa = PBXGroup;
 			children = (
-				91B63F96266FF8960092F2B0 /* PasswordGeneratorTests.swift */,
 				91B63F98266FF8960092F2B0 /* Info.plist */,
+				38DAA38227BC6CE1009071DD /* AppLocalizationTests.swift */,
+				38DAA38127BC6CC8009071DD /* Helpers */,
 			);
 			path = PasswordGeneratorTests;
 			sourceTree = "<group>";
@@ -319,6 +332,7 @@
 				en,
 				Base,
 				fr,
+				"es-419",
 			);
 			mainGroup = 912B03BD2643D6EF001C5FCA;
 			packageReferences = (
@@ -400,7 +414,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91B63F97266FF8960092F2B0 /* PasswordGeneratorTests.swift in Sources */,
+				38DAA38327BC6CE1009071DD /* AppLocalizationTests.swift in Sources */,
+				38DAA38027BC6CA3009071DD /* SharedLocalizationTestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +435,7 @@
 			children = (
 				918626372678CF690022DB90 /* en */,
 				918626392678CF850022DB90 /* fr */,
+				38DAA38527BC7469009071DD /* es-419 */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -429,6 +445,7 @@
 			children = (
 				91E89EFC2664EA43007A478A /* en */,
 				91E89EFE2664EB4F007A478A /* fr */,
+				38DAA38427BC7469009071DD /* es-419 */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
