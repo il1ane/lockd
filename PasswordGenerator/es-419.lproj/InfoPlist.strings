@@ -1,0 +1,10 @@
+/*
+  InfoPlist.strings
+  PasswordGenerator
+
+  Created by Iliane Zedadra on 15/06/2021.
+  
+*/
+
+NSFaceIDUsageDescription = "Desbloquea tus contraseñas.";
+

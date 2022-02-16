@@ -62,6 +62,8 @@
 /* Begin PBXFileReference section */
 		38DAA37F27BC6CA3009071DD /* SharedLocalizationTestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedLocalizationTestHelpers.swift; sourceTree = "<group>"; };
 		38DAA38227BC6CE1009071DD /* AppLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalizationTests.swift; sourceTree = "<group>"; };
+		38DAA38427BC7469009071DD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		38DAA38527BC7469009071DD /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		9103AC0C2645A00600CA6EB6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		9103AC0E2645A7BD00CA6EB6 /* SavePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavePasswordView.swift; sourceTree = "<group>"; };
 		9126F2A6271578BD001E54D3 /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 				en,
 				Base,
 				fr,
+				"es-419",
 			);
 			mainGroup = 912B03BD2643D6EF001C5FCA;
 			packageReferences = (
@@ -432,6 +435,7 @@
 			children = (
 				918626372678CF690022DB90 /* en */,
 				918626392678CF850022DB90 /* fr */,
+				38DAA38527BC7469009071DD /* es-419 */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -441,6 +445,7 @@
 			children = (
 				91E89EFC2664EA43007A478A /* en */,
 				91E89EFE2664EB4F007A478A /* fr */,
+				38DAA38427BC7469009071DD /* es-419 */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
