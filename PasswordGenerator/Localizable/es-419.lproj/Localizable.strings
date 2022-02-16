@@ -78,6 +78,7 @@
 "Copié (60sec)" = "Copiado (60 seg)";
 "Si cette option est active, le contenu du presse papier sera automatiquement supprimé après 60 secondes." = "Si esta opción está activa, el contenido del portapapeles se eliminará automáticamente después de 60 segundos.";
 "Presse papier éphémère" = "Portapapeles efímero";
+"Champ(s) manquant(s)." = "Por favor, completa todos los campos requeridos";
 
 //SettingsView
 "Déverouiller vos mots de passes" = "Desbloquea tus contraseñas";

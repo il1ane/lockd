@@ -44,6 +44,7 @@
 "Entropie:" = "Entropy:";
 "Entropie" = "Entropy";
 "Nombre de combinaisons possibles" = "Possible combinations";
+"Champ(s) manquant(s)." = "Missing fields.";
 
 //SavePasswordView
 "Nouveau mot de passe" = "New password";
